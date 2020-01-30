@@ -6,8 +6,7 @@ public class Student {
 	
 	private String name;
 	private String surname;
-	private List<Student> students;
-	
+
 	public Student(String name, String surname) {
 		this.setName(name);
 		this.setSurname(surname);
@@ -43,7 +42,6 @@ public class Student {
 
 
 	public void setStudents(List<Student> students) {
-		this.students = students;
 	}
 }
 
