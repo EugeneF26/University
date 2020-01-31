@@ -2,7 +2,7 @@ package com.project.university.entity;
 
 /**
  * @author Eugene
- * The class contain data Lecture hall
+ * The class contain data of Lecture hall
  */
 public class LectureHall {
 	
