@@ -2,11 +2,11 @@ package com.project.university;
 
 import com.project.university.domain.UniversityApplication;
 
-/* @author Eugene
+/** @author Eugene
  * <strong>This is main class in application</strong> 
  */
 public class Main {
-	/*
+	/**
 	 * Here start point of the program.
 	 * @param args command line values 
 	 */
