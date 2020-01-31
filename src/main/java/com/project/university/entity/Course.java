@@ -2,6 +2,10 @@ package com.project.university.entity;
 
 import java.util.List;
 
+/**
+ * @author Eugene
+ * The class contain data of Course
+ */
 public class Course {
 	
 	private int year;
