@@ -10,7 +10,7 @@ import com.project.university.entity.Group;
 import com.project.university.entity.Course;
 
 /** @author Eugene
- * This is class contain a schedule and methods for working with it. 
+ * This is class contain a schedule and methods for working with it
  */
 public class Schedule {
 
