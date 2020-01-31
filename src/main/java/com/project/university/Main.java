@@ -8,7 +8,8 @@ import com.project.university.domain.UniversityApplication;
 public class Main {
 	/**
 	 * Here start point of the program
-	 * @param args command line values 
+	 * @param args command line values
+	 * @see UniversityApplication#run() 
 	 */
 	public static void main(String[] args) {
 		UniversityApplication universityApplication = new UniversityApplication();
