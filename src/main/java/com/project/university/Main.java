@@ -3,7 +3,7 @@ package com.project.university;
 import com.project.university.domain.UniversityApplication;
 
 /** @author Eugene
- * <strong>This is main class in application</strong> 
+ * <strong>The main class in application</strong> 
  */
 public class Main {
 	/**

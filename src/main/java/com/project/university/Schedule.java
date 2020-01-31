@@ -10,14 +10,14 @@ import com.project.university.entity.Group;
 import com.project.university.entity.Course;
 
 /** @author Eugene
- * This is class contain a schedule and methods for working with it
+ * The class contain a schedule and methods for working with it
  */
 public class Schedule {
 
 	private List<ScheduleItem> days;
 	
 	/**
-	 * This is method where filling the list of schedule
+	 * The method where filling the list of schedule
 	 * @param scheduleItem instance SheduleItem class
 	 * @see Schedule#days
 	 * @see ScheduleItem
@@ -27,7 +27,7 @@ public class Schedule {
 	}
 	
 	/**
-	 * This is method return item of schedule by date
+	 * The method return item of schedule by date
 	 * @param studyDay of Date value
 	 * @return days by day
 	 * @see ScheduleItem
@@ -37,7 +37,7 @@ public class Schedule {
 	}
 	
 	/**
-	 * This is method return list of groups
+	 * The method return list of groups
 	 * @param year int value of the course number 
 	 * @return list with groups
 	 * @see Course#getGroups()
@@ -47,7 +47,7 @@ public class Schedule {
 	}
 	
 	/**
-	 * This is method return list items of schedule by period
+	 * The method return list items of schedule by period
 	 * @param period of Period value
 	 * @return list with item of schedule
 	 * @see ScheduleItem
