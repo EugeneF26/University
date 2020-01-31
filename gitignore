@@ -5,6 +5,9 @@ target/
 # Mobile Tools for Java (J2ME)
 bin/
 
+#Javadoc
+javadoc/
+
 #Idea
 *.idea/
 *.iml
