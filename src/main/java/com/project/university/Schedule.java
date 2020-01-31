@@ -14,10 +14,6 @@ import com.project.university.entity.Course;
  */
 public class Schedule {
 
-	/**
-	 * This is list where stored schedule item
-	 * @see ScheduleItem
-	 */
 	private List<ScheduleItem> days;
 	
 	/**
