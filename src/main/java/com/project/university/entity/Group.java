@@ -1,5 +1,9 @@
 package com.project.university.entity;
 
+/**
+ * @author Eugene
+ * The class contain data of Group
+ */
 public class Group {
 	
 	private String group;
