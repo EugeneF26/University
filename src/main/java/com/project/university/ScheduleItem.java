@@ -7,8 +7,7 @@ import com.project.university.entity.Lecture;
 import com.project.university.entity.LectureHall;
 import com.project.university.entity.Professor;
 
-/**
- * @author Eugene
+/** @author Eugene
  * This is class contain schedule item data
  */
 public class ScheduleItem {

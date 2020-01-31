@@ -3,8 +3,7 @@ package com.project.university.domain;
 import com.project.university.entity.Professor;
 import com.project.university.entity.Student;
 
-/**
- * @author Eugene
+/** @author Eugene
  * The class contain methods for managing data of other classes
  */
 public class UniversityApplication {

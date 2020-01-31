@@ -53,7 +53,7 @@ public class Schedule {
 	 * @see ScheduleItem
 	 */
 	public List<ScheduleItem> getScheduleByDate(Period period) {
-		List<ScheduleItem> scheduleItem = new ArrayList<>(); 
+		List<ScheduleItem> scheduleItem = new ArrayList<ScheduleItem>(); 
 		scheduleItem.add(days.get(0));
 		return scheduleItem;
 	}

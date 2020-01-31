@@ -1,7 +1,6 @@
 package com.project.university.entity;
 
-/**
- * @author Eugene
+/** @author Eugene
  * The class contain data of Professor
  */
 public class Professor {

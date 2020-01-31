@@ -3,7 +3,7 @@ package com.project.university.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
+/** @author Eugene
  * The class contain data of student and methods working with it
  */
 public class Student {
@@ -30,7 +30,7 @@ public class Student {
 	 * @return list of student by group
 	 */
 	public List<Student> getStudents(String titleGroup) {
-		List<Student> studentsByGroup = new ArrayList<>();
+		List<Student> studentsByGroup = new ArrayList<Student>();
 		for (int i = 0; i < students.size(); i++) {
 			if (students.get(i).group.getGroup().equals(titleGroup)) {
 				studentsByGroup.add(students.get(i));
