@@ -7,17 +7,17 @@ import java.util.List;
 
 import com.project.university.entity.Group;
 
-/* @author Eugene
+/** @author Eugene
  * This is class contain a schedule and methods for working with it. 
  */
 public class Schedule {
 
-	/*
+	/**
 	 * This is list where I will store my scheduleItem 
 	 */
 	private List<ScheduleItem> days;
 	
-	/*
+	/**
 	 * This is method where I will filling the list with schedule
 	 * @param scheduleItem instance SheduleItem class
 	 */
@@ -25,7 +25,7 @@ public class Schedule {
 		days.add(scheduleItem);
 	}
 	
-	/*
+	/**
 	 * This is method where I will obtain item of schedule by date
 	 * @param studyDay of Date value
 	 * @return days by day  
@@ -34,7 +34,7 @@ public class Schedule {
 		return days.get(0);
 	}
 	
-	/*
+	/**
 	 * This is method where I will obtain list with groups
 	 * @param year int value of the course number 
 	 * @return list with groups
@@ -43,7 +43,7 @@ public class Schedule {
 		return days.get(0).getCourse().getGroups();
 	}
 	
-	/*
+	/**
 	 * This is method where I will obtain item of schedule by period
 	 * @param period of Period value
 	 * @return list with item of schedule 
