@@ -1,0 +1,17 @@
+# Compiled class file
+*.class
+target/
+
+# Mobile Tools for Java (J2ME)
+bin/
+
+#Javadoc
+javadoc/
+
+#Idea
+*.idea/
+*.iml
+out/
+*.xml/
+.test/resources/
+
