@@ -30,7 +30,7 @@ public class CourseRepository implements CrudRepository<Course> {
 	@Override
 	public int update(Course course) {
 		return this.jdbcTemplate.update(
-		        "INSERT INTO COURSES (course_year) VALUES (?)", course.getYear());
+		        "UPDATE COURSES SET course_year=? WHERE course_year=? ", new Object[] {course.getYear()});
 	}
 
 	@Override
