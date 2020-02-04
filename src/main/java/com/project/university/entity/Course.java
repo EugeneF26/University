@@ -10,15 +10,15 @@ public class Course {
 	private int year;
 	private List<Group> groups;
 
-	private Course(int year) {
+	public Course(int year) {
 		this.year = year;
 	}
 
-	private Course(List<Group> groups) {
+	public Course(List<Group> groups) {
 		this.groups.addAll(groups);
 	}
 	
-	private Course(int year, List<Group> groups) {
+	public Course(int year, List<Group> groups) {
 		this.year = year;
 		this.groups.addAll(groups);
 	}

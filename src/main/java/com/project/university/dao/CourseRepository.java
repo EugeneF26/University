@@ -22,9 +22,9 @@ public class CourseRepository implements CrudRepository<Course> {
 	}
 
 	@Override
-	public Course find(int id) {
-		return (Course) this.jdbcTemplate.query("SELECT course_year FROM COURSES WHERE course_year = ?;", 
-				BeanPropertyRowMapper.newInstance(Course.class));
+	public Course find(int year) {
+		return new Course(this.jdbcTemplate.queryForObject("SELECT course_year FROM COURSES WHERE course_year = ?;", 
+		 Integer.class, year));
 	}
 
 	@Override
