@@ -36,7 +36,7 @@ public class CourseRepository implements CrudRepository<Course> {
 	@Override
 	public int delete(int year) {
 		return this.jdbcTemplate.update(
-		        "DELETE FROM COURSES WHERE course_year = ?", Long.valueOf(year));
+		        "DELETE FROM COURSES WHERE course_year = ?", new Object[] {year});
 	}
 
 	@Override
