@@ -1,9 +1,9 @@
 # Compiled class file
 *.class
 target/
-*.sittings/
-.project
-.classpath
+sittings/
+project
+classpath
 
 # Mobile Tools for Java (J2ME)
 bin/
@@ -15,6 +15,5 @@ javadoc/
 *.idea/
 *.iml
 out/
-*.xml/
-.test/resources/
+*.xml
 
