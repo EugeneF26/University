@@ -25,7 +25,7 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 	public int save(Professor professor) {
 		return this.jdbcTemplate.update(
 		        "INSERT INTO PROFESSORS (professor_name, professor_surname, professor_patronymic) VALUES (?,?,?)", 
-		        new Object[] {professor.getName(), professor.getSurname(), professor.getPatronymic()});
+		       professor.getName(), professor.getSurname(), professor.getPatronymic());
 	}
 
 	/**
@@ -33,9 +33,9 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 	 */
 	@Override
 	public Professor find(int id) {
-		return this.jdbcTemplate.queryForObject("SELECT professor_id, professor_name, professor_surname, professor_patronimyc "
+		return new Professor(this.jdbcTemplate.queryForObject("SELECT professor_id, professor_name, professor_surname, professor_patronimyc "
 				+ "FROM PROFESSORS WHERE professor_id = ?;", 
-				new Object[] {id}, BeanPropertyRowMapper.newInstance(Professor.class));
+				Integer.class, id));
 	}
 
 	/**
@@ -45,8 +45,8 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 	public int update(Professor professor) {
 		return this.jdbcTemplate.update(
 		        "UPDATE PROFESSOR SET professor_name=?, professor_surname=?, professor_patronymic=? "
-		        + "WHERE professor_id=? ", new Object[] {professor.getName(), professor.getSurname(), 
-		        		professor.getPatronymic(), professor.getProfessorId()});
+		        + "WHERE professor_id=? ", professor.getName(), professor.getSurname(), 
+		        		professor.getPatronymic(), professor.getProfessorId());
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 	@Override
 	public int delete(int id) {
 		return this.jdbcTemplate.update(
-		        "DELETE FROM PROFESSORS WHERE professor_id=?", new Object[] {id});
+		        "DELETE FROM PROFESSORS WHERE professor_id=?", id);
 	}
 
 	/**

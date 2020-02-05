@@ -25,7 +25,11 @@ public class Student {
 		this.setName(name);
 		this.setSurname(surname);
 	}
-
+	
+	public Student(int studentId) {
+		this.studentId = studentId;
+	}
+	
 	/**
 	 * The method return list of students by group
 	 * @param titleGroup of group string value

@@ -24,6 +24,10 @@ public class Professor {
 		this.patronymic = patronymic;
 	}
 	
+	public Professor(int professorId) {
+		this.professorId = professorId;
+	}
+	
 	public String getName() {
 		return name;
 	}

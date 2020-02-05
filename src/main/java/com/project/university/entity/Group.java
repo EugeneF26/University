@@ -8,6 +8,10 @@ public class Group {
 	private int groupId;
 	private Student student;
 	
+	public Group(int groupId) {
+		this.groupId = groupId;
+	}
+	
 	public int getGroupId() {
 		return groupId;
 	}
