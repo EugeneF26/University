@@ -6,12 +6,15 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Data;
+
 /** @author Eugene
  * The class contain a schedule and methods for working with it
  */
+@Data
 public class Schedule {
 
-	private List<ScheduleItem> days;
+	private final List<ScheduleItem> days;
 	
 	/**
 	 * The method where filling the list of schedule
@@ -53,14 +56,6 @@ public class Schedule {
 		List<ScheduleItem> scheduleItem = new ArrayList<ScheduleItem>(); 
 		scheduleItem.add(days.get(0));
 		return scheduleItem;
-	}
-	
-	public List<ScheduleItem> getDays() {
-		return days;
-	}
-
-	public void setDays(List<ScheduleItem> days) {
-		this.days = days;
 	}
 }
 

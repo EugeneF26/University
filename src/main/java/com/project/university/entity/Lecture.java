@@ -1,18 +1,12 @@
 package com.project.university.entity;
 
+import lombok.Data;
+
 /** @author Eugene
  * The class contain data of Lecture
  */
+@Data
 public class Lecture {
-	
-	private String title;
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
+	private final String title;
 }
 

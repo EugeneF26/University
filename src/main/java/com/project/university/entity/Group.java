@@ -1,30 +1,13 @@
 package com.project.university.entity;
 
+import lombok.Data;
+
 /** @author Eugene
  * The class contain data of Group
  */
+@Data
 public class Group {
-	
-	private int groupId;
+	private final int groupId;
 	private Student student;
-	
-	public Group(int groupId) {
-		this.groupId = groupId;
-	}
-	
-	public int getGroupId() {
-		return groupId;
-	}
-	
-	public void setGroupId(int groupId) {
-		this.groupId = groupId;
-	}
-	
-	public Student getStudent() {
-		return student;
-	}
-	public void setStudent(Student student) {
-		this.student = student;
-	}
 }
 
