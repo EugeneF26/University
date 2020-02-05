@@ -1,13 +1,10 @@
-package com.project.university;
+package com.project.university.entity;
 
 import java.sql.Date;
 
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.project.university.entity.Group;
-import com.project.university.entity.Course;
 
 /** @author Eugene
  * The class contain a schedule and methods for working with it

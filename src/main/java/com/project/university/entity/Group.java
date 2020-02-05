@@ -5,15 +5,15 @@ package com.project.university.entity;
  */
 public class Group {
 	
-	private String group;
+	private int groupId;
 	private Student student;
 	
-	public String getGroup() {
-		return group;
+	public int getGroupId() {
+		return groupId;
 	}
 	
-	public void setGroup(String group) {
-		this.group = group;
+	public void setGroupId(int groupId) {
+		this.groupId = groupId;
 	}
 	
 	public Student getStudent() {
