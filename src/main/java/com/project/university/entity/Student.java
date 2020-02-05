@@ -29,10 +29,10 @@ public class Student {
 	 * @param titleGroup of group string value
 	 * @return list of student by group
 	 */
-	public List<Student> getStudents(String titleGroup) {
+	public List<Student> getStudents(int groupId) {
 		List<Student> studentsByGroup = new ArrayList<Student>();
 		for (int i = 0; i < students.size(); i++) {
-			if (students.get(i).group.getGroup().equals(titleGroup)) {
+			if (students.get(i).group.getGroupId() == (groupId)) {
 				studentsByGroup.add(students.get(i));
 			}
 		}
