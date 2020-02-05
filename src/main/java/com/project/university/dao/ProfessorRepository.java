@@ -18,7 +18,7 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 	@Override
 	public int save(Professor professor) {
 		return this.jdbcTemplate.update(
-		        "INSERT INTO PROFESSORS (professor_name, professor_surname, professor_patronymic) VALUES (?)", 
+		        "INSERT INTO PROFESSORS (professor_name, professor_surname, professor_patronymic) VALUES (?,?,?)", 
 		        new Object[] {professor.getName(), professor.getSurname(), professor.getPatronymic()});
 	}
 
@@ -33,7 +33,8 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 	public int update(Professor professor) {
 		return this.jdbcTemplate.update(
 		        "UPDATE PROFESSOR SET professor_name=?, professor_surname=?, professor_patronymic=? "
-		        + "WHERE professor_id=? ", new Object[] {professor.getName(), professor.getSurname(), professor.getPatronymic(), professor.getId()});
+		        + "WHERE professor_id=? ", new Object[] {professor.getName(), professor.getSurname(), 
+		        		professor.getPatronymic(), professor.getProfessorId()});
 	}
 
 	@Override

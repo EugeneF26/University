@@ -5,13 +5,20 @@ package com.project.university.entity;
  */
 public class Professor {
 	
-	private int id;
+	private int professorId;
 	private String name;
 	private String surname;
 	private String patronymic;
 	
-	public Professor(int id, String name, String surname, String patronymic) {
-		this.id = id;
+	/**
+	 * The constructor for filling data
+	 * @param professorId of professor int value
+	 * @param name of professor string value
+	 * @param surname of professor string value
+	 * @param patronymic of professor string value
+	 */
+	public Professor(int professorId, String name, String surname, String patronymic) {
+		this.professorId = professorId;
 		this.name = name;
 		this.surname = surname;
 		this.patronymic = patronymic;
@@ -41,12 +48,12 @@ public class Professor {
 		this.patronymic = patronymic;
 	}
 
-	public int getId() {
-		return id;
+	public int getProfessorId() {
+		return professorId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setPofessorId(int id) {
+		this.professorId = id;
 	}
 }
 

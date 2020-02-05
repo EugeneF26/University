@@ -8,18 +8,20 @@ import java.util.List;
  */
 public class Student {
 
+	private int studentId;
 	private String name;
 	private String surname;
-	private int id;
 	private List<Student> students;
 	private Group group;
-
+	
 	/**
 	 * The constructor for filling data
+	 * @param studentId of student int value
 	 * @param name of student string value
 	 * @param surname of student string value
 	 */
-	public Student(String name, String surname) {
+	public Student(int studentId, String name, String surname) {
+		this.studentId = studentId;
 		this.setName(name);
 		this.setSurname(surname);
 	}
@@ -46,7 +48,7 @@ public class Student {
 	 */
 	public void expelStudent(Student student) {
 		for (int i = 0; i < students.size(); i++) {
-			if (students.get(i).getId() == student.getId()) {
+			if (students.get(i).getStudentId() == student.getStudentId()) {
 				students.remove(i);
 			}
 		}
@@ -80,12 +82,12 @@ public class Student {
 		this.group = group;
 	}
 
-	public int getId() {
-		return id;
+	public int getStudentId() {
+		return studentId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setStudentId(int id) {
+		this.studentId = id;
 	}
 }
 
