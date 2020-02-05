@@ -9,12 +9,18 @@ import org.springframework.stereotype.Repository;
 
 import com.project.university.entity.Professor;
 
+/** @author Eugene
+ * The repository class contain methods working with data base
+ */
 @Repository
 public class ProfessorRepository implements CrudRepository<Professor> {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
+	/**
+	 * @see CrudRepository#save(Object)
+	 */
 	@Override
 	public int save(Professor professor) {
 		return this.jdbcTemplate.update(
@@ -22,6 +28,9 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 		        new Object[] {professor.getName(), professor.getSurname(), professor.getPatronymic()});
 	}
 
+	/**
+	 * @see CrudRepository#find(int)
+	 */
 	@Override
 	public Professor find(int id) {
 		return this.jdbcTemplate.queryForObject("SELECT professor_id, professor_name, professor_surname, professor_patronimyc "
@@ -29,6 +38,9 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 				new Object[] {id}, BeanPropertyRowMapper.newInstance(Professor.class));
 	}
 
+	/**
+	 * @see CrudRepository#update(Object)
+	 */
 	@Override
 	public int update(Professor professor) {
 		return this.jdbcTemplate.update(
@@ -37,12 +49,18 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 		        		professor.getPatronymic(), professor.getProfessorId()});
 	}
 
+	/**
+	 * @see CrudRepository#delete(int)
+	 */
 	@Override
 	public int delete(int id) {
 		return this.jdbcTemplate.update(
 		        "DELETE FROM PROFESSORS WHERE professor_id=?", new Object[] {id});
 	}
 
+	/**
+	 * @see CrudRepository#getAll()
+	 */
 	@Override
 	public List<Professor> getAll() {
 		return this.jdbcTemplate.query("SELECT FROM PROFESSORS", BeanPropertyRowMapper.newInstance(Professor.class));

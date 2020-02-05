@@ -9,36 +9,54 @@ import org.springframework.stereotype.Repository;
 
 import com.project.university.entity.Group;
 
+/** @author Eugene
+ * The repository class contain methods working with data base
+ */
 @Repository
 public class GroupRepository implements CrudRepository<Group> {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
+	/**
+	 * @see CrudRepository#save(Object)
+	 */
 	@Override
 	public int save(Group group) {
 		return this.jdbcTemplate.update(
 		        "INSERT INTO COURSES (group_id) VALUES (?)", new Object[] {group.getGroupId()});
 	}
 
+	/**
+	 * @see CrudRepository#find(int)
+	 */
 	@Override
 	public Group find(int id) {
 		return this.jdbcTemplate.queryForObject("SELECT group_id FROM GROUPS WHERE group_id = ?;", 
 				new Object[] {id}, BeanPropertyRowMapper.newInstance(Group.class));
 	}
 
+	/**
+	 * @see CrudRepository#uddate(Object)
+	 */
 	@Override
 	public int update(Group group) {
 		return this.jdbcTemplate.update(
 		        "UPDATE GROUPS SET group_id=? WHERE group_id=? ", new Object[] {group.getGroupId()});
 	}
 
+	/**
+	 * @see CrudRepository#delete(int)
+	 */
 	@Override
 	public int delete(int id) {
 		return this.jdbcTemplate.update(
 		        "DELETE FROM GROUPS WHERE group_id=?", new Object[] {id});
 	}
 
+	/**
+	 * @see CrudRepository#getAll()
+	 */
 	@Override
 	public List<Group> getAll() {
 		return this.jdbcTemplate.query("SELECT FROM GROUPS", BeanPropertyRowMapper.newInstance(Group.class));
