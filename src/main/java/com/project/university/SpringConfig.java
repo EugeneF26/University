@@ -14,7 +14,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 public class SpringConfig {
 	
 	@Bean
-    public DataSource mysqlDataSource() {
+    public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("${db.DRIVER]");
         dataSource.setUrl("${db.HOST}");
