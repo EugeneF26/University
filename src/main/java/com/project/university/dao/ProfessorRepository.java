@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.project.university.SpringConfig;
 import com.project.university.entity.Professor;
 
 /** @author Eugene
@@ -19,6 +20,10 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 
 	private JdbcTemplate jdbcTemplate;
 	
+	/** Construct a new JdbcTemplate, given a DataSource to obtain connections from
+	 * @param dataSource - the JDBC DataSource to obtain connections from
+	 * @see SpringConfig#dataSource()
+	 */
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
