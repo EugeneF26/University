@@ -39,9 +39,9 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 	 */
 	@Override
 	public Professor find(int id) {
-		return new Professor(this.jdbcTemplate.queryForObject("SELECT professor_id, professor_name, professor_surname, professor_patronimyc "
+		return this.jdbcTemplate.queryForObject("SELECT professor_id, professor_name, professor_surname, professor_patronimyc "
 				+ "FROM PROFESSORS WHERE professor_id = ?;", 
-				Integer.class, id));
+				 BeanPropertyRowMapper.newInstance(Professor.class), id);
 	}
 
 	/**

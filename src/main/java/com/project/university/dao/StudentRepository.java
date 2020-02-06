@@ -39,8 +39,8 @@ public class StudentRepository implements CrudRepository<Student>{
 	 */
 	@Override
 	public Student find(int id) {
-		return new Student(this.jdbcTemplate.queryForObject("SELECT student_id, student_name, student_surname "
-				+ "FROM STUDENTS WHERE student_id = ?;", Integer.class, id));
+		 return this.jdbcTemplate.queryForObject("SELECT student_id, student_name, student_surname "
+				+ "FROM STUDENTS WHERE student_id = ?;", BeanPropertyRowMapper.newInstance(Student.class), id);
 	}
 
 	/**

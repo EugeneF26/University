@@ -38,8 +38,8 @@ public class GroupRepository implements CrudRepository<Group> {
 	 */
 	@Override
 	public Group find(int id) {
-		return new Group(this.jdbcTemplate.queryForObject("SELECT group_id FROM GROUPS WHERE group_id = ?;", 
-				Integer.class, id));
+		return this.jdbcTemplate.queryForObject("SELECT group_id FROM GROUPS WHERE group_id = ?;", 
+				BeanPropertyRowMapper.newInstance(Group.class), id);
 	}
 
 	/**
