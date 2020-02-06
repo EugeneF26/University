@@ -22,5 +22,5 @@ public class SpringConfig {
         dataSource.setPassword("${db.PASSWORD}");
         return dataSource;
     }
-
 }
+

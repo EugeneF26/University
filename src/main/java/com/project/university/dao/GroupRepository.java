@@ -2,6 +2,8 @@ package com.project.university.dao;
 
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,8 +17,12 @@ import com.project.university.entity.Group;
 @Repository
 public class GroupRepository implements CrudRepository<Group> {
 
-	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	public void setDataSource(DataSource dataSource) {
+		this.jdbcTemplate = new JdbcTemplate(dataSource);
+	}
 
 	/**
 	 * @see CrudRepository#save(Object)
