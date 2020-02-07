@@ -1,11 +1,10 @@
 package com.project.university;
 
-import javax.sql.DataSource;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 /** @author Eugene
@@ -18,16 +17,16 @@ public class SpringConfig {
 	
 	/**
 	 * Attempts to establish a connection with the data source
-	 * @return dataSourse
+	 * @return jdbcTemplate
 	 */
 	@Bean
-    public DataSource dataSource() {
+    public JdbcTemplate dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("${db.DRIVER]");
         dataSource.setUrl("${db.HOST}");
         dataSource.setUsername("${db.USERNAME}");
         dataSource.setPassword("${db.PASSWORD}");
-        return dataSource;
+        return new JdbcTemplate(dataSource);
     }
 }
 

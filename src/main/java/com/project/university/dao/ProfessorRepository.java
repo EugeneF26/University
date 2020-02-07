@@ -2,8 +2,6 @@ package com.project.university.dao;
 
 import java.util.List;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -20,13 +18,13 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 
 	private JdbcTemplate jdbcTemplate;
 	
-	/** Construct a new JdbcTemplate, given a DataSource to obtain connections from
-	 * @param dataSource - the JDBC DataSource to obtain connections from
+	/** Construct a new JdbcTemplate, given a jdbcTemplate with DataSource to obtain connections from
+	 * @param jdbcTemplate - the jdbcTemplate with DataSource to obtain connections from
 	 * @see SpringConfig#dataSource()
 	 */
 	@Autowired
-	public void setDataSource(DataSource dataSource) {
-		this.jdbcTemplate = new JdbcTemplate(dataSource);
+	public void setDataSource(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
 	}
 
 	/**
