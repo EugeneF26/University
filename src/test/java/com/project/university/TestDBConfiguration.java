@@ -11,7 +11,7 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 public class TestDBConfiguration {
 
 	@Bean
-	public DataSource dataSource() {
+	public DataSource getDataSource() {
 		return new EmbeddedDatabaseBuilder()
 				.generateUniqueName(true)
 				.setType(EmbeddedDatabaseType.H2)
@@ -22,9 +22,9 @@ public class TestDBConfiguration {
 	}
 
 	@Bean("testTemplate")
-	public JdbcTemplate namedParamJdbcTemplate() {
-		JdbcTemplate namedParamJdbcTemplate = new JdbcTemplate(dataSource());
-		return namedParamJdbcTemplate;
+	public JdbcTemplate jdbcTemplate() {
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
+		return jdbcTemplate;
 	}
 }
 

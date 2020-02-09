@@ -7,7 +7,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -29,7 +28,7 @@ public class SpringConfig {
 	 * @return jdbcTemplate
 	 */
 	@Bean
-    public JdbcTemplate dataSource() {
+    public JdbcTemplate getDataSource() {
         HikariDataSource hikariDataSource = new HikariDataSource();
         hikariDataSource.setDriverClassName(DRIVER);
         hikariDataSource.setJdbcUrl(HOST);
@@ -37,11 +36,5 @@ public class SpringConfig {
         hikariDataSource.setPassword(PASSWORD);
         return new JdbcTemplate(hikariDataSource);
     }
-	
-	@Bean
-	public NamedParameterJdbcTemplate nameParamJdbcTemplate() {
-		NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource());
-		return namedParameterJdbcTemplate;
-	}
 }
 

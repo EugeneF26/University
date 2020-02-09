@@ -1,12 +1,18 @@
 package com.project.university;
 
 import java.io.FileNotFoundException;
+import java.util.List;
+
 import org.dbunit.dataset.DataSetException;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.hamcrest.collection.IsCollectionWithSize;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
@@ -31,13 +37,36 @@ public class StudentRepositoryTest {
 	public void setup() {
 		studentRepository.setDataSource(jdbcTemplate);
 	}
+	
+	@Test
+	public void testSaveStudentsById_WhenTheUserEntersTheIdOfTheStudentIsOneAndTheProgramDisplaysTheResult_thenCorrect()
+			throws DataSetException, FileNotFoundException {
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Student.class);
+		Student student = context.getBean(Student.class, "Petr", "Manshikov");
+		int rows = studentRepository.save(student);
+		Assert.assertEquals(rows, 1);
+	}
 
 	@Test
-	public void testFindStudentsByCourceName_WhenTheUserEntersTheNameOfTheCourseIsMathsAndTheProgramDisplaysTheResult_thenCorrect()
+	public void testFindStudentsById_WhenTheUserEntersTheIdOfTheStudentIsOneAndTheProgramDisplaysTheResult_thenCorrect()
 			throws DataSetException, FileNotFoundException {
 		Student student = studentRepository.find(1);
 		Assert.assertEquals(student.getName(), "Petr");
 		Assert.assertEquals(student.getSurname(), "Manshikov");
+	}
+	
+	@Test
+	public void testDeleteStudentsById_WhenTheUserEntersTheIdOfTheStudentIsOneAndTheProgramDisplaysTheResult_thenCorrect()
+			throws DataSetException, FileNotFoundException {
+		int rows = studentRepository.delete(1);
+		Assert.assertEquals(rows, 1);
+	}
+	
+	@Test
+	public void testGetAllStudentsById_WhenTheUserEntersTheIdOfTheStudentIsOneAndTheProgramDisplaysTheResult_thenCorrect()
+			throws DataSetException, FileNotFoundException {
+		List<Student> result = studentRepository.getAll();
+		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(5));
 	}
 }
 
