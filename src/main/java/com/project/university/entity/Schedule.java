@@ -14,7 +14,7 @@ import lombok.Data;
 @Data
 public class Schedule {
 
-	private final List<ScheduleItem> days;
+	private List<ScheduleItem> days;
 	
 	/**
 	 * The method where filling the list of schedule

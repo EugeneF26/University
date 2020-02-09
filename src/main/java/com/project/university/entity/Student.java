@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 public class Student {
 
-	private final int studentId;
+	private int studentId;
 	private String name;
 	private String surname;
 	private List<Student> students;

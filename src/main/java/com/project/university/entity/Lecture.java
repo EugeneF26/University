@@ -7,6 +7,6 @@ import lombok.Data;
  */
 @Data
 public class Lecture {
-	private final String title;
+	private String title;
 }
 

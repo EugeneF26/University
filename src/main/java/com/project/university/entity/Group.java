@@ -7,7 +7,7 @@ import lombok.Data;
  */
 @Data
 public class Group {
-	private final int groupId;
+	private int groupId;
 	private Student student;
 }
 

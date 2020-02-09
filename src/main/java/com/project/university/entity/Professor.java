@@ -7,7 +7,7 @@ import lombok.Data;
  */
 @Data
 public class Professor {
-	private final int professorId;
+	private int professorId;
 	private String name;
 	private String surname;
 	private String patronymic;

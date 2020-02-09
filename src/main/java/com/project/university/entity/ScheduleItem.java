@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class ScheduleItem {
 
-	private final Date studyDay;
+	private Date studyDay;
 	private Course course;
 	private Professor professor;
 	private Lecture lecture;

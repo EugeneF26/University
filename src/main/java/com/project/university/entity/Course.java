@@ -12,7 +12,7 @@ import lombok.Data;
 @Component
 @Data
 public class Course {
-	private final int year;
+	private int year;
 	private List<Group> groups;
 }
 
