@@ -33,7 +33,7 @@ public class StudentRepository implements CrudRepository<Student>{
 	@Override
 	public int save(Student student) {
 		return this.jdbcTemplate.update(
-		        "INSERT INTO STUDENTS (student_id, student_name, student_surname) VALUES (?,?,?)", 
+		        "INSERT INTO STUDENTS (student_id, name, surname) VALUES (?,?,?)", 
 		        student.getStudentId(), student.getName(), student.getSurname());
 	}
 
@@ -42,7 +42,7 @@ public class StudentRepository implements CrudRepository<Student>{
 	 */
 	@Override
 	public Student find(int id) {
-		 return this.jdbcTemplate.queryForObject("SELECT student_id, student_name, student_surname "
+		 return this.jdbcTemplate.queryForObject("SELECT student_id, name, surname "
 				+ "FROM STUDENTS WHERE student_id = ?;", BeanPropertyRowMapper.newInstance(Student.class), id);
 	}
 
