@@ -34,7 +34,7 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 	public int save(Professor professor) {
 		return this.jdbcTemplate.update(
 		        "INSERT INTO PROFESSORS (professor_name, professor_surname, professor_patronymic) VALUES (?,?,?)", 
-		       professor.getName(), professor.getSurname(), professor.getPatronymic());
+		       professor.getProfessorName(), professor.getProfessorSurname(), professor.getProfessorPatronymic());
 	}
 
 	/**
@@ -42,7 +42,7 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 	 */
 	@Override
 	public Professor find(int id) {
-		return this.jdbcTemplate.queryForObject("SELECT professor_id, professor_name, professor_surname, professor_patronimyc "
+		return this.jdbcTemplate.queryForObject("SELECT professor_id, professor_name, professor_surname, professor_patronymic "
 				+ "FROM PROFESSORS WHERE professor_id = ?;", 
 				 BeanPropertyRowMapper.newInstance(Professor.class), id);
 	}
@@ -53,9 +53,9 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 	@Override
 	public int update(Professor professor) {
 		return this.jdbcTemplate.update(
-		        "UPDATE PROFESSOR SET professor_name=?, professor_surname=?, professor_patronymic=? "
-		        + "WHERE professor_id=? ", professor.getName(), professor.getSurname(), 
-		        		professor.getPatronymic(), professor.getProfessorId());
+		        "UPDATE PROFESSORS SET professor_name=?, professor_surname=?, professor_patronymic=? "
+		        + "WHERE professor_id=? ", professor.getProfessorName(), professor.getProfessorSurname(), 
+		        		professor.getProfessorPatronymic(), professor.getProfessorId());
 	}
 
 	/**
@@ -72,7 +72,7 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 	 */
 	@Override
 	public List<Professor> getAll() {
-		return this.jdbcTemplate.query("SELECT FROM PROFESSORS", BeanPropertyRowMapper.newInstance(Professor.class));
+		return this.jdbcTemplate.query("SELECT * FROM PROFESSORS", BeanPropertyRowMapper.newInstance(Professor.class));
 	}
 }
 

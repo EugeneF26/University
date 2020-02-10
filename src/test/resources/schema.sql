@@ -33,3 +33,15 @@ VALUES (1),
 (4),
 (5),
 (6);
+DROP TABLE IF EXISTS PROFESSORS;
+CREATE TABLE professors
+(
+professor_id SERIAL PRIMARY KEY,
+professor_name TEXT,
+professor_surname TEXT,
+professor_patronymic TEXT
+);
+INSERT INTO professors (professor_name, professor_surname, professor_patronymic)
+VALUES ('Pavel', 'Koronkov', 'Petrovich'),
+('Mark', 'Marsov', 'Vladimirovich'),
+('Petr', 'Fedorenko', 'Konstantinovich');

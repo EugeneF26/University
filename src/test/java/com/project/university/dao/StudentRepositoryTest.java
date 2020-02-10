@@ -41,7 +41,11 @@ public class StudentRepositoryTest {
 	@Test
 	public void testSave_WhenTheUserSendsTheStudentDataAndTheProgramSavesAndIncrementStudentIdThem_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-		Student student = Student.builder().studentName("Pavel").studentSurname("Mrakov").build();		
+		Student student = Student
+				.builder()
+				.studentName("Pavel")
+				.studentSurname("Mrakov")
+				.build();		
 		int rows = studentRepository.save(student);
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
 	}
@@ -57,7 +61,12 @@ public class StudentRepositoryTest {
 	@Test
 	public void testUpdate_WhenUserSendsTheDataInTheMethodAndReturnsCountUpdatedRows_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-		Student student = Student.builder().studentId(4).studentName("Arkadiy").studentSurname("Morozov").build();	
+		Student student = Student
+				.builder()
+				.studentId(4)
+				.studentName("Arkadiy")
+				.studentSurname("Morozov")
+				.build();	
 		int rows = studentRepository.update(student);
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
 	}

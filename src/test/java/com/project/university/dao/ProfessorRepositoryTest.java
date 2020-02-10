@@ -17,16 +17,16 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.project.university.TestDBConfiguration;
-import com.project.university.entity.Group;
+import com.project.university.entity.Professor;
 
 import junit.framework.Assert;
 
 @ExtendWith(SpringExtension.class)
-@SpringJUnitConfig(classes = { TestDBConfiguration.class, GroupRepository.class })
-public class GroupRepositoryTest {
+@SpringJUnitConfig(classes = { TestDBConfiguration.class, ProfessorRepository.class })
+public class ProfessorRepositoryTest {
 	
 	@Autowired
-	private GroupRepository groupRepository;
+	private ProfessorRepository professorRepository;
 
 	@Autowired
 	@Qualifier("testTemplate")
@@ -34,50 +34,54 @@ public class GroupRepositoryTest {
 
 	@BeforeEach
 	public void setup() {
-		groupRepository.setDataSource(jdbcTemplate);
+		professorRepository.setDataSource(jdbcTemplate);
 	}
 	
 	@Test
-	public void testSave_WhenTheUserSendsTheGroupDataAndTheProgramSavesCourseIdThem_thenCorrect()
+	public void testSave_WhenTheUserSendsTheProfessorDataAndTheProgramSavesProfessorDataThem_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-		Group group = Group
-				.builder()
-				.groupId(7)
-				.build();		
-		int rows = groupRepository.save(group);
+		Professor professor = Professor.builder()
+				.professorName("Alexander")
+				.professorSurname("Artemenko")
+				.professorPatronymic("Fedorovich")
+				.build();
+		int rows = professorRepository.save(professor);
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
 	}
 	
 	@Test
-	public void testFindGroupById_WhenTheUserEntersTheIdOfTheGroupIsOneAndTheProgramDisplaysTheResult_thenCorrect()
+	public void testFindProfessorById_WhenTheUserEntersTheIdOfTheProfessorIsOneAndTheProgramDisplaysTheResult_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-		Group group = groupRepository.find(1);
-		Assert.assertEquals(group.getGroupId(), 1);
+		Professor professor = professorRepository.find(1);
+		Assert.assertEquals(professor.getProfessorId(), 1);
 	}
 	
 	@Test
 	public void testUpdate_WhenUserSendsTheDataInTheMethodAndReturnsCountUpdatedRows_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-		Group group = Group
+		Professor professor = Professor
 				.builder()
-				.groupId(1)
+				.professorName("Alexander")
+				.professorSurname("Artemenko")
+				.professorPatronymic("Fedorovich")
+				.professorId(2)
 				.build();	
-		int rows = groupRepository.update(group);
+		int rows = professorRepository.update(professor);
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
 	}
 	
 	@Test
-	public void testDelete_WhenUserSendsTheGroupIdInTheMethodAndReturnsCountDeletedRows_thenCorrect() 
+	public void testDelete_WhenUserSendsTheProfessorIdInTheMethodAndReturnsCountDeletedRows_thenCorrect() 
 			throws DataSetException, FileNotFoundException {
-		int rows = groupRepository.delete(6);
+		int rows = professorRepository.delete(3);
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
 	}
 	
 	@Test
 	public void testGetAll_WhenTheUserSendsQueryForAllDataAndTheProgramReturnThem_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-		List<Group> result = groupRepository.getAll();
-		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(7));
+		List<Professor> result = professorRepository.getAll();
+		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(3));
 	}
 }
 
