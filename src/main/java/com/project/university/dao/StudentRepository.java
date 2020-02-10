@@ -52,7 +52,7 @@ public class StudentRepository implements CrudRepository<Student>{
 	@Override
 	public int update(Student student) {
 		return this.jdbcTemplate.update(
-		        "UPDATE STUDENTS SET student_id=?, student_name=?, student_surname=? "
+		        "UPDATE STUDENTS SET name=?, surname=? "
 		        + "WHERE student_id=? ", student.getName(), student.getSurname(), student.getStudentId());
 	}
 

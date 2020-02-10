@@ -1,10 +1,10 @@
 package com.project.university;
 
 import java.io.FileNotFoundException;
-
 import java.util.List;
 
 import org.dbunit.dataset.DataSetException;
+import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.collection.IsCollectionWithSize;
 import org.junit.jupiter.api.BeforeEach;
@@ -38,11 +38,11 @@ public class StudentRepositoryTest {
 	}
 	
 	@Test
-	public void testSaveStudentsById_WhenTheUserEntersTheIdOfTheStudentIsOneAndTheProgramDisplaysTheResult_thenCorrect()
+	public void testSave_WhenTheUserSendsTheStudentDataAndTheProgramSavesAndIncrementStudentIdThem_thenCorrect()
 			throws DataSetException, FileNotFoundException {
 		Student student = Student.builder().name("Pavel").surname("Mrakov").build();		
 		int rows = studentRepository.save(student);
-		Assert.assertEquals(rows, 1);
+		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
 	}
 
 	@Test
@@ -54,14 +54,22 @@ public class StudentRepositoryTest {
 	}
 	
 	@Test
-	public void testDeleteStudentsById_WhenTheUserEntersTheIdOfTheStudentIsOneAndTheProgramDisplaysTheResult_thenCorrect()
+	public void testUpdate_WhenUserSendsTheDataInTheMethodAndReturnsCountUpdatedRows_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-		int rows = studentRepository.delete(5);
-		Assert.assertEquals(rows, 1);
+		Student student = Student.builder().studentId(4).name("Arkadiy").surname("Morozov").build();	
+		int rows = studentRepository.update(student);
+		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
 	}
 	
 	@Test
-	public void testGetAllStudentsById_WhenTheUserEntersTheIdOfTheStudentIsOneAndTheProgramDisplaysTheResult_thenCorrect()
+	public void testDelete_WhenUserSendsTheStudentIdInTheMethodAndReturnsCountDeletedRows_thenCorrect() 
+			throws DataSetException, FileNotFoundException {
+		int rows = studentRepository.delete(5);
+		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
+	}
+	
+	@Test
+	public void testGetAll_WhenTheUserSendsQueryForAllDataAndTheProgramReturnThem_thenCorrect()
 			throws DataSetException, FileNotFoundException {
 		List<Student> result = studentRepository.getAll();
 		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(6));
