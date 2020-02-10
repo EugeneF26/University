@@ -21,3 +21,15 @@ VALUES (1),
 (2),
 (3),
 (4);
+DROP TABLE IF EXISTS GROUPS;
+CREATE TABLE groups
+(
+group_id NUMBER PRIMARY KEY,
+);
+INSERT INTO groups
+VALUES (1),
+(2),
+(3),
+(4),
+(5),
+(6);

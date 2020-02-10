@@ -33,7 +33,7 @@ public class GroupRepository implements CrudRepository<Group> {
 	@Override
 	public int save(Group group) {
 		return this.jdbcTemplate.update(
-		        "INSERT INTO COURSES (group_id) VALUES (?)", group.getGroupId());
+		        "INSERT INTO GROUPS VALUES (?)", group.getGroupId());
 	}
 
 	/**
@@ -51,7 +51,7 @@ public class GroupRepository implements CrudRepository<Group> {
 	@Override
 	public int update(Group group) {
 		return this.jdbcTemplate.update(
-		        "UPDATE GROUPS SET group_id=? WHERE group_id=? ", group.getGroupId());
+		        "UPDATE GROUPS SET group_id=? WHERE group_id=? ", group.getGroupId(), group.getGroupId());
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class GroupRepository implements CrudRepository<Group> {
 	 */
 	@Override
 	public List<Group> getAll() {
-		return this.jdbcTemplate.query("SELECT FROM GROUPS", BeanPropertyRowMapper.newInstance(Group.class));
+		return this.jdbcTemplate.query("SELECT * FROM GROUPS", BeanPropertyRowMapper.newInstance(Group.class));
 	}
 }
 
