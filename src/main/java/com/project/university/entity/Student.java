@@ -1,15 +1,21 @@
 package com.project.university.entity;
 
 import java.util.List;
+
 import java.util.stream.Collectors;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.NonNull;
+import lombok.NoArgsConstructor;
 
 /** @author Eugene
  * The class contain data of student and methods working with it
  */
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Student {
  
 	private int studentId;

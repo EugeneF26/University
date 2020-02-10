@@ -1,18 +1,17 @@
 package com.project.university;
 
 import java.io.FileNotFoundException;
+
 import java.util.List;
 
 import org.dbunit.dataset.DataSetException;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.hamcrest.collection.IsCollectionWithSize;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
@@ -41,8 +40,7 @@ public class StudentRepositoryTest {
 	@Test
 	public void testSaveStudentsById_WhenTheUserEntersTheIdOfTheStudentIsOneAndTheProgramDisplaysTheResult_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Student.class);
-		Student student = context.getBean(Student.class, "Petr", "Manshikov");
+		Student student = Student.builder().name("Pavel").surname("Mrakov").build();		
 		int rows = studentRepository.save(student);
 		Assert.assertEquals(rows, 1);
 	}
@@ -58,7 +56,7 @@ public class StudentRepositoryTest {
 	@Test
 	public void testDeleteStudentsById_WhenTheUserEntersTheIdOfTheStudentIsOneAndTheProgramDisplaysTheResult_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-		int rows = studentRepository.delete(1);
+		int rows = studentRepository.delete(5);
 		Assert.assertEquals(rows, 1);
 	}
 	
@@ -66,7 +64,7 @@ public class StudentRepositoryTest {
 	public void testGetAllStudentsById_WhenTheUserEntersTheIdOfTheStudentIsOneAndTheProgramDisplaysTheResult_thenCorrect()
 			throws DataSetException, FileNotFoundException {
 		List<Student> result = studentRepository.getAll();
-		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(5));
+		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(6));
 	}
 }
 
