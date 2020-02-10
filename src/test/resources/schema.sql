@@ -2,10 +2,10 @@ DROP TABLE IF EXISTS STUDENTS;
 CREATE TABLE students
 (
 student_id SERIAL PRIMARY KEY,
-name TEXT NOT NULL,
-surname TEXT NOT NULL
+student_name TEXT NOT NULL,
+student_surname TEXT NOT NULL
 );
-INSERT INTO students (name, surname)
+INSERT INTO students (student_name, student_surname)
 VALUES ('Petr', 'Manshikov'),
 ('Fedor', 'Gruntovskiy'),
 ('Georgiy', 'Murashvily'),

@@ -19,8 +19,8 @@ import lombok.NoArgsConstructor;
 public class Student {
  
 	private int studentId;
-	private String name;
-	private String surname;
+	private String studentName;
+	private String studentSurname;
 	private List<Student> students;
 	private Group group;
 	
