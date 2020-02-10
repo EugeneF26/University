@@ -11,3 +11,13 @@ VALUES ('Petr', 'Manshikov'),
 ('Georgiy', 'Murashvily'),
 ('Stepan', 'Parashka'),
 ('Maxim', 'Torkovskiy');
+DROP TABLE IF EXISTS COURSES;
+CREATE TABLE courses
+(
+course_year NUMBER PRIMARY KEY,
+);
+INSERT INTO courses
+VALUES (1),
+(2),
+(3),
+(4);

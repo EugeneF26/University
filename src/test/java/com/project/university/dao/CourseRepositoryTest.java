@@ -1,4 +1,4 @@
-package com.project.university;
+package com.project.university.dao;
 
 import java.io.FileNotFoundException;
 import java.util.List;
@@ -16,17 +16,18 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-import com.project.university.dao.StudentRepository;
-import com.project.university.entity.Student;
+import com.project.university.TestDBConfiguration;
+import com.project.university.entity.Course;
 
 import junit.framework.Assert;
 
-@ExtendWith(SpringExtension.class)
-@SpringJUnitConfig(classes = { TestDBConfiguration.class, StudentRepository.class })
-public class StudentRepositoryTest {
 
+@ExtendWith(SpringExtension.class)
+@SpringJUnitConfig(classes = { TestDBConfiguration.class, CourseRepository.class })
+public class CourseRepositoryTest {
+	
 	@Autowired
-	private StudentRepository studentRepository;
+	private CourseRepository courseRepository;
 
 	@Autowired
 	@Qualifier("testTemplate")
@@ -34,45 +35,44 @@ public class StudentRepositoryTest {
 
 	@BeforeEach
 	public void setup() {
-		studentRepository.setDataSource(jdbcTemplate);
+		courseRepository.setDataSource(jdbcTemplate);
 	}
 	
 	@Test
-	public void testSave_WhenTheUserSendsTheStudentDataAndTheProgramSavesAndIncrementStudentIdThem_thenCorrect()
+	public void testSave_WhenTheUserSendsTheCourseYearAndTheProgramSavesCourseYearThem_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-		Student student = Student.builder().studentName("Pavel").studentSurname("Mrakov").build();		
-		int rows = studentRepository.save(student);
+		Course course = Course.builder().courseYear(5).build();	
+		int rows = courseRepository.save(course);
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
 	}
-
+	
 	@Test
-	public void testFindStudentsById_WhenTheUserEntersTheIdOfTheStudentIsOneAndTheProgramDisplaysTheResult_thenCorrect()
+	public void testFindCourseByYear_WhenTheUserEntersTheYearOfTheCourseIsOneAndTheProgramDisplaysTheResult_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-		Student student = studentRepository.find(1);
-		Assert.assertEquals(student.getStudentName(), "Petr");
-		Assert.assertEquals(student.getStudentSurname(), "Manshikov");
+		Course course = courseRepository.find(1);
+		Assert.assertEquals(course.getCourseYear(), 1);
 	}
 	
 	@Test
 	public void testUpdate_WhenUserSendsTheDataInTheMethodAndReturnsCountUpdatedRows_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-		Student student = Student.builder().studentId(4).studentName("Arkadiy").studentSurname("Morozov").build();	
-		int rows = studentRepository.update(student);
+		Course course = Course.builder().courseYear(2).build();	
+		int rows = courseRepository.update(course);
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
 	}
 	
 	@Test
-	public void testDelete_WhenUserSendsTheStudentIdInTheMethodAndReturnsCountDeletedRows_thenCorrect() 
+	public void testDelete_WhenUserSendsTheCourseYearInTheMethodAndReturnsCountDeletedRows_thenCorrect() 
 			throws DataSetException, FileNotFoundException {
-		int rows = studentRepository.delete(5);
+		int rows = courseRepository.delete(3);
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
 	}
 	
 	@Test
 	public void testGetAll_WhenTheUserSendsQueryForAllDataAndTheProgramReturnThem_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-		List<Student> result = studentRepository.getAll();
-		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(6));
+		List<Course> result = courseRepository.getAll();
+		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(4));
 	}
 }
 

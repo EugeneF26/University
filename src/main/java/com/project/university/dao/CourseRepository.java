@@ -33,7 +33,7 @@ public class CourseRepository implements CrudRepository<Course> {
 	 */
 	@Override
 	public int save(Course course) {
-		return this.jdbcTemplate.update("INSERT INTO COURSES (course_year) VALUES (?)", course.getYear());
+		return this.jdbcTemplate.update("INSERT INTO COURSES (course_year) VALUES (?)", course.getCourseYear());
 	}
 
 	/**
@@ -50,7 +50,7 @@ public class CourseRepository implements CrudRepository<Course> {
 	 */
 	@Override
 	public int update(Course course) {
-		return this.jdbcTemplate.update("UPDATE COURSES SET course_year=? WHERE course_year=? ", course.getYear());
+		return this.jdbcTemplate.update("UPDATE COURSES SET course_year=? WHERE course_year=? ", course.getCourseYear(), course.getCourseYear());
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class CourseRepository implements CrudRepository<Course> {
 	 */
 	@Override
 	public List<Course> getAll() {
-		return this.jdbcTemplate.query("SELECT FROM COURSES", BeanPropertyRowMapper.newInstance(Course.class));
+		return this.jdbcTemplate.query("SELECT * FROM COURSES", BeanPropertyRowMapper.newInstance(Course.class));
 	}
 }
 
