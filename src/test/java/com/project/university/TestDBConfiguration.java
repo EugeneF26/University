@@ -1,6 +1,7 @@
 package com.project.university;
 
 import javax.sql.DataSource;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -11,7 +12,7 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 public class TestDBConfiguration {
 
 	@Bean
-	public DataSource getDataSource() {
+	public DataSource dataSourceWithScripts() {
 		return new EmbeddedDatabaseBuilder()
 				.generateUniqueName(true)
 				.setType(EmbeddedDatabaseType.H2)
@@ -24,7 +25,7 @@ public class TestDBConfiguration {
 
 	@Bean
 	public JdbcTemplate jdbcTemplate() {
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSourceWithScripts());
 		return jdbcTemplate;
 	}
 }
