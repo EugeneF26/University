@@ -1,4 +1,4 @@
-package com.project.university.domain;
+package com.project.university;
 
 import com.project.university.entity.Professor;
 import com.project.university.entity.Student;

@@ -1,36 +1,21 @@
 package com.project.university.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /** @author Eugene
  * The class contain data of Professor
  */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Professor {
-	
-	private String name;
-	private String surname;
-	private String patronymic;
-	
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getSurname() {
-		return surname;
-	}
-
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
-
-	public String getPatronymic() {
-		return patronymic;
-	}
-
-	public void setPatronymic(String patronymic) {
-		this.patronymic = patronymic;
-	}
+	private int professorId;
+	private String professorName;
+	private String professorSurname;
+	private String professorPatronymic;
 }
 

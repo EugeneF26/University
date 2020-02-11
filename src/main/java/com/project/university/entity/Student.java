@@ -1,91 +1,49 @@
 package com.project.university.entity;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import java.util.stream.Collectors;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /** @author Eugene
  * The class contain data of student and methods working with it
  */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Student {
-
-	private String name;
-	private String surname;
-	private int id;
+ 
+	private int studentId;
+	private String studentName;
+	private String studentSurname;
 	private List<Student> students;
 	private Group group;
-
-	/**
-	 * The constructor for filling data
-	 * @param name of student string value
-	 * @param surname of student string value
-	 */
-	public Student(String name, String surname) {
-		this.setName(name);
-		this.setSurname(surname);
-	}
-
+	
 	/**
 	 * The method return list of students by group
 	 * @param titleGroup of group string value
 	 * @return list of student by group
 	 */
-	public List<Student> getStudents(String titleGroup) {
-		List<Student> studentsByGroup = new ArrayList<Student>();
-		for (int i = 0; i < students.size(); i++) {
-			if (students.get(i).group.getGroup().equals(titleGroup)) {
-				studentsByGroup.add(students.get(i));
-			}
-		}
+	public List<Student> getStudents(int groupId) {
+		List<Student> studentsByGroup = students.stream()
+				.filter(element -> Integer.valueOf(element.group.getGroupId()).equals(groupId))
+				.collect(Collectors.toList());
 		return studentsByGroup;
 	}
-
+	
 	/**
 	 * The method delete student from list of students
 	 * @param student instance of Student
 	 * @see Student#Student(String, String)
 	 */
 	public void expelStudent(Student student) {
-		for (int i = 0; i < students.size(); i++) {
-			if (students.get(i).getId() == student.getId()) {
-				students.remove(i);
-			}
-		}
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getSurname() {
-		return surname;
-	}
-
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
-
-	public void setStudents(List<Student> students) {
-
-	}
-
-	public Group getGroup() {
-		return group;
-	}
-
-	public void setGroup(Group group) {
-		this.group = group;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
+		students
+		.removeIf(element -> Integer.valueOf(element.studentId).equals(student.getStudentId()));
 	}
 }
 

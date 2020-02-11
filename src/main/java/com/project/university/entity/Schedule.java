@@ -1,4 +1,4 @@
-package com.project.university;
+package com.project.university.entity;
 
 import java.sql.Date;
 
@@ -6,12 +6,12 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.project.university.entity.Group;
-import com.project.university.entity.Course;
+import lombok.Data;
 
 /** @author Eugene
  * The class contain a schedule and methods for working with it
  */
+@Data
 public class Schedule {
 
 	private List<ScheduleItem> days;
@@ -56,14 +56,6 @@ public class Schedule {
 		List<ScheduleItem> scheduleItem = new ArrayList<ScheduleItem>(); 
 		scheduleItem.add(days.get(0));
 		return scheduleItem;
-	}
-	
-	public List<ScheduleItem> getDays() {
-		return days;
-	}
-
-	public void setDays(List<ScheduleItem> days) {
-		this.days = days;
 	}
 }
 
