@@ -11,25 +11,26 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
+import com.project.university.DatasourseConfiguration;
 import com.project.university.TestDBConfiguration;
 import com.project.university.entity.Professor;
 
 import junit.framework.Assert;
 
 @ExtendWith(SpringExtension.class)
-@SpringJUnitConfig(classes = { TestDBConfiguration.class, ProfessorRepository.class })
+@SpringJUnitConfig(classes = {StudentRepository.class, DatasourseConfiguration.class, TestDBConfiguration.class})
+@ActiveProfiles("dev")
 public class ProfessorRepositoryTest {
 	
 	@Autowired
 	private ProfessorRepository professorRepository;
 
 	@Autowired
-	@Qualifier("testTemplate")
 	JdbcTemplate jdbcTemplate;
 
 	@BeforeEach

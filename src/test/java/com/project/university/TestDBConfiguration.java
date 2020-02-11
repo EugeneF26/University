@@ -22,11 +22,10 @@ public class TestDBConfiguration {
 				.build();
 	}
 
-	@Bean("testTemplate")
+	@Bean
 	public JdbcTemplate jdbcTemplate() {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
 		return jdbcTemplate;
 	}
 }
-
 

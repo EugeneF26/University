@@ -8,8 +8,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.project.university.entity.Course;
-import com.project.university.SpringConfig;
-
 
 /**
  * @author Eugene The repository class contain methods working with data base
