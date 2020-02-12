@@ -23,7 +23,7 @@ import com.project.university.entity.Group;
 import junit.framework.Assert;
 
 @ExtendWith(SpringExtension.class)
-@SpringJUnitConfig(classes = {StudentRepository.class, DatasourseConfiguration.class, TestDBConfiguration.class})
+@SpringJUnitConfig(classes = {DatasourseConfiguration.class, TestDBConfiguration.class})
 @ActiveProfiles("dev")
 public class GroupRepositoryTest {
 	
