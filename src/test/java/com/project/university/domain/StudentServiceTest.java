@@ -1,5 +1,7 @@
 package com.project.university.domain;
 
+import java.util.List;
+
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsNull;
@@ -20,8 +22,12 @@ import com.project.university.entity.Student;
 @ActiveProfiles("dev")
 public class StudentServiceTest {
 	
-	@Autowired
 	private StudentService studentService;
+	
+	@Autowired
+	public StudentServiceTest(StudentService studentService) {
+		this.studentService = studentService;
+	}
 	
 	@Test
 	public void testSave_WhenTheNumberOfUpdateRowsIsOne_thenCorrect() {
@@ -36,7 +42,7 @@ public class StudentServiceTest {
 	
 	@Test
 	public void testFind_WhenTheResultOfQueryDoesNotEmpty_thenCorrect()  {
-		String result = studentService.find(1);
+		Student result = studentService.find(1);
 		MatcherAssert.assertThat(result, IsNull.notNullValue());
 	}
 	
@@ -59,7 +65,7 @@ public class StudentServiceTest {
 	
 	@Test
 	public void testGetAll_WhenTheResultOfQueryDoesNotEmpty_thenCorrect()  {
-		String result = studentService.getAllStudents();
+		List<Student> result = studentService.getAllStudents();
 		MatcherAssert.assertThat(result,  IsNull.notNullValue());
 	}
 }

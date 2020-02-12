@@ -19,6 +19,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import com.project.university.DatasourseConfiguration;
 import com.project.university.TestDBConfiguration;
 import com.project.university.dao.StudentRepository;
+import com.project.university.entity.Group;
 import com.project.university.entity.Student;
 
 import junit.framework.Assert;
@@ -84,6 +85,20 @@ public class StudentRepositoryTest {
 			throws DataSetException, FileNotFoundException {
 		List<Student> result = studentRepository.getAll();
 		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(6));
+	}
+	
+	@Test
+	public void testRegroupStudent() {
+		Student student = Student
+				.builder()
+				.studentId(4)
+				.groupId(Group
+						.builder()
+						.groupId(1)
+						.build())
+				.build();	
+		int rows = studentRepository.regroupStudent(student);
+		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
 	}
 }
 

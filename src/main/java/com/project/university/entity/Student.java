@@ -22,7 +22,7 @@ public class Student {
 	private String studentName;
 	private String studentSurname;
 	private List<Student> students;
-	private Group group;
+	private Group groupId;
 	
 	/**
 	 * The method return list of students by group
@@ -31,7 +31,7 @@ public class Student {
 	 */
 	public List<Student> getStudents(int groupId) {
 		List<Student> studentsByGroup = students.stream()
-				.filter(element -> Integer.valueOf(element.group.getGroupId()).equals(groupId))
+				.filter(element -> Integer.valueOf(element.groupId.getGroupId()).equals(groupId))
 				.collect(Collectors.toList());
 		return studentsByGroup;
 	}
