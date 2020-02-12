@@ -76,9 +76,21 @@ public class StudentRepository implements CrudRepository<Student> {
 		return this.jdbcTemplate.query("SELECT student_id, student_name, student_surname, group_id FROM STUDENTS", new StudentMapper());
 	}
 	
+	/**
+	 * regroup student
+	 * @param student
+	 * @return number of updated rows
+	 */
 	public int regroupStudent(Student student) {
 		return this.jdbcTemplate.update("UPDATE STUDENTS SET group_id=?" + " WHERE student_id=?",
 				student.getGroupId().getGroupId(), student.getStudentId());
+	}
+	
+	/**
+	 * Deletes all students from table
+	 */
+	public void truncateStudentsAndStudentsCourses() {		
+		this.jdbcTemplate.update("DELETE FROM students");
 	}
 }
 

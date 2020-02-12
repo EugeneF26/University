@@ -1,13 +1,13 @@
 package com.project.university.dao;
 
 import java.io.FileNotFoundException;
+
 import java.util.List;
 
 import org.dbunit.dataset.DataSetException;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.collection.IsCollectionWithSize;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,14 +31,9 @@ public class StudentRepositoryTest {
 
 	@Autowired
 	private StudentRepository studentRepository;
-
+	
 	@Autowired
 	JdbcTemplate jdbcTemplate;
-
-	@BeforeEach
-	public void setup() {
-		studentRepository.setDataSource(jdbcTemplate);
-	}
 	
 	@Test
 	public void testSave_WhenTheUserSendsTheStudentDataAndTheProgramSavesAndIncrementStudentIdThem_thenCorrect()
