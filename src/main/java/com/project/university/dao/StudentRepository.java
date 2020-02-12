@@ -36,8 +36,8 @@ public class StudentRepository implements CrudRepository<Student> {
 	 */
 	@Override
 	public int save(Student student) {
-		return this.jdbcTemplate.update("INSERT INTO STUDENTS (student_name, student_surname) VALUES (?,?)",
-				student.getStudentName(), student.getStudentSurname());
+		return this.jdbcTemplate.update("INSERT INTO STUDENTS (student_name, student_surname, group_id) VALUES (?,?,?)",
+				student.getStudentName(), student.getStudentSurname(), student.getGroupId().getGroupId());
 	}
 
 	/**
