@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.project.university.domain.StudentMapper;
 import com.project.university.entity.Student;
 
 /**
@@ -72,13 +73,12 @@ public class StudentRepository implements CrudRepository<Student> {
 	 */
 	@Override
 	public List<Student> getAll() {
-		return this.jdbcTemplate.query("SELECT * FROM STUDENTS", BeanPropertyRowMapper.newInstance(Student.class));
+		return this.jdbcTemplate.query("SELECT student_id, student_name, student_surname, group_id FROM STUDENTS", new StudentMapper());
 	}
 	
-	
-
 	public int regroupStudent(Student student) {
 		return this.jdbcTemplate.update("UPDATE STUDENTS SET group_id=?" + " WHERE student_id=?",
 				student.getGroupId().getGroupId(), student.getStudentId());
 	}
 }
+
