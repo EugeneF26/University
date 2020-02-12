@@ -70,7 +70,7 @@ public class GroupRepositoryTest {
 	@Test
 	public void testDelete_WhenUserSendsTheGroupIdInTheMethodAndReturnsCountDeletedRows_thenCorrect() 
 			throws DataSetException, FileNotFoundException {
-		int rows = groupRepository.delete(6);
+		int rows = groupRepository.delete(5);
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
 	}
 	
@@ -78,7 +78,7 @@ public class GroupRepositoryTest {
 	public void testGetAll_WhenTheUserSendsQueryForAllDataAndTheProgramReturnThem_thenCorrect()
 			throws DataSetException, FileNotFoundException {
 		List<Group> result = groupRepository.getAll();
-		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(7));
+		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(6));
 	}
 }
 

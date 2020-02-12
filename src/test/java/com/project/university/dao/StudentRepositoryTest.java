@@ -8,7 +8,6 @@ import org.dbunit.dataset.DataSetException;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.collection.IsCollectionWithSize;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,30 +29,27 @@ import junit.framework.Assert;
 @ActiveProfiles("dev")
 public class StudentRepositoryTest {
 
-	@Autowired
 	private StudentRepository studentRepository;
+	@SuppressWarnings("unused")
+	private JdbcTemplate jdbcTemplate;
 	
 	@Autowired
-	JdbcTemplate jdbcTemplate;
-	
-	@BeforeEach
-	public void setup() {
-		studentRepository.setDataSource(jdbcTemplate);
+	public StudentRepositoryTest(StudentRepository studentRepository, JdbcTemplate jdbcTemplate){
+		this.studentRepository = studentRepository;
+		this.jdbcTemplate = jdbcTemplate;
 	}
 	
 	@Test
 	public void testSave_WhenTheUserSendsTheStudentDataAndTheProgramSavesAndIncrementStudentIdThem_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-		Group group = Group
-				.builder()
-				.groupId(1)
-				.build();
-		
 		Student student = Student
 				.builder()
 				.studentName("Pavel")
 				.studentSurname("Mrakov")
-				.groupId(group)
+				.groupId(Group
+						.builder()
+						.groupId(1)
+						.build())
 				.build();		
 		int rows = studentRepository.save(student);
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));

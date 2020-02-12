@@ -15,6 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import com.project.university.DatasourseConfiguration;
 import com.project.university.TestDBConfiguration;
 import com.project.university.domain.StudentService;
+import com.project.university.entity.Group;
 import com.project.university.entity.Student;
 
 @ExtendWith(SpringExtension.class)
@@ -35,6 +36,7 @@ public class StudentServiceTest {
 				.studentId(1)
 				.studentName("Nikolay")
 				.studentSurname("Pushev")
+				.groupId(Group.builder().groupId(1).build())
 				.build();
 		int rows = studentService.save(NEW_STUDENT);
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
