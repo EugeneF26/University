@@ -23,16 +23,15 @@ public class StudentMapper implements RowMapper<Student> {
 	 */
 	@Override
 	public Student mapRow(ResultSet rs, int rowNum) throws SQLException {
-		Group group = Group
-				.builder()
-				.groupId(rs.getInt("group_id"))
-				.build();
 		Student student = Student
 				.builder()
 				.studentId(rs.getInt("student_id"))
 				.studentName(rs.getString("student_name"))
 				.studentSurname(rs.getString("student_surname"))
-				.groupId(group)
+				.groupId(Group
+						.builder()
+						.groupId(rs.getInt("group_id"))
+						.build())
 				.build();
         return student;
 	}

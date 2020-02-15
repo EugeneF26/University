@@ -15,7 +15,6 @@ import com.project.university.entity.Student;
 @Service
 public class StudentService {
 	
-	
 	private StudentRepository studentRepository;
 	
 	/**
