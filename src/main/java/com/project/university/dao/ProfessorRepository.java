@@ -13,7 +13,7 @@ import com.project.university.entity.Professor;
  * The repository class contain methods working with data base
  */
 @Repository
-public class ProfessorRepository implements CrudRepository<Professor> {
+public class ProfessorRepository implements CrudRepository<Professor>, CrudProfessorService {
 
 	private JdbcTemplate jdbcTemplate;
 	

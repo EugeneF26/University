@@ -8,12 +8,13 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.project.university.entity.Course;
+import com.project.university.entity.Student;
 
 /**
  * @author Eugene The repository class contain methods working with data base
  */
 @Repository
-public class CourseRepository implements CrudRepository<Course> {
+public class CourseRepository implements CrudRepository<Course>, CrudCourseService {
 
 	private JdbcTemplate jdbcTemplate;
 
@@ -65,6 +66,11 @@ public class CourseRepository implements CrudRepository<Course> {
 	@Override
 	public List<Course> getAll() {
 		return this.jdbcTemplate.query("SELECT * FROM COURSES", BeanPropertyRowMapper.newInstance(Course.class));
+	}
+
+	@Override
+	public int acceptNewStudentToCourse(Student student) {
+		return 0;
 	}
 }
 

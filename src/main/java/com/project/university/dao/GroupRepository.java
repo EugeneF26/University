@@ -13,7 +13,7 @@ import com.project.university.entity.Group;
  * The repository class contain methods working with data base
  */
 @Repository
-public class GroupRepository implements CrudRepository<Group> {
+public class GroupRepository implements CrudRepository<Group>, CrudGroupService {
 
 	private JdbcTemplate jdbcTemplate;
 	

@@ -1,4 +1,4 @@
-package com.project.university.domain;
+package com.project.university.mapper;
 
 import java.sql.ResultSet;
 

@@ -100,7 +100,7 @@ public class StudentRepositoryTest {
 						.groupId(1)
 						.build())
 				.build();	
-		int rows = studentRepository.regroupStudent(student);
+		int rows = studentRepository.transferOfStudentToAnotherGroup(student);
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
 	}
 }
