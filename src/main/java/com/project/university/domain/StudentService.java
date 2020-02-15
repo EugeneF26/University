@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.university.dao.CrudRepository;
 import com.project.university.dao.StudentRepository;
 import com.project.university.entity.Student;
 
@@ -15,6 +16,7 @@ import com.project.university.entity.Student;
 @Service
 public class StudentService {
 	
+	private CrudRepository<Student> crudRepository;
 	private StudentRepository studentRepository;
 	
 	/**
@@ -22,7 +24,8 @@ public class StudentService {
 	 * @param studentRepository
 	 */
 	@Autowired
-	public StudentService(StudentRepository studentRepository) {
+	public StudentService(CrudRepository<Student> crudRepository, StudentRepository studentRepository) {
+		this.crudRepository = crudRepository;
 		this.studentRepository = studentRepository;
 	}
 	
@@ -32,7 +35,7 @@ public class StudentService {
 	 * @return studentResult - result of query for data base
 	 */
 	public Student find(int studentId) {
-		return studentRepository.find(studentId);
+		return crudRepository.find(studentId);
 	}
 	
 	/**
@@ -41,7 +44,7 @@ public class StudentService {
 	 * @return number of updated rows
 	 */
 	public int save(Student student) {
-		return studentRepository.save(student);
+		return crudRepository.save(student);
 	}
 	
 	/**
@@ -50,7 +53,7 @@ public class StudentService {
 	 * @return number of updated rows
 	 */
 	public int update(Student student) {
-		return studentRepository.update(student);
+		return crudRepository.update(student);
 	}
 
 	/**
@@ -59,7 +62,7 @@ public class StudentService {
 	 * @return number of updated rows
 	 */
 	public int delete(int studentId) {
-		return studentRepository.delete(studentId);
+		return crudRepository.delete(studentId);
 	}
 
 	/**
@@ -67,7 +70,7 @@ public class StudentService {
 	 * @return studentResult
 	 */
 	public List<Student> getAllStudents() {
-		return studentRepository.getAll();
+		return crudRepository.getAll();
 	}
 	
 	public int transferOfStudentToAnotherGroup(Student student) {
