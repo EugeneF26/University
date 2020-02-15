@@ -14,7 +14,7 @@ import com.project.university.entity.Student;
  * @author Eugene The repository class contain methods working with data base
  */
 @Repository
-public class StudentRepository implements CrudRepository<Student> {
+public class StudentRepository implements CrudRepository<Student>, CrudStudentService{
 
 	private JdbcTemplate jdbcTemplate;
 
@@ -81,7 +81,8 @@ public class StudentRepository implements CrudRepository<Student> {
 	 * @param student
 	 * @return number of updated rows
 	 */
-	public int regroup(Student student) {
+	@Override
+	public int transferOfStudentToAnotherGroup(Student student) {
 		return this.jdbcTemplate.update("UPDATE STUDENTS SET group_id=?" + " WHERE student_id=?",
 				student.getGroupId().getGroupId(), student.getStudentId());
 	}
@@ -89,7 +90,8 @@ public class StudentRepository implements CrudRepository<Student> {
 	/**
 	 * Deletes all students from table
 	 */
-	public void truncate() {		
+	@Override
+	public void truncateStudentsTable() {		
 		this.jdbcTemplate.update("DELETE FROM students");
 	}
 }
