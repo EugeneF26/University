@@ -1,4 +1,4 @@
-package com.project.university;
+package com.project.university.config;
 
 import javax.sql.DataSource;
 

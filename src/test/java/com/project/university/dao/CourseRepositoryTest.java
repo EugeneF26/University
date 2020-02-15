@@ -16,8 +16,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-import com.project.university.DatasourseConfiguration;
-import com.project.university.TestDBConfiguration;
+import com.project.university.config.DatasourseConfiguration;
+import com.project.university.config.TestDBConfiguration;
 import com.project.university.entity.Course;
 
 import junit.framework.Assert;
