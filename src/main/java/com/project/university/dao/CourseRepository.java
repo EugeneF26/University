@@ -51,7 +51,8 @@ public class CourseRepository implements CrudRepository<Course>, CrudCourseServi
 	 */
 	@Override
 	public int update(Course course) {
-		return this.jdbcTemplate.update("UPDATE COURSES SET course_year=? WHERE course_year=? ", course.getCourseYear(), course.getCourseYear());
+		return this.jdbcTemplate.update("UPDATE COURSES SET course_year=? WHERE course_year=? ", 
+				course.getCourseYear(), course.getCourseYear());
 	}
 
 	/**
@@ -72,7 +73,8 @@ public class CourseRepository implements CrudRepository<Course>, CrudCourseServi
 
 	@Override
 	public int acceptNewStudentToCourse(Student student) {
-		return this.jdbcTemplate.update("UPDATE COURSES SET course_year=? WHERE course_year=?");
+		return this.jdbcTemplate.update("UPDATE STUDENTS SET course_year=? WHERE course_year=?", 
+				student.getCourse_year(), student.getCourse_year());
 	}
 }
 

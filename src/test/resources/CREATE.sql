@@ -1,19 +1,18 @@
 CREATE TABLE groups
 (
-group_id NUMBER PRIMARY KEY,
-student_id NUMBER
+group_id NUMBER PRIMARY KEY
 );
 CREATE TABLE students
 (
 student_id SERIAL PRIMARY KEY,
 student_name TEXT NOT NULL,
 student_surname TEXT NOT NULL,
-group_id NUMBER NOT NULL
+group_id NUMBER NOT NULL,
+course_year NUMBER
 );
 CREATE TABLE courses
 (
-course_year NUMBER PRIMARY KEY,
-group_id NUMBER
+course_year NUMBER PRIMARY KEY
 );
 CREATE TABLE professors
 (
@@ -26,12 +25,12 @@ CREATE TABLE lectures
 (
 lecture_title TEXT PRIMARY KEY
 );
-CREATE TABLE lecturehalls
+CREATE TABLE lecture_halls
 (
 floor TEXT,
 number_room NUMBER PRIMARY KEY
 );
-CREATE TABLE scheduleItem
+CREATE TABLE schedule_Item
 (
 study_day TIMESTAMP PRIMARY KEY,
 course_year NUMBER,
@@ -41,5 +40,5 @@ number_room NUMBER,
 FOREIGN KEY (course_year) REFERENCES courses(course_year) ON DELETE CASCADE ON UPDATE CASCADE,
 FOREIGN KEY (professor_id) REFERENCES professors(professor_id) ON DELETE CASCADE ON UPDATE CASCADE,
 FOREIGN KEY (lecture_title) REFERENCES lectures(lecture_title) ON DELETE CASCADE ON UPDATE CASCADE,
-FOREIGN KEY (number_room) REFERENCES lecturehalls(number_room) ON DELETE CASCADE ON UPDATE CASCADE
+FOREIGN KEY (number_room) REFERENCES lecture_halls(number_room) ON DELETE CASCADE ON UPDATE CASCADE
 );

@@ -23,6 +23,7 @@ public class Student {
 	private String studentSurname;
 	private List<Student> students;
 	private Group groupId;
+	private Course course_year;
 	
 	/**
 	 * The method return list of students by group
