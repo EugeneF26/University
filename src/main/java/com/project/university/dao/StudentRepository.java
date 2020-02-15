@@ -81,7 +81,7 @@ public class StudentRepository implements CrudRepository<Student> {
 	 * @param student
 	 * @return number of updated rows
 	 */
-	public int regroupStudent(Student student) {
+	public int regroup(Student student) {
 		return this.jdbcTemplate.update("UPDATE STUDENTS SET group_id=?" + " WHERE student_id=?",
 				student.getGroupId().getGroupId(), student.getStudentId());
 	}
@@ -89,7 +89,7 @@ public class StudentRepository implements CrudRepository<Student> {
 	/**
 	 * Deletes all students from table
 	 */
-	public void truncateStudentsAndStudentsCourses() {		
+	public void truncate() {		
 		this.jdbcTemplate.update("DELETE FROM students");
 	}
 }

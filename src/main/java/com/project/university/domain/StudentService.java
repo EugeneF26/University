@@ -1,6 +1,5 @@
 package com.project.university.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,16 +33,7 @@ public class StudentService {
 	 * @return studentResult - result of query for data base
 	 */
 	public Student find(int studentId) {
-		Student resultQuestion = studentRepository.find(studentId);
-		Student studentResult = Student
-				.builder()
-				.studentId(resultQuestion.getStudentId())
-				.studentName(resultQuestion.getStudentName())
-				.studentSurname(resultQuestion.getStudentSurname())
-				.students(resultQuestion.getStudents())
-				.groupId(resultQuestion.getGroupId())
-				.build();
-		return studentResult;
+		return studentRepository.find(studentId);
 	}
 	
 	/**
@@ -78,19 +68,18 @@ public class StudentService {
 	 * @return studentResult
 	 */
 	public List<Student> getAllStudents() {
-		List<Student> resultQuestion = studentRepository.getAll();
-		List<Student> studentResult = new ArrayList<>();
-		for (int i = 0; i < resultQuestion.size(); i++) {
-			studentResult.add(Student
-					.builder()
-					.studentId(resultQuestion.get(i).getStudentId())
-					.studentName(resultQuestion.get(i).getStudentName())
-					.studentSurname(resultQuestion.get(i).getStudentSurname())
-					.students(resultQuestion.get(i).getStudents())
-					.groupId(resultQuestion.get(i).getGroupId())
-					.build());
-		}
-		return studentResult;
+		return studentRepository.getAll();
+	}
+	
+	public int transferOfStudentToAnotherGroup(Student student) {
+		return studentRepository.regroup(student);
+	}
+	
+	/**
+	 * Deletes all students from table
+	 */
+	public void truncateStudentsTable() {		
+		studentRepository.truncate();
 	}
 }
 
