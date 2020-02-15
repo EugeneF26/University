@@ -34,7 +34,7 @@ public class GroupRepository implements CrudRepository<Group>, CrudGroupService 
 	@Override
 	public int save(Group group) {
 		return this.jdbcTemplate.update(
-		        "INSERT INTO GROUPS VALUES (?)", group.getGroupId());
+		        "INSERT INTO GROUPS (group_id) VALUES (?)", group.getGroupId());
 	}
 
 	/**

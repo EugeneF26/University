@@ -1,4 +1,4 @@
-INSERT INTO groups
+INSERT INTO groups (group_id)
 VALUES (1),
 (2),
 (3),
@@ -10,7 +10,7 @@ VALUES ('Petr', 'Manshikov', 1),
 ('Georgiy', 'Murashvily', 3),
 ('Stepan', 'Parashka', 4),
 ('Maxim', 'Torkovskiy', 5);
-INSERT INTO courses
+INSERT INTO courses (course_year)
 VALUES (1),
 (2),
 (3),
