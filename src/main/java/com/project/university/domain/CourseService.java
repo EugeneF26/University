@@ -8,8 +8,8 @@ import java.util.StringJoiner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.project.university.dao.CrudCourseService;
-import com.project.university.dao.CrudRepository;
+import com.project.university.crud.CrudCourseService;
+import com.project.university.crud.CrudRepository;
 import com.project.university.entity.Course;
 import com.project.university.entity.Student;
 

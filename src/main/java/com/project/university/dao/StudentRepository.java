@@ -7,6 +7,8 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.project.university.crud.CrudRepository;
+import com.project.university.crud.CrudStudentService;
 import com.project.university.entity.Student;
 import com.project.university.mapper.StudentMapper;
 

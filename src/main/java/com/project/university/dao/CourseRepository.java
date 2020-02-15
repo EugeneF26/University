@@ -7,6 +7,8 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.project.university.crud.CrudCourseService;
+import com.project.university.crud.CrudRepository;
 import com.project.university.entity.Course;
 import com.project.university.entity.Student;
 
@@ -70,7 +72,7 @@ public class CourseRepository implements CrudRepository<Course>, CrudCourseServi
 
 	@Override
 	public int acceptNewStudentToCourse(Student student) {
-		return 0;
+		return this.jdbcTemplate.update("UPDATE COURSES SET course_year=? WHERE course_year=?");
 	}
 }
 

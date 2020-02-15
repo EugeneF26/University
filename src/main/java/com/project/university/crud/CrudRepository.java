@@ -1,4 +1,4 @@
-package com.project.university.dao;
+package com.project.university.crud;
 
 import java.util.List;
 

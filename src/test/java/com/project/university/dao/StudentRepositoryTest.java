@@ -41,8 +41,8 @@ public class StudentRepositoryTest {
 	
 	@Test
 	public void testSave_WhenTheUserSendsTheStudentDataAndTheProgramSavesAndIncrementStudentIdThem_thenCorrect()
-			throws DataSetException, FileNotFoundException {
-		Student student = Student
+			throws DataSetException, FileNotFoundException {		
+		int rows = studentRepository.save(Student
 				.builder()
 				.studentName("Pavel")
 				.studentSurname("Mrakov")
@@ -50,8 +50,7 @@ public class StudentRepositoryTest {
 						.builder()
 						.groupId(1)
 						.build())
-				.build();		
-		int rows = studentRepository.save(student);
+				.build());
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
 	}
 
@@ -66,13 +65,12 @@ public class StudentRepositoryTest {
 	@Test
 	public void testUpdate_WhenUserSendsTheDataInTheMethodAndReturnsCountUpdatedRows_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-		Student student = Student
+		int rows = studentRepository.update(Student
 				.builder()
 				.studentId(4)
 				.studentName("Arkadiy")
 				.studentSurname("Morozov")
-				.build();	
-		int rows = studentRepository.update(student);
+				.build());
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
 	}
 	
@@ -92,15 +90,14 @@ public class StudentRepositoryTest {
 	
 	@Test
 	public void testRegroupStudent() {
-		Student student = Student
+		int rows = studentRepository.transferOfStudentToAnotherGroup(Student
 				.builder()
 				.studentId(4)
 				.groupId(Group
 						.builder()
 						.groupId(1)
 						.build())
-				.build();	
-		int rows = studentRepository.transferOfStudentToAnotherGroup(student);
+				.build());
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
 	}
 }

@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.project.university.dao.CrudRepository;
-import com.project.university.dao.CrudStudentService;
+import com.project.university.crud.CrudRepository;
+import com.project.university.crud.CrudStudentService;
 import com.project.university.entity.Student;
 
 /**
