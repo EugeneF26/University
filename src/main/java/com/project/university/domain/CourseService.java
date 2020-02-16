@@ -17,6 +17,7 @@ import com.project.university.entity.Student;
 public class CourseService implements CrudCourseService {
 
 	private CrudRepository<Course> crudRepository;
+	@SuppressWarnings("unused")
 	private CrudCourseService crudCourseService;
 	
 	@Autowired

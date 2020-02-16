@@ -15,6 +15,7 @@ import com.project.university.entity.Professor;
 public class ProfessorService implements CrudProfessorService {
 
 	private CrudRepository<Professor> crudRepository;
+	@SuppressWarnings("unused")
 	private CrudProfessorService crudProfessorService;
 	
 	@Autowired

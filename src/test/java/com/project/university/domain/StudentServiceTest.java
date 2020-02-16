@@ -13,13 +13,12 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.project.university.config.DatasourseConfiguration;
-import com.project.university.config.TestDBConfiguration;
 import com.project.university.domain.StudentService;
 import com.project.university.entity.Group;
 import com.project.university.entity.Student;
 
 @ExtendWith(SpringExtension.class)
-@SpringJUnitConfig(classes = {StudentService.class, DatasourseConfiguration.class, TestDBConfiguration.class})
+@SpringJUnitConfig(classes = {StudentService.class, DatasourseConfiguration.class})
 @ActiveProfiles("dev")
 public class StudentServiceTest {
 	

@@ -1,6 +1,7 @@
 package com.project.university.domain;
 
 import org.hamcrest.CoreMatchers;
+
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsNull;
 import org.junit.jupiter.api.Test;
@@ -11,12 +12,11 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.project.university.config.DatasourseConfiguration;
-import com.project.university.config.TestDBConfiguration;
 import com.project.university.domain.GroupService;
 import com.project.university.entity.Group;
 
 @ExtendWith(SpringExtension.class)
-@SpringJUnitConfig(classes = {GroupService.class, DatasourseConfiguration.class, TestDBConfiguration.class})
+@SpringJUnitConfig(classes = {GroupService.class, DatasourseConfiguration.class})
 @ActiveProfiles("dev")
 public class GroupServiceTest {
 	

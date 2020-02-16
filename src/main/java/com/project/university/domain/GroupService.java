@@ -16,6 +16,7 @@ import com.project.university.entity.Group;
 public class GroupService implements CrudGroupService {
 	
 	private CrudRepository<Group> crudRepository;
+	@SuppressWarnings("unused")
 	private CrudGroupService crudGroupService;
 	
 	@Autowired
