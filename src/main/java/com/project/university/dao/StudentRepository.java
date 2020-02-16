@@ -93,8 +93,8 @@ public class StudentRepository implements CrudRepository<Student>, CrudStudentSe
 	 * Deletes all students from table
 	 */
 	@Override
-	public void truncateStudentsTable() {		
-		this.jdbcTemplate.update("DELETE FROM students");
+	public int truncateStudentsTable() {		
+		return this.jdbcTemplate.update("DELETE FROM students");
 	}
 }
 

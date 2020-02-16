@@ -13,17 +13,19 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.project.university.config.DatasourseConfiguration;
-import com.project.university.config.TestDBConfiguration;
 import com.project.university.entity.Group;
 
 import junit.framework.Assert;
 
 @ExtendWith(SpringExtension.class)
-@SpringJUnitConfig(classes = {DatasourseConfiguration.class, TestDBConfiguration.class})
+@SpringJUnitConfig(classes = {DatasourseConfiguration.class})
+@Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, scripts={"/DROP.sql", "/CREATE.sql", "/INSERT.sql"})
 @ActiveProfiles("dev")
 public class GroupRepositoryTest {
 	
@@ -78,7 +80,7 @@ public class GroupRepositoryTest {
 	public void testGetAll_WhenTheUserSendsQueryForAllDataAndTheProgramReturnThem_thenCorrect()
 			throws DataSetException, FileNotFoundException {
 		List<Group> result = groupRepository.getAll();
-		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(6));
+		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(5));
 	}
 }
 

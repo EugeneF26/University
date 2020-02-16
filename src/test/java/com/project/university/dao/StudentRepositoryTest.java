@@ -13,19 +13,21 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.project.university.config.DatasourseConfiguration;
-import com.project.university.config.TestDBConfiguration;
 import com.project.university.dao.StudentRepository;
 import com.project.university.entity.Group;
 import com.project.university.entity.Student;
+import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 
 import junit.framework.Assert;
 
 @ExtendWith(SpringExtension.class)
-@SpringJUnitConfig(classes = {DatasourseConfiguration.class, TestDBConfiguration.class})
+@SpringJUnitConfig(classes = {StudentRepository.class, DatasourseConfiguration.class})
+@Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, scripts={"/DROP.sql", "/CREATE.sql", "/INSERT.sql"})
 @ActiveProfiles("dev")
 public class StudentRepositoryTest {
 
@@ -85,7 +87,7 @@ public class StudentRepositoryTest {
 	public void testGetAll_WhenTheUserSendsQueryForAllDataAndTheProgramReturnThem_thenCorrect()
 			throws DataSetException, FileNotFoundException {
 		List<Student> result = studentRepository.getAll();
-		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(6));
+		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(5));
 	}
 	
 	@Test
@@ -99,6 +101,12 @@ public class StudentRepositoryTest {
 						.build())
 				.build());
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
+	}
+	
+	@Test
+	public void testTruncate() {
+		int rows = studentRepository.truncateStudentsTable();
+		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(5));
 	}
 }
 

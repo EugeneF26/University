@@ -82,8 +82,8 @@ public class StudentService implements CrudStudentService {
 	 * Deletes all students from table
 	 */
 	@Override
-	public void truncateStudentsTable() {		
-		crudStudentService.truncateStudentsTable();
+	public int truncateStudentsTable() {		
+		return crudStudentService.truncateStudentsTable();
 	}
 }
 
