@@ -1,6 +1,7 @@
 package com.project.university.dao;
 
 import java.io.FileNotFoundException;
+import com.project.university.crud.CrudStudentService;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.project.university.config.DatasourseConfiguration;
-import com.project.university.dao.StudentRepository;
+import com.project.university.crud.CrudRepository;
 import com.project.university.entity.Group;
 import com.project.university.entity.Student;
 import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
@@ -26,25 +27,30 @@ import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import junit.framework.Assert;
 
 @ExtendWith(SpringExtension.class)
-@SpringJUnitConfig(classes = {StudentRepository.class, DatasourseConfiguration.class})
-@Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, scripts={"/DROP.sql", "/CREATE.sql", "/INSERT.sql"})
+@SpringJUnitConfig(classes = {DatasourseConfiguration.class})
+@Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, 
+scripts={"/DROP.sql", "/CREATE.sql", "/INSERT.sql"})
 @ActiveProfiles("dev")
-public class StudentRepositoryTest {
+public class StudentRepositoryTest{
 
-	private StudentRepository studentRepository;
+	private CrudRepository<Student> crudRepository;
+	private CrudStudentService crudStudentService;
 	@SuppressWarnings("unused")
 	private JdbcTemplate jdbcTemplate;
 	
 	@Autowired
-	public StudentRepositoryTest(StudentRepository studentRepository, JdbcTemplate jdbcTemplate){
-		this.studentRepository = studentRepository;
+	public StudentRepositoryTest(CrudRepository<Student> crudRepository, 
+			CrudStudentService crudStudentService, 
+			JdbcTemplate jdbcTemplate){
 		this.jdbcTemplate = jdbcTemplate;
+		this.crudRepository = crudRepository;
+		this.crudStudentService = crudStudentService;
 	}
 	
 	@Test
 	public void testSave_WhenTheUserSendsTheStudentDataAndTheProgramSavesAndIncrementStudentIdThem_thenCorrect()
 			throws DataSetException, FileNotFoundException {		
-		int rows = studentRepository.save(Student
+		int rows = crudRepository.save(Student
 				.builder()
 				.studentName("Pavel")
 				.studentSurname("Mrakov")
@@ -59,7 +65,7 @@ public class StudentRepositoryTest {
 	@Test
 	public void testFindStudentsById_WhenTheUserEntersTheIdOfTheStudentIsOneAndTheProgramDisplaysTheResult_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-		Student student = studentRepository.find(1);
+		Student student = crudRepository.find(1);
 		Assert.assertEquals(student.getStudentName(), "Petr");
 		Assert.assertEquals(student.getStudentSurname(), "Manshikov");
 	}
@@ -67,7 +73,7 @@ public class StudentRepositoryTest {
 	@Test
 	public void testUpdate_WhenUserSendsTheDataInTheMethodAndReturnsCountUpdatedRows_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-		int rows = studentRepository.update(Student
+		int rows = crudRepository.update(Student
 				.builder()
 				.studentId(4)
 				.studentName("Arkadiy")
@@ -79,20 +85,20 @@ public class StudentRepositoryTest {
 	@Test
 	public void testDelete_WhenUserSendsTheStudentIdInTheMethodAndReturnsCountDeletedRows_thenCorrect() 
 			throws DataSetException, FileNotFoundException {
-		int rows = studentRepository.delete(5);
+		int rows = crudRepository.delete(5);
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
 	}
 	
 	@Test
 	public void testGetAll_WhenTheUserSendsQueryForAllDataAndTheProgramReturnThem_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-		List<Student> result = studentRepository.getAll();
+		List<Student> result = crudRepository.getAll();
 		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(5));
 	}
 	
 	@Test
-	public void testRegroupStudent() {
-		int rows = studentRepository.transferOfStudentToAnotherGroup(Student
+	public void testTransferOfStudentToAnotherGroup_WhenTheUserSendsQueryForTransferOfStudentAndTheProgramReturnNumberOfUpdatedRowsIsOne_thenCorrect() {
+		int rows = crudStudentService.transferOfStudentToAnotherGroup(Student
 				.builder()
 				.studentId(4)
 				.groupId(Group
@@ -104,8 +110,8 @@ public class StudentRepositoryTest {
 	}
 	
 	@Test
-	public void testTruncate() {
-		int rows = studentRepository.truncateStudentsTable();
+	public void testTruncate_WhenTheUserSendsQueryForDeleteAllDataAndTheProgramReturnNumberOfUpdatedRowsIsOne_thenCorrect() {
+		int rows = crudStudentService.truncateStudentsTable();
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(5));
 	}
 }
