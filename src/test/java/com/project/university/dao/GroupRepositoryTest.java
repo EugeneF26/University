@@ -7,7 +7,6 @@ import org.dbunit.dataset.DataSetException;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.collection.IsCollectionWithSize;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +18,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.project.university.config.DatasourseConfiguration;
+import com.project.university.crud.CrudRepository;
 import com.project.university.entity.Group;
 
 import junit.framework.Assert;
@@ -29,15 +29,15 @@ import junit.framework.Assert;
 @ActiveProfiles("dev")
 public class GroupRepositoryTest {
 	
+	private CrudRepository<Group> crudRepository;
+	@SuppressWarnings("unused")
+	private JdbcTemplate jdbcTemplate;
+	
 	@Autowired
-	private GroupRepository groupRepository;
-
-	@Autowired
-	JdbcTemplate jdbcTemplate;
-
-	@BeforeEach
-	public void setup() {
-		groupRepository.setDataSource(jdbcTemplate);
+	public GroupRepositoryTest(CrudRepository<Group> groupRepository, 
+			JdbcTemplate jdbcTemplate){
+		this.crudRepository = groupRepository;
+		this.jdbcTemplate = jdbcTemplate;
 	}
 	
 	@Test
@@ -47,14 +47,14 @@ public class GroupRepositoryTest {
 				.builder()
 				.groupId(7)
 				.build();		
-		int rows = groupRepository.save(group);
+		int rows = crudRepository.save(group);
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
 	}
 	
 	@Test
 	public void testFindGroupById_WhenTheUserEntersTheIdOfTheGroupIsOneAndTheProgramDisplaysTheResult_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-		Group group = groupRepository.find(1);
+		Group group = crudRepository.find(1);
 		Assert.assertEquals(group.getGroupId(), 1);
 	}
 	
@@ -65,21 +65,21 @@ public class GroupRepositoryTest {
 				.builder()
 				.groupId(1)
 				.build();	
-		int rows = groupRepository.update(group);
+		int rows = crudRepository.update(group);
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
 	}
 	
 	@Test
 	public void testDelete_WhenUserSendsTheGroupIdInTheMethodAndReturnsCountDeletedRows_thenCorrect() 
 			throws DataSetException, FileNotFoundException {
-		int rows = groupRepository.delete(5);
+		int rows = crudRepository.delete(5);
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
 	}
 	
 	@Test
 	public void testGetAll_WhenTheUserSendsQueryForAllDataAndTheProgramReturnThem_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-		List<Group> result = groupRepository.getAll();
+		List<Group> result = crudRepository.getAll();
 		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(5));
 	}
 }

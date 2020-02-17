@@ -71,5 +71,10 @@ public class GroupRepository implements CrudRepository<Group>, CrudGroupService 
 	public List<Group> getAll() {
 		return this.jdbcTemplate.query("SELECT * FROM GROUPS", BeanPropertyRowMapper.newInstance(Group.class));
 	}
+
+	@Override
+	public int truncateGroupTable() {
+		return this.jdbcTemplate.update("DELETE FROM GROUPS");
+	}
 }
 
