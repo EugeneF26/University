@@ -11,7 +11,7 @@ import com.project.university.entity.Course;
 import com.project.university.entity.Student;
 
 @Service
-public class CourseService implements CrudCourseService, CrudRepository<Course> {
+public class CourseService implements CrudCourseService {
 
 	private CrudRepository<Course> crudRepository;
 	private CrudCourseService crudCourseService;
@@ -22,27 +22,22 @@ public class CourseService implements CrudCourseService, CrudRepository<Course> 
 		this.crudCourseService = crudCourseService;
 	}
 	
-	@Override
 	public int save(Course course) {
 		return crudRepository.save(course);
 	}
 	
-	@Override
 	public Course find(int courseId) {
 		return crudRepository.find(courseId);
 	}
 	
-	@Override
 	public int update(Course course) {
 		return crudRepository.update(course);
 	}
 	
-	@Override
 	public int delete(int courseId) {
 		return crudRepository.delete(courseId);
 	}
 	
-	@Override
 	public List<Course> getAll() {
 		return crudRepository.getAll();
 	}

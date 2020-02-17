@@ -1,7 +1,5 @@
 package com.project.university.domain;
 
-import java.util.List;
-
 import org.hamcrest.CoreMatchers;
 
 import org.hamcrest.MatcherAssert;
@@ -9,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
@@ -16,10 +16,11 @@ import com.project.university.config.DatasourseConfiguration;
 import com.project.university.crud.CrudCourseService;
 import com.project.university.entity.Course;
 import com.project.university.entity.Student;
-import com.project.university.crud.CrudRepository;
 
 @ExtendWith(SpringExtension.class)
-@SpringJUnitConfig(classes = { CrudRepository.class, DatasourseConfiguration.class })
+@SpringJUnitConfig(classes = {DatasourseConfiguration.class })
+@Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, 
+scripts={"/DROP.sql", "/CREATE.sql", "/INSERT.sql"})
 @ActiveProfiles("dev")
 public class CourseServiceTest {
 

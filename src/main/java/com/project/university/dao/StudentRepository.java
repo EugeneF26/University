@@ -16,7 +16,7 @@ import com.project.university.mapper.StudentMapper;
  * @author Eugene The repository class contain methods working with data base
  */
 @Repository
-public class StudentRepository implements CrudRepository<Student>, CrudStudentService{
+public class StudentRepository implements CrudRepository<Student>, CrudStudentService {
 
 	private JdbcTemplate jdbcTemplate;
 
