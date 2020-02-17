@@ -31,7 +31,7 @@ import junit.framework.Assert;
 @Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, 
 scripts={"/DROP.sql", "/CREATE.sql", "/INSERT.sql"})
 @ActiveProfiles("dev")
-public class StudentRepositoryTest{
+public class StudentRepositoryTest {
 
 	private CrudRepository<Student> crudRepository;
 	private CrudStudentService crudStudentService;
@@ -110,7 +110,7 @@ public class StudentRepositoryTest{
 	}
 	
 	@Test
-	public void testTruncate_WhenTheUserSendsQueryForDeleteAllDataAndTheProgramReturnNumberOfUpdatedRowsIsOne_thenCorrect() {
+	public void testTruncate_WhenTheUserSendsQueryForDeleteAllDataAndTheProgramReturnNumberOfUpdatedRowsIsFive_thenCorrect() {
 		int rows = crudStudentService.truncateStudentsTable();
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(5));
 	}

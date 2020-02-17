@@ -76,5 +76,10 @@ public class CourseRepository implements CrudRepository<Course>, CrudCourseServi
 		return this.jdbcTemplate.update("UPDATE STUDENTS SET course_year=? WHERE course_year=?", 
 				student.getCourse_year(), student.getCourse_year());
 	}
+
+	@Override
+	public int truncateCoursesTable() {
+		return this.jdbcTemplate.update("DELETE FROM courses");
+	}
 }
 

@@ -17,7 +17,6 @@ import com.project.university.entity.Student;
 public class CourseService implements CrudCourseService {
 
 	private CrudRepository<Course> crudRepository;
-	@SuppressWarnings("unused")
 	private CrudCourseService crudCourseService;
 	
 	@Autowired
@@ -60,6 +59,11 @@ public class CourseService implements CrudCourseService {
 	public int acceptNewStudentToCourse(Student student) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public int truncateCoursesTable() {
+		return crudCourseService.truncateCoursesTable();
 	}
 }
 
