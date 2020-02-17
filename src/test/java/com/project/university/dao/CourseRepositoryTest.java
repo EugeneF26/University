@@ -21,6 +21,7 @@ import com.project.university.config.DatasourseConfiguration;
 import com.project.university.crud.CrudCourseService;
 import com.project.university.crud.CrudRepository;
 import com.project.university.entity.Course;
+import com.project.university.entity.Student;
 
 import junit.framework.Assert;
 
@@ -86,6 +87,18 @@ public class CourseRepositoryTest {
 			throws DataSetException, FileNotFoundException {
 		List<Course> result = crudRepository.getAll();
 		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(4));
+	}
+	
+	@Test
+	void testAcceptNewStudentToCourse_WhenTheUserSendsQueryForUpdateDataAndTheProgramReturnNumberOfUpdatedRowsIsOne_thenCorrect() {
+		int rows = crudCourseService.acceptNewStudentToCourse(Student
+				.builder()
+				.studentId(1)
+				.build(), Course
+				.builder()
+				.courseYear(1)
+				.build());
+		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
 	}
 	
 	@Test

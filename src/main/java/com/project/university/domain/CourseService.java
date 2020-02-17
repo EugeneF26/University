@@ -56,9 +56,8 @@ public class CourseService implements CrudCourseService {
 	}
 
 	@Override
-	public int acceptNewStudentToCourse(Student student) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int acceptNewStudentToCourse(Student student, Course course) {
+		return crudCourseService.acceptNewStudentToCourse(student, course);
 	}
 
 	@Override

@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /** @author Eugene
@@ -16,6 +17,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 public class Student {
  
 	private int studentId;
@@ -23,7 +25,6 @@ public class Student {
 	private String studentSurname;
 	private List<Student> students;
 	private Group groupId;
-	private Course course_year;
 	
 	/**
 	 * The method return list of students by group

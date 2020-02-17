@@ -19,3 +19,8 @@ INSERT INTO professors (professor_name, professor_surname, professor_patronymic)
 VALUES ('Pavel', 'Koronkov', 'Petrovich'),
 ('Mark', 'Marsov', 'Vladimirovich'),
 ('Petr', 'Fedorenko', 'Konstantinovich');
+INSERT INTO students_courses (student_id, course_year)
+VALUES (1,1),
+(2,2),
+(3,3),
+(4,4);

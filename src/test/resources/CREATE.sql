@@ -7,8 +7,7 @@ CREATE TABLE students
 student_id SERIAL PRIMARY KEY,
 student_name TEXT NOT NULL,
 student_surname TEXT NOT NULL,
-group_id NUMBER NOT NULL,
-course_year NUMBER
+group_id NUMBER NOT NULL
 );
 CREATE TABLE courses
 (
@@ -41,4 +40,11 @@ FOREIGN KEY (course_year) REFERENCES courses(course_year) ON DELETE CASCADE ON U
 FOREIGN KEY (professor_id) REFERENCES professors(professor_id) ON DELETE CASCADE ON UPDATE CASCADE,
 FOREIGN KEY (lecture_title) REFERENCES lectures(lecture_title) ON DELETE CASCADE ON UPDATE CASCADE,
 FOREIGN KEY (number_room) REFERENCES lecture_halls(number_room) ON DELETE CASCADE ON UPDATE CASCADE
+);
+CREATE TABLE students_courses
+(
+student_id NUMBER,
+course_year NUMBER,
+FOREIGN KEY (student_id) REFERENCES students(student_id) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (course_year) REFERENCES courses(course_year) ON DELETE CASCADE ON UPDATE CASCADE
 );
