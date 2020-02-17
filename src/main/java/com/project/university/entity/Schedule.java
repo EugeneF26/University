@@ -1,5 +1,6 @@
 package com.project.university.entity;
 
+import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,9 @@ public class Schedule {
 	public ScheduleItem getScheduleByDate(Date studyDay) {		
 		return days
 				.stream()
-				.filter(element -> element.equals(studyDay))
+				.filter(element -> element
+						.getStudyDay()
+						.equals(studyDay))
 				.findFirst()
 				.get();
 	}
@@ -54,7 +57,7 @@ public class Schedule {
 					groups.add(days.get(i).getCourse().getGroups().get(i2));
 				}
 			}
-		}		
+		}			
 		return groups;
 	}
 	
@@ -65,8 +68,11 @@ public class Schedule {
 	 * @see ScheduleItem
 	 */
 	public List<ScheduleItem> getScheduleByDate(Period period) {
-		List<ScheduleItem> scheduleItem = new ArrayList<ScheduleItem>(); 
-		scheduleItem.add(days.get(0));
+		LocalDate localDate = LocalDate.of(period.getYears(), period.getMonths(), period.getDays()); 
+		List<ScheduleItem> scheduleItem = days
+				.stream()
+				.filter(element -> element.getStudyDay().equals(localDate))
+				.collect(Collectors.toList());
 		return scheduleItem;
 	}
 }
