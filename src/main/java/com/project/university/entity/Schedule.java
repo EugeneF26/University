@@ -1,10 +1,10 @@
 package com.project.university.entity;
 
-import java.sql.Date;
-
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.Date;
 
 import lombok.Data;
 
@@ -28,12 +28,16 @@ public class Schedule {
 	
 	/**
 	 * The method return item of schedule by date
-	 * @param studyDay of Date value
+	 * @param date of Date value
 	 * @return days by day
 	 * @see ScheduleItem
 	 */
-	public ScheduleItem getScheduleByDate(Date studyDay) {
-		return days.get(0);
+	public ScheduleItem getScheduleByDate(Date studyDay) {		
+		return days
+				.stream()
+				.filter(element -> element.equals(studyDay))
+				.findFirst()
+				.get();
 	}
 	
 	/**
@@ -43,7 +47,15 @@ public class Schedule {
 	 * @see Course#getGroups()
 	 */
 	public List<Group> getGroups(int year) {
-		return days.get(0).getCourse().getGroups();
+		List<Group> groups = new ArrayList<>();
+		for(int i = 0; i < days.size(); i++) {
+			if(Integer.valueOf(days.get(i).getCourse().getCourseYear()).equals(year)) {
+				for(int i2 = 0; i2 < days.get(i).getCourse().getGroups().size(); i2++) {
+					groups.add(days.get(i).getCourse().getGroups().get(i2));
+				}
+			}
+		}		
+		return groups;
 	}
 	
 	/**
