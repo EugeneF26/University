@@ -8,7 +8,6 @@ import org.dbunit.dataset.DataSetException;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.collection.IsCollectionWithSize;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +19,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.project.university.config.DatasourseConfiguration;
+import com.project.university.crud.CrudRepository;
 import com.project.university.entity.Professor;
 
 import junit.framework.Assert;
@@ -31,14 +31,15 @@ import junit.framework.Assert;
 public class ProfessorRepositoryTest {
 	
 	@Autowired
-	private ProfessorRepository professorRepository;
-
+	private CrudRepository<Professor> crudRepository;
+	@SuppressWarnings("unused")
+	private JdbcTemplate jdbcTemplate;
+	
 	@Autowired
-	JdbcTemplate jdbcTemplate;
-
-	@BeforeEach
-	public void setup() {
-		professorRepository.setDataSource(jdbcTemplate);
+	public ProfessorRepositoryTest(CrudRepository<Professor> crudRepository, 
+			JdbcTemplate jdbcTemplate){
+		this.jdbcTemplate = jdbcTemplate;
+		this.crudRepository = crudRepository;
 	}
 	
 	@Test
@@ -49,14 +50,14 @@ public class ProfessorRepositoryTest {
 				.professorSurname("Artemenko")
 				.professorPatronymic("Fedorovich")
 				.build();
-		int rows = professorRepository.save(professor);
+		int rows = crudRepository.save(professor);
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
 	}
 	
 	@Test
 	public void testFindProfessorById_WhenTheUserEntersTheIdOfTheProfessorIsOneAndTheProgramDisplaysTheResult_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-		Professor professor = professorRepository.find(1);
+		Professor professor = crudRepository.find(1);
 		Assert.assertEquals(professor.getProfessorId(), 1);
 	}
 	
@@ -70,21 +71,21 @@ public class ProfessorRepositoryTest {
 				.professorPatronymic("Fedorovich")
 				.professorId(2)
 				.build();	
-		int rows = professorRepository.update(professor);
+		int rows = crudRepository.update(professor);
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
 	}
 	
 	@Test
 	public void testDelete_WhenUserSendsTheProfessorIdInTheMethodAndReturnsCountDeletedRows_thenCorrect() 
 			throws DataSetException, FileNotFoundException {
-		int rows = professorRepository.delete(3);
+		int rows = crudRepository.delete(3);
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
 	}
 	
 	@Test
 	public void testGetAll_WhenTheUserSendsQueryForAllDataAndTheProgramReturnThem_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-		List<Professor> result = professorRepository.getAll();
+		List<Professor> result = crudRepository.getAll();
 		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(3));
 	}
 }

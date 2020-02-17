@@ -75,5 +75,10 @@ public class ProfessorRepository implements CrudRepository<Professor>, CrudProfe
 	public List<Professor> getAll() {
 		return this.jdbcTemplate.query("SELECT * FROM PROFESSORS", BeanPropertyRowMapper.newInstance(Professor.class));
 	}
+
+	@Override
+	public int truncateProfessorTable() {
+		return this.jdbcTemplate.update("DELETE FROM professors");
+	}
 }
 
