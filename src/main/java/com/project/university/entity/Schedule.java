@@ -5,7 +5,6 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.Date;
 
 import lombok.Data;
 
@@ -33,7 +32,7 @@ public class Schedule {
 	 * @return days by day
 	 * @see ScheduleItem
 	 */
-	public ScheduleItem getScheduleByDate(Date studyDay) {		
+	public ScheduleItem getScheduleByDate(LocalDate studyDay) {		
 		return days
 				.stream()
 				.filter(element -> element
