@@ -1,6 +1,7 @@
 package com.project.university.dao;
 
 import java.io.FileNotFoundException;
+
 import java.util.List;
 
 import org.dbunit.dataset.DataSetException;
@@ -18,10 +19,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.project.university.config.DatasourseConfiguration;
-import com.project.university.crud.CrudCourseService;
 import com.project.university.crud.CrudRepository;
 import com.project.university.entity.Course;
-import com.project.university.entity.Student;
 
 import junit.framework.Assert;
 
@@ -33,17 +32,14 @@ scripts={"/DROP.sql", "/CREATE.sql", "/INSERT.sql"})
 public class CourseRepositoryTest {
 	
 	private CrudRepository<Course> crudRepository;
-	private CrudCourseService crudCourseService;
 	@SuppressWarnings("unused")
 	private JdbcTemplate jdbcTemplate;
 
 	@Autowired
 	public CourseRepositoryTest(CrudRepository<Course> crudRepository, 
-			CrudCourseService crudCourseService, 
 			JdbcTemplate jdbcTemplate){
 		this.jdbcTemplate = jdbcTemplate;
 		this.crudRepository = crudRepository;
-		this.crudCourseService = crudCourseService;
 	}
 	
 	@Test
@@ -87,24 +83,6 @@ public class CourseRepositoryTest {
 			throws DataSetException, FileNotFoundException {
 		List<Course> result = crudRepository.getAll();
 		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(4));
-	}
-	
-	@Test
-	void testAcceptNewStudentToCourse_WhenTheUserSendsQueryForUpdateDataAndTheProgramReturnNumberOfUpdatedRowsIsOne_thenCorrect() {
-		int rows = crudCourseService.acceptNewStudentToCourse(Student
-				.builder()
-				.studentId(1)
-				.build(), Course
-				.builder()
-				.courseYear(1)
-				.build());
-		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
-	}
-	
-	@Test
-	public void testTruncate_WhenTheUserSendsQueryForDeleteAllDataAndTheProgramReturnNumberOfUpdatedRowsIsFour_thenCorrect() {
-		int rows = crudCourseService.truncateCoursesTable();
-		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(4));
 	}
 }
 

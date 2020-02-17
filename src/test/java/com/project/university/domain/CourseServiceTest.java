@@ -1,9 +1,10 @@
 package com.project.university.domain;
 
+import java.util.List;
+
 import org.hamcrest.CoreMatchers;
 
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.core.IsNull;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,53 +13,34 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.project.university.config.DatasourseConfiguration;
-import com.project.university.domain.CourseService;
+import com.project.university.crud.CrudCourseService;
 import com.project.university.entity.Course;
+import com.project.university.entity.Student;
+import com.project.university.crud.CrudRepository;
 
 @ExtendWith(SpringExtension.class)
-@SpringJUnitConfig(classes = {CourseService.class, DatasourseConfiguration.class})
+@SpringJUnitConfig(classes = { CrudRepository.class, DatasourseConfiguration.class })
 @ActiveProfiles("dev")
 public class CourseServiceTest {
-	
+
+	private CrudCourseService crudCourseService;
+
 	@Autowired
-	CourseService courseService;
-	
+	public CourseServiceTest(CrudCourseService crudCourseService) {
+		this.crudCourseService = crudCourseService;
+	}
+
 	@Test
-	public void testSave_WhenTheNumberOfUpdateRowsIsOne_thenCorrect() {
-		Course NEW_GROUP = Course
-				.builder()
-				.courseYear(1)
-				.build();
-		int rows = courseService.save(NEW_GROUP);
+	void testAcceptNewStudentToCourse_WhenTheUserSendsQueryForUpdateDataAndTheProgramReturnNumberOfUpdatedRowsIsOne_thenCorrect() {
+		int rows = crudCourseService.acceptNewStudentToCourse(Student.builder().studentId(1).build(),
+				Course.builder().courseYear(1).build());
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
 	}
-	
+
 	@Test
-	public void testFind_WhenTheResultOfQueryDoesNotEmpty_thenCorrect() {
-		String result = courseService.find(1);
-		MatcherAssert.assertThat(result, IsNull.notNullValue());
-	}
-	
-	@Test
-	public void testUpdate_WhenTheNumberOfUpdateRowsIsOne_thenCorrect() {
-		Course NEW_DATA_GROUP = Course
-				.builder()
-				.courseYear(1)
-				.build();
-		int rows = courseService.update(NEW_DATA_GROUP);
-		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
-	}
-	
-	@Test
-	public void testDelete_WhenTheNumberOfUpdateRowsIsOne_thenCorrect() {
-		int rows = courseService.delete(1);
-		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
-	}
-	
-	@Test
-	public void testGetAll_WhenTheResultOfQueryDoesNotEmpty_thenCorrect() {
-		String result = courseService.getAll();
-		MatcherAssert.assertThat(result,  IsNull.notNullValue());
+	public void testTruncate_WhenTheUserSendsQueryForDeleteAllDataAndTheProgramReturnNumberOfUpdatedRowsIsFour_thenCorrect() {
+		int rows = crudCourseService.truncateCoursesTable();
+		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(4));
 	}
 }
 

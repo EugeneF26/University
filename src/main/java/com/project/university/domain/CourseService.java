@@ -1,9 +1,6 @@
 package com.project.university.domain;
 
-import java.util.ArrayList;
-
 import java.util.List;
-import java.util.StringJoiner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +11,7 @@ import com.project.university.entity.Course;
 import com.project.university.entity.Student;
 
 @Service
-public class CourseService implements CrudCourseService {
+public class CourseService implements CrudCourseService, CrudRepository<Course> {
 
 	private CrudRepository<Course> crudRepository;
 	private CrudCourseService crudCourseService;
@@ -25,34 +22,29 @@ public class CourseService implements CrudCourseService {
 		this.crudCourseService = crudCourseService;
 	}
 	
+	@Override
 	public int save(Course course) {
 		return crudRepository.save(course);
 	}
 	
-	public String find(int courseId) {
-		Course result = crudRepository.find(courseId);
-		StringJoiner stringJoiner = new StringJoiner("\n");
-		stringJoiner.add(String.valueOf("Course_id = " + result.getCourseYear() + ";"));
-		return stringJoiner.toString();
+	@Override
+	public Course find(int courseId) {
+		return crudRepository.find(courseId);
 	}
 	
+	@Override
 	public int update(Course course) {
-		List<Course> newCourse = new ArrayList<Course>();
-		newCourse.add(course);
 		return crudRepository.update(course);
 	}
 	
+	@Override
 	public int delete(int courseId) {
 		return crudRepository.delete(courseId);
 	}
 	
-	public String getAll() {
-		List<Course> result = crudRepository.getAll();
-		StringJoiner stringJoiner = new StringJoiner("\n");
-		for(int i = 0; i < result.size(); i++) {
-		stringJoiner.add(String.valueOf("Course_id = " + result.get(i).getCourseYear() + ";"));
-		}
-		return stringJoiner.toString();
+	@Override
+	public List<Course> getAll() {
+		return crudRepository.getAll();
 	}
 
 	@Override

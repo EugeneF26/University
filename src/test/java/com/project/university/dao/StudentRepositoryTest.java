@@ -1,7 +1,6 @@
 package com.project.university.dao;
 
 import java.io.FileNotFoundException;
-import com.project.university.crud.CrudStudentService;
 
 import java.util.List;
 
@@ -34,17 +33,14 @@ scripts={"/DROP.sql", "/CREATE.sql", "/INSERT.sql"})
 public class StudentRepositoryTest {
 
 	private CrudRepository<Student> crudRepository;
-	private CrudStudentService crudStudentService;
 	@SuppressWarnings("unused")
 	private JdbcTemplate jdbcTemplate;
 	
 	@Autowired
 	public StudentRepositoryTest(CrudRepository<Student> crudRepository, 
-			CrudStudentService crudStudentService, 
 			JdbcTemplate jdbcTemplate){
 		this.jdbcTemplate = jdbcTemplate;
 		this.crudRepository = crudRepository;
-		this.crudStudentService = crudStudentService;
 	}
 	
 	@Test
@@ -94,25 +90,6 @@ public class StudentRepositoryTest {
 			throws DataSetException, FileNotFoundException {
 		List<Student> result = crudRepository.getAll();
 		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(5));
-	}
-	
-	@Test
-	public void testTransferOfStudentToAnotherGroup_WhenTheUserSendsQueryForTransferOfStudentAndTheProgramReturnNumberOfUpdatedRowsIsOne_thenCorrect() {
-		int rows = crudStudentService.transferOfStudentToAnotherGroup(Student
-				.builder()
-				.studentId(4)
-				.groupId(Group
-						.builder()
-						.groupId(1)
-						.build())
-				.build());
-		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
-	}
-	
-	@Test
-	public void testTruncate_WhenTheUserSendsQueryForDeleteAllDataAndTheProgramReturnNumberOfUpdatedRowsIsFive_thenCorrect() {
-		int rows = crudStudentService.truncateStudentsTable();
-		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(5));
 	}
 }
 
