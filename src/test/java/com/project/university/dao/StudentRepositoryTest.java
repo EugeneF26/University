@@ -20,7 +20,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import com.project.university.config.DatasourseConfiguration;
 import com.project.university.entity.Group;
 import com.project.university.entity.Student;
-import com.project.university.service.impl.CrudRepository;
+import com.project.university.repository.CrudRepository;
 
 import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 

@@ -8,7 +8,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.project.university.entity.Professor;
-import com.project.university.service.impl.CrudRepository;
 import com.project.university.service.impl.ProfessorService;
 
 /** @author Eugene

@@ -20,7 +20,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.project.university.config.DatasourseConfiguration;
 import com.project.university.entity.Course;
-import com.project.university.service.impl.CrudRepository;
+import com.project.university.repository.CrudRepository;
 
 import junit.framework.Assert;
 

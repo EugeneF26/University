@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import com.project.university.entity.Student;
 import com.project.university.mapper.StudentMapper;
-import com.project.university.service.impl.CrudRepository;
 import com.project.university.service.impl.StudentService;
 
 /**

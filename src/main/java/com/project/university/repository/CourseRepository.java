@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import com.project.university.entity.Course;
 import com.project.university.entity.Student;
 import com.project.university.service.impl.CourseService;
-import com.project.university.service.impl.CrudRepository;
 
 /**
  * @author Eugene The repository class contain methods working with data base
