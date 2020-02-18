@@ -23,8 +23,8 @@ public class StudentServiceImpl implements StudentService {
 	}
 	
 	@Override
-	public int expelStrudent(int studentId) {
-		return studentRepository.delete(studentId);
+	public int expelStrudent(Student student) {
+		return studentRepository.delete(student.getStudentId());
 	}
 	
 	@Override

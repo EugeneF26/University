@@ -6,7 +6,7 @@ import com.project.university.entity.Student;
 
 public interface StudentService {
 	int transferOfStudentToAnotherGroup(Student student);
-	int expelStrudent(int studentId);
+	int expelStrudent(Student student);
 	int acceptNewStudentToCourse(Student student);
 	List<Student> getStudents();
 }

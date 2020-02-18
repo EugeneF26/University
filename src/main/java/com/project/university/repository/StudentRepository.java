@@ -1,12 +1,16 @@
 package com.project.university.repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.project.university.entity.Group;
 import com.project.university.entity.Student;
 
 /**
@@ -36,7 +40,7 @@ public class StudentRepository implements CrudRepository<Student> {
 	@Override
 	public int save(Student student) {
 		return this.jdbcTemplate.update("INSERT INTO STUDENTS (studentName, studentSurname, groupId) VALUES (?,?,?)",
-				student.getStudentName(), student.getStudentSurname(), student.getGroupId());
+				student.getStudentName(), student.getStudentSurname(), student.getGroupId().getGroupId());
 	}
 
 	/**
@@ -73,7 +77,19 @@ public class StudentRepository implements CrudRepository<Student> {
 	@Override
 	public List<Student> getAll() {
 		return this.jdbcTemplate.query("SELECT studentId, studentName, studentSurname, groupId FROM STUDENTS", 
-				BeanPropertyRowMapper.newInstance(Student.class));
+				new RowMapper<Student>() {
+            public Student mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Student student = new Student();
+                student.setStudentId(rs.getInt("studentId"));
+                student.setStudentName(rs.getString("studentName"));
+                student.setStudentSurname(rs.getString("studentSurname"));
+                student.setGroupId(Group
+                		.builder()
+                		.groupId(rs.getInt("groupId"))
+                		.build());
+                return student;
+            }
+        }); 
 	}
 }
 

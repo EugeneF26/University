@@ -19,6 +19,6 @@ public class Student {
 	private String studentName;
 	private String studentSurname;
 	private List<Student> students;
-	private int groupId;
+	private Group groupId;
 }
 

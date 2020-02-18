@@ -16,7 +16,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
  */
 @Configuration
 @PropertySource({"classpath:h2.properties", "classpath:postgres.properties"})
-@ComponentScan
+@ComponentScan("com.project.repository")
 public class DatasourseConfiguration {
 	
 	@Value("${h2.DRIVER}") private String DRIVER_H2;

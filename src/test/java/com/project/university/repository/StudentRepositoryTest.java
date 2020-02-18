@@ -17,6 +17,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.project.university.config.DatasourseConfiguration;
+import com.project.university.entity.Group;
 import com.project.university.entity.Student;
 import com.project.university.repository.CrudRepository;
 import com.project.university.repository.StudentRepository;
@@ -46,7 +47,10 @@ public class StudentRepositoryTest {
 				.builder()
 				.studentName("Pavel")
 				.studentSurname("Mrakov")
-				.groupId(1)
+				.groupId(Group
+						.builder()
+						.groupId(1)
+						.build())
 				.build());
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
 	}

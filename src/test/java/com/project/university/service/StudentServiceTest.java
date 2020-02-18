@@ -15,6 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.project.university.config.DatasourseConfiguration;
+import com.project.university.entity.Group;
 import com.project.university.entity.Student;
 import com.project.university.repository.StudentRepository;
 import com.project.university.service.StudentService;
@@ -40,7 +41,10 @@ public class StudentServiceTest {
 	
 	@Test
 	public void testExpelStrudent_() {
-		int rows = studentService.expelStrudent(1);
+		int rows = studentService.expelStrudent(Student
+				.builder()
+				.studentId(1)
+				.build());
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
 	}
 	
@@ -49,9 +53,12 @@ public class StudentServiceTest {
 		int rows = studentService.acceptNewStudentToCourse(Student
 				.builder()
 				.studentId(1)
-				.studentName("")
-				.studentSurname("")
-				.groupId(1)
+				.studentName("Michail")
+				.studentSurname("Moko")
+				.groupId(Group
+						.builder()
+						.groupId(1)
+						.build())
 				.build());
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
 	}
