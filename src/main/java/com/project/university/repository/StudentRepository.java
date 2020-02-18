@@ -8,7 +8,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.project.university.entity.Student;
-import com.project.university.mapper.StudentMapper;
 
 /**
  * @author Eugene The repository class contain methods working with data base
@@ -36,8 +35,8 @@ public class StudentRepository implements CrudRepository<Student> {
 	 */
 	@Override
 	public int save(Student student) {
-		return this.jdbcTemplate.update("INSERT INTO STUDENTS (student_name, student_surname, group_id) VALUES (?,?,?)",
-				student.getStudentName(), student.getStudentSurname(), student.getGroupId().getGroupId());
+		return this.jdbcTemplate.update("INSERT INTO STUDENTS (studentName, studentSurname, groupId) VALUES (?,?,?)",
+				student.getStudentName(), student.getStudentSurname(), student.getGroupId());
 	}
 
 	/**
@@ -46,7 +45,7 @@ public class StudentRepository implements CrudRepository<Student> {
 	@Override
 	public Student find(int id) {
 		return this.jdbcTemplate.queryForObject(
-				"SELECT student_id, student_name, student_surname " + "FROM STUDENTS WHERE student_id=?",
+				"SELECT studentId, studentName, studentSurname " + "FROM STUDENTS WHERE studentId=?",
 				BeanPropertyRowMapper.newInstance(Student.class), id);
 	}
 
@@ -56,7 +55,7 @@ public class StudentRepository implements CrudRepository<Student> {
 	@Override
 	public int update(Student student) {
 		return this.jdbcTemplate.update(
-				"UPDATE STUDENTS SET student_name=?, student_surname=? " + "WHERE student_id=?",
+				"UPDATE STUDENTS SET studentName=?, studentSurname=? " + "WHERE studentId=?",
 				student.getStudentName(), student.getStudentSurname(), student.getStudentId());
 	}
 
@@ -65,7 +64,7 @@ public class StudentRepository implements CrudRepository<Student> {
 	 */
 	@Override
 	public int delete(int id) {
-		return this.jdbcTemplate.update("DELETE FROM STUDENTS WHERE student_id=?", id);
+		return this.jdbcTemplate.update("DELETE FROM STUDENTS WHERE studentId=?", id);
 	}
 
 	/**
@@ -73,7 +72,7 @@ public class StudentRepository implements CrudRepository<Student> {
 	 */
 	@Override
 	public List<Student> getAll() {
-		return this.jdbcTemplate.query("SELECT student_id, student_name, student_surname, group_id FROM STUDENTS", 
+		return this.jdbcTemplate.query("SELECT studentId, studentName, studentSurname, groupId FROM STUDENTS", 
 				BeanPropertyRowMapper.newInstance(Student.class));
 	}
 }

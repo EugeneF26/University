@@ -1,4 +1,4 @@
-package com.project.university.service.impl;
+package com.project.university.service;
 
 import java.util.List;
 

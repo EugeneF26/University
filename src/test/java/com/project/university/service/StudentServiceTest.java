@@ -1,4 +1,4 @@
-package com.project.university.domain;
+package com.project.university.service;
 
 import org.hamcrest.CoreMatchers;
 
@@ -13,35 +13,27 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.project.university.config.DatasourseConfiguration;
-import com.project.university.entity.Group;
 import com.project.university.entity.Student;
-import com.project.university.service.impl.StudentService;
+import com.project.university.service.StudentService;
+import com.project.university.service.StudentServiceImpl;
 
 @ExtendWith(SpringExtension.class)
-@SpringJUnitConfig(classes = {DatasourseConfiguration.class})
-@Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, 
-scripts={"/DROP.sql", "/CREATE.sql", "/INSERT.sql"})
+@SpringJUnitConfig(classes = {StudentServiceImpl.class, DatasourseConfiguration.class })
+@Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, scripts = {"/DROP.sql","/CREATE.sql","/INSERT.sql" })
 @ActiveProfiles("dev")
 public class StudentServiceTest {
-	
-	private StudentService studentService;
+
+    private StudentService studentService;
 	
 	@Autowired
 	public StudentServiceTest(StudentService studentService) {
 		this.studentService = studentService;
 	}
-	
+
+
 	@Test
-	public void testTransferOfStudentToAnotherGroup_WhenTheUserSendsQueryForTransferOfStudentAndTheProgramReturnNumberOfUpdatedRowsIsOne_thenCorrect() {
-		int rows = studentService.transferOfStudentToAnotherGroup(Student
-				.builder()
-				.studentId(4)
-				.groupId(Group
-						.builder()
-						.groupId(1)
-						.build())
-				.build());
+	public void testXXX_() {
+		int rows = studentService.acceptNewStudentToCourse(Student.builder().groupId(1).build());
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
 	}
 }
-
