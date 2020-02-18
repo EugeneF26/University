@@ -1,4 +1,4 @@
-package com.project.university.service;
+package com.project.university.service.impl;
 
 import java.util.List;
 
@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.university.entity.Student;
-import com.project.university.repository.StudentRepository;
+import com.project.university.repository.CrudRepository;
+import com.project.university.service.StudentService;
 
 /**
  * @author Eugene
@@ -15,31 +16,31 @@ import com.project.university.repository.StudentRepository;
 @Service
 public class StudentServiceImpl implements StudentService {
 	
-	private StudentRepository studentRepository;		
+	private CrudRepository<Student> crudRepository;		
 	
 	@Autowired
-	public StudentServiceImpl(StudentRepository studentRepository) {
-		this.studentRepository = studentRepository;
+	public StudentServiceImpl(CrudRepository<Student> crudRepository) {
+		this.crudRepository = crudRepository;
 	}
 	
 	@Override
 	public int expelStrudent(Student student) {
-		return studentRepository.delete(student.getStudentId());
+		return crudRepository.delete(student.getStudentId());
 	}
 	
 	@Override
 	public int transferOfStudentToAnotherGroup(Student student) {
-		return studentRepository.update(student);
+		return crudRepository.update(student);
 	}
 
 	@Override
 	public int acceptNewStudentToCourse(Student student) {
-		return studentRepository.save(student);
+		return crudRepository.save(student);
 	}
 
 	@Override
 	public List<Student> getStudents() {
-		return studentRepository.getAll();
+		return crudRepository.getAll();
 	}
 }
 

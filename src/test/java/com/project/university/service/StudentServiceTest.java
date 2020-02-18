@@ -19,7 +19,7 @@ import com.project.university.entity.Group;
 import com.project.university.entity.Student;
 import com.project.university.repository.StudentRepository;
 import com.project.university.service.StudentService;
-import com.project.university.service.StudentServiceImpl;
+import com.project.university.service.impl.StudentServiceImpl;
 
 @ExtendWith(SpringExtension.class)
 @SpringJUnitConfig(classes = {StudentServiceImpl.class, StudentRepository.class, DatasourseConfiguration.class })

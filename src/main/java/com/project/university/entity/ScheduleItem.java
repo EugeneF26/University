@@ -1,9 +1,6 @@
 package com.project.university.entity;
 
 import java.time.LocalDate;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
 import lombok.Data;
 
 /** @author Eugene
