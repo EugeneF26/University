@@ -30,7 +30,7 @@ public class StudentServiceImpl implements StudentService {
 	
 	@Override
 	public int transferOfStudentToAnotherGroup(Student student) {
-		return crudRepository.update(student);
+		return 0;
 	}
 
 	@Override

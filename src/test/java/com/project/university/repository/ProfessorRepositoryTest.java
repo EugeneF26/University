@@ -18,55 +18,59 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.project.university.config.DatasourseConfiguration;
-import com.project.university.entity.Course;
+import com.project.university.entity.Professor;
 
 import junit.framework.Assert;
 
 @ExtendWith(SpringExtension.class)
-@SpringJUnitConfig(classes = {CourseRepository.class, DatasourseConfiguration.class})
-@Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, 
-scripts={"/DROP.sql", "/CREATE.sql", "/INSERT.sql"})
+@SpringJUnitConfig(classes = {ProfessorRepository.class, DatasourseConfiguration.class})
+@Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, scripts={"/DROP.sql", "/CREATE.sql", "/INSERT.sql"})
 @ActiveProfiles("dev")
-public class CourseRepositoryTest {
+public class ProfessorRepositoryTest {
 	
-	private CrudRepository<Course> crudRepository;
-
 	@Autowired
-	public CourseRepositoryTest(CrudRepository<Course> crudRepository){
+	private CrudRepository<Professor> crudRepository;
+	
+	@Autowired
+	public ProfessorRepositoryTest(CrudRepository<Professor> crudRepository){
 		this.crudRepository = crudRepository;
 	}
 	
 	@Test
-	public void testSave_WhenTheUserSendsTheCourseYearAndTheProgramSavesCourseYearThem_thenCorrect()
+	public void testSave_WhenTheUserSendsTheProfessorDataAndTheProgramSavesProfessorDataThem_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-		Course course = Course
-				.builder()
-				.courseYear(5)
-				.build();	
-		int rows = crudRepository.save(course);
+		Professor professor = Professor.builder()
+				.professorName("Alexander")
+				.professorSurname("Artemenko")
+				.professorPatronymic("Fedorovich")
+				.build();
+		int rows = crudRepository.save(professor);
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
 	}
 	
 	@Test
-	public void testFindCourseByYear_WhenTheUserEntersTheYearOfTheCourseIsOneAndTheProgramDisplaysTheResult_thenCorrect()
+	public void testFindProfessorById_WhenTheUserEntersTheIdOfTheProfessorIsOneAndTheProgramDisplaysTheResult_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-		Course course = crudRepository.find(1);
-		Assert.assertEquals(course.getCourseYear(), 1);
+		Professor professor = crudRepository.find(1);
+		Assert.assertEquals(professor.getProfessorId(), 1);
 	}
 	
 	@Test
 	public void testUpdate_WhenUserSendsTheDataInTheMethodAndReturnsCountUpdatedRows_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-		Course course = Course
+		Professor professor = Professor
 				.builder()
-				.courseYear(2)
+				.professorName("Alexander")
+				.professorSurname("Artemenko")
+				.professorPatronymic("Fedorovich")
+				.professorId(2)
 				.build();	
-		int rows = crudRepository.update(course);
+		int rows = crudRepository.update(professor);
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
 	}
 	
 	@Test
-	public void testDelete_WhenUserSendsTheCourseYearInTheMethodAndReturnsCountDeletedRows_thenCorrect() 
+	public void testDelete_WhenUserSendsTheProfessorIdInTheMethodAndReturnsCountDeletedRows_thenCorrect() 
 			throws DataSetException, FileNotFoundException {
 		int rows = crudRepository.delete(3);
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
@@ -75,8 +79,8 @@ public class CourseRepositoryTest {
 	@Test
 	public void testGetAll_WhenTheUserSendsQueryForAllDataAndTheProgramReturnThem_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-		List<Course> result = crudRepository.getAll();
-		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(4));
+		List<Professor> result = crudRepository.getAll();
+		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(3));
 	}
 }
 

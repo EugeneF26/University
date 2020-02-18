@@ -9,11 +9,11 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.project.university.config.DatasourseConfiguration;
-import com.project.university.repository.StudentRepository;
+import com.project.university.repository.CourseRepository;
 import com.project.university.service.impl.CourseServiceImpl;
 
 @ExtendWith(SpringExtension.class)
-@SpringJUnitConfig(classes = {CourseServiceImpl.class, StudentRepository.class, DatasourseConfiguration.class })
+@SpringJUnitConfig(classes = {CourseServiceImpl.class, CourseRepository.class, DatasourseConfiguration.class })
 @Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, scripts = {"/DROP.sql","/CREATE.sql","/INSERT.sql" })
 @ActiveProfiles("dev")
 public class CourseServiceTest {
