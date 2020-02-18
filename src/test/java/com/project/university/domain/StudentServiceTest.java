@@ -43,11 +43,5 @@ public class StudentServiceTest {
 				.build());
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
 	}
-	
-	@Test
-	public void testTruncate_WhenTheUserSendsQueryForDeleteAllDataAndTheProgramReturnNumberOfUpdatedRowsIsFive_thenCorrect() {
-		int rows = studentService.truncateStudentsTable();
-		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(5));
-	}
 }
 

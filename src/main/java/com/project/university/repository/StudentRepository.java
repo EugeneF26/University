@@ -73,7 +73,8 @@ public class StudentRepository implements CrudRepository<Student> {
 	 */
 	@Override
 	public List<Student> getAll() {
-		return this.jdbcTemplate.query("SELECT student_id, student_name, student_surname, group_id FROM STUDENTS", new StudentMapper());
+		return this.jdbcTemplate.query("SELECT student_id, student_name, student_surname, group_id FROM STUDENTS", 
+				BeanPropertyRowMapper.newInstance(Student.class));
 	}
 }
 

@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 public class Course {
 	private int courseYear;
 	private List<Group> groups;

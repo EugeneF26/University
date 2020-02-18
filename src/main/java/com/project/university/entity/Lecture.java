@@ -7,7 +7,6 @@ import lombok.EqualsAndHashCode;
  * The class contain data of Lecture
  */
 @Data
-@EqualsAndHashCode
 public class Lecture {
 	private String title;
 }

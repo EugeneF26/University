@@ -11,7 +11,6 @@ import lombok.Data;
  */
 @Data
 public class ScheduleItem {
-
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private LocalDate studyDay;
 	private Course course;
