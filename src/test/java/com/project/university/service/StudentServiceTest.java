@@ -1,5 +1,10 @@
 package com.project.university.service;
 
+import java.util.List;
+
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.collection.IsCollectionWithSize;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.project.university.config.DatasourseConfiguration;
+import com.project.university.entity.Student;
 import com.project.university.repository.StudentRepository;
 import com.project.university.service.StudentService;
 import com.project.university.service.StudentServiceImpl;
@@ -33,18 +39,27 @@ public class StudentServiceTest {
 	}
 	
 	@Test
-	public void expelStrudent() {
-		
+	public void testExpelStrudent_() {
+		int rows = studentService.expelStrudent(1);
+		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
 	}
 	
 	@Test
-	public void acceptNewStudentToCourse() {
-		
+	public void testAcceptNewStudentToCourse_() {
+		int rows = studentService.acceptNewStudentToCourse(Student
+				.builder()
+				.studentId(1)
+				.studentName("")
+				.studentSurname("")
+				.groupId(1)
+				.build());
+		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
 	}
 	
 	@Test
-	public void getStudents() {
-		
+	public void testGetStudents() {
+		List<Student> result = studentService.getStudents();
+		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(5));
 	}
 }
 
