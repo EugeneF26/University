@@ -12,7 +12,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.project.university.config.DatasourseConfiguration;
-import com.project.university.crud.CrudProfessorService;
+import com.project.university.crud.ProfessorService;
 
 @ExtendWith(SpringExtension.class)
 @SpringJUnitConfig(classes = {DatasourseConfiguration.class})
@@ -20,16 +20,16 @@ import com.project.university.crud.CrudProfessorService;
 @ActiveProfiles("dev")
 public class ProfessorServiceTest {
 	
-	private CrudProfessorService crudProfessorService;
+	private ProfessorService professorService;
 	
 	@Autowired
-	public ProfessorServiceTest(CrudProfessorService crudProfessorService) {
-		this.crudProfessorService = crudProfessorService;
+	public ProfessorServiceTest(ProfessorService professorService) {
+		this.professorService = professorService;
 	}
 	
 	@Test
 	public void testTruncate_WhenTheUserSendsQueryForDeleteAllDataAndTheProgramReturnNumberOfUpdatedRowsIsFour_thenCorrect() {
-		int rows = crudProfessorService.truncateProfessorTable();
+		int rows = professorService.truncateProfessorTable();
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(3));
 	}
 }

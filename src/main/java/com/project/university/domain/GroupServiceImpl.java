@@ -5,20 +5,20 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.project.university.crud.CrudGroupService;
+import com.project.university.crud.GroupService;
 import com.project.university.crud.CrudRepository;
 import com.project.university.entity.Group;
 
 @Service
-public class GroupService implements CrudGroupService {
+public class GroupServiceImpl implements GroupService {
 	
 	private CrudRepository<Group> crudRepository;
-	private CrudGroupService crudGroupService;
+	private GroupService groupService;
 	
 	@Autowired
-	public GroupService(CrudRepository<Group> crudRepository,CrudGroupService crudGroupService) {
+	public GroupServiceImpl(CrudRepository<Group> crudRepository, GroupService groupService) {
 		this.crudRepository = crudRepository;
-		this.crudGroupService = crudGroupService;
+		this.groupService = groupService;
 	}
 	
 	public int save(Group group) {
@@ -43,7 +43,7 @@ public class GroupService implements CrudGroupService {
 
 	@Override
 	public int truncateGroupTable() {
-		return crudGroupService.truncateGroupTable();
+		return groupService.truncateGroupTable();
 	}
 }
 

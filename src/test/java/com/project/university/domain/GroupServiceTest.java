@@ -12,7 +12,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.project.university.config.DatasourseConfiguration;
-import com.project.university.crud.CrudGroupService;
+import com.project.university.crud.GroupService;
 
 @ExtendWith(SpringExtension.class)
 @SpringJUnitConfig(classes = {DatasourseConfiguration.class})
@@ -21,16 +21,16 @@ scripts={"/DROP.sql", "/CREATE.sql", "/INSERT.sql"})
 @ActiveProfiles("dev")
 public class GroupServiceTest {
 	
-	private CrudGroupService crudGroupService;
+	private GroupService groupService;
 	
 	@Autowired
-	public GroupServiceTest(CrudGroupService crudGroupService){
-		this.crudGroupService = crudGroupService;
+	public GroupServiceTest(GroupService groupService){
+		this.groupService = groupService;
 	}
 	
 	@Test
 	public void testTruncate_WhenTheUserSendsQueryForDeleteAllDataAndTheProgramReturnNumberOfUpdatedRowsIsFive_thenCorrect() {
-		int rows = crudGroupService.truncateGroupTable();
+		int rows = groupService.truncateGroupTable();
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(5));
 	}
 }

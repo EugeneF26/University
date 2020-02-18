@@ -1,6 +1,6 @@
 package com.project.university.crud;
 
-public interface CrudProfessorService {
+public interface ProfessorService {
 	int truncateProfessorTable();
 }
 

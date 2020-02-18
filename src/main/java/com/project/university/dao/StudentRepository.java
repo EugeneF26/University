@@ -8,7 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.project.university.crud.CrudRepository;
-import com.project.university.crud.CrudStudentService;
+import com.project.university.crud.StudentService;
 import com.project.university.entity.Student;
 import com.project.university.mapper.StudentMapper;
 
@@ -16,7 +16,7 @@ import com.project.university.mapper.StudentMapper;
  * @author Eugene The repository class contain methods working with data base
  */
 @Repository
-public class StudentRepository implements CrudRepository<Student>, CrudStudentService {
+public class StudentRepository implements CrudRepository<Student>, StudentService {
 
 	private JdbcTemplate jdbcTemplate;
 

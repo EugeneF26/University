@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.university.crud.CrudRepository;
-import com.project.university.crud.CrudStudentService;
+import com.project.university.crud.StudentService;
 import com.project.university.entity.Student;
 
 /**
@@ -14,19 +14,19 @@ import com.project.university.entity.Student;
  * The class is component of the service layer for Student.
  */
 @Service
-public class StudentService implements CrudStudentService {
+public class StudentServiceImpl implements StudentService {
 	
 	private CrudRepository<Student> crudRepository;
-	private CrudStudentService crudStudentService;
+	private StudentService studentService;
 	
 	/**
 	 * StudentRepostitory initialization
 	 * @param studentRepository
 	 */
 	@Autowired
-	public StudentService(CrudRepository<Student> crudRepository, CrudStudentService crudStudentService) {
+	public StudentServiceImpl(CrudRepository<Student> crudRepository, StudentService studentService) {
 		this.crudRepository = crudRepository;
-		this.crudStudentService = crudStudentService;
+		this.studentService = studentService;
 	}
 	
 	/**
@@ -75,7 +75,7 @@ public class StudentService implements CrudStudentService {
 	
 	@Override
 	public int transferOfStudentToAnotherGroup(Student student) {
-		return crudStudentService.transferOfStudentToAnotherGroup(student);
+		return studentService.transferOfStudentToAnotherGroup(student);
 	}
 	
 	/**
@@ -83,7 +83,7 @@ public class StudentService implements CrudStudentService {
 	 */
 	@Override
 	public int truncateStudentsTable() {		
-		return crudStudentService.truncateStudentsTable();
+		return studentService.truncateStudentsTable();
 	}
 }
 

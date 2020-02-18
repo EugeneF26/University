@@ -5,20 +5,20 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.project.university.crud.CrudProfessorService;
+import com.project.university.crud.ProfessorService;
 import com.project.university.crud.CrudRepository;
 import com.project.university.entity.Professor;
 
 @Service
-public class ProfessorService implements CrudProfessorService {
+public class ProfessorServiceImpl implements ProfessorService {
 
 	private CrudRepository<Professor> crudRepository;
-	private CrudProfessorService crudProfessorService;
+	private ProfessorService professorService;
 	
 	@Autowired
-	public ProfessorService(CrudRepository<Professor> crudRepository, CrudProfessorService crudProfessorService) {
+	public ProfessorServiceImpl(CrudRepository<Professor> crudRepository, ProfessorService professorService) {
 		this.crudRepository = crudRepository;
-		this.crudProfessorService = crudProfessorService;
+		this.professorService = professorService;
 	}
 	
 	public Professor find(int professorId) {
@@ -43,7 +43,7 @@ public class ProfessorService implements CrudProfessorService {
 
 	@Override
 	public int truncateProfessorTable() {
-		return crudProfessorService.truncateProfessorTable();
+		return professorService.truncateProfessorTable();
 	}
 }
 

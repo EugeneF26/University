@@ -5,21 +5,21 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.project.university.crud.CrudCourseService;
+import com.project.university.crud.CourseService;
 import com.project.university.crud.CrudRepository;
 import com.project.university.entity.Course;
 import com.project.university.entity.Student;
 
 @Service
-public class CourseService implements CrudCourseService {
+public class CourseServiceImpl implements CourseService {
 
 	private CrudRepository<Course> crudRepository;
-	private CrudCourseService crudCourseService;
+	private CourseService courseService;
 	
 	@Autowired
-	public CourseService(CrudRepository<Course> crudRepository,CrudCourseService crudCourseService) {
+	public CourseServiceImpl(CrudRepository<Course> crudRepository,CourseService courseService) {
 		this.crudRepository = crudRepository;
-		this.crudCourseService = crudCourseService;
+		this.courseService = courseService;
 	}
 	
 	public int save(Course course) {
@@ -44,12 +44,12 @@ public class CourseService implements CrudCourseService {
 
 	@Override
 	public int acceptNewStudentToCourse(Student student, Course course) {
-		return crudCourseService.acceptNewStudentToCourse(student, course);
+		return courseService.acceptNewStudentToCourse(student, course);
 	}
 
 	@Override
 	public int truncateCoursesTable() {
-		return crudCourseService.truncateCoursesTable();
+		return courseService.truncateCoursesTable();
 	}
 }
 

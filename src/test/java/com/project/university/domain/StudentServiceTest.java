@@ -13,7 +13,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.project.university.config.DatasourseConfiguration;
-import com.project.university.crud.CrudStudentService;
+import com.project.university.crud.StudentService;
 import com.project.university.entity.Group;
 import com.project.university.entity.Student;
 
@@ -24,16 +24,16 @@ scripts={"/DROP.sql", "/CREATE.sql", "/INSERT.sql"})
 @ActiveProfiles("dev")
 public class StudentServiceTest {
 	
-	private CrudStudentService crudStudentService;
+	private StudentService studentService;
 	
 	@Autowired
-	public StudentServiceTest(CrudStudentService crudStudentService) {
-		this.crudStudentService = crudStudentService;
+	public StudentServiceTest(StudentService studentService) {
+		this.studentService = studentService;
 	}
 	
 	@Test
 	public void testTransferOfStudentToAnotherGroup_WhenTheUserSendsQueryForTransferOfStudentAndTheProgramReturnNumberOfUpdatedRowsIsOne_thenCorrect() {
-		int rows = crudStudentService.transferOfStudentToAnotherGroup(Student
+		int rows = studentService.transferOfStudentToAnotherGroup(Student
 				.builder()
 				.studentId(4)
 				.groupId(Group
@@ -46,7 +46,7 @@ public class StudentServiceTest {
 	
 	@Test
 	public void testTruncate_WhenTheUserSendsQueryForDeleteAllDataAndTheProgramReturnNumberOfUpdatedRowsIsFive_thenCorrect() {
-		int rows = crudStudentService.truncateStudentsTable();
+		int rows = studentService.truncateStudentsTable();
 		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(5));
 	}
 }

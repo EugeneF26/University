@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.project.university.crud.CrudGroupService;
+import com.project.university.crud.GroupService;
 import com.project.university.crud.CrudRepository;
 import com.project.university.entity.Group;
 
@@ -15,7 +15,7 @@ import com.project.university.entity.Group;
  * The repository class contain methods working with data base
  */
 @Repository
-public class GroupRepository implements CrudRepository<Group>, CrudGroupService {
+public class GroupRepository implements CrudRepository<Group>, GroupService {
 
 	private JdbcTemplate jdbcTemplate;
 	
