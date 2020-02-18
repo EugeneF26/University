@@ -17,73 +17,34 @@ import com.project.university.service.impl.StudentService;
 public class StudentServiceImpl implements StudentService {
 	
 	private CrudRepository<Student> crudRepository;
-	private StudentService studentService;
 	
 	/**
 	 * StudentRepostitory initialization
 	 * @param studentRepository
 	 */
 	@Autowired
-	public StudentServiceImpl(CrudRepository<Student> crudRepository, StudentService studentService) {
+	public StudentServiceImpl(CrudRepository<Student> crudRepository) {
 		this.crudRepository = crudRepository;
-		this.studentService = studentService;
 	}
 	
-	/**
-	 * Finds student data by id of Student
-	 * @param studentId
-	 * @return studentResult - result of query for data base
-	 */
-	public Student find(int studentId) {
-		return crudRepository.find(studentId);
-	}
-	
-	/**
-	 * Saves student
-	 * @param student
-	 * @return number of updated rows
-	 */
-	public int save(Student student) {
-		return crudRepository.save(student);
-	}
-	
-	/**
-	 * Updates student data
-	 * @param student
-	 * @return number of updated rows
-	 */
-	public int update(Student student) {
-		return crudRepository.update(student);
-	}
-
-	/**
-	 * Deletes student by id
-	 * @param studentId
-	 * @return number of updated rows
-	 */
-	public int delete(int studentId) {
+	@Override
+	public int expelStrudent(int studentId) {
 		return crudRepository.delete(studentId);
-	}
-
-	/**
-	 * Gets list of all students
-	 * @return studentResult
-	 */
-	public List<Student> getAllStudents() {
-		return crudRepository.getAll();
 	}
 	
 	@Override
 	public int transferOfStudentToAnotherGroup(Student student) {
-		return studentService.transferOfStudentToAnotherGroup(student);
+		return crudRepository.update(student);
 	}
-	
-	/**
-	 * Deletes all students from table
-	 */
+
 	@Override
-	public int truncateStudentsTable() {		
-		return studentService.truncateStudentsTable();
+	public int acceptNewStudentToCourse(Student student) {
+		return crudRepository.save(student);
+	}
+
+	@Override
+	public List<Student> getStudents() {
+		return crudRepository.getAll();
 	}
 }
 

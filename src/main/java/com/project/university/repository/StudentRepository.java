@@ -9,13 +9,12 @@ import org.springframework.stereotype.Repository;
 
 import com.project.university.entity.Student;
 import com.project.university.mapper.StudentMapper;
-import com.project.university.service.impl.StudentService;
 
 /**
  * @author Eugene The repository class contain methods working with data base
  */
 @Repository
-public class StudentRepository implements CrudRepository<Student>, StudentService {
+public class StudentRepository implements CrudRepository<Student> {
 
 	private JdbcTemplate jdbcTemplate;
 
@@ -75,25 +74,6 @@ public class StudentRepository implements CrudRepository<Student>, StudentServic
 	@Override
 	public List<Student> getAll() {
 		return this.jdbcTemplate.query("SELECT student_id, student_name, student_surname, group_id FROM STUDENTS", new StudentMapper());
-	}
-	
-	/**
-	 * regroup student
-	 * @param student
-	 * @return number of updated rows
-	 */
-	@Override
-	public int transferOfStudentToAnotherGroup(Student student) {
-		return this.jdbcTemplate.update("UPDATE STUDENTS SET group_id=?" + " WHERE student_id=?",
-				student.getGroupId().getGroupId(), student.getStudentId());
-	}
-	
-	/**
-	 * Deletes all students from table
-	 */
-	@Override
-	public int truncateStudentsTable() {		
-		return this.jdbcTemplate.update("DELETE FROM students");
 	}
 }
 
