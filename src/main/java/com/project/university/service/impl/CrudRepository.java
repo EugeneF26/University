@@ -1,4 +1,4 @@
-package com.project.university.crud;
+package com.project.university.service.impl;
 
 import java.util.List;
 

@@ -13,9 +13,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.project.university.config.DatasourseConfiguration;
-import com.project.university.crud.CourseService;
 import com.project.university.entity.Course;
 import com.project.university.entity.Student;
+import com.project.university.service.impl.CourseService;
 
 @ExtendWith(SpringExtension.class)
 @SpringJUnitConfig(classes = {DatasourseConfiguration.class })

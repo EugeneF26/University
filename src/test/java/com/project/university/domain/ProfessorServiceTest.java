@@ -12,7 +12,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.project.university.config.DatasourseConfiguration;
-import com.project.university.crud.ProfessorService;
+import com.project.university.service.impl.ProfessorService;
 
 @ExtendWith(SpringExtension.class)
 @SpringJUnitConfig(classes = {DatasourseConfiguration.class})

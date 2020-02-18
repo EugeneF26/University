@@ -1,4 +1,4 @@
-package com.project.university.dao;
+package com.project.university.repository;
 
 import java.util.List;
 
@@ -7,10 +7,10 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.project.university.crud.CrudRepository;
-import com.project.university.crud.StudentService;
 import com.project.university.entity.Student;
 import com.project.university.mapper.StudentMapper;
+import com.project.university.service.impl.CrudRepository;
+import com.project.university.service.impl.StudentService;
 
 /**
  * @author Eugene The repository class contain methods working with data base

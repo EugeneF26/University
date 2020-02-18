@@ -1,13 +1,13 @@
-package com.project.university.domain;
+package com.project.university.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.project.university.crud.ProfessorService;
-import com.project.university.crud.CrudRepository;
 import com.project.university.entity.Professor;
+import com.project.university.service.impl.CrudRepository;
+import com.project.university.service.impl.ProfessorService;
 
 @Service
 public class ProfessorServiceImpl implements ProfessorService {

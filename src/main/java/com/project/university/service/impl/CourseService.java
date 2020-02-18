@@ -1,4 +1,4 @@
-package com.project.university.crud;
+package com.project.university.service.impl;
 
 import com.project.university.entity.Course;
 import com.project.university.entity.Student;
