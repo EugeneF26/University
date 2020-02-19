@@ -14,7 +14,7 @@ import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-import com.project.university.config.DatasourseConfiguration;
+import com.project.university.config.DatasourseConfigurationTest;
 import com.project.university.entity.Group;
 import com.project.university.entity.Student;
 import com.project.university.repository.StudentRepository;
@@ -22,7 +22,7 @@ import com.project.university.service.StudentService;
 import com.project.university.service.impl.StudentServiceImpl;
 
 @ExtendWith(SpringExtension.class)
-@SpringJUnitConfig(classes = {StudentServiceImpl.class, StudentRepository.class, DatasourseConfiguration.class })
+@SpringJUnitConfig(classes = {StudentServiceImpl.class, StudentRepository.class, DatasourseConfigurationTest.class })
 @Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, scripts = {"/DROP.sql","/CREATE.sql","/INSERT.sql" })
 @ActiveProfiles("dev")
 public class StudentServiceTest {
@@ -35,32 +35,23 @@ public class StudentServiceTest {
 	}
 	
 	@Test
-	public void testTransferOfStudentToAnotherGroup_WhenTheUserSendsQueryForTransferOfStudentAndTheProgramReturnNumberOfUpdatedRowsIsOne_thenCorrect() {
+	public void testTransferOfStudentToAnotherGroup_WhenTheUserSendsQueryForTransferOfStudentAndTheProgramReturnIdStudentIsSix_thenCorrect() {
 		
 	}
 	
 	@Test
-	public void testExpelStrudent_() {
-		int rows = studentService.expelStrudent(Student
-				.builder()
-				.studentId(1)
-				.build());
-		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
-	}
-	
-	@Test
 	public void testAcceptNewStudentToCourse_() {
-		int rows = studentService.acceptNewStudentToCourse(Student
+		Student student = Student
 				.builder()
-				.studentId(1)
-				.studentName("Michail")
-				.studentSurname("Moko")
-				.groupId(Group
+				.id(1)
+				.name("Michail")
+				.surname("Moko")
+				.group(Group
 						.builder()
-						.groupId(1)
+						.id(1)
 						.build())
-				.build());
-		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
+				.build();
+		MatcherAssert.assertThat(studentService.acceptNewStudent(student).getId(), CoreMatchers.equalTo(6));
 	}
 	
 	@Test

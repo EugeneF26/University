@@ -5,9 +5,8 @@ import java.util.List;
 import com.project.university.entity.Student;
 
 public interface StudentService {
-	int transferOfStudentToAnotherGroup(Student student);
-	int expelStrudent(Student student);
-	int acceptNewStudentToCourse(Student student);
+	Student transferStudentToAnotherGroup(Student student);
+	Student acceptNewStudent(Student student);
 	List<Student> getStudents();
 }
 

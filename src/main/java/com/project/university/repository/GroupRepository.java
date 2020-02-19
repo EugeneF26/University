@@ -9,16 +9,20 @@ import org.springframework.stereotype.Repository;
 
 import com.project.university.entity.Group;
 
-/** @author Eugene
- * The repository class contain methods working with data base
+/**
+ * @author Eugene The repository class contain methods working with data base
  */
 @Repository
 public class GroupRepository implements CrudRepository<Group> {
 
 	private JdbcTemplate jdbcTemplate;
-	
-	/** Construct a new JdbcTemplate, given a jdbcTemplate with DataSource to obtain connections from
-	 * @param jdbcTemplate - the jdbcTemplate with DataSource to obtain connections from
+
+	/**
+	 * Construct a new JdbcTemplate, given a jdbcTemplate with DataSource to obtain
+	 * connections from
+	 * 
+	 * @param jdbcTemplate - the jdbcTemplate with DataSource to obtain connections
+	 *                     from
 	 * @see SpringConfig#dataSource()
 	 */
 	@Autowired
@@ -30,17 +34,17 @@ public class GroupRepository implements CrudRepository<Group> {
 	 * @see CrudRepository#save(Object)
 	 */
 	@Override
-	public int save(Group group) {
-		return this.jdbcTemplate.update(
-		        "INSERT INTO GROUPS (groupId) VALUES (?)", group.getGroupId());
+	public Group save(Group group) {
+		this.jdbcTemplate.update("INSERT INTO GROUPS (id) VALUES (?)", group.getId());
+		return group;
 	}
 
 	/**
 	 * @see CrudRepository#find(int)
 	 */
 	@Override
-	public Group find(int id) {
-		return this.jdbcTemplate.queryForObject("SELECT groupId FROM GROUPS WHERE groupId = ?;", 
+	public Group findOneBiId(Integer id) {
+		return this.jdbcTemplate.queryForObject("SELECT id FROM GROUPS WHERE id = ?;",
 				BeanPropertyRowMapper.newInstance(Group.class), id);
 	}
 
@@ -48,18 +52,17 @@ public class GroupRepository implements CrudRepository<Group> {
 	 * @see CrudRepository#uddate(Object)
 	 */
 	@Override
-	public int update(Group group) {
-		return this.jdbcTemplate.update(
-		        "UPDATE GROUPS SET groupId=? WHERE groupId=? ", group.getGroupId(), group.getGroupId());
+	public Group update(Group group) {
+		this.jdbcTemplate.update("UPDATE GROUPS SET id=? WHERE id=? ", group.getId(), group.getId());
+		return group;
 	}
 
 	/**
 	 * @see CrudRepository#delete(int)
 	 */
 	@Override
-	public int delete(int id) {
-		return this.jdbcTemplate.update(
-		        "DELETE FROM GROUPS WHERE groupId=?", id);
+	public void delete(Group group) {
+		this.jdbcTemplate.update("DELETE FROM GROUPS WHERE id=?", group.getId());
 	}
 
 	/**
@@ -70,4 +73,3 @@ public class GroupRepository implements CrudRepository<Group> {
 		return this.jdbcTemplate.query("SELECT * FROM GROUPS", BeanPropertyRowMapper.newInstance(Group.class));
 	}
 }
-

@@ -13,15 +13,15 @@ import com.project.university.service.GroupService;
 @Service
 public class GroupServiceImpl implements GroupService {
 	
-	private CrudRepository<Course> crudRepository;
+	private CrudRepository<Group> crudRepository;
 	
 	@Autowired
-	public GroupServiceImpl(CrudRepository<Course> crudRepository) {
+	public GroupServiceImpl(CrudRepository<Group> crudRepository) {
 		this.crudRepository = crudRepository;
 	}
 
 	@Override
-	public List<Group> getGroupByYear(Course course) {
+	public List<Group> getGroupsByYear(Course course) {
 		return null;
 	}
 }

@@ -17,13 +17,11 @@ import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-import com.project.university.config.DatasourseConfiguration;
+import com.project.university.config.DatasourseConfigurationTest;
 import com.project.university.entity.Course;
 
-import junit.framework.Assert;
-
 @ExtendWith(SpringExtension.class)
-@SpringJUnitConfig(classes = {CourseRepository.class, DatasourseConfiguration.class})
+@SpringJUnitConfig(classes = {CourseRepository.class, DatasourseConfigurationTest.class})
 @Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, 
 scripts={"/DROP.sql", "/CREATE.sql", "/INSERT.sql"})
 @ActiveProfiles("dev")
@@ -41,35 +39,27 @@ public class CourseRepositoryTest {
 			throws DataSetException, FileNotFoundException {
 		Course course = Course
 				.builder()
-				.courseYear(5)
+				.year(5)
 				.build();	
-		int rows = crudRepository.save(course);
-		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
+		MatcherAssert.assertThat(crudRepository.save(course).getId(), CoreMatchers.equalTo(5));
 	}
 	
 	@Test
 	public void testFindCourseByYear_WhenTheUserEntersTheYearOfTheCourseIsOneAndTheProgramDisplaysTheResult_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-		Course course = crudRepository.find(1);
-		Assert.assertEquals(course.getCourseYear(), 1);
+		Course course = crudRepository.findOneBiId(1);
+		MatcherAssert.assertThat(course.getYear(), CoreMatchers.equalTo(1));
 	}
 	
 	@Test
-	public void testUpdate_WhenUserSendsTheDataInTheMethodAndReturnsCountUpdatedRows_thenCorrect()
+	public void testUpdate_WhenUserSendsTheDataInTheMethodAndReturnsTheSameObject_thenCorrect()
 			throws DataSetException, FileNotFoundException {
 		Course course = Course
 				.builder()
-				.courseYear(2)
+				.year(2)
 				.build();	
-		int rows = crudRepository.update(course);
-		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
-	}
-	
-	@Test
-	public void testDelete_WhenUserSendsTheCourseYearInTheMethodAndReturnsCountDeletedRows_thenCorrect() 
-			throws DataSetException, FileNotFoundException {
-		int rows = crudRepository.delete(3);
-		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
+		Course result = crudRepository.update(course);
+		MatcherAssert.assertThat(result, CoreMatchers.equalToObject(course));
 	}
 	
 	@Test

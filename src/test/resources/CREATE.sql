@@ -1,50 +1,53 @@
 CREATE TABLE groups
 (
-groupId NUMBER PRIMARY KEY
+id NUMBER PRIMARY KEY
 );
 CREATE TABLE students
 (
-studentId SERIAL PRIMARY KEY,
-studentName TEXT NOT NULL,
-studentSurname TEXT NOT NULL,
+id SERIAL PRIMARY KEY,
+name TEXT NOT NULL,
+surname TEXT NOT NULL,
 groupId NUMBER NOT NULL
 );
 CREATE TABLE courses
 (
-courseYear NUMBER PRIMARY KEY
+id SERIAL PRIMARY KEY,
+year NUMBER
 );
 CREATE TABLE professors
 (
-professorId SERIAL PRIMARY KEY,
-professorName TEXT,
-professorSurname TEXT,
-professorPatronymic TEXT
+id SERIAL PRIMARY KEY,
+name TEXT,
+surname TEXT,
+patronymic TEXT
 );
 CREATE TABLE lectures
 (
-lectureTitle TEXT PRIMARY KEY
+id SERIAL PRIMARY KEY,
+title TEXT 
 );
 CREATE TABLE lecture_halls
 (
-floor TEXT,
-numberRoom NUMBER PRIMARY KEY
+id SERIAL PRIMARY KEY,
+floor NUMBER,
+numberRoom NUMBER
 );
 CREATE TABLE schedule_Item
 (
 studyDay TIMESTAMP PRIMARY KEY,
-courseYear NUMBER,
-professorId NUMBER,
-lectureTitle TEXT,
+year NUMBER,
+id NUMBER,
+title TEXT,
 numberRoom NUMBER,
-FOREIGN KEY (courseYear) REFERENCES courses(courseYear) ON DELETE CASCADE ON UPDATE CASCADE,
-FOREIGN KEY (professorId) REFERENCES professors(professorId) ON DELETE CASCADE ON UPDATE CASCADE,
-FOREIGN KEY (lectureTitle) REFERENCES lectures(lectureTitle) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (year) REFERENCES courses(year) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (id) REFERENCES professors(id) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (title) REFERENCES lectures(title) ON DELETE CASCADE ON UPDATE CASCADE,
 FOREIGN KEY (numberRoom) REFERENCES lecture_halls(numberRoom) ON DELETE CASCADE ON UPDATE CASCADE
 );
 CREATE TABLE students_courses
 (
-studentId NUMBER,
-courseYear NUMBER,
-FOREIGN KEY (studentId) REFERENCES students(studentId) ON DELETE CASCADE ON UPDATE CASCADE,
-FOREIGN KEY (courseYear) REFERENCES courses(courseYear) ON DELETE CASCADE ON UPDATE CASCADE
+id NUMBER,
+year NUMBER,
+FOREIGN KEY (id) REFERENCES students(id) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (year) REFERENCES courses(year) ON DELETE CASCADE ON UPDATE CASCADE
 );

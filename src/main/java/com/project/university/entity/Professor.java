@@ -14,9 +14,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Professor {
-	private int professorId;
-	private String professorName;
-	private String professorSurname;
-	private String professorPatronymic;
+	private Integer id;
+	private String name;
+	private String surname;
+	private String patronymic;
 }
 

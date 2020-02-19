@@ -1,6 +1,7 @@
 package com.project.university.repository;
 
 import java.io.FileNotFoundException;
+
 import java.util.List;
 
 import org.dbunit.dataset.DataSetException;
@@ -16,12 +17,11 @@ import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-import com.project.university.config.DatasourseConfiguration;
+import com.project.university.config.DatasourseConfigurationTest;
 import com.project.university.entity.Group;
-import junit.framework.Assert;
 
 @ExtendWith(SpringExtension.class)
-@SpringJUnitConfig(classes = {GroupRepository.class, DatasourseConfiguration.class})
+@SpringJUnitConfig(classes = {GroupRepository.class, DatasourseConfigurationTest.class})
 @Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, scripts={"/DROP.sql", "/CREATE.sql", "/INSERT.sql"})
 @ActiveProfiles("dev")
 public class GroupRepositoryTest {
@@ -38,35 +38,27 @@ public class GroupRepositoryTest {
 			throws DataSetException, FileNotFoundException {
 		Group group = Group
 				.builder()
-				.groupId(7)
+				.id(7)
 				.build();		
-		int rows = crudRepository.save(group);
-		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
+		MatcherAssert.assertThat(crudRepository.save(group).getId(), CoreMatchers.equalTo(7));
 	}
 	
 	@Test
 	public void testFindGroupById_WhenTheUserEntersTheIdOfTheGroupIsOneAndTheProgramDisplaysTheResult_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-		Group group = crudRepository.find(1);
-		Assert.assertEquals(group.getGroupId(), 1);
+		Group group = crudRepository.findOneBiId(1);
+		MatcherAssert.assertThat(group.getId(), CoreMatchers.equalTo(1));
 	}
 	
 	@Test
-	public void testUpdate_WhenUserSendsTheDataInTheMethodAndReturnsCountUpdatedRows_thenCorrect()
+	public void testUpdate_WhenUserSendsTheDataInTheMethodAndReturnsTheSameObject_thenCorrect()
 			throws DataSetException, FileNotFoundException {
 		Group group = Group
 				.builder()
-				.groupId(1)
+				.id(1)
 				.build();	
-		int rows = crudRepository.update(group);
-		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
-	}
-	
-	@Test
-	public void testDelete_WhenUserSendsTheGroupIdInTheMethodAndReturnsCountDeletedRows_thenCorrect() 
-			throws DataSetException, FileNotFoundException {
-		int rows = crudRepository.delete(5);
-		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
+		Group result = crudRepository.update(group);
+		MatcherAssert.assertThat(result, CoreMatchers.equalToObject(group));
 	}
 	
 	@Test

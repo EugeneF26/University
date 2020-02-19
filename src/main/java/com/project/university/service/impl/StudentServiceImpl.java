@@ -24,17 +24,12 @@ public class StudentServiceImpl implements StudentService {
 	}
 	
 	@Override
-	public int expelStrudent(Student student) {
-		return crudRepository.delete(student.getStudentId());
-	}
-	
-	@Override
-	public int transferOfStudentToAnotherGroup(Student student) {
-		return 0;
+	public Student transferStudentToAnotherGroup(Student student) {
+		return crudRepository.update(student);
 	}
 
 	@Override
-	public int acceptNewStudentToCourse(Student student) {
+	public Student acceptNewStudent(Student student) {
 		return crudRepository.save(student);
 	}
 

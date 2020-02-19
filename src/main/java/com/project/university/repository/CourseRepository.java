@@ -17,8 +17,12 @@ public class CourseRepository implements CrudRepository<Course> {
 
 	private JdbcTemplate jdbcTemplate;
 
-	/** Construct a new JdbcTemplate, given a jdbcTemplate with DataSource to obtain connections from
-	 * @param jdbcTemplate - the jdbcTemplate with DataSource to obtain connections from
+	/**
+	 * Construct a new JdbcTemplate, given a jdbcTemplate with DataSource to obtain
+	 * connections from
+	 * 
+	 * @param jdbcTemplate - the jdbcTemplate with DataSource to obtain connections
+	 *                     from
 	 * @see SpringConfig#dataSource()
 	 */
 	@Autowired
@@ -30,16 +34,18 @@ public class CourseRepository implements CrudRepository<Course> {
 	 * @see CrudRepository#save(Object)
 	 */
 	@Override
-	public int save(Course course) {
-		return this.jdbcTemplate.update("INSERT INTO COURSES (courseYear) VALUES (?)", course.getCourseYear());
+	public Course save(Course course) {
+		this.jdbcTemplate.update("INSERT INTO COURSES (year) VALUES (?)", course.getYear());
+		return this.jdbcTemplate.queryForObject("SELECT id FROM COURSES WHERE year=?",
+				BeanPropertyRowMapper.newInstance(Course.class), course.getYear());
 	}
 
 	/**
 	 * @see CrudRepository#find(int)
 	 */
 	@Override
-	public Course find(int year) {
-		return this.jdbcTemplate.queryForObject("SELECT courseYear FROM COURSES WHERE courseYear = ?;",
+	public Course findOneBiId(Integer year) {
+		return this.jdbcTemplate.queryForObject("SELECT year FROM COURSES WHERE year = ?;",
 				BeanPropertyRowMapper.newInstance(Course.class), year);
 	}
 
@@ -47,17 +53,17 @@ public class CourseRepository implements CrudRepository<Course> {
 	 * @see CrudRepository#update(Object)
 	 */
 	@Override
-	public int update(Course course) {
-		return this.jdbcTemplate.update("UPDATE COURSES SET courseYear=? WHERE courseYear=? ", 
-				course.getCourseYear(), course.getCourseYear());
+	public Course update(Course course) {
+		this.jdbcTemplate.update("UPDATE COURSES SET year=? WHERE year=? ", course.getYear(), course.getYear());
+		return course;
 	}
 
 	/**
 	 * @see CrudRepository#delete(int)
 	 */
 	@Override
-	public int delete(int year) {
-		return this.jdbcTemplate.update("DELETE FROM COURSES WHERE courseYear = ?", year);
+	public void delete(Course course) {
+		this.jdbcTemplate.update("DELETE FROM COURSES WHERE year = ?", course.getYear());
 	}
 
 	/**
@@ -68,4 +74,3 @@ public class CourseRepository implements CrudRepository<Course> {
 		return this.jdbcTemplate.query("SELECT * FROM COURSES", BeanPropertyRowMapper.newInstance(Course.class));
 	}
 }
-

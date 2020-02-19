@@ -11,19 +11,19 @@ import com.project.university.service.ProfessorService;
 public class ProfessorServiceImpl implements ProfessorService {
 
 	private CrudRepository<Professor> crudRepository;
-	
+
 	@Autowired
 	public ProfessorServiceImpl(CrudRepository<Professor> crudRepository) {
 		this.crudRepository = crudRepository;
 	}
 
 	@Override
-	public int fireProfessor(Professor professor) {
-		return crudRepository.delete(professor.getProfessorId());
+	public void fireProfessor(Professor professor) {
+		crudRepository.delete(professor);
 	}
 
 	@Override
-	public int acceptNewProfessor(Professor professor) {
+	public Professor acceptNewProfessor(Professor professor) {
 		return crudRepository.save(professor);
 	}
 }

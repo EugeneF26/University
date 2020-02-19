@@ -7,7 +7,8 @@ import lombok.Data;
  */
 @Data
 public class LectureHall {
-	private String floor;
-	private int number;
+	private Integer id;
+	private Integer floor;
+	private Integer number;
 }
 

@@ -3,7 +3,7 @@ package com.project.university.service;
 import com.project.university.entity.Professor;
 
 public interface ProfessorService {
-	int fireProfessor(Professor professor);
-	int acceptNewProfessor(Professor professor);
+	void fireProfessor(Professor professor);
+	Professor acceptNewProfessor(Professor professor);
 }
 

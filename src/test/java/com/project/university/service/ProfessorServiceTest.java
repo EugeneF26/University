@@ -11,13 +11,13 @@ import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-import com.project.university.config.DatasourseConfiguration;
+import com.project.university.config.DatasourseConfigurationTest;
 import com.project.university.entity.Professor;
 import com.project.university.repository.ProfessorRepository;
 import com.project.university.service.impl.ProfessorServiceImpl;
 
 @ExtendWith(SpringExtension.class)
-@SpringJUnitConfig(classes = {ProfessorServiceImpl.class, ProfessorRepository.class, DatasourseConfiguration.class})
+@SpringJUnitConfig(classes = {ProfessorServiceImpl.class, ProfessorRepository.class, DatasourseConfigurationTest.class})
 @Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, scripts={"/DROP.sql", "/CREATE.sql", "/INSERT.sql"})
 @ActiveProfiles("dev")
 public class ProfessorServiceTest {
@@ -30,27 +30,14 @@ public class ProfessorServiceTest {
 	}
 	
 	@Test
-	public void testAcceptNewProfessor_WhenTheUserSendsQueryForAddANewProfessorAndTheProgramReturnNumberOfUpdatedRowsIsOne_thenCorrect() {
-		int rows = professorService.acceptNewProfessor(Professor
+	public void testAcceptNewProfessor_WhenTheUserSendsQueryForAddANewProfessorAndTheProgramReturnIncrementIdOfStudent_thenCorrect() {
+		Professor professor = Professor
 				.builder()
-				.professorId(1)
-				.professorName("Vladimir")
-				.professorSurname("Marko")
-				.professorPatronymic("Petrovish")
-				.build());
-		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
-	}
-	
-	@Test
-	public void testFireProfessor_WhenTheUserSendsQueryForDeleteAProfessorAndTheProgramReturnNumberOfUpdatedRowsIsOne_thenCorrect() {
-		int rows = professorService.fireProfessor(Professor
-				.builder()
-				.professorId(1)
-				.professorName("Vladimir")
-				.professorSurname("Marko")
-				.professorPatronymic("Petrovish")
-				.build());
-		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
+				.name("Vladimir")
+				.surname("Marko")
+				.patronymic("Petrovish")
+				.build();
+		MatcherAssert.assertThat(professorService.acceptNewProfessor(professor).getId(), CoreMatchers.equalTo(4));
 	}
 }
 

@@ -8,6 +8,7 @@ import lombok.Data;
  */
 @Data
 public class ScheduleItem {
+	private Integer id;
 	private LocalDate studyDay;
 	private Course course;
 	private Professor professor;

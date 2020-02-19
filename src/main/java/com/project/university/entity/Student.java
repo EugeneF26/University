@@ -1,7 +1,5 @@
 package com.project.university.entity;
 
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,10 +13,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Student {
-	private int studentId;
-	private String studentName;
-	private String studentSurname;
-	private List<Student> students;
-	private Group groupId;
+	private Integer id;
+	private String name;
+	private String surname;
+	private Group group;
 }
 
