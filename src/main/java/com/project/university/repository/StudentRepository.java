@@ -1,13 +1,10 @@
 package com.project.university.repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.project.university.entity.Group;
@@ -39,10 +36,10 @@ public class StudentRepository implements CrudRepository<Student> {
 	 */
 	@Override
 	public Student save(Student student) {
-		 this.jdbcTemplate.update("INSERT INTO STUDENTS (name, surname, groupId) VALUES (?,?,?)",
-				student.getName(), student.getSurname(), student.getGroup().getId());
-		 return this.jdbcTemplate.queryForObject("SELECT id FROM STUDENTS WHERE name=? AND surname=?",
-				 BeanPropertyRowMapper.newInstance(Student.class), student.getName(), student.getSurname());
+		this.jdbcTemplate.update("INSERT INTO STUDENTS (name, surname, groupId) VALUES (?,?,?)", student.getName(),
+				student.getSurname(), student.getGroup().getId());
+		return this.jdbcTemplate.queryForObject("SELECT id FROM STUDENTS WHERE name=? AND surname=?",
+				BeanPropertyRowMapper.newInstance(Student.class), student.getName(), student.getSurname());
 	}
 
 	/**
@@ -50,8 +47,7 @@ public class StudentRepository implements CrudRepository<Student> {
 	 */
 	@Override
 	public Student findOneBiId(Integer id) {
-		return this.jdbcTemplate.queryForObject(
-				"SELECT id, name, surname " + "FROM STUDENTS WHERE id=?",
+		return this.jdbcTemplate.queryForObject("SELECT id, name, surname " + "FROM STUDENTS WHERE id=?",
 				BeanPropertyRowMapper.newInstance(Student.class), id);
 	}
 
@@ -60,9 +56,8 @@ public class StudentRepository implements CrudRepository<Student> {
 	 */
 	@Override
 	public Student update(Student student) {
-		this.jdbcTemplate.update(
-				"UPDATE STUDENTS SET name=?, surname=? " + "WHERE id=?",
-				student.getName(), student.getSurname(), student.getId());
+		this.jdbcTemplate.update("UPDATE STUDENTS SET name=?, surname=? " + "WHERE id=?", student.getName(),
+				student.getSurname(), student.getId());
 		return student;
 	}
 
@@ -79,20 +74,18 @@ public class StudentRepository implements CrudRepository<Student> {
 	 */
 	@Override
 	public List<Student> getAll() {
-		return this.jdbcTemplate.query("SELECT id, name, surname, groupId FROM STUDENTS", 
-				new RowMapper<Student>() {
-            public Student mapRow(ResultSet rs, int rowNum) throws SQLException {
-                Student student = new Student();
-                student.setId(rs.getInt("id"));
-                student.setName(rs.getString("name"));
-                student.setSurname(rs.getString("surname"));
-                student.setGroup(Group
-                		.builder()
-                		.id(rs.getInt("groupId"))
-                		.build());
-                return student;
-            }
-        }); 
+		return this.jdbcTemplate.query("SELECT id, name, surname, groupId FROM STUDENTS", (rs, rowNum) -> {
+			return Student
+					.builder()
+					.id(rs.getInt("id"))
+					.name(rs.getString("name"))
+					.surname(rs.getString("surname"))
+					.group(Group
+							.builder()
+							.id(1)
+							.build())
+					.build();
+		});
 	}
 }
 
