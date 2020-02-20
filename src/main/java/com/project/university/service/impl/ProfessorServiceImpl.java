@@ -19,12 +19,12 @@ public class ProfessorServiceImpl implements ProfessorService {
 
 	@Override
 	public void fireProfessor(Professor professor) {
-		crudRepository.delete(professor);
+		crudRepository.update(professor);
 	}
 
 	@Override
 	public Professor acceptNewProfessor(Professor professor) {
-		return crudRepository.save(professor);
+		return crudRepository.update(professor);
 	}
 }
 

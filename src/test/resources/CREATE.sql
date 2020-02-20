@@ -14,12 +14,14 @@ CREATE TABLE courses
 id SERIAL PRIMARY KEY,
 year NUMBER
 );
+CREATE TYPE status AS ENUM ('accepted','fired');
 CREATE TABLE professors
 (
 id SERIAL PRIMARY KEY,
 name TEXT,
 surname TEXT,
-patronymic TEXT
+patronymic TEXT,
+currentStatus status
 );
 CREATE TABLE lectures
 (

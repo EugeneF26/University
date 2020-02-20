@@ -18,5 +18,6 @@ public class Professor {
 	private String name;
 	private String surname;
 	private String patronymic;
+	private StatusProfessor status;
 }
 
