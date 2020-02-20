@@ -70,6 +70,10 @@ public class StudentRepositoryTest {
 		.id(4)
 		.name("Arkadiy")
 		.surname("Morozov")
+		.group(Group
+				.builder()
+				.id(1)
+				.build())
 		.build();
 		Student result = crudRepository.update(student);
 		MatcherAssert.assertThat(result, CoreMatchers.equalToObject(student));

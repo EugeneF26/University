@@ -38,11 +38,11 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 	public Professor save(Professor professor) {
 		this.jdbcTemplate.update("INSERT INTO PROFESSORS (name, surname, patronymic, currentStatus) VALUES (?,?,?,?)",
 				professor.getName(), professor.getSurname(), professor.getPatronymic(), 
-				professor.getCurrentStatus().getStatus().toString());
+				professor.getCurrentStatus().getStatus());
 		return this.jdbcTemplate.queryForObject("SELECT id FROM PROFESSORS WHERE name=? AND surname=? AND patronymic=? "
 				+ "AND currentStatus=?",
 				BeanPropertyRowMapper.newInstance(Professor.class), professor.getName(), professor.getSurname(),
-				professor.getPatronymic(), professor.getCurrentStatus().getStatus().toString());
+				professor.getPatronymic(), professor.getCurrentStatus().getStatus());
 	}
 
 	/**

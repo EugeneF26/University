@@ -38,8 +38,9 @@ public class StudentRepository implements CrudRepository<Student> {
 	public Student save(Student student) {
 		this.jdbcTemplate.update("INSERT INTO STUDENTS (name, surname, groupId) VALUES (?,?,?)", student.getName(),
 				student.getSurname(), student.getGroup().getId());
-		return this.jdbcTemplate.queryForObject("SELECT id FROM STUDENTS WHERE name=? AND surname=?",
-				BeanPropertyRowMapper.newInstance(Student.class), student.getName(), student.getSurname());
+		return this.jdbcTemplate.queryForObject("SELECT id FROM STUDENTS WHERE name=? AND surname=? AND groupId=?",
+				BeanPropertyRowMapper.newInstance(Student.class), student.getName(), student.getSurname(), 
+				student.getGroup().getId());
 	}
 
 	/**
@@ -47,7 +48,7 @@ public class StudentRepository implements CrudRepository<Student> {
 	 */
 	@Override
 	public Student findOneById(Integer id) {
-		return this.jdbcTemplate.queryForObject("SELECT id, name, surname " + "FROM STUDENTS WHERE id=?",
+		return this.jdbcTemplate.queryForObject("SELECT id, name, surname, groupId " + "FROM STUDENTS WHERE id=?",
 				BeanPropertyRowMapper.newInstance(Student.class), id);
 	}
 
@@ -56,8 +57,8 @@ public class StudentRepository implements CrudRepository<Student> {
 	 */
 	@Override
 	public Student update(Student student) {
-		this.jdbcTemplate.update("UPDATE STUDENTS SET name=?, surname=? " + "WHERE id=?", student.getName(),
-				student.getSurname(), student.getId());
+		this.jdbcTemplate.update("UPDATE STUDENTS SET name=?, surname=?, groupId=? " + "WHERE id=?", student.getName(),
+				student.getSurname(), student.getGroup().getId(), student.getId());
 		return student;
 	}
 
