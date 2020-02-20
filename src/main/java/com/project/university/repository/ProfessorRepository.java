@@ -35,11 +35,12 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 	 */
 	@Override
 	public Professor save(Professor professor) {
-		this.jdbcTemplate.update("INSERT INTO PROFESSORS (name, surname, patronymic) VALUES (?,?,?)",
-				professor.getName(), professor.getSurname(), professor.getPatronymic());
-		return this.jdbcTemplate.queryForObject("SELECT id FROM PROFESSORS WHERE name=? AND surname=? AND patronymic=?",
+		this.jdbcTemplate.update("INSERT INTO PROFESSORS (name, surname, patronymic, currentStatus) VALUES (?,?,?,?)",
+				professor.getName(), professor.getSurname(), professor.getPatronymic(), professor.getCurrentStatus());
+		return this.jdbcTemplate.queryForObject("SELECT id FROM PROFESSORS WHERE name=? AND surname=? AND patronymic=? "
+				+ "AND currentStatus=?",
 				BeanPropertyRowMapper.newInstance(Professor.class), professor.getName(), professor.getSurname(),
-				professor.getPatronymic());
+				professor.getPatronymic(), professor.getCurrentStatus());
 	}
 
 	/**
@@ -57,8 +58,8 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 	 */
 	@Override
 	public Professor update(Professor professor) {
-		this.jdbcTemplate.update("UPDATE PROFESSORS SET name=?, surname=?, patronymic=? " + "WHERE id=? ",
-				professor.getName(), professor.getSurname(), professor.getPatronymic(), professor.getId());
+		this.jdbcTemplate.update("UPDATE PROFESSORS SET name=?, surname=?, patronymic=?, currentStatus=? " + "WHERE id=? ",
+				professor.getName(), professor.getSurname(), professor.getPatronymic(), professor.getCurrentStatus(), professor.getId());
 		return professor;
 	}
 
@@ -78,3 +79,4 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 		return this.jdbcTemplate.query("SELECT * FROM PROFESSORS", BeanPropertyRowMapper.newInstance(Professor.class));
 	}
 }
+

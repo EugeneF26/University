@@ -73,3 +73,4 @@ public class GroupRepository implements CrudRepository<Group> {
 		return this.jdbcTemplate.query("SELECT * FROM GROUPS", BeanPropertyRowMapper.newInstance(Group.class));
 	}
 }
+

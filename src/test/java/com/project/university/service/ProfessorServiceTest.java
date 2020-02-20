@@ -33,11 +33,10 @@ public class ProfessorServiceTest {
 	public void testAcceptNewProfessor_WhenTheUserSendsQueryForAddANewProfessorAndTheProgramReturnIncrementIdOfStudent_thenCorrect() {
 		Professor professor = Professor
 				.builder()
-				.name("Vladimir")
-				.surname("Marko")
-				.patronymic("Petrovish")
+				.currentStatus("accepted")
+				.id(1)
 				.build();
-		MatcherAssert.assertThat(professorService.acceptNewProfessor(professor).getId(), CoreMatchers.equalTo(4));
+		MatcherAssert.assertThat(professorService.acceptNewProfessor(professor).getId(), CoreMatchers.equalTo(1));
 	}
 }
 

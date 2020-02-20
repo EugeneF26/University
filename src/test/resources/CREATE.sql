@@ -12,16 +12,17 @@ groupId NUMBER NOT NULL
 CREATE TABLE courses
 (
 id SERIAL PRIMARY KEY,
-year NUMBER
+year NUMBER,
+groupId NUMBER,
+FOREIGN KEY (groupId) REFERENCES groups(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
-CREATE TYPE status AS ENUM ('accepted','fired');
 CREATE TABLE professors
 (
 id SERIAL PRIMARY KEY,
 name TEXT,
 surname TEXT,
 patronymic TEXT,
-currentStatus status
+currentStatus TEXT
 );
 CREATE TABLE lectures
 (

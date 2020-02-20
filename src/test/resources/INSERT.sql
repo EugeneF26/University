@@ -15,10 +15,10 @@ VALUES (1),
 (2),
 (3),
 (4);
-INSERT INTO professors (name, surname, patronymic)
-VALUES ('Pavel', 'Koronkov', 'Petrovich'),
-('Mark', 'Marsov', 'Vladimirovich'),
-('Petr', 'Fedorenko', 'Konstantinovich');
+INSERT INTO professors (name, surname, patronymic, currentStatus)
+VALUES ('Pavel', 'Koronkov', 'Petrovich', 'Works'),
+('Mark', 'Marsov', 'Vladimirovich', 'Works'),
+('Petr', 'Fedorenko', 'Konstantinovich', 'Works');
 INSERT INTO students_courses (id, year)
 VALUES (1,1),
 (2,2),

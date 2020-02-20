@@ -6,8 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/** @author Eugene
- * The class contain data of Professor
+/**
+ * @author Eugene The class contain data of Professor
  */
 @Data
 @Builder
@@ -18,6 +18,6 @@ public class Professor {
 	private String name;
 	private String surname;
 	private String patronymic;
-	private StatusProfessor status;
+	private String currentStatus;
 }
 

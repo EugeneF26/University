@@ -41,6 +41,7 @@ public class ProfessorRepositoryTest {
 				.name("Alexander")
 				.surname("Artemenko")
 				.patronymic("Fedorovich")
+				.currentStatus("currentStatus")
 				.build();
 		MatcherAssert.assertThat(crudRepository.save(professor).getId(), CoreMatchers.equalTo(4));
 	}
@@ -55,12 +56,14 @@ public class ProfessorRepositoryTest {
 	@Test
 	public void testUpdate_WhenUserSendsTheDataInTheMethodAndReturnsCountUpdatedRows_thenCorrect()
 			throws DataSetException, FileNotFoundException {
+	
 		Professor professor = Professor
 				.builder()
 				.name("Alexander")
 				.surname("Artemenko")
 				.patronymic("Fedorovich")
 				.id(2)
+				.currentStatus("currentStatus")
 				.build();	
 		Professor result = crudRepository.update(professor);
 		MatcherAssert.assertThat(result, CoreMatchers.equalToObject(professor));
