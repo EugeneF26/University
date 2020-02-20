@@ -18,6 +18,10 @@ public class Professor {
 	private String name;
 	private String surname;
 	private String patronymic;
-	private String currentStatus;
+	private StatusProfessor currentStatus;
+	
+	public StatusProfessor getCurrentStatus(){
+		return currentStatus;
+	}
 }
 

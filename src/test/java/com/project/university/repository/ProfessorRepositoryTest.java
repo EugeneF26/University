@@ -19,6 +19,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.project.university.config.DatasourseConfigurationTest;
 import com.project.university.entity.Professor;
+import com.project.university.entity.StatusProfessor;
 
 @ExtendWith(SpringExtension.class)
 @SpringJUnitConfig(classes = {ProfessorRepository.class, DatasourseConfigurationTest.class})
@@ -37,11 +38,12 @@ public class ProfessorRepositoryTest {
 	@Test
 	public void testSave_WhenTheUserSendsTheProfessorDataAndTheProgramSavesProfessorDataThem_thenCorrect()
 			throws DataSetException, FileNotFoundException {
+		new Professor().getCurrentStatus();
 		Professor professor = Professor.builder()
 				.name("Alexander")
 				.surname("Artemenko")
 				.patronymic("Fedorovich")
-				.currentStatus("currentStatus")
+				.currentStatus(StatusProfessor.ACCEPTED)
 				.build();
 		MatcherAssert.assertThat(crudRepository.save(professor).getId(), CoreMatchers.equalTo(4));
 	}
@@ -56,14 +58,13 @@ public class ProfessorRepositoryTest {
 	@Test
 	public void testUpdate_WhenUserSendsTheDataInTheMethodAndReturnsCountUpdatedRows_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-	
-		Professor professor = Professor
-				.builder()
+		new Professor().getCurrentStatus();
+		Professor professor = Professor.builder()
 				.name("Alexander")
 				.surname("Artemenko")
 				.patronymic("Fedorovich")
 				.id(2)
-				.currentStatus("currentStatus")
+				.currentStatus(StatusProfessor.ACCEPTED)
 				.build();	
 		Professor result = crudRepository.update(professor);
 		MatcherAssert.assertThat(result, CoreMatchers.equalToObject(professor));

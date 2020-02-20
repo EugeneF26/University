@@ -13,6 +13,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.project.university.config.DatasourseConfigurationTest;
 import com.project.university.entity.Professor;
+import com.project.university.entity.StatusProfessor;
 import com.project.university.repository.ProfessorRepository;
 import com.project.university.service.impl.ProfessorServiceImpl;
 
@@ -33,7 +34,7 @@ public class ProfessorServiceTest {
 	public void testAcceptNewProfessor_WhenTheUserSendsQueryForAddANewProfessorAndTheProgramReturnIncrementIdOfStudent_thenCorrect() {
 		Professor professor = Professor
 				.builder()
-				.currentStatus("accepted")
+				.currentStatus(StatusProfessor.ACCEPTED)
 				.id(1)
 				.build();
 		MatcherAssert.assertThat(professorService.acceptNewProfessor(professor).getId(), CoreMatchers.equalTo(1));

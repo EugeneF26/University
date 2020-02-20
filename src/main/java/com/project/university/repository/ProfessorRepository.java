@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.project.university.entity.Professor;
+import com.project.university.entity.StatusProfessor;
 
 /**
  * @author Eugene The repository class contain methods working with data base
@@ -36,11 +37,12 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 	@Override
 	public Professor save(Professor professor) {
 		this.jdbcTemplate.update("INSERT INTO PROFESSORS (name, surname, patronymic, currentStatus) VALUES (?,?,?,?)",
-				professor.getName(), professor.getSurname(), professor.getPatronymic(), professor.getCurrentStatus());
+				professor.getName(), professor.getSurname(), professor.getPatronymic(), 
+				professor.getCurrentStatus().getStatus().toString());
 		return this.jdbcTemplate.queryForObject("SELECT id FROM PROFESSORS WHERE name=? AND surname=? AND patronymic=? "
 				+ "AND currentStatus=?",
 				BeanPropertyRowMapper.newInstance(Professor.class), professor.getName(), professor.getSurname(),
-				professor.getPatronymic(), professor.getCurrentStatus());
+				professor.getPatronymic(), professor.getCurrentStatus().getStatus().toString());
 	}
 
 	/**
@@ -59,7 +61,8 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 	@Override
 	public Professor update(Professor professor) {
 		this.jdbcTemplate.update("UPDATE PROFESSORS SET name=?, surname=?, patronymic=?, currentStatus=? " + "WHERE id=? ",
-				professor.getName(), professor.getSurname(), professor.getPatronymic(), professor.getCurrentStatus(), professor.getId());
+				professor.getName(), professor.getSurname(), professor.getPatronymic(), 
+				professor.getCurrentStatus().getStatus(), professor.getId());
 		return professor;
 	}
 
@@ -76,7 +79,15 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 	 */
 	@Override
 	public List<Professor> getAll() {
-		return this.jdbcTemplate.query("SELECT * FROM PROFESSORS", BeanPropertyRowMapper.newInstance(Professor.class));
+		return this.jdbcTemplate.query("SELECT * FROM PROFESSORS", (rs, rowNum) -> {
+			return Professor
+					.builder()
+					.id(rs.getInt("id"))
+					.name(rs.getString("name"))
+					.surname(rs.getString("surname"))
+					.currentStatus((StatusProfessor.valueOf((rs.getString("currentStatus")))))
+					.build();
+		});
 	}
 }
 
