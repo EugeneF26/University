@@ -35,7 +35,7 @@ public class StudentServiceTest {
 	}
 	
 	@Test
-	public void testTransferOfStudentToAnotherGroup_WhenTheUserSendsQueryForTransferOfStudentAndTheProgramReturnIdStudentIsSix_thenCorrect() {
+	public void testTransferOfStudentToAnotherGroup_WhenTheUserSendsQueryForTransferOfStudentAndTheProgramReturnIdStudentIsThree_thenCorrect() {
 		
 	}
 	
@@ -51,13 +51,13 @@ public class StudentServiceTest {
 						.id(1)
 						.build())
 				.build();
-		MatcherAssert.assertThat(studentService.acceptNewStudent(student).getId(), CoreMatchers.equalTo(6));
+		MatcherAssert.assertThat(studentService.acceptNewStudent(student).getId(), CoreMatchers.equalTo(4));
 	}
 	
 	@Test
 	public void testGetStudents() {
 		List<Student> result = studentService.getStudents();
-		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(5));
+		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(3));
 	}
 }
 

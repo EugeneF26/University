@@ -51,7 +51,7 @@ public class ProfessorRepositoryTest {
 	@Test
 	public void testFindProfessorById_WhenTheUserEntersTheIdOfTheProfessorIsOneAndTheProgramDisplaysTheResult_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-		Professor professor = crudRepository.findOneBiId(1);
+		Professor professor = crudRepository.findOneById(1);
 		MatcherAssert.assertThat(professor.getId(), CoreMatchers.equalTo(1));
 	}
 	

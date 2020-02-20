@@ -35,8 +35,9 @@ public class CourseRepository implements CrudRepository<Course> {
 	 */
 	@Override
 	public Course save(Course course) {
-		this.jdbcTemplate.update("INSERT INTO COURSES (year) VALUES (?)", course.getYear());
-		return this.jdbcTemplate.queryForObject("SELECT id FROM COURSES WHERE year=?",
+		this.jdbcTemplate.update("INSERT INTO COURSES (year, groupId) VALUES (?,?)", course.getYear(), 
+				course.getGroups().get(0).getId());
+		return this.jdbcTemplate.queryForObject("SELECT id, groupId FROM COURSES WHERE year=?",
 				BeanPropertyRowMapper.newInstance(Course.class), course.getYear());
 	}
 
@@ -44,9 +45,11 @@ public class CourseRepository implements CrudRepository<Course> {
 	 * @see CrudRepository#find(int)
 	 */
 	@Override
-	public Course findOneBiId(Integer year) {
-		return this.jdbcTemplate.queryForObject("SELECT year FROM COURSES WHERE year = ?;",
-				BeanPropertyRowMapper.newInstance(Course.class), year);
+	public Course findOneById(Integer year) {
+		return this.jdbcTemplate.queryForObject("SELECT id, year, groupId FROM COURSES WHERE year = ?;",
+				(rs, rowNum) -> {
+					return Course.builder().id(rs.getInt("id")).year(rs.getInt("year")).build();
+				}, year);
 	}
 
 	/**
@@ -54,7 +57,8 @@ public class CourseRepository implements CrudRepository<Course> {
 	 */
 	@Override
 	public Course update(Course course) {
-		this.jdbcTemplate.update("UPDATE COURSES SET year=? WHERE year=? ", course.getYear(), course.getYear());
+		this.jdbcTemplate.update("UPDATE COURSES SET groupId=? WHERE year=? ", course.getGroups().get(0).getId(),
+				course.getYear());
 		return course;
 	}
 
@@ -63,7 +67,8 @@ public class CourseRepository implements CrudRepository<Course> {
 	 */
 	@Override
 	public void delete(Course course) {
-		this.jdbcTemplate.update("DELETE FROM COURSES WHERE year = ?", course.getYear());
+		this.jdbcTemplate.update("DELETE FROM COURSES WHERE id=? AND year = ? AND groupId = ?", course.getId(),
+				course.getYear(), course.getId());
 	}
 
 	/**
@@ -74,3 +79,4 @@ public class CourseRepository implements CrudRepository<Course> {
 		return this.jdbcTemplate.query("SELECT * FROM COURSES", BeanPropertyRowMapper.newInstance(Course.class));
 	}
 }
+

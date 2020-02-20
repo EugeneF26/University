@@ -18,7 +18,7 @@ public interface CrudRepository<T> {
 	 * @param id - must not be null
 	 * @return the given entity
 	 */
-	T findOneBiId(Integer id);
+	T findOneById(Integer id);
 	
 	/** Update a given entity
 	 * @param t - must not be null

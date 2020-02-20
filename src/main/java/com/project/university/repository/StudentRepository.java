@@ -46,7 +46,7 @@ public class StudentRepository implements CrudRepository<Student> {
 	 * @see CrudRepository#find(int)
 	 */
 	@Override
-	public Student findOneBiId(Integer id) {
+	public Student findOneById(Integer id) {
 		return this.jdbcTemplate.queryForObject("SELECT id, name, surname " + "FROM STUDENTS WHERE id=?",
 				BeanPropertyRowMapper.newInstance(Student.class), id);
 	}

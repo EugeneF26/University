@@ -48,16 +48,16 @@ public class StudentRepositoryTest {
 		.name("Pavel")
 		.surname("Mrakov")
 		.group(Group.builder()
-				.id(1)
+				.id(6)
 				.build())
 		.build();
-		MatcherAssert.assertThat(crudRepository.save(student).getId(), CoreMatchers.equalTo(6));
+		MatcherAssert.assertThat(crudRepository.save(student).getId(), CoreMatchers.equalTo(4));
 	}
 
 	@Test
 	public void testFindStudentsById_WhenTheUserEntersTheIdOfTheStudentIsOneAndTheProgramDisplaysTheResult_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-		Student student = crudRepository.findOneBiId(1);
+		Student student = crudRepository.findOneById(1);
 		Assert.assertEquals(student.getName(), "Petr");
 		Assert.assertEquals(student.getSurname(), "Manshikov");
 	}
@@ -80,7 +80,7 @@ public class StudentRepositoryTest {
 			throws DataSetException, FileNotFoundException {
 		
 		List<Student> result = crudRepository.getAll();
-		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(5));
+		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(3));
 	}
 }
 

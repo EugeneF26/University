@@ -1,7 +1,7 @@
 package com.project.university.entity;
 
 public enum StatusProfessor {
-	ACCEPTED("accepted"), FIRED("fired");
+	ACCEPTED("accepted"), FIRED("fired"), WORKS("works");
 
 	private String status;
 
@@ -22,3 +22,4 @@ public enum StatusProfessor {
 		return status;
 	}
 }
+

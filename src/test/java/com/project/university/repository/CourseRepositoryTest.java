@@ -1,7 +1,7 @@
 package com.project.university.repository;
 
 import java.io.FileNotFoundException;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import org.dbunit.dataset.DataSetException;
@@ -19,6 +19,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.project.university.config.DatasourseConfigurationTest;
 import com.project.university.entity.Course;
+import com.project.university.entity.Group;
 
 @ExtendWith(SpringExtension.class)
 @SpringJUnitConfig(classes = {CourseRepository.class, DatasourseConfigurationTest.class})
@@ -37,26 +38,40 @@ public class CourseRepositoryTest {
 	@Test
 	public void testSave_WhenTheUserSendsTheCourseYearAndTheProgramSavesCourseYearThem_thenCorrect()
 			throws DataSetException, FileNotFoundException {
+		List<Group> group = new ArrayList<>();
+		group.add(Group
+				.builder()
+				.id(1)
+				.build());
+		
 		Course course = Course
 				.builder()
-				.year(5)
+				.year(4)
+				.groups(group)
 				.build();	
-		MatcherAssert.assertThat(crudRepository.save(course).getId(), CoreMatchers.equalTo(5));
+		MatcherAssert.assertThat(crudRepository.save(course).getId(), CoreMatchers.equalTo(4));
 	}
 	
 	@Test
 	public void testFindCourseByYear_WhenTheUserEntersTheYearOfTheCourseIsOneAndTheProgramDisplaysTheResult_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-		Course course = crudRepository.findOneBiId(1);
+		Course course = crudRepository.findOneById(1);
 		MatcherAssert.assertThat(course.getYear(), CoreMatchers.equalTo(1));
 	}
 	
 	@Test
 	public void testUpdate_WhenUserSendsTheDataInTheMethodAndReturnsTheSameObject_thenCorrect()
 			throws DataSetException, FileNotFoundException {
+		List<Group> group = new ArrayList<>();
+		group.add(Group
+				.builder()
+				.id(1)
+				.build());
+		
 		Course course = Course
 				.builder()
 				.year(2)
+				.groups(group)
 				.build();	
 		Course result = crudRepository.update(course);
 		MatcherAssert.assertThat(result, CoreMatchers.equalToObject(course));
@@ -66,7 +81,7 @@ public class CourseRepositoryTest {
 	public void testGetAll_WhenTheUserSendsQueryForAllDataAndTheProgramReturnThem_thenCorrect()
 			throws DataSetException, FileNotFoundException {
 		List<Course> result = crudRepository.getAll();
-		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(4));
+		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(3));
 	}
 }
 

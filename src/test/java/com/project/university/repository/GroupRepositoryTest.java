@@ -38,15 +38,16 @@ public class GroupRepositoryTest {
 			throws DataSetException, FileNotFoundException {
 		Group group = Group
 				.builder()
-				.id(7)
+				.id(4)
+				.courseYear(1)
 				.build();		
-		MatcherAssert.assertThat(crudRepository.save(group).getId(), CoreMatchers.equalTo(7));
+		MatcherAssert.assertThat(crudRepository.save(group).getId(), CoreMatchers.equalTo(4));
 	}
 	
 	@Test
 	public void testFindGroupById_WhenTheUserEntersTheIdOfTheGroupIsOneAndTheProgramDisplaysTheResult_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-		Group group = crudRepository.findOneBiId(1);
+		Group group = crudRepository.findOneById(1);
 		MatcherAssert.assertThat(group.getId(), CoreMatchers.equalTo(1));
 	}
 	
@@ -56,6 +57,7 @@ public class GroupRepositoryTest {
 		Group group = Group
 				.builder()
 				.id(1)
+				.courseYear(1)
 				.build();	
 		Group result = crudRepository.update(group);
 		MatcherAssert.assertThat(result, CoreMatchers.equalToObject(group));
@@ -65,7 +67,7 @@ public class GroupRepositoryTest {
 	public void testGetAll_WhenTheUserSendsQueryForAllDataAndTheProgramReturnThem_thenCorrect()
 			throws DataSetException, FileNotFoundException {
 		List<Group> result = crudRepository.getAll();
-		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(5));
+		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(3));
 	}
 }
 

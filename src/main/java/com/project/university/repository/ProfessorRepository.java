@@ -49,7 +49,7 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 	 * @see CrudRepository#find(int)
 	 */
 	@Override
-	public Professor findOneBiId(Integer id) {
+	public Professor findOneById(Integer id) {
 		return this.jdbcTemplate.queryForObject(
 				"SELECT id, name, surname, patronymic " + "FROM PROFESSORS WHERE id = ?;",
 				BeanPropertyRowMapper.newInstance(Professor.class), id);
