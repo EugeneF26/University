@@ -14,9 +14,7 @@ currentStatus TEXT
 CREATE TABLE courses
 (
 id SERIAL PRIMARY KEY,
-year NUMBER,
-groupId NUMBER,
-FOREIGN KEY (groupId) REFERENCES groups(id) ON DELETE CASCADE ON UPDATE CASCADE
+year NUMBER CHECK (year <= 5)
 );
 CREATE TABLE professors
 (

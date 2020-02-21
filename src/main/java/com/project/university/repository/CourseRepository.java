@@ -36,16 +36,13 @@ public class CourseRepository implements CrudRepository<Course> {
 	 */
 	@Override
 	public Course save(Course course) {
-	Group group = Group
-			.builder()
-			.courseId(Course
-					.builder()
-					.id(course.getId())
-					.build())
-			.build();
-	
-		this.jdbcTemplate.update("INSERT INTO COURSES (year, groupId) VALUES (?,?)", course.getYear(), group.getId());
-		return this.jdbcTemplate.queryForObject("SELECT id, groupId FROM COURSES WHERE year=?",
+		Group group = Group
+				.builder()
+				.courseId(new Course(course.getId()))
+				.build();
+		this.jdbcTemplate.update("INSERT INTO COURSES (year) VALUES(?)", course.getYear());
+		this.jdbcTemplate.update("INSERT INTO GROUPS(courseId) VALUES(?)", group.getCourseId().getId());
+		return this.jdbcTemplate.queryForObject("SELECT id FROM COURSES WHERE year=?",
 				BeanPropertyRowMapper.newInstance(Course.class), course.getYear());
 	}
 
@@ -54,7 +51,7 @@ public class CourseRepository implements CrudRepository<Course> {
 	 */
 	@Override
 	public Course findOneById(Integer year) {
-		return this.jdbcTemplate.queryForObject("SELECT id, year, groupId FROM COURSES WHERE year = ?;",
+		return this.jdbcTemplate.queryForObject("SELECT id, year FROM COURSES WHERE year = ?;",
 				(rs, rowNum) -> {
 					return Course.builder().id(rs.getInt("id")).year(rs.getInt("year")).build();
 				}, year);
@@ -67,13 +64,10 @@ public class CourseRepository implements CrudRepository<Course> {
 	public Course update(Course course) {
 		Group group = Group
 				.builder()
-				.courseId(Course
-						.builder()
-						.id(course.getId())
-						.build())
+				.courseId(new Course(course.getId()))
 				.build();
-		this.jdbcTemplate.update("UPDATE COURSES SET groupId=? WHERE year=? ", group.getId(),
-				course.getYear());
+		this.jdbcTemplate.update("UPDATE COURSES SET year=? WHERE id=? ", course.getYear(), course.getId());
+		this.jdbcTemplate.update("UPDATE GROUPS SET courseId=? WHERE id=?", group.getCourseId().getId(),course.getId());
 		return course;
 	}
 
@@ -82,8 +76,8 @@ public class CourseRepository implements CrudRepository<Course> {
 	 */
 	@Override
 	public void delete(Course course) {
-		this.jdbcTemplate.update("DELETE FROM COURSES WHERE id=? AND year = ? AND groupId = ?", course.getId(),
-				course.getYear(), course.getId());
+		this.jdbcTemplate.update("DELETE FROM COURSES WHERE id=? AND year = ?", course.getId(),
+				course.getYear());
 	}
 
 	/**

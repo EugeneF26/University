@@ -18,5 +18,9 @@ public class Course {
 	private Integer id;
 	private Integer year;
 	private List<Group> groups;
+	
+	public Course(Integer id) {
+		this.id = id;
+	}
 }
 
