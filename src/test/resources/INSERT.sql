@@ -2,10 +2,10 @@ INSERT INTO groups (courseId)
 VALUES (1),
 (2),
 (4);
-INSERT INTO students (name, surname, groupId)
-VALUES ('Petr', 'Manshikov', 1),
-('Fedor', 'Gruntovskiy', 2),
-('Georgiy', 'Murashvily', 3);
+INSERT INTO students (name, surname, groupId, currentStatus)
+VALUES ('Petr', 'Manshikov', 1, 'STUDY'),
+('Fedor', 'Gruntovskiy', 2, 'STUDY'),
+('Georgiy', 'Murashvily', 3, 'STUDY');
 INSERT INTO courses (year, groupid)
 VALUES (1,1),
 (2,1),

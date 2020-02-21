@@ -8,7 +8,8 @@ CREATE TABLE students
 id SERIAL PRIMARY KEY,
 name TEXT NOT NULL,
 surname TEXT NOT NULL,
-groupId NUMBER NOT NULL
+groupId NUMBER NOT NULL,
+currentStatus TEXT
 );
 CREATE TABLE courses
 (

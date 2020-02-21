@@ -16,6 +16,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.project.university.config.DatasourseConfiguration;
 import com.project.university.entity.Group;
+import com.project.university.entity.StatusStudent;
 import com.project.university.entity.Student;
 import com.project.university.repository.StudentRepository;
 import com.project.university.service.StudentService;
@@ -50,6 +51,7 @@ public class StudentServiceTest {
 						.builder()
 						.id(1)
 						.build())
+				.currentStatus(StatusStudent.ACCEPTED)
 				.build();
 		MatcherAssert.assertThat(studentService.acceptNewStudent(student).getId(), CoreMatchers.equalTo(4));
 	}

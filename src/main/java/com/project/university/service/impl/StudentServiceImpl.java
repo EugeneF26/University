@@ -27,9 +27,16 @@ public class StudentServiceImpl implements StudentService {
 	public Student transferStudentToAnotherGroup(Student student) {
 		return crudRepository.update(student);
 	}
+	
+	@Override
+	public void expelStrudent(Student student) {
+		student.getCurrentStatus().setStatus("EXPELLED");
+		crudRepository.update(student);
+	}
 
 	@Override
 	public Student acceptNewStudent(Student student) {
+		student.getCurrentStatus().setStatus("ACCEPTED");
 		return crudRepository.save(student);
 	}
 

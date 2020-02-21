@@ -17,5 +17,6 @@ public class Student {
 	private String name;
 	private String surname;
 	private Group group;
+	private StatusStudent currentStatus;
 }
 
