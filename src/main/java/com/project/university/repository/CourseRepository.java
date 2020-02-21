@@ -65,7 +65,14 @@ public class CourseRepository implements CrudRepository<Course> {
 	 */
 	@Override
 	public Course update(Course course) {
-		this.jdbcTemplate.update("UPDATE COURSES SET groupId=? WHERE year=? ", course.getGroups().get(0).getId(),
+		Group group = Group
+				.builder()
+				.courseId(Course
+						.builder()
+						.id(course.getId())
+						.build())
+				.build();
+		this.jdbcTemplate.update("UPDATE COURSES SET groupId=? WHERE year=? ", group.getId(),
 				course.getYear());
 		return course;
 	}
