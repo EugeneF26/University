@@ -17,12 +17,12 @@ import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-import com.project.university.config.DatasourseConfigurationTest;
+import com.project.university.config.DatasourseConfiguration;
 import com.project.university.entity.Course;
 import com.project.university.entity.Group;
 
 @ExtendWith(SpringExtension.class)
-@SpringJUnitConfig(classes = {CourseRepository.class, DatasourseConfigurationTest.class})
+@SpringJUnitConfig(classes = {CourseRepository.class, DatasourseConfiguration.class})
 @Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, 
 scripts={"/DROP.sql", "/CREATE.sql", "/INSERT.sql"})
 @ActiveProfiles("dev")

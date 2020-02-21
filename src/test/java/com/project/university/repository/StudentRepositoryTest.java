@@ -16,7 +16,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-import com.project.university.config.DatasourseConfigurationTest;
+import com.project.university.config.DatasourseConfiguration;
 import com.project.university.entity.Group;
 import com.project.university.entity.Student;
 import com.project.university.repository.CrudRepository;
@@ -27,7 +27,7 @@ import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import junit.framework.Assert;
 
 @ExtendWith(SpringExtension.class)
-@SpringJUnitConfig(classes = {StudentRepository.class, DatasourseConfigurationTest.class})
+@SpringJUnitConfig(classes = {StudentRepository.class, DatasourseConfiguration.class})
 @Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, 
 scripts={"/DROP.sql", "/CREATE.sql", "/INSERT.sql"})
 @ActiveProfiles("dev")

@@ -1,4 +1,4 @@
-INSERT INTO groups (id, courseYear)
+INSERT INTO groups (id, courseId)
 VALUES (1, 1),
 (2,1),
 (3,1);

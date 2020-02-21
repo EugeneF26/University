@@ -1,7 +1,7 @@
 CREATE TABLE groups
 (
 id NUMBER PRIMARY KEY CHECK (id <= 5),
-courseYear NUMBER CHECK (courseYear <= 5)
+courseId NUMBER CHECK (courseId <= 5)
 );
 CREATE TABLE students
 (

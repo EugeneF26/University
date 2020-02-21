@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.project.university.entity.Course;
+import com.project.university.entity.Group;
 
 /**
  * @author Eugene The repository class contain methods working with data base
@@ -35,8 +36,15 @@ public class CourseRepository implements CrudRepository<Course> {
 	 */
 	@Override
 	public Course save(Course course) {
-		this.jdbcTemplate.update("INSERT INTO COURSES (year, groupId) VALUES (?,?)", course.getYear(), 
-				course.getGroups().get(0).getId());
+	Group group = Group
+			.builder()
+			.courseId(Course
+					.builder()
+					.id(course.getId())
+					.build())
+			.build();
+	
+		this.jdbcTemplate.update("INSERT INTO COURSES (year, groupId) VALUES (?,?)", course.getYear(), group.getId());
 		return this.jdbcTemplate.queryForObject("SELECT id, groupId FROM COURSES WHERE year=?",
 				BeanPropertyRowMapper.newInstance(Course.class), course.getYear());
 	}

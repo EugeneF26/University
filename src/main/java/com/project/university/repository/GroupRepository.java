@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.project.university.entity.Course;
 import com.project.university.entity.Group;
 
 /**
@@ -35,7 +36,7 @@ public class GroupRepository implements CrudRepository<Group> {
 	 */
 	@Override
 	public Group save(Group group) {
-		this.jdbcTemplate.update("INSERT INTO GROUPS (id, courseYear) VALUES (?,?)", group.getId(), group.getCourseYear());
+		this.jdbcTemplate.update("INSERT INTO GROUPS (id, courseId) VALUES (?,?)", group.getId(), group.getCourseId().getId());
 		return group;
 	}
 
@@ -44,8 +45,17 @@ public class GroupRepository implements CrudRepository<Group> {
 	 */
 	@Override
 	public Group findOneById(Integer id) {
-		return this.jdbcTemplate.queryForObject("SELECT id,courseYear FROM GROUPS WHERE id = ?;",
-				BeanPropertyRowMapper.newInstance(Group.class), id);
+		return this.jdbcTemplate.queryForObject("SELECT id, courseId FROM GROUPS WHERE id = ?;",
+				(rs, rowNum) -> {
+					return Group
+							.builder()
+							.id(rs.getInt("id"))
+							.courseId(Course
+									.builder()
+									.id(rs.getInt("id"))
+									.build())
+							.build();
+				}, id);
 	}
 
 	/**
@@ -53,7 +63,7 @@ public class GroupRepository implements CrudRepository<Group> {
 	 */
 	@Override
 	public Group update(Group group) {
-		this.jdbcTemplate.update("UPDATE GROUPS SET courseYear=? WHERE id=? ", group.getCourseYear(), group.getId());
+		this.jdbcTemplate.update("UPDATE GROUPS SET courseId=? WHERE id=? ", group.getCourseId().getId(), group.getId());
 		return group;
 	}
 
@@ -62,7 +72,7 @@ public class GroupRepository implements CrudRepository<Group> {
 	 */
 	@Override
 	public void delete(Group group) {
-		this.jdbcTemplate.update("DELETE FROM GROUPS WHERE id=? AND courseYear=?", group.getId(), group.getCourseYear());
+		this.jdbcTemplate.update("DELETE FROM GROUPS WHERE id=? AND courseId=?", group.getId(), group.getCourseId().getId());
 	}
 
 	/**
@@ -70,7 +80,15 @@ public class GroupRepository implements CrudRepository<Group> {
 	 */
 	@Override
 	public List<Group> getAll() {
-		return this.jdbcTemplate.query("SELECT * FROM GROUPS", BeanPropertyRowMapper.newInstance(Group.class));
+		return this.jdbcTemplate.query("SELECT * FROM GROUPS", (rs, rowNum) -> {
+			return Group
+					.builder()
+					.id(rs.getInt("id"))
+					.courseId(Course.builder()
+							.id(rs.getInt("courseId"))
+							.build())
+					.build();
+		});
 	}
 }
 

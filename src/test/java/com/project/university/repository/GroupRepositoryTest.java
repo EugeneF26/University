@@ -17,11 +17,12 @@ import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-import com.project.university.config.DatasourseConfigurationTest;
+import com.project.university.config.DatasourseConfiguration;
+import com.project.university.entity.Course;
 import com.project.university.entity.Group;
 
 @ExtendWith(SpringExtension.class)
-@SpringJUnitConfig(classes = {GroupRepository.class, DatasourseConfigurationTest.class})
+@SpringJUnitConfig(classes = {GroupRepository.class, DatasourseConfiguration.class})
 @Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, scripts={"/DROP.sql", "/CREATE.sql", "/INSERT.sql"})
 @ActiveProfiles("dev")
 public class GroupRepositoryTest {
@@ -39,7 +40,10 @@ public class GroupRepositoryTest {
 		Group group = Group
 				.builder()
 				.id(4)
-				.courseYear(1)
+				.courseId(Course
+						.builder()
+						.id(1)
+						.build())
 				.build();		
 		MatcherAssert.assertThat(crudRepository.save(group).getId(), CoreMatchers.equalTo(4));
 	}
@@ -57,7 +61,10 @@ public class GroupRepositoryTest {
 		Group group = Group
 				.builder()
 				.id(1)
-				.courseYear(1)
+				.courseId(Course
+						.builder()
+						.id(1)
+						.build())
 				.build();	
 		Group result = crudRepository.update(group);
 		MatcherAssert.assertThat(result, CoreMatchers.equalToObject(group));

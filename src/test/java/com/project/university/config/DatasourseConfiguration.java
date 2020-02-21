@@ -11,32 +11,38 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
+/** @author Eugene
+ * A factory for connections to the physical data source that this DataSource object represents
+ */
 @Configuration
-@PropertySource("classpath:postgres.properties")
+@PropertySource("classpath:h2.properties")
 @ComponentScan("com.project.university.repository")
-@Profile({"prod","default"})
-public class DatasourseConfigurationMain {
+@Profile("dev")
+public class DatasourseConfiguration {
 	
-	@Value("${postgres.DRIVER}") private String DRIVER_POSTGRES;
-	@Value("${postgres.HOST}") private String HOST_POSTGRES;
-    @Value("${postgres.USERNAME}") private String USER_NAME_POSTGRES;
-	@Value("${postgres.PASSWORD}") private String PASSWORD_H2_POSTGRES;
+	@Value("${h2.DRIVER}") private String DRIVER_H2;
+	@Value("${h2.HOST}") private String HOST_H2;
+    @Value("${h2.USERNAME}") private String USER_NAME_H2;
+	@Value("${h2.PASSWORD}") private String PASSWORD_H2;
 	
 	/**
 	 * Attempts to establish a connection with the data source
 	 * @return dataSourse
 	 */
 	@Bean
-	@Profile({"prod","default"})
-    public DataSource dataSourcePostgres() {
+    public DataSource dataSourceH2() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(DRIVER_POSTGRES);
-        dataSource.setUrl(HOST_POSTGRES);
-        dataSource.setUsername(USER_NAME_POSTGRES);
-        dataSource.setPassword(PASSWORD_H2_POSTGRES);
+        dataSource.setDriverClassName(DRIVER_H2);
+        dataSource.setUrl(HOST_H2);
+        dataSource.setUsername(USER_NAME_H2);
+        dataSource.setPassword(PASSWORD_H2);
         return dataSource;
     }
 	
+	/**
+	 * Construct a new JdbcTemplate, given a DataSource to obtain connections from.
+	 * @return jdbcTemplate
+	 */
 	@Bean
 	public JdbcTemplate jdbcTemplate(DataSource dataSource) {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);

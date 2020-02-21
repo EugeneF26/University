@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Group {
 	private Integer id;
-	private Integer courseYear;
+	private Course courseId;
 	private List<Student> students;
 }
 
