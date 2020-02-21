@@ -46,7 +46,7 @@ public class CourseRepositoryTest {
 		
 		Course course = Course
 				.builder()
-				.year(4)
+				.id(2)
 				.groups(group)
 				.build();	
 		MatcherAssert.assertThat(crudRepository.save(course).getId(), CoreMatchers.equalTo(4));

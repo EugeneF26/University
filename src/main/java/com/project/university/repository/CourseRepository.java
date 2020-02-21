@@ -40,10 +40,10 @@ public class CourseRepository implements CrudRepository<Course> {
 				.builder()
 				.courseId(new Course(course.getId()))
 				.build();
-		this.jdbcTemplate.update("INSERT INTO COURSES (year) VALUES(?)", course.getYear());
-		this.jdbcTemplate.update("INSERT INTO GROUPS(courseId) VALUES(?)", group.getCourseId().getId());
-		return this.jdbcTemplate.queryForObject("SELECT id FROM COURSES WHERE year=?",
-				BeanPropertyRowMapper.newInstance(Course.class), course.getYear());
+		this.jdbcTemplate.update("INSERT INTO COURSES_GROUPS (courseId, groupId) VALUES(?,?)", 
+				course.getId(), group.getCourseId().getId());
+		return this.jdbcTemplate.queryForObject("SELECT id FROM COURSES_GROUPS WHERE courseId=? AND groupId=?",
+				BeanPropertyRowMapper.newInstance(Course.class), course.getId(), group.getCourseId().getId());
 	}
 
 	/**
@@ -66,8 +66,8 @@ public class CourseRepository implements CrudRepository<Course> {
 				.builder()
 				.courseId(new Course(course.getId()))
 				.build();
-		this.jdbcTemplate.update("UPDATE COURSES SET year=? WHERE id=? ", course.getYear(), course.getId());
-		this.jdbcTemplate.update("UPDATE GROUPS SET courseId=? WHERE id=?", group.getCourseId().getId(),course.getId());
+		this.jdbcTemplate.update("UPDATE COURSES_GROUPS SET courseId=? WHERE groupId=?", group.getCourseId().getId(), 
+				group.getId());
 		return course;
 	}
 
