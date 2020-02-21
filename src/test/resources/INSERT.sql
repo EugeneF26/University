@@ -1,7 +1,7 @@
-INSERT INTO groups (id, courseId)
-VALUES (1, 1),
-(2,1),
-(3,1);
+INSERT INTO groups (courseId)
+VALUES (1),
+(2),
+(4);
 INSERT INTO students (name, surname, groupId)
 VALUES ('Petr', 'Manshikov', 1),
 ('Fedor', 'Gruntovskiy', 2),

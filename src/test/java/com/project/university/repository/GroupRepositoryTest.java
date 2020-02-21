@@ -39,10 +39,9 @@ public class GroupRepositoryTest {
 			throws DataSetException, FileNotFoundException {
 		Group group = Group
 				.builder()
-				.id(4)
 				.courseId(Course
 						.builder()
-						.id(1)
+						.id(3)
 						.build())
 				.build();		
 		MatcherAssert.assertThat(crudRepository.save(group).getId(), CoreMatchers.equalTo(4));

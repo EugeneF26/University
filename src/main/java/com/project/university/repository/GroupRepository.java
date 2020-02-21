@@ -36,8 +36,9 @@ public class GroupRepository implements CrudRepository<Group> {
 	 */
 	@Override
 	public Group save(Group group) {
-		this.jdbcTemplate.update("INSERT INTO GROUPS (id, courseId) VALUES (?,?)", group.getId(), group.getCourseId().getId());
-		return group;
+		this.jdbcTemplate.update("INSERT INTO GROUPS (courseId) VALUES (?)", group.getCourseId().getId());
+		return this.jdbcTemplate.queryForObject("SELECT id FROM GROUPS WHERE courseId=?", 
+				BeanPropertyRowMapper.newInstance(Group.class) , group.getCourseId().getId());
 	}
 
 	/**
