@@ -1,6 +1,7 @@
 CREATE TABLE groups
 (
 id SERIAL PRIMARY KEY CHECK (id <= 5),
+name TEXT,
 courseId NUMBER CHECK (courseId <= 5),
 CONSTRAINT sc_unique UNIQUE (id, courseId)
 );
@@ -15,9 +16,9 @@ currentStatus TEXT
 CREATE TABLE courses
 (
 id SERIAL PRIMARY KEY,
-year NUMBER CHECK (year <= 5),
-FOREIGN KEY (year) REFERENCES groups(courseId) ON DELETE CASCADE ON UPDATE CASCADE
+year NUMBER CHECK (year <= 5)
 );
+ALTER TABLE GROUPS ADD FOREIGN KEY (courseId) REFERENCES courses(year) ON DELETE CASCADE ON UPDATE CASCADE;
 CREATE TABLE professors
 (
 id SERIAL PRIMARY KEY,

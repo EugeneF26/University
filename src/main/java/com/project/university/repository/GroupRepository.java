@@ -1,6 +1,5 @@
 package com.project.university.repository;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,9 +36,9 @@ public class GroupRepository implements CrudRepository<Group> {
 	 */
 	@Override
 	public Group save(Group group) {	
-		this.jdbcTemplate.update("INSERT INTO GROUPS (courseId) VALUES (?)", group.getCourseId().getId());
-		return this.jdbcTemplate.queryForObject("SELECT id FROM GROUPS WHERE courseId=?", 
-				BeanPropertyRowMapper.newInstance(Group.class) , group.getCourseId().getId());
+		this.jdbcTemplate.update("INSERT INTO GROUPS (courseId, name) VALUES (?,?)", group.getCourseId().getId(), group.getName());
+		return this.jdbcTemplate.queryForObject("SELECT id FROM GROUPS WHERE courseId=? AND name=?", 
+				BeanPropertyRowMapper.newInstance(Group.class) , group.getCourseId().getId(), group.getName());
 	}
 
 	/**

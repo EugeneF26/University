@@ -1,7 +1,6 @@
 package com.project.university.repository;
 
 import java.io.FileNotFoundException;
-
 import java.util.List;
 
 import org.dbunit.dataset.DataSetException;
@@ -41,8 +40,9 @@ public class GroupRepositoryTest {
 				.builder()
 				.courseId(Course
 						.builder()
-						.id(3)
+						.id(2)
 						.build())
+				.name("Y1")
 				.build();		
 		MatcherAssert.assertThat(crudRepository.save(group).getId(), CoreMatchers.equalTo(4));
 	}
