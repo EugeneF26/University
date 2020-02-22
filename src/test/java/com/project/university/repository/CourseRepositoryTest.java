@@ -49,7 +49,7 @@ public class CourseRepositoryTest {
 				.id(2)
 				.groups(group)
 				.build();	
-		MatcherAssert.assertThat(crudRepository.save(course).getId(), CoreMatchers.equalTo(4));
+		MatcherAssert.assertThat(crudRepository.save(course).getId(), CoreMatchers.equalTo(2));
 	}
 	
 	@Test

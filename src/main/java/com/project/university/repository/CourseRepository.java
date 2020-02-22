@@ -36,14 +36,9 @@ public class CourseRepository implements CrudRepository<Course> {
 	 */
 	@Override
 	public Course save(Course course) {
-		Group group = Group
-				.builder()
-				.courseId(new Course(course.getId()))
-				.build();
-		this.jdbcTemplate.update("INSERT INTO COURSES_GROUPS (courseId, groupId) VALUES(?,?)", 
-				course.getId(), group.getCourseId().getId());
-		return this.jdbcTemplate.queryForObject("SELECT id FROM COURSES_GROUPS WHERE courseId=? AND groupId=?",
-				BeanPropertyRowMapper.newInstance(Course.class), course.getId(), group.getCourseId().getId());
+		this.jdbcTemplate.update("INSERT INTO COURSES (year) VALUES(?)", course.getYear());
+		return this.jdbcTemplate.queryForObject("SELECT id FROM COURSES WHERE id=?",
+				BeanPropertyRowMapper.newInstance(Course.class), course.getId());
 	}
 
 	/**
@@ -62,12 +57,7 @@ public class CourseRepository implements CrudRepository<Course> {
 	 */
 	@Override
 	public Course update(Course course) {
-		Group group = Group
-				.builder()
-				.courseId(new Course(course.getId()))
-				.build();
-		this.jdbcTemplate.update("UPDATE COURSES_GROUPS SET courseId=? WHERE groupId=?", group.getCourseId().getId(), 
-				group.getId());
+		this.jdbcTemplate.update("UPDATE COURSES SET year=? WHERE id=?", course.getYear(), course.getId());
 		return course;
 	}
 

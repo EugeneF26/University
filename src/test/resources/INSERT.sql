@@ -9,11 +9,7 @@ VALUES ('Petr', 'Manshikov', 1, 'STUDY'),
 INSERT INTO courses (year)
 VALUES (1),
 (2),
-(3);
-INSERT INTO courses_groups (courseId, groupId)
-VALUES(1,1),
-(2,3),
-(3,3);
+(4);
 INSERT INTO professors (name, surname, patronymic, currentStatus)
 VALUES ('Pavel', 'Koronkov', 'Petrovich', 'WORKS'),
 ('Mark', 'Marsov', 'Vladimirovich', 'WORKS'),

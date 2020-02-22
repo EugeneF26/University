@@ -65,8 +65,7 @@ public class GroupRepository implements CrudRepository<Group> {
 	 */
 	@Override
 	public Group update(Group group) {	
-		this.jdbcTemplate.update("UPDATE COURSES_GROUPS SET groupId=? WHERE courseId=?", group.getId(), 
-				group.getCourseId().getId());
+		this.jdbcTemplate.update("UPDATE GROUPS SET courseId=? WHERE id=?", group.getCourseId().getId(), group.getId());
 		return group;
 	}
 

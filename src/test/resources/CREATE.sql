@@ -1,7 +1,8 @@
 CREATE TABLE groups
 (
 id SERIAL PRIMARY KEY CHECK (id <= 5),
-courseId NUMBER CHECK (courseId <= 5)
+courseId NUMBER CHECK (courseId <= 5),
+CONSTRAINT sc_unique UNIQUE (id, courseId)
 );
 CREATE TABLE students
 (
@@ -14,15 +15,8 @@ currentStatus TEXT
 CREATE TABLE courses
 (
 id SERIAL PRIMARY KEY,
-year NUMBER CHECK (year <= 5)
-);
-CREATE TABLE courses_groups
-(
-id SERIAL,
-courseId NUMBER,
-groupId NUMBER,
-FOREIGN KEY (courseId) REFERENCES courses(id) ON DELETE CASCADE ON UPDATE CASCADE,
-FOREIGN KEY (groupId) REFERENCES groups(id) ON DELETE CASCADE ON UPDATE CASCADE
+year NUMBER CHECK (year <= 5),
+FOREIGN KEY (year) REFERENCES groups(courseId) ON DELETE CASCADE ON UPDATE CASCADE
 );
 CREATE TABLE professors
 (
