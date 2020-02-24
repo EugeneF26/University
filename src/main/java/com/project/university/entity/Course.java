@@ -15,7 +15,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Course {
-	private int courseYear;
+	private Integer id;
+	private Integer year;
 	private List<Group> groups;
+	
+	public Course(Integer id) {
+		this.id = id;
+	}
 }
 

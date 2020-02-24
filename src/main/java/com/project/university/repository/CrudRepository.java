@@ -1,4 +1,4 @@
-package com.project.university.dao;
+package com.project.university.repository;
 
 import java.util.List;
 
@@ -12,25 +12,25 @@ public interface CrudRepository<T> {
 	 * @param t - must not be null.
 	 * @return the count saved line
 	 */
-	int save(T t);
+	T save(T t);
 	
 	/** Retrieves an entity by its id.
 	 * @param id - must not be null
 	 * @return the given entity
 	 */
-	T find(int id);
+	T findOneById(Integer id);
 	
 	/** Update a given entity
 	 * @param t - must not be null
 	 * @return the count update line
 	 */
-	int update(T t);
+	T update(T t);
 	
 	/** Deletes by given id. 
 	 * @param id - must not be null
 	 * @return the count delete line
 	 */
-	int delete(int id);
+	void delete(T id);
 	
 	/** Returns all instances of the type.
 	 * @return all entities

@@ -1,7 +1,6 @@
 package com.project.university.entity;
 
-import java.util.Date;
-
+import java.time.LocalDate;
 import lombok.Data;
 
 /** @author Eugene
@@ -9,8 +8,8 @@ import lombok.Data;
  */
 @Data
 public class ScheduleItem {
-
-	private Date studyDay;
+	private Integer id;
+	private LocalDate studyDay;
 	private Course course;
 	private Professor professor;
 	private Lecture lecture;

@@ -1,22 +1,16 @@
-INSERT INTO students (student_name, student_surname)
-VALUES ('Petr', 'Manshikov'),
-('Fedor', 'Gruntovskiy'),
-('Georgiy', 'Murashvily'),
-('Stepan', 'Parashka'),
-('Maxim', 'Torkovskiy');
-INSERT INTO courses
+INSERT INTO students (name, surname, groupId, currentStatus)
+VALUES ('Petr', 'Manshikov', 1, 'STUDY'),
+('Fedor', 'Gruntovskiy', 2, 'STUDY'),
+('Georgiy', 'Murashvily', 3, 'STUDY');
+INSERT INTO courses (year)
 VALUES (1),
 (2),
-(3),
 (4);
-INSERT INTO groups
-VALUES (1),
-(2),
-(3),
-(4),
-(5),
-(6);
-INSERT INTO professors (professor_name, professor_surname, professor_patronymic)
-VALUES ('Pavel', 'Koronkov', 'Petrovich'),
-('Mark', 'Marsov', 'Vladimirovich'),
-('Petr', 'Fedorenko', 'Konstantinovich');
+INSERT INTO groups (courseId, name)
+VALUES (1, 'M2'),
+(2, 'G5'),
+(4, 'Y5');
+INSERT INTO professors (name, surname, patronymic, currentStatus)
+VALUES ('Pavel', 'Koronkov', 'Petrovich', 'WORKS'),
+('Mark', 'Marsov', 'Vladimirovich', 'WORKS'),
+('Petr', 'Fedorenko', 'Konstantinovich', 'WORKS');

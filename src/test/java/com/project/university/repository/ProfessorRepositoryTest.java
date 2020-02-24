@@ -1,87 +1,79 @@
-package com.project.university.dao;
+package com.project.university.repository;
 
 import java.io.FileNotFoundException;
+
 import java.util.List;
 
 import org.dbunit.dataset.DataSetException;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.collection.IsCollectionWithSize;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-import com.project.university.DatasourseConfiguration;
-import com.project.university.TestDBConfiguration;
+import com.project.university.config.DatasourseConfiguration;
 import com.project.university.entity.Professor;
-
-import junit.framework.Assert;
+import com.project.university.entity.StatusProfessor;
 
 @ExtendWith(SpringExtension.class)
-@SpringJUnitConfig(classes = {StudentRepository.class, DatasourseConfiguration.class, TestDBConfiguration.class})
+@SpringJUnitConfig(classes = {ProfessorRepository.class, DatasourseConfiguration.class})
+@Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, scripts={"/DROP.sql", "/CREATE.sql", "/INSERT.sql"})
 @ActiveProfiles("dev")
 public class ProfessorRepositoryTest {
 	
 	@Autowired
-	private ProfessorRepository professorRepository;
-
+	private CrudRepository<Professor> crudRepository;
+	
 	@Autowired
-	JdbcTemplate jdbcTemplate;
-
-	@BeforeEach
-	public void setup() {
-		professorRepository.setDataSource(jdbcTemplate);
+	public ProfessorRepositoryTest(CrudRepository<Professor> crudRepository){
+		this.crudRepository = crudRepository;
 	}
 	
 	@Test
 	public void testSave_WhenTheUserSendsTheProfessorDataAndTheProgramSavesProfessorDataThem_thenCorrect()
 			throws DataSetException, FileNotFoundException {
+		new Professor().getCurrentStatus();
 		Professor professor = Professor.builder()
-				.professorName("Alexander")
-				.professorSurname("Artemenko")
-				.professorPatronymic("Fedorovich")
+				.name("Alexander")
+				.surname("Artemenko")
+				.patronymic("Fedorovich")
+				.currentStatus(StatusProfessor.ACCEPTED)
 				.build();
-		int rows = professorRepository.save(professor);
-		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
+		MatcherAssert.assertThat(crudRepository.save(professor).getId(), CoreMatchers.equalTo(4));
 	}
 	
 	@Test
 	public void testFindProfessorById_WhenTheUserEntersTheIdOfTheProfessorIsOneAndTheProgramDisplaysTheResult_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-		Professor professor = professorRepository.find(1);
-		Assert.assertEquals(professor.getProfessorId(), 1);
+		Professor professor = crudRepository.findOneById(1);
+		MatcherAssert.assertThat(professor.getId(), CoreMatchers.equalTo(1));
 	}
 	
 	@Test
 	public void testUpdate_WhenUserSendsTheDataInTheMethodAndReturnsCountUpdatedRows_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-		Professor professor = Professor
-				.builder()
-				.professorName("Alexander")
-				.professorSurname("Artemenko")
-				.professorPatronymic("Fedorovich")
-				.professorId(2)
+		new Professor().getCurrentStatus();
+		Professor professor = Professor.builder()
+				.name("Alexander")
+				.surname("Artemenko")
+				.patronymic("Fedorovich")
+				.id(2)
+				.currentStatus(StatusProfessor.ACCEPTED)
 				.build();	
-		int rows = professorRepository.update(professor);
-		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
-	}
-	
-	@Test
-	public void testDelete_WhenUserSendsTheProfessorIdInTheMethodAndReturnsCountDeletedRows_thenCorrect() 
-			throws DataSetException, FileNotFoundException {
-		int rows = professorRepository.delete(3);
-		MatcherAssert.assertThat(rows, CoreMatchers.equalTo(1));
+		Professor result = crudRepository.update(professor);
+		MatcherAssert.assertThat(result, CoreMatchers.equalToObject(professor));
 	}
 	
 	@Test
 	public void testGetAll_WhenTheUserSendsQueryForAllDataAndTheProgramReturnThem_thenCorrect()
 			throws DataSetException, FileNotFoundException {
-		List<Professor> result = professorRepository.getAll();
+		List<Professor> result = crudRepository.getAll();
 		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(3));
 	}
 }

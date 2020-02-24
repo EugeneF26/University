@@ -1,4 +1,4 @@
-package com.project.university.dao;
+package com.project.university.repository;
 
 import java.util.List;
 
@@ -17,8 +17,12 @@ public class CourseRepository implements CrudRepository<Course> {
 
 	private JdbcTemplate jdbcTemplate;
 
-	/** Construct a new JdbcTemplate, given a jdbcTemplate with DataSource to obtain connections from
-	 * @param jdbcTemplate - the jdbcTemplate with DataSource to obtain connections from
+	/**
+	 * Construct a new JdbcTemplate, given a jdbcTemplate with DataSource to obtain
+	 * connections from
+	 * 
+	 * @param jdbcTemplate - the jdbcTemplate with DataSource to obtain connections
+	 *                     from
 	 * @see SpringConfig#dataSource()
 	 */
 	@Autowired
@@ -30,33 +34,38 @@ public class CourseRepository implements CrudRepository<Course> {
 	 * @see CrudRepository#save(Object)
 	 */
 	@Override
-	public int save(Course course) {
-		return this.jdbcTemplate.update("INSERT INTO COURSES (course_year) VALUES (?)", course.getCourseYear());
+	public Course save(Course course) {
+		this.jdbcTemplate.update("INSERT INTO COURSES (year) VALUES(?)", course.getYear());
+		return this.jdbcTemplate.queryForObject("SELECT id FROM COURSES WHERE id=?",
+				BeanPropertyRowMapper.newInstance(Course.class), course.getId());
 	}
 
 	/**
 	 * @see CrudRepository#find(int)
 	 */
 	@Override
-	public Course find(int year) {
-		return this.jdbcTemplate.queryForObject("SELECT course_year FROM COURSES WHERE course_year = ?;",
-				BeanPropertyRowMapper.newInstance(Course.class), year);
+	public Course findOneById(Integer year) {
+		return this.jdbcTemplate.queryForObject("SELECT id, year FROM COURSES WHERE year = ?;",
+				(rs, rowNum) -> {
+					return Course.builder().id(rs.getInt("id")).year(rs.getInt("year")).build();
+				}, year);
 	}
 
 	/**
 	 * @see CrudRepository#update(Object)
 	 */
 	@Override
-	public int update(Course course) {
-		return this.jdbcTemplate.update("UPDATE COURSES SET course_year=? WHERE course_year=? ", course.getCourseYear(), course.getCourseYear());
+	public Course update(Course course) {
+		this.jdbcTemplate.update("UPDATE COURSES SET year=? WHERE id=?", course.getYear(), course.getId());
+		return course;
 	}
 
 	/**
 	 * @see CrudRepository#delete(int)
 	 */
 	@Override
-	public int delete(int year) {
-		return this.jdbcTemplate.update("DELETE FROM COURSES WHERE course_year = ?", year);
+	public void delete(Course course) {
+		this.jdbcTemplate.update("DELETE FROM COURSES WHERE id=?", course.getId());
 	}
 
 	/**

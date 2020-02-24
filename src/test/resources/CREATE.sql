@@ -1,25 +1,52 @@
-DROP TABLE IF EXISTS STUDENTS;
-CREATE TABLE students
-(
-student_id SERIAL PRIMARY KEY,
-student_name TEXT NOT NULL,
-student_surname TEXT NOT NULL
-);
-DROP TABLE IF EXISTS COURSES;
-CREATE TABLE courses
-(
-course_year NUMBER PRIMARY KEY,
-);
-DROP TABLE IF EXISTS GROUPS;
 CREATE TABLE groups
 (
-group_id NUMBER PRIMARY KEY,
+id SERIAL PRIMARY KEY CHECK (id <= 5),
+name TEXT,
+courseId NUMBER CHECK (courseId <= 5),
+CONSTRAINT sc_unique UNIQUE (id, courseId)
 );
-DROP TABLE IF EXISTS PROFESSORS;
+CREATE TABLE students
+(
+id SERIAL PRIMARY KEY,
+name TEXT NOT NULL,
+surname TEXT NOT NULL,
+groupId NUMBER NOT NULL,
+currentStatus TEXT
+);
+CREATE TABLE courses
+(
+id SERIAL PRIMARY KEY,
+year NUMBER CHECK (year <= 5)
+);
+ALTER TABLE GROUPS ADD FOREIGN KEY (courseId) REFERENCES courses(year) ON DELETE CASCADE ON UPDATE CASCADE;
 CREATE TABLE professors
 (
-professor_id SERIAL PRIMARY KEY,
-professor_name TEXT,
-professor_surname TEXT,
-professor_patronymic TEXT
+id SERIAL PRIMARY KEY,
+name TEXT,
+surname TEXT,
+patronymic TEXT,
+currentStatus TEXT
+);
+CREATE TABLE lectures
+(
+id SERIAL PRIMARY KEY,
+title TEXT 
+);
+CREATE TABLE lecture_halls
+(
+id SERIAL PRIMARY KEY,
+floor NUMBER,
+numberRoom NUMBER
+);
+CREATE TABLE schedule_Item
+(
+studyDay TIMESTAMP PRIMARY KEY,
+year NUMBER,
+id NUMBER,
+title TEXT,
+numberRoom NUMBER,
+FOREIGN KEY (year) REFERENCES courses(year) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (id) REFERENCES professors(id) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (title) REFERENCES lectures(title) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (numberRoom) REFERENCES lecture_halls(numberRoom) ON DELETE CASCADE ON UPDATE CASCADE
 );
