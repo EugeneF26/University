@@ -20,8 +20,8 @@ public class Professor {
 	private String patronymic;
 	private StatusProfessor currentStatus;
 	
-	public StatusProfessor getCurrentStatus(){
-		return currentStatus;
-	}
+	
+	public StatusProfessor getCurrentStatus(){ return currentStatus; }
+
 }
 

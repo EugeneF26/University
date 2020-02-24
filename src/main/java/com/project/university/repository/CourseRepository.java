@@ -65,8 +65,7 @@ public class CourseRepository implements CrudRepository<Course> {
 	 */
 	@Override
 	public void delete(Course course) {
-		this.jdbcTemplate.update("DELETE FROM COURSES WHERE id=? AND year = ?", course.getId(),
-				course.getYear());
+		this.jdbcTemplate.update("DELETE FROM COURSES WHERE id=?", course.getId());
 	}
 
 	/**

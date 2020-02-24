@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.university.entity.Professor;
+import com.project.university.entity.Professor.ProfessorBuilder;
+import com.project.university.entity.StatusProfessor;
 import com.project.university.repository.CrudRepository;
 import com.project.university.service.ProfessorService;
 
@@ -19,13 +21,13 @@ public class ProfessorServiceImpl implements ProfessorService {
 
 	@Override
 	public void fireProfessor(Professor professor) {
-		professor.getCurrentStatus().setStatus("FIRED");
+		professor.setCurrentStatus(StatusProfessor.ACCEPTED);
 		crudRepository.update(professor);
 	}
 
 	@Override
 	public Professor acceptNewProfessor(Professor professor) {
-		professor.getCurrentStatus().setStatus("ACCEPTED");
+		professor.setCurrentStatus(StatusProfessor.FIRED);
 		return crudRepository.update(professor);
 	}
 }

@@ -36,9 +36,9 @@ public class GroupRepository implements CrudRepository<Group> {
 	 */
 	@Override
 	public Group save(Group group) {	
-		this.jdbcTemplate.update("INSERT INTO GROUPS (courseId, name) VALUES (?,?)", group.getCourseId().getId(), group.getName());
+		this.jdbcTemplate.update("INSERT INTO GROUPS (courseId, name) VALUES (?,?)", group.getCourse().getId(), group.getName());
 		return this.jdbcTemplate.queryForObject("SELECT id FROM GROUPS WHERE courseId=? AND name=?", 
-				BeanPropertyRowMapper.newInstance(Group.class) , group.getCourseId().getId(), group.getName());
+				BeanPropertyRowMapper.newInstance(Group.class) , group.getCourse().getId(), group.getName());
 	}
 
 	/**
@@ -51,7 +51,7 @@ public class GroupRepository implements CrudRepository<Group> {
 					return Group
 							.builder()
 							.id(rs.getInt("id"))
-							.courseId(Course
+							.course(Course
 									.builder()
 									.id(rs.getInt("id"))
 									.build())
@@ -64,7 +64,7 @@ public class GroupRepository implements CrudRepository<Group> {
 	 */
 	@Override
 	public Group update(Group group) {	
-		this.jdbcTemplate.update("UPDATE GROUPS SET courseId=? WHERE id=?", group.getCourseId().getId(), group.getId());
+		this.jdbcTemplate.update("UPDATE GROUPS SET courseId=? WHERE courseId=?", group.getCourse().getId(), group.getCourse().getId());
 		return group;
 	}
 
@@ -73,7 +73,7 @@ public class GroupRepository implements CrudRepository<Group> {
 	 */
 	@Override
 	public void delete(Group group) {
-		this.jdbcTemplate.update("DELETE FROM GROUPS WHERE id=? AND courseId=?", group.getId(), group.getCourseId().getId());
+		this.jdbcTemplate.update("DELETE FROM GROUPS WHERE id=?", group.getId());
 	}
 
 	/**
@@ -85,7 +85,7 @@ public class GroupRepository implements CrudRepository<Group> {
 			return Group
 					.builder()
 					.id(rs.getInt("id"))
-					.courseId(Course.builder()
+					.course(Course.builder()
 							.id(rs.getInt("courseId"))
 							.build())
 					.build();

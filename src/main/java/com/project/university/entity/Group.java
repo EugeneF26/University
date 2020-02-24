@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class Group {
 	private Integer id;
 	private String name;
-	private Course courseId;
+	private Course course;
 	private List<Student> students;
 }
 

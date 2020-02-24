@@ -38,7 +38,7 @@ public class GroupRepositoryTest {
 			throws DataSetException, FileNotFoundException {
 		Group group = Group
 				.builder()
-				.courseId(Course
+				.course(Course
 						.builder()
 						.id(2)
 						.build())
@@ -60,7 +60,7 @@ public class GroupRepositoryTest {
 		Group group = Group
 				.builder()
 				.id(1)
-				.courseId(Course
+				.course(Course
 						.builder()
 						.id(1)
 						.build())
