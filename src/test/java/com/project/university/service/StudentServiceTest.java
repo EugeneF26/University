@@ -15,12 +15,10 @@ import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-import com.project.university.config.DatasourseConfiguration;
 import com.project.university.config.DatasourseConfigurationTest;
 import com.project.university.entity.Group;
 import com.project.university.entity.StatusStudent;
 import com.project.university.entity.Student;
-import com.project.university.exception.DataAlreadyExistsException;
 import com.project.university.repository.StudentRepository;
 import com.project.university.service.StudentService;
 import com.project.university.service.impl.StudentServiceImpl;

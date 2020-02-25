@@ -16,7 +16,6 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-import com.project.university.config.DatasourseConfiguration;
 import com.project.university.config.DatasourseConfigurationTest;
 import com.project.university.entity.Group;
 import com.project.university.entity.Student;
