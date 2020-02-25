@@ -23,7 +23,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
 	@Override
 	public void createSchedule(ScheduleItem item) {
-		crudRepository.save(item);
+		
 	}
 
 	@Override

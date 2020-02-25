@@ -18,7 +18,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 @PropertySource("classpath:h2.properties")
 @ComponentScan("com.project.university.repository")
 @Profile("dev")
-public class DatasourseConfiguration {
+public class DatasourseConfigurationTest {
 	
 	@Value("${h2.DRIVER}") private String DRIVER_H2;
 	@Value("${h2.HOST}") private String HOST_H2;

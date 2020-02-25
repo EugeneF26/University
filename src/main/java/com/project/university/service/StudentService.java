@@ -2,12 +2,16 @@ package com.project.university.service;
 
 import java.util.List;
 
+import org.dbunit.dataset.NoSuchTableException;
+
 import com.project.university.entity.Student;
+import com.project.university.exception.DataAlreadyExistsException;
+import com.project.university.exception.DataNotFoundException;
 
 public interface StudentService {
-	Student transferStudentToAnotherGroup(Student student);
-	Student acceptNewStudent(Student student);
-	void expelStrudent(Student student);
-	List<Student> getStudents();
+	Student transferStudentToAnotherGroup(Student student) throws DataNotFoundException ;
+	Student acceptNewStudent(Student student) throws DataAlreadyExistsException;
+	void expelStrudent(Student student) throws DataNotFoundException;
+	List<Student> getStudents() throws NoSuchTableException;
 }
 

@@ -17,8 +17,11 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.project.university.config.DatasourseConfiguration;
+import com.project.university.config.DatasourseConfigurationTest;
 import com.project.university.entity.Group;
 import com.project.university.entity.Student;
+import com.project.university.exception.DataAlreadyExistsException;
+import com.project.university.exception.DataNotFoundException;
 import com.project.university.repository.CrudRepository;
 import com.project.university.repository.StudentRepository;
 
@@ -27,7 +30,7 @@ import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import junit.framework.Assert;
 
 @ExtendWith(SpringExtension.class)
-@SpringJUnitConfig(classes = {StudentRepository.class, DatasourseConfiguration.class})
+@SpringJUnitConfig(classes = {StudentRepository.class, DatasourseConfigurationTest.class})
 @Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, 
 scripts={"/DROP.sql", "/CREATE.sql", "/INSERT.sql"})
 @ActiveProfiles("dev")
@@ -42,7 +45,7 @@ public class StudentRepositoryTest {
 	
 	@Test
 	public void testSave_WhenTheUserSendsTheStudentDataAndTheProgramSavesAndIncrementStudentIdThem_thenCorrect()
-			throws DataSetException, FileNotFoundException {	
+			throws DataSetException, FileNotFoundException, DataAlreadyExistsException {	
 		Student student = Student
 		.builder()
 		.name("Pavel")
@@ -56,7 +59,7 @@ public class StudentRepositoryTest {
 
 	@Test
 	public void testFindStudentsById_WhenTheUserEntersTheIdOfTheStudentIsOneAndTheProgramDisplaysTheResult_thenCorrect()
-			throws DataSetException, FileNotFoundException {
+			throws DataSetException, FileNotFoundException, DataNotFoundException {
 		Student student = crudRepository.findOneById(1);
 		Assert.assertEquals(student.getName(), "Petr");
 		Assert.assertEquals(student.getSurname(), "Manshikov");
@@ -64,7 +67,7 @@ public class StudentRepositoryTest {
 	
 	@Test
 	public void testUpdate_WhenUserSendsTheDataInTheMethodAndReturnsCountUpdatedRows_thenCorrect()
-			throws DataSetException, FileNotFoundException {
+			throws DataSetException, FileNotFoundException, DataNotFoundException {
 		Student student = Student
 		.builder()
 		.id(4)

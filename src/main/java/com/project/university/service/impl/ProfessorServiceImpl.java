@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.university.entity.Professor;
-import com.project.university.entity.Professor.ProfessorBuilder;
 import com.project.university.entity.StatusProfessor;
+import com.project.university.exception.DataNotFoundException;
 import com.project.university.repository.CrudRepository;
 import com.project.university.service.ProfessorService;
 
@@ -20,13 +20,13 @@ public class ProfessorServiceImpl implements ProfessorService {
 	}
 
 	@Override
-	public void fireProfessor(Professor professor) {
+	public void fireProfessor(Professor professor) throws DataNotFoundException {
 		professor.setCurrentStatus(StatusProfessor.ACCEPTED);
 		crudRepository.update(professor);
 	}
 
 	@Override
-	public Professor acceptNewProfessor(Professor professor) {
+	public Professor acceptNewProfessor(Professor professor) throws DataNotFoundException {
 		professor.setCurrentStatus(StatusProfessor.FIRED);
 		return crudRepository.update(professor);
 	}

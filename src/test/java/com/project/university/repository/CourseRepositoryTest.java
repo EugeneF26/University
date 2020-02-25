@@ -17,12 +17,14 @@ import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-import com.project.university.config.DatasourseConfiguration;
+import com.project.university.config.DatasourseConfigurationTest;
 import com.project.university.entity.Course;
 import com.project.university.entity.Group;
+import com.project.university.exception.DataAlreadyExistsException;
+import com.project.university.exception.DataNotFoundException;
 
 @ExtendWith(SpringExtension.class)
-@SpringJUnitConfig(classes = {CourseRepository.class, DatasourseConfiguration.class})
+@SpringJUnitConfig(classes = {CourseRepository.class, DatasourseConfigurationTest.class})
 @Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, 
 scripts={"/DROP.sql", "/CREATE.sql", "/INSERT.sql"})
 @ActiveProfiles("dev")
@@ -37,7 +39,7 @@ public class CourseRepositoryTest {
 	
 	@Test
 	public void testSave_WhenTheUserSendsTheCourseYearAndTheProgramSavesCourseYearThem_thenCorrect()
-			throws DataSetException, FileNotFoundException {
+			throws DataSetException, FileNotFoundException, DataAlreadyExistsException {
 		List<Group> group = new ArrayList<>();
 		group.add(Group
 				.builder()
@@ -54,14 +56,14 @@ public class CourseRepositoryTest {
 	
 	@Test
 	public void testFindCourseByYear_WhenTheUserEntersTheYearOfTheCourseIsOneAndTheProgramDisplaysTheResult_thenCorrect()
-			throws DataSetException, FileNotFoundException {
+			throws DataSetException, FileNotFoundException, DataNotFoundException {
 		Course course = crudRepository.findOneById(1);
 		MatcherAssert.assertThat(course.getYear(), CoreMatchers.equalTo(1));
 	}
 	
 	@Test
 	public void testUpdate_WhenUserSendsTheDataInTheMethodAndReturnsTheSameObject_thenCorrect()
-			throws DataSetException, FileNotFoundException {
+			throws DataSetException, FileNotFoundException, DataNotFoundException {
 		List<Group> group = new ArrayList<>();
 		group.add(Group
 				.builder()

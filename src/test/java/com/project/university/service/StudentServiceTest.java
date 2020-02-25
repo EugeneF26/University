@@ -2,6 +2,7 @@ package com.project.university.service;
 
 import java.util.List;
 
+import org.dbunit.dataset.NoSuchTableException;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.collection.IsCollectionWithSize;
@@ -15,15 +16,17 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.project.university.config.DatasourseConfiguration;
+import com.project.university.config.DatasourseConfigurationTest;
 import com.project.university.entity.Group;
 import com.project.university.entity.StatusStudent;
 import com.project.university.entity.Student;
+import com.project.university.exception.DataAlreadyExistsException;
 import com.project.university.repository.StudentRepository;
 import com.project.university.service.StudentService;
 import com.project.university.service.impl.StudentServiceImpl;
 
 @ExtendWith(SpringExtension.class)
-@SpringJUnitConfig(classes = {StudentServiceImpl.class, StudentRepository.class, DatasourseConfiguration.class })
+@SpringJUnitConfig(classes = {StudentServiceImpl.class, StudentRepository.class, DatasourseConfigurationTest.class })
 @Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, scripts = {"/DROP.sql","/CREATE.sql","/INSERT.sql" })
 @ActiveProfiles("dev")
 public class StudentServiceTest {
@@ -41,7 +44,7 @@ public class StudentServiceTest {
 	}
 	
 	@Test
-	public void testAcceptNewStudentToCourse_() {
+	public void testAcceptNewStudentToCourse_() throws DataAlreadyExistsException {
 		Student student = Student
 				.builder()
 				.id(1)
@@ -57,7 +60,7 @@ public class StudentServiceTest {
 	}
 	
 	@Test
-	public void testGetStudents() {
+	public void testGetStudents() throws NoSuchTableException {
 		List<Student> result = studentService.getStudents();
 		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(3));
 	}

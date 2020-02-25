@@ -18,11 +18,14 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.project.university.config.DatasourseConfiguration;
+import com.project.university.config.DatasourseConfigurationTest;
 import com.project.university.entity.Professor;
 import com.project.university.entity.StatusProfessor;
+import com.project.university.exception.DataAlreadyExistsException;
+import com.project.university.exception.DataNotFoundException;
 
 @ExtendWith(SpringExtension.class)
-@SpringJUnitConfig(classes = {ProfessorRepository.class, DatasourseConfiguration.class})
+@SpringJUnitConfig(classes = {ProfessorRepository.class, DatasourseConfigurationTest.class})
 @Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, scripts={"/DROP.sql", "/CREATE.sql", "/INSERT.sql"})
 @ActiveProfiles("dev")
 public class ProfessorRepositoryTest {
@@ -37,7 +40,7 @@ public class ProfessorRepositoryTest {
 	
 	@Test
 	public void testSave_WhenTheUserSendsTheProfessorDataAndTheProgramSavesProfessorDataThem_thenCorrect()
-			throws DataSetException, FileNotFoundException {
+			throws DataSetException, FileNotFoundException, DataAlreadyExistsException {
 		new Professor().getCurrentStatus();
 		Professor professor = Professor.builder()
 				.name("Alexander")
@@ -50,14 +53,14 @@ public class ProfessorRepositoryTest {
 	
 	@Test
 	public void testFindProfessorById_WhenTheUserEntersTheIdOfTheProfessorIsOneAndTheProgramDisplaysTheResult_thenCorrect()
-			throws DataSetException, FileNotFoundException {
+			throws DataSetException, FileNotFoundException, DataNotFoundException {
 		Professor professor = crudRepository.findOneById(1);
 		MatcherAssert.assertThat(professor.getId(), CoreMatchers.equalTo(1));
 	}
 	
 	@Test
 	public void testUpdate_WhenUserSendsTheDataInTheMethodAndReturnsCountUpdatedRows_thenCorrect()
-			throws DataSetException, FileNotFoundException {
+			throws DataSetException, FileNotFoundException, DataNotFoundException {
 		new Professor().getCurrentStatus();
 		Professor professor = Professor.builder()
 				.name("Alexander")

@@ -17,11 +17,14 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.project.university.config.DatasourseConfiguration;
+import com.project.university.config.DatasourseConfigurationTest;
 import com.project.university.entity.Course;
 import com.project.university.entity.Group;
+import com.project.university.exception.DataAlreadyExistsException;
+import com.project.university.exception.DataNotFoundException;
 
 @ExtendWith(SpringExtension.class)
-@SpringJUnitConfig(classes = {GroupRepository.class, DatasourseConfiguration.class})
+@SpringJUnitConfig(classes = {GroupRepository.class, DatasourseConfigurationTest.class})
 @Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, scripts={"/DROP.sql", "/CREATE.sql", "/INSERT.sql"})
 @ActiveProfiles("dev")
 public class GroupRepositoryTest {
@@ -35,7 +38,7 @@ public class GroupRepositoryTest {
 	
 	@Test
 	public void testSave_WhenTheUserSendsTheGroupDataAndTheProgramSavesCourseIdThem_thenCorrect()
-			throws DataSetException, FileNotFoundException {
+			throws DataSetException, FileNotFoundException, DataAlreadyExistsException {
 		Group group = Group
 				.builder()
 				.course(Course
@@ -49,14 +52,14 @@ public class GroupRepositoryTest {
 	
 	@Test
 	public void testFindGroupById_WhenTheUserEntersTheIdOfTheGroupIsOneAndTheProgramDisplaysTheResult_thenCorrect()
-			throws DataSetException, FileNotFoundException {
+			throws DataSetException, FileNotFoundException, DataNotFoundException {
 		Group group = crudRepository.findOneById(1);
 		MatcherAssert.assertThat(group.getId(), CoreMatchers.equalTo(1));
 	}
 	
 	@Test
 	public void testUpdate_WhenUserSendsTheDataInTheMethodAndReturnsTheSameObject_thenCorrect()
-			throws DataSetException, FileNotFoundException {
+			throws DataSetException, FileNotFoundException, DataNotFoundException {
 		Group group = Group
 				.builder()
 				.id(1)

@@ -2,11 +2,14 @@ package com.project.university.service.impl;
 
 import java.util.List;
 
+import org.dbunit.dataset.NoSuchTableException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.university.entity.StatusStudent;
 import com.project.university.entity.Student;
+import com.project.university.exception.DataAlreadyExistsException;
+import com.project.university.exception.DataNotFoundException;
 import com.project.university.repository.CrudRepository;
 import com.project.university.service.StudentService;
 
@@ -25,24 +28,24 @@ public class StudentServiceImpl implements StudentService {
 	}
 	
 	@Override
-	public Student transferStudentToAnotherGroup(Student student) {
+	public Student transferStudentToAnotherGroup(Student student) throws DataNotFoundException {
 		return crudRepository.update(student);
 	}
 	
 	@Override
-	public void expelStrudent(Student student) {
+	public void expelStrudent(Student student) throws DataNotFoundException {
 		student.setCurrentStatus(StatusStudent.EXPELLED);
 		crudRepository.update(student);
 	}
 
 	@Override
-	public Student acceptNewStudent(Student student) {
+	public Student acceptNewStudent(Student student) throws DataAlreadyExistsException {
 		student.setCurrentStatus(StatusStudent.ACCEPTED);
 		return crudRepository.save(student);
 	}
 
 	@Override
-	public List<Student> getStudents() {
+	public List<Student> getStudents() throws NoSuchTableException {
 		return crudRepository.getAll();
 	}
 }
