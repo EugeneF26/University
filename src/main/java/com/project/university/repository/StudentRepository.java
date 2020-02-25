@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 
 import com.project.university.entity.Group;
 import com.project.university.entity.Student;
-import com.project.university.exception.DataAlreadyExistsException;
 import com.project.university.exception.DataNotFoundException;
 
 /**
@@ -41,7 +40,7 @@ public class StudentRepository implements CrudRepository<Student> {
 	 * @see CrudRepository#save(Object)
 	 */
 	@Override
-	public Student save(Student student) throws DataAlreadyExistsException {
+	public Student save(Student student) throws NoSuchTableException {
 		Student result = null;
 		try {
 			this.jdbcTemplate.update("INSERT INTO STUDENTS (name, surname, groupId) VALUES (?,?,?)", student.getName(),
@@ -50,9 +49,9 @@ public class StudentRepository implements CrudRepository<Student> {
 					"SELECT id FROM STUDENTS WHERE name=? AND surname=? AND groupId=?",
 					BeanPropertyRowMapper.newInstance(Student.class), student.getName(), student.getSurname(),
 					student.getGroup().getId());
-		} catch (Exception e) {
-			log.error("", e);
-			throw new DataAlreadyExistsException("", e);
+		} catch (Exception ex) {
+			log.error("Such table not exists", ex);
+			throw new NoSuchTableException("Such table not exists", ex);
 		}
 		return result;
 	}
@@ -66,9 +65,9 @@ public class StudentRepository implements CrudRepository<Student> {
 		try {
 			result = this.jdbcTemplate.queryForObject("SELECT id, name, surname, groupId " + "FROM STUDENTS WHERE id=?",
 					BeanPropertyRowMapper.newInstance(Student.class), id);
-		} catch (Exception e) {
-			log.error("", e);
-			throw new DataNotFoundException("", e);
+		} catch (Exception ex) {
+			log.error("Such data not exists", ex);
+			throw new DataNotFoundException("Such data not exists", ex);
 		}
 		return result;
 	}
@@ -81,9 +80,9 @@ public class StudentRepository implements CrudRepository<Student> {
 		try {
 			this.jdbcTemplate.update("UPDATE STUDENTS SET name=?, surname=?, groupId=? " + "WHERE id=?",
 					student.getName(), student.getSurname(), student.getGroup().getId(), student.getId());
-		} catch (Exception e) {
-			log.error("",e);
-			throw new DataNotFoundException("",e);
+		} catch (Exception ex) {
+			log.error("Such data not exists", ex);
+			throw new DataNotFoundException("Such data not exists", ex);
 		}
 		return student;
 	}
@@ -95,9 +94,9 @@ public class StudentRepository implements CrudRepository<Student> {
 	public void delete(Student student) throws DataNotFoundException {
 		try {
 			this.jdbcTemplate.update("DELETE FROM STUDENTS WHERE id=?", student.getId());
-		} catch(Exception e) {
-			log.error("",e);
-			throw new DataNotFoundException("",e);
+		} catch(Exception ex) {
+			log.error("Such data not exists", ex);
+			throw new DataNotFoundException("Such data not exists", ex);
 		}
 	}
 
@@ -112,9 +111,9 @@ public class StudentRepository implements CrudRepository<Student> {
 				return Student.builder().id(rs.getInt("id")).name(rs.getString("name")).surname(rs.getString("surname"))
 						.group(Group.builder().id(1).build()).build();
 			});
-		} catch(Exception e) {
-			log.error("",e);
-			throw new NoSuchTableException("",e);
+		} catch(Exception ex) {
+			log.error("Such data not exists",ex);
+			throw new NoSuchTableException("Such data not exists",ex);
 		}
 		return result;
 	}

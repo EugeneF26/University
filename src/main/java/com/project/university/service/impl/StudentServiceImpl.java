@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.project.university.entity.StatusStudent;
 import com.project.university.entity.Student;
-import com.project.university.exception.DataAlreadyExistsException;
 import com.project.university.exception.DataNotFoundException;
 import com.project.university.repository.CrudRepository;
 import com.project.university.service.StudentService;
@@ -39,7 +38,7 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public Student acceptNewStudent(Student student) throws DataAlreadyExistsException {
+	public Student acceptNewStudent(Student student) throws NoSuchTableException {
 		student.setCurrentStatus(StatusStudent.ACCEPTED);
 		return crudRepository.save(student);
 	}

@@ -17,8 +17,9 @@ public interface CrudRepository<T> {
 	 * @param t - must not be null.
 	 * @return the count saved line
 	 * @throws DataAlreadyExistsException 
+	 * @throws NoSuchTableException 
 	 */
-	T save(T t) throws DataAlreadyExistsException ;
+	T save(T t) throws NoSuchTableException ;
 	
 	/** Retrieves an entity by its id.
 	 * @param id - must not be null

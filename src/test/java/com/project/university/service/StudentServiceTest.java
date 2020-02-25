@@ -44,7 +44,7 @@ public class StudentServiceTest {
 	}
 	
 	@Test
-	public void testAcceptNewStudentToCourse_() throws DataAlreadyExistsException {
+	public void testAcceptNewStudentToCourse_() throws NoSuchTableException {
 		Student student = Student
 				.builder()
 				.id(1)

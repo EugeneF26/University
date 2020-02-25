@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 
 import com.project.university.entity.Professor;
 import com.project.university.entity.StatusProfessor;
-import com.project.university.exception.DataAlreadyExistsException;
 import com.project.university.exception.DataNotFoundException;
 
 /**
@@ -41,7 +40,7 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 	 * @see CrudRepository#save(Object)
 	 */
 	@Override
-	public Professor save(Professor professor) throws DataAlreadyExistsException {
+	public Professor save(Professor professor) throws NoSuchTableException {
 		Professor result = null;
 		try {
 			this.jdbcTemplate.update(
@@ -52,9 +51,9 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 					"SELECT id FROM PROFESSORS WHERE name=? AND surname=? AND patronymic=? " + "AND currentStatus=?",
 					BeanPropertyRowMapper.newInstance(Professor.class), professor.getName(), professor.getSurname(),
 					professor.getPatronymic(), professor.getCurrentStatus().getStatus());
-		} catch (Exception e) {
-			log.error("",e);
-			throw new DataAlreadyExistsException("",e);
+		} catch (Exception ex) {
+			log.error("Such table not exists", ex);
+			throw new NoSuchTableException("Such table not exists", ex);
 		}
 		return result;
 	}
@@ -69,9 +68,9 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 			result = this.jdbcTemplate.queryForObject(
 					"SELECT id, name, surname, patronymic " + "FROM PROFESSORS WHERE id = ?;",
 					BeanPropertyRowMapper.newInstance(Professor.class), id);
-		} catch (Exception e) {
-			log.error("",e);
-			throw new DataNotFoundException("",e);
+		} catch (Exception ex) {
+			log.error("Such data not exists", ex);
+			throw new DataNotFoundException("Such data not exists", ex);
 		}
 		return result;
 	}
@@ -86,9 +85,9 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 					"UPDATE PROFESSORS SET name=?, surname=?, patronymic=?, currentStatus=? " + "WHERE id=? ",
 					professor.getName(), professor.getSurname(), professor.getPatronymic(),
 					professor.getCurrentStatus().getStatus(), professor.getId());
-		} catch (Exception e) {
-			log.error("",e);
-			throw new DataNotFoundException("",e);
+		} catch (Exception ex) {
+			log.error("Such data not exists", ex);
+			throw new DataNotFoundException("Such data not exists", ex);
 		}
 		return professor;
 	}
@@ -100,9 +99,9 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 	public void delete(Professor professor) throws DataNotFoundException {
 		try {
 			this.jdbcTemplate.update("DELETE FROM PROFESSORS WHERE id=?", professor.getId());
-		} catch (Exception e) {
-			log.error("",e);
-			throw new DataNotFoundException("",e);
+		} catch (Exception ex) {
+			log.error("Such data not exists", ex);
+			throw new DataNotFoundException("Such data not exists", ex);
 		}
 	}
 
@@ -118,9 +117,9 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 						.surname(rs.getString("surname"))
 						.currentStatus((StatusProfessor.valueOf((rs.getString("currentStatus"))))).build();
 			});
-		} catch (Exception e) {
-			log.error("",e);
-			throw new NoSuchTableException("",e);
+		} catch (Exception ex) {
+			log.error("Such data not exists", ex);
+			throw new NoSuchTableException("Such data not exists", ex);
 		}
 		return result;
 	}
