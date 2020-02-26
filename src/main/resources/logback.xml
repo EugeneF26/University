@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-	
+
+	<property name="USER_HOME" value="" />
+
 	<appender name="MAIN"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${user.home}/logback/log_file.log</file>
+		<file>${USER.HOME}/log_file.log</file>
 
 		<rollingPolicy
 			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
