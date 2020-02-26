@@ -1,5 +1,6 @@
 package com.project.university.repository;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.dbunit.dataset.NoSuchTableException;
@@ -18,8 +19,9 @@ public interface CrudRepository<T> {
 	 * @return the count saved line
 	 * @throws DataAlreadyExistsException 
 	 * @throws NoSuchTableException 
+	 * @throws SQLException 
 	 */
-	T save(T t) throws NoSuchTableException ;
+	T save(T t) throws SQLException ;
 	
 	/** Retrieves an entity by its id.
 	 * @param id - must not be null
@@ -44,7 +46,8 @@ public interface CrudRepository<T> {
 	/** Returns all instances of the type.
 	 * @return all entities
 	 * @throws NoSuchTableException 
+	 * @throws SQLException 
 	 */
-	List<T> getAll() throws NoSuchTableException;
+	List<T> getAll() throws SQLException;
 }
 

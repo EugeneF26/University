@@ -1,8 +1,8 @@
 package com.project.university.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
-import org.dbunit.dataset.NoSuchTableException;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.collection.IsCollectionWithSize;
@@ -42,7 +42,7 @@ public class StudentServiceTest {
 	}
 	
 	@Test
-	public void testAcceptNewStudentToCourse_() throws NoSuchTableException {
+	public void testAcceptNewStudentToCourse_() throws SQLException {
 		Student student = Student
 				.builder()
 				.id(1)
@@ -58,7 +58,7 @@ public class StudentServiceTest {
 	}
 	
 	@Test
-	public void testGetStudents() throws NoSuchTableException {
+	public void testGetStudents() throws SQLException {
 		List<Student> result = studentService.getStudents();
 		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(3));
 	}

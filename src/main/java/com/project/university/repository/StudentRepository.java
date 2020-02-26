@@ -1,8 +1,8 @@
 package com.project.university.repository;
 
+import java.sql.SQLException;
 import java.util.List;
 
-import org.dbunit.dataset.NoSuchTableException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +40,7 @@ public class StudentRepository implements CrudRepository<Student> {
 	 * @see CrudRepository#save(Object)
 	 */
 	@Override
-	public Student save(Student student) throws NoSuchTableException {
+	public Student save(Student student) throws SQLException {
 		Student result = null;
 		try {
 			this.jdbcTemplate.update("INSERT INTO STUDENTS (name, surname, groupId) VALUES (?,?,?)", student.getName(),
@@ -51,7 +51,7 @@ public class StudentRepository implements CrudRepository<Student> {
 					student.getGroup().getId());
 		} catch (Exception ex) {
 			log.error("Such table not exists", ex);
-			throw new NoSuchTableException("Such table not exists", ex);
+			throw new SQLException("Such table not exists", ex);
 		}
 		return result;
 	}
@@ -104,7 +104,7 @@ public class StudentRepository implements CrudRepository<Student> {
 	 * @see CrudRepository#getAll()
 	 */
 	@Override
-	public List<Student> getAll() throws NoSuchTableException {
+	public List<Student> getAll() throws SQLException {
 		List<Student> result = null;
 		try {
 			result = this.jdbcTemplate.query("SELECT id, name, surname, groupId FROM STUDENTS", (rs, rowNum) -> {
@@ -113,7 +113,7 @@ public class StudentRepository implements CrudRepository<Student> {
 			});
 		} catch(Exception ex) {
 			log.error("Such data not exists",ex);
-			throw new NoSuchTableException("Such data not exists",ex);
+			throw new SQLException("Such data not exists",ex);
 		}
 		return result;
 	}

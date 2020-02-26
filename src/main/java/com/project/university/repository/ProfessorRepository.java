@@ -1,8 +1,8 @@
 package com.project.university.repository;
 
+import java.sql.SQLException;
 import java.util.List;
 
-import org.dbunit.dataset.NoSuchTableException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,10 +40,10 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 	 * @see CrudRepository#save(Object)
 	 */
 	@Override
-	public Professor save(Professor professor) throws NoSuchTableException {
+	public Professor save(Professor professor) throws SQLException {
 		Professor result = null;
 		String fullName = professor.getName() + " " + professor.getSurname() + " " + professor.getPatronymic();
-		log.debug("adding professor's {} to Professors", fullName);
+		log.info("adding professor's {} to Professors", fullName);
 		try {
 			this.jdbcTemplate.update(
 					"INSERT INTO PROFESSORS (name, surname, patronymic, currentStatus) VALUES (?,?,?,?)",
@@ -55,7 +55,7 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 					professor.getPatronymic(), professor.getCurrentStatus().getStatus());
 		} catch (Exception ex) {
 			log.error("Cannot add student " + fullName + " to DB", ex);
-			throw new NoSuchTableException("Such table not exists", ex);
+			throw new SQLException("Such table not exists", ex);
 		}
 		log.info("professor {} successfully created with ID {}", fullName , result.getId());
 		return result;
@@ -67,7 +67,7 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 	@Override
 	public Professor findOneById(Integer id) throws DataNotFoundException {
 		Professor result = null;
-		log.debug("fining professor's with id {}", id);
+		log.info("fining professor's with id {}", id);
 		try {
 			result = this.jdbcTemplate.queryForObject(
 					"SELECT id, name, surname, patronymic " + "FROM PROFESSORS WHERE id = ?;",
@@ -86,7 +86,7 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 	 */
 	@Override
 	public Professor update(Professor professor) throws DataNotFoundException {
-		log.debug("updating professor's with id {}", professor.getId());
+		log.info("updating professor's with id {}", professor.getId());
 		try {
 			jdbcTemplate.update(
 					"UPDATE PROFESSORS SET name=?, surname=?, patronymic=?, currentStatus=? " + "WHERE id=? ",
@@ -106,7 +106,7 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 	@Override
 	public void delete(Professor professor) throws DataNotFoundException {
 		String fullName = professor.getName() + " " + professor.getSurname() + " " + professor.getPatronymic();
-		log.debug("deleting professor's {} with id {}", fullName, professor.getId());
+		log.info("deleting professor's {} with id {}", fullName, professor.getId());
 		try {
 			this.jdbcTemplate.update("DELETE FROM PROFESSORS WHERE id=?", professor.getId());
 		} catch (Exception ex) {
@@ -120,9 +120,9 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 	 * @see CrudRepository#getAll()
 	 */
 	@Override
-	public List<Professor> getAll() throws NoSuchTableException {
+	public List<Professor> getAll() throws SQLException {
 		List<Professor> result = null;
-		log.debug("getting list all professors");
+		log.info("getting list all professors");
 		try {
 			result = this.jdbcTemplate.query("SELECT * FROM PROFESSORS", (rs, rowNum) -> {
 				return Professor.builder().id(rs.getInt("id")).name(rs.getString("name"))
@@ -131,7 +131,7 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 			});
 		} catch (Exception ex) {
 			log.error("Such data not exists", ex);
-			throw new NoSuchTableException("Such data not exists", ex);
+			throw new SQLException("Such data not exists", ex);
 		}
 		log.info("list all professors successfully created");
 		return result;

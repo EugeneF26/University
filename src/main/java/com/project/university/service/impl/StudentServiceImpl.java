@@ -1,8 +1,8 @@
 package com.project.university.service.impl;
 
+import java.sql.SQLException;
 import java.util.List;
 
-import org.dbunit.dataset.NoSuchTableException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,13 +38,13 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public Student acceptNewStudent(Student student) throws NoSuchTableException {
+	public Student acceptNewStudent(Student student) throws SQLException {
 		student.setCurrentStatus(StatusStudent.ACCEPTED);
 		return crudRepository.save(student);
 	}
 
 	@Override
-	public List<Student> getStudents() throws NoSuchTableException {
+	public List<Student> getStudents() throws SQLException {
 		return crudRepository.getAll();
 	}
 }

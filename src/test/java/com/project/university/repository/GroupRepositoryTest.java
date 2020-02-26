@@ -1,6 +1,7 @@
 package com.project.university.repository;
 
 import java.io.FileNotFoundException;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.dbunit.dataset.DataSetException;
@@ -37,7 +38,7 @@ public class GroupRepositoryTest {
 	
 	@Test
 	public void testSave_WhenTheUserSendsTheGroupDataAndTheProgramSavesCourseIdThem_thenCorrect()
-			throws DataSetException, FileNotFoundException, DataAlreadyExistsException {
+			throws DataSetException, FileNotFoundException, DataAlreadyExistsException, SQLException {
 		Group group = Group
 				.builder()
 				.course(Course
@@ -73,7 +74,7 @@ public class GroupRepositoryTest {
 	
 	@Test
 	public void testGetAll_WhenTheUserSendsQueryForAllDataAndTheProgramReturnThem_thenCorrect()
-			throws DataSetException, FileNotFoundException {
+			throws DataSetException, FileNotFoundException, SQLException {
 		List<Group> result = crudRepository.getAll();
 		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(3));
 	}

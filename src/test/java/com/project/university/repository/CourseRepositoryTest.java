@@ -1,6 +1,7 @@
 package com.project.university.repository;
 
 import java.io.FileNotFoundException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class CourseRepositoryTest {
 	
 	@Test
 	public void testSave_WhenTheUserSendsTheCourseYearAndTheProgramSavesCourseYearThem_thenCorrect()
-			throws DataSetException, FileNotFoundException, DataAlreadyExistsException {
+			throws DataSetException, FileNotFoundException, DataAlreadyExistsException, SQLException {
 		List<Group> group = new ArrayList<>();
 		group.add(Group
 				.builder()
@@ -81,7 +82,7 @@ public class CourseRepositoryTest {
 	
 	@Test
 	public void testGetAll_WhenTheUserSendsQueryForAllDataAndTheProgramReturnThem_thenCorrect()
-			throws DataSetException, FileNotFoundException {
+			throws DataSetException, FileNotFoundException, SQLException {
 		List<Course> result = crudRepository.getAll();
 		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(3));
 	}

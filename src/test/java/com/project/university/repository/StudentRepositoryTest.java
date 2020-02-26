@@ -1,7 +1,7 @@
 package com.project.university.repository;
 
 import java.io.FileNotFoundException;
-
+import java.sql.SQLException;
 import java.util.List;
 
 import org.dbunit.dataset.DataSetException;
@@ -19,7 +19,6 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import com.project.university.config.DatasourseConfigurationTest;
 import com.project.university.entity.Group;
 import com.project.university.entity.Student;
-import com.project.university.exception.DataAlreadyExistsException;
 import com.project.university.exception.DataNotFoundException;
 import com.project.university.repository.CrudRepository;
 import com.project.university.repository.StudentRepository;
@@ -44,7 +43,7 @@ public class StudentRepositoryTest {
 	
 	@Test
 	public void testSave_WhenTheUserSendsTheStudentDataAndTheProgramSavesAndIncrementStudentIdThem_thenCorrect()
-			throws DataSetException, FileNotFoundException, DataAlreadyExistsException {	
+			throws DataSetException, FileNotFoundException, SQLException {	
 		Student student = Student
 		.builder()
 		.name("Pavel")
@@ -83,7 +82,7 @@ public class StudentRepositoryTest {
 	
 	@Test
 	public void testGetAll_WhenTheUserSendsQueryForAllDataAndTheProgramReturnThem_thenCorrect()
-			throws DataSetException, FileNotFoundException {
+			throws DataSetException, FileNotFoundException, SQLException {
 		
 		List<Student> result = crudRepository.getAll();
 		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(3));

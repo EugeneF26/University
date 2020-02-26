@@ -1,7 +1,7 @@
 package com.project.university.repository;
 
 import java.io.FileNotFoundException;
-
+import java.sql.SQLException;
 import java.util.List;
 
 import org.dbunit.dataset.DataSetException;
@@ -20,7 +20,6 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import com.project.university.config.DatasourseConfigurationTest;
 import com.project.university.entity.Professor;
 import com.project.university.entity.StatusProfessor;
-import com.project.university.exception.DataAlreadyExistsException;
 import com.project.university.exception.DataNotFoundException;
 
 @ExtendWith(SpringExtension.class)
@@ -39,7 +38,7 @@ public class ProfessorRepositoryTest {
 	
 	@Test
 	public void testSave_WhenTheUserSendsTheProfessorDataAndTheProgramSavesProfessorDataThem_thenCorrect()
-			throws DataSetException, FileNotFoundException, DataAlreadyExistsException {
+			throws DataSetException, FileNotFoundException, SQLException {
 		new Professor().getCurrentStatus();
 		Professor professor = Professor.builder()
 				.name("Alexander")
@@ -74,7 +73,7 @@ public class ProfessorRepositoryTest {
 	
 	@Test
 	public void testGetAll_WhenTheUserSendsQueryForAllDataAndTheProgramReturnThem_thenCorrect()
-			throws DataSetException, FileNotFoundException {
+			throws DataSetException, FileNotFoundException, SQLException {
 		List<Professor> result = crudRepository.getAll();
 		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(3));
 	}
