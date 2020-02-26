@@ -1,6 +1,5 @@
 package com.project.university.service.impl;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.project.university.entity.StatusStudent;
 import com.project.university.entity.Student;
-import com.project.university.exception.DataNotFoundException;
 import com.project.university.repository.CrudRepository;
 import com.project.university.service.StudentService;
 
@@ -27,24 +25,24 @@ public class StudentServiceImpl implements StudentService {
 	}
 	
 	@Override
-	public Student transferStudentToAnotherGroup(Student student) throws DataNotFoundException {
+	public Student transferStudentToAnotherGroup(Student student) throws Exception {
 		return crudRepository.update(student);
 	}
 	
 	@Override
-	public void expelStrudent(Student student) throws DataNotFoundException {
+	public void expelStrudent(Student student) throws Exception {
 		student.setCurrentStatus(StatusStudent.EXPELLED);
 		crudRepository.update(student);
 	}
 
 	@Override
-	public Student acceptNewStudent(Student student) throws SQLException {
+	public Student acceptNewStudent(Student student) throws Exception {
 		student.setCurrentStatus(StatusStudent.ACCEPTED);
 		return crudRepository.save(student);
 	}
 
 	@Override
-	public List<Student> getStudents() throws SQLException {
+	public List<Student> getStudents() throws Exception {
 		return crudRepository.getAll();
 	}
 }

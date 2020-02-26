@@ -1,6 +1,5 @@
 package com.project.university.repository;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.project.university.entity.Group;
 import com.project.university.entity.Student;
+import com.project.university.exception.DataAlreadyExistsException;
 import com.project.university.exception.DataNotFoundException;
 
 /**
@@ -40,20 +40,30 @@ public class StudentRepository implements CrudRepository<Student> {
 	 * @see CrudRepository#save(Object)
 	 */
 	@Override
-	public Student save(Student student) throws SQLException {
+	public Student save(Student student) throws DataAlreadyExistsException {
 		Student result = null;
+		int rows = 0;
+		String fullName = student.getName() + " " + student.getSurname();
+		log.trace("adding professor's {} to Professors", fullName);
 		try {
-			this.jdbcTemplate.update("INSERT INTO STUDENTS (name, surname, groupId) VALUES (?,?,?)", student.getName(),
+			rows = this.jdbcTemplate.update("INSERT INTO STUDENTS (name, surname, groupId) VALUES (?,?,?)", student.getName(),
 					student.getSurname(), student.getGroup().getId());
 			result = this.jdbcTemplate.queryForObject(
 					"SELECT id FROM STUDENTS WHERE name=? AND surname=? AND groupId=?",
 					BeanPropertyRowMapper.newInstance(Student.class), student.getName(), student.getSurname(),
 					student.getGroup().getId());
 		} catch (Exception ex) {
-			log.error("Such table not exists", ex);
-			throw new SQLException("Such table not exists", ex);
+			log.error("Cannot add student's" + fullName + " to DB", ex);
+			throw new DataAlreadyExistsException(ex);
 		}
-		return result;
+		
+		if(rows != 0) {
+			log.trace("student {} successfully created with ID {}", fullName, result.getId());
+			return result;
+		} else {
+			log.trace("failed to create a student's {} with id {} ", fullName, student.getId());
+			return null;
+		}
 	}
 
 	/**
@@ -62,14 +72,22 @@ public class StudentRepository implements CrudRepository<Student> {
 	@Override
 	public Student findOneById(Integer id) throws DataNotFoundException {
 		Student result = null;
+		log.trace("searching student's with id {}", id);
 		try {
 			result = this.jdbcTemplate.queryForObject("SELECT id, name, surname, groupId " + "FROM STUDENTS WHERE id=?",
 					BeanPropertyRowMapper.newInstance(Student.class), id);
 		} catch (Exception ex) {
-			log.error("Such data not exists", ex);
-			throw new DataNotFoundException("Such data not exists", ex);
+			log.error("Method findOneById of StudentRepository threw an error", ex);
+			throw new DataNotFoundException(ex);
 		}
-		return result;
+		if(result != null) {
+			log.trace("student {} {} successfully find with ID {}", result.getName(), 
+					result.getSurname(), result.getId());
+			return result;
+		} else {
+			log.trace("query not returned data");
+			return null;
+		}
 	}
 
 	/**
@@ -77,14 +95,22 @@ public class StudentRepository implements CrudRepository<Student> {
 	 */
 	@Override
 	public Student update(Student student) throws DataNotFoundException {
+		int rows = 0;
+		log.trace("updating student's with id {}", student.getId());
 		try {
-			this.jdbcTemplate.update("UPDATE STUDENTS SET name=?, surname=?, groupId=? " + "WHERE id=?",
+			rows = this.jdbcTemplate.update("UPDATE STUDENTS SET name=?, surname=?, groupId=? " + "WHERE id=?",
 					student.getName(), student.getSurname(), student.getGroup().getId(), student.getId());
 		} catch (Exception ex) {
-			log.error("Such data not exists", ex);
-			throw new DataNotFoundException("Such data not exists", ex);
+			log.error("Method update of StudentRepository threw an error",ex);
+			throw new DataNotFoundException(ex);
 		}
-		return student;
+		if(rows != 0) {
+			log.trace("data of student's with id {} was updated", student.getId());
+			return student;
+		} else {
+			log.trace("data of student's with id {} was not updated", student.getId());
+			return null;
+		}
 	}
 
 	/**
@@ -92,11 +118,19 @@ public class StudentRepository implements CrudRepository<Student> {
 	 */
 	@Override
 	public void delete(Student student) throws DataNotFoundException {
+		String fullName = student.getName() + " " + student.getSurname();
+		int rows = 0;
+		log.trace("deleting student's {} with id {}", fullName, student.getId());
 		try {
-			this.jdbcTemplate.update("DELETE FROM STUDENTS WHERE id=?", student.getId());
+			rows = this.jdbcTemplate.update("DELETE FROM STUDENTS WHERE id=?", student.getId());
 		} catch(Exception ex) {
-			log.error("Such data not exists", ex);
-			throw new DataNotFoundException("Such data not exists", ex);
+			log.error("Method delete of StudentRepository threw an error", ex);
+			throw new DataNotFoundException(ex);
+		}
+		if(rows != 0) {
+			log.trace("student {} successfully deleted with ID {}", fullName, student.getId());
+		} else {
+			log.trace("student {} with id {} was not deleted", fullName, student.getId());
 		}
 	}
 
@@ -104,18 +138,26 @@ public class StudentRepository implements CrudRepository<Student> {
 	 * @see CrudRepository#getAll()
 	 */
 	@Override
-	public List<Student> getAll() throws SQLException {
+	public List<Student> getAll() throws DataNotFoundException {
 		List<Student> result = null;
+		log.trace("getting list all students");
 		try {
 			result = this.jdbcTemplate.query("SELECT id, name, surname, groupId FROM STUDENTS", (rs, rowNum) -> {
 				return Student.builder().id(rs.getInt("id")).name(rs.getString("name")).surname(rs.getString("surname"))
 						.group(Group.builder().id(1).build()).build();
 			});
 		} catch(Exception ex) {
-			log.error("Such data not exists",ex);
-			throw new SQLException("Such data not exists",ex);
+			log.error("Method getAll of StudentRepository threw an error", ex);
+			throw new DataNotFoundException(ex);
 		}
-		return result;
+		
+		if (result != null) {
+			log.trace("list all students successfully created");
+			return result;
+		} else {
+			log.trace("query not returned data");
+			return null;
+		}
 	}
 }
 

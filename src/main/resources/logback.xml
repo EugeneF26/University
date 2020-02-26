@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-	<property name="USER_HOME" value="" />
-
 	<appender name="MAIN"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${USER.HOME}/log_file.log</file>
+		<file>log_file.log</file>
 
 		<rollingPolicy
 			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
@@ -21,13 +19,7 @@
 		</encoder>
 	</appender>
 
-	<logger
-		name="com.project.university.repository.ProfessorRepository"
-		level="error">
-		<appender-ref ref="MAIN" />
-	</logger>
-
-	<root level="error">
+	<root level="ERROR">
 		<appender-ref ref="MAIN" />
 	</root>
 </configuration>

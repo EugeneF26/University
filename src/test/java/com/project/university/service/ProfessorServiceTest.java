@@ -14,7 +14,6 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import com.project.university.config.DatasourseConfigurationTest;
 import com.project.university.entity.Professor;
 import com.project.university.entity.StatusProfessor;
-import com.project.university.exception.DataNotFoundException;
 import com.project.university.repository.ProfessorRepository;
 import com.project.university.service.impl.ProfessorServiceImpl;
 
@@ -32,7 +31,7 @@ public class ProfessorServiceTest {
 	}
 	
 	@Test
-	public void testAcceptNewProfessor_WhenTheUserSendsQueryForAddANewProfessorAndTheProgramReturnIncrementIdOfStudent_thenCorrect() throws DataNotFoundException {
+	public void testAcceptNewProfessor_WhenTheUserSendsQueryForAddANewProfessorAndTheProgramReturnIncrementIdOfStudent_thenCorrect() throws Exception {
 		Professor professor = Professor
 				.builder()
 				.currentStatus(StatusProfessor.ACCEPTED)

@@ -1,6 +1,5 @@
 package com.project.university.repository;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.project.university.entity.Professor;
 import com.project.university.entity.StatusProfessor;
+import com.project.university.exception.DataAlreadyExistsException;
 import com.project.university.exception.DataNotFoundException;
 
 /**
@@ -40,12 +40,13 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 	 * @see CrudRepository#save(Object)
 	 */
 	@Override
-	public Professor save(Professor professor) throws SQLException {
+	public Professor save(Professor professor) throws DataAlreadyExistsException {
 		Professor result = null;
+		int rows = 0;
 		String fullName = professor.getName() + " " + professor.getSurname() + " " + professor.getPatronymic();
-		log.info("adding professor's {} to Professors", fullName);
+		log.trace("adding professor's {} to Professors", fullName);
 		try {
-			this.jdbcTemplate.update(
+			rows = this.jdbcTemplate.update(
 					"INSERT INTO PROFESSORS (name, surname, patronymic, currentStatus) VALUES (?,?,?,?)",
 					professor.getName(), professor.getSurname(), professor.getPatronymic(),
 					professor.getCurrentStatus().getStatus());
@@ -54,11 +55,17 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 					BeanPropertyRowMapper.newInstance(Professor.class), professor.getName(), professor.getSurname(),
 					professor.getPatronymic(), professor.getCurrentStatus().getStatus());
 		} catch (Exception ex) {
-			log.error("Cannot add student " + fullName + " to DB", ex);
-			throw new SQLException("Such table not exists", ex);
+			log.error("Cannot add professor's" + fullName + " to DB", ex);
+			throw new DataAlreadyExistsException(ex);
 		}
-		log.info("professor {} successfully created with ID {}", fullName , result.getId());
-		return result;
+		
+		if(rows != 0) {
+			log.trace("professor {} successfully created with ID {}", fullName, result.getId());
+			return result;
+		} else {
+			log.trace("failed to create a professor's {} with id {} ", fullName, professor.getId());
+			return null;
+		}
 	}
 
 	/**
@@ -67,18 +74,24 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 	@Override
 	public Professor findOneById(Integer id) throws DataNotFoundException {
 		Professor result = null;
-		log.info("fining professor's with id {}", id);
+		log.trace("searching professor's with id {}", id);
 		try {
 			result = this.jdbcTemplate.queryForObject(
 					"SELECT id, name, surname, patronymic " + "FROM PROFESSORS WHERE id = ?;",
 					BeanPropertyRowMapper.newInstance(Professor.class), id);
 		} catch (Exception ex) {
-			log.error("Such data not exists", ex);
-			throw new DataNotFoundException("Such data not exists", ex);
+			log.error("Method findOneById of ProfessorRepository threw an error", ex);
+			throw new DataNotFoundException(ex);
 		}
-		log.info("professor {} {} {} successfully find with ID {}", result.getName(), result.getSurname(), 
-				result.getPatronymic(), result.getId());
-		return result;
+		
+		if(result != null) {
+			log.trace("professor {} {} {} successfully find with ID {}", result.getName(), result.getSurname(),
+					result.getPatronymic(), result.getId());
+			return result;
+		} else {
+			log.trace("query not returned data");
+			return null;
+		}
 	}
 
 	/**
@@ -86,18 +99,25 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 	 */
 	@Override
 	public Professor update(Professor professor) throws DataNotFoundException {
-		log.info("updating professor's with id {}", professor.getId());
+		int rows = 0;
+		log.trace("updating professor's with id {}", professor.getId());
 		try {
-			jdbcTemplate.update(
+			rows = jdbcTemplate.update(
 					"UPDATE PROFESSORS SET name=?, surname=?, patronymic=?, currentStatus=? " + "WHERE id=? ",
 					professor.getName(), professor.getSurname(), professor.getPatronymic(),
 					professor.getCurrentStatus().getStatus(), professor.getId());
 		} catch (Exception ex) {
-			log.error("Such data not exists", ex);
-			throw new DataNotFoundException("Such data not exists", ex);
+			log.error("Method update of ProfessorRepository threw an error", ex);
+			throw new DataNotFoundException(ex);
 		}
-		log.info("professor successfully updated with ID {}", professor.getId());
-		return professor;
+		
+		if(rows != 0) {
+			log.trace("data of professor's with id {} was updated", professor.getId());
+			return professor;
+		} else {
+			log.trace("data of professor's with id {} was not updated", professor.getId());
+			return null;
+		}
 	}
 
 	/**
@@ -106,23 +126,29 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 	@Override
 	public void delete(Professor professor) throws DataNotFoundException {
 		String fullName = professor.getName() + " " + professor.getSurname() + " " + professor.getPatronymic();
-		log.info("deleting professor's {} with id {}", fullName, professor.getId());
+		int rows = 0;
+		log.trace("deleting professor's {} with id {}", fullName, professor.getId());
 		try {
-			this.jdbcTemplate.update("DELETE FROM PROFESSORS WHERE id=?", professor.getId());
+			rows = this.jdbcTemplate.update("DELETE FROM PROFESSORS WHERE id=?", professor.getId());
 		} catch (Exception ex) {
-			log.error("Such data not exists", ex);
-			throw new DataNotFoundException("Such data not exists", ex);
+			log.error("Method delete of ProfessorRepository threw an error", ex);
+			throw new DataNotFoundException(ex);
 		}
-		log.info("professor {} successfully deleted with ID {}", fullName, professor.getId());
+		
+		if(rows != 0) {
+			log.trace("professor {} successfully deleted with ID {}", fullName, professor.getId());
+		} else {
+			log.trace("professor {} with id {} was not deleted", fullName, professor.getId());
+		}
 	}
 
 	/**
 	 * @see CrudRepository#getAll()
 	 */
 	@Override
-	public List<Professor> getAll() throws SQLException {
+	public List<Professor> getAll() throws DataNotFoundException {
 		List<Professor> result = null;
-		log.info("getting list all professors");
+		log.trace("getting list all professors");
 		try {
 			result = this.jdbcTemplate.query("SELECT * FROM PROFESSORS", (rs, rowNum) -> {
 				return Professor.builder().id(rs.getInt("id")).name(rs.getString("name"))
@@ -130,11 +156,17 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 						.currentStatus((StatusProfessor.valueOf((rs.getString("currentStatus"))))).build();
 			});
 		} catch (Exception ex) {
-			log.error("Such data not exists", ex);
-			throw new SQLException("Such data not exists", ex);
+			log.error("Method getAll of ProfessorRepository threw an error", ex);
+			throw new DataNotFoundException(ex);
 		}
-		log.info("list all professors successfully created");
-		return result;
+		
+		if (result != null) {
+			log.trace("list all professors successfully created");
+			return result;
+		} else {
+			log.trace("query not returned data");
+			return null;
+		}
 	}
 }
 

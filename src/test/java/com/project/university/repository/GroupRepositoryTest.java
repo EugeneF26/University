@@ -74,7 +74,7 @@ public class GroupRepositoryTest {
 	
 	@Test
 	public void testGetAll_WhenTheUserSendsQueryForAllDataAndTheProgramReturnThem_thenCorrect()
-			throws DataSetException, FileNotFoundException, SQLException {
+			throws DataSetException, FileNotFoundException, SQLException, DataNotFoundException {
 		List<Group> result = crudRepository.getAll();
 		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(3));
 	}

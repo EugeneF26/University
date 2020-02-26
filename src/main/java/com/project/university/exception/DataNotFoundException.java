@@ -8,6 +8,10 @@ public class DataNotFoundException extends Exception {
 		 super(message, cause);
 	}
 	
+	public DataNotFoundException(Throwable cause) {
+		 super(cause);
+	}
+	
 	public DataNotFoundException(String message) {
 		 super(message);
 	}

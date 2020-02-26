@@ -1,6 +1,5 @@
 package com.project.university.service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import org.hamcrest.CoreMatchers;
@@ -42,7 +41,7 @@ public class StudentServiceTest {
 	}
 	
 	@Test
-	public void testAcceptNewStudentToCourse_() throws SQLException {
+	public void testAcceptNewStudentToCourse_() throws Exception {
 		Student student = Student
 				.builder()
 				.id(1)
@@ -58,7 +57,7 @@ public class StudentServiceTest {
 	}
 	
 	@Test
-	public void testGetStudents() throws SQLException {
+	public void testGetStudents() throws Exception {
 		List<Student> result = studentService.getStudents();
 		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(3));
 	}

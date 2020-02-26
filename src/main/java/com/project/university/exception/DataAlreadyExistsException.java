@@ -7,6 +7,10 @@ public class DataAlreadyExistsException extends Exception {
 	public DataAlreadyExistsException(String message, Throwable cause) {
 		 super(message, cause);
 	}
+	
+	public DataAlreadyExistsException(Throwable cause) {
+		 super(cause);
+	}
 
 	public DataAlreadyExistsException(String message) {
 		 super(message);

@@ -21,12 +21,13 @@ public interface CrudRepository<T> {
 	 * @throws NoSuchTableException 
 	 * @throws SQLException 
 	 */
-	T save(T t) throws SQLException ;
+	T save(T t) throws DataAlreadyExistsException ;
 	
 	/** Retrieves an entity by its id.
 	 * @param id - must not be null
 	 * @return the given entity
 	 * @throws DataNotFoundException 
+	 * @throws SQLException 
 	 */
 	T findOneById(Integer id) throws DataNotFoundException;
 	
@@ -48,6 +49,6 @@ public interface CrudRepository<T> {
 	 * @throws NoSuchTableException 
 	 * @throws SQLException 
 	 */
-	List<T> getAll() throws SQLException;
+	List<T> getAll() throws DataNotFoundException;
 }
 

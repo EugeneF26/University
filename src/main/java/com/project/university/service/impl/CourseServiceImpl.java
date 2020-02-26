@@ -17,6 +17,5 @@ public class CourseServiceImpl implements CourseService {
 	public CourseServiceImpl(CrudRepository<Course> crudRepository) {
 		this.crudRepository = crudRepository;
 	}
-
 }
 
