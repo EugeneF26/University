@@ -1,5 +1,6 @@
 package com.project.university.repository;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Repository;
 
 import com.project.university.entity.Professor;
 import com.project.university.entity.StatusProfessor;
-import com.project.university.exception.DataAlreadyExistsException;
 import com.project.university.exception.DataNotFoundException;
 
 /**
@@ -40,7 +40,7 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 	 * @see CrudRepository#save(Object)
 	 */
 	@Override
-	public Professor save(Professor professor) throws DataAlreadyExistsException {
+	public Professor save(Professor professor) throws SQLException {
 		Professor result = null;
 		int rows = 0;
 		String fullName = professor.getName() + " " + professor.getSurname() + " " + professor.getPatronymic();
@@ -56,7 +56,7 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 					professor.getPatronymic(), professor.getCurrentStatus().getStatus());
 		} catch (Exception ex) {
 			log.error("Cannot add professor's" + fullName + " to DB", ex);
-			throw new DataAlreadyExistsException(ex);
+			throw new SQLException(ex);
 		}
 		
 		if(rows != 0) {

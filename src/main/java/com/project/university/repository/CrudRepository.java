@@ -21,7 +21,7 @@ public interface CrudRepository<T> {
 	 * @throws NoSuchTableException 
 	 * @throws SQLException 
 	 */
-	T save(T t) throws DataAlreadyExistsException ;
+	T save(T t) throws SQLException;
 	
 	/** Retrieves an entity by its id.
 	 * @param id - must not be null
