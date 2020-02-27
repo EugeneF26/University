@@ -66,7 +66,7 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 			return result;
 		} else {
 			log.warn("failed to create a professor's {} with id {} ", professor, professor.getId());
-			throw new DataSaveException();
+			throw new DataSaveException("data was not saved");
 		}
 	}
 
@@ -92,7 +92,7 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 			return result;
 		} else {
 			log.warn("query not returned data");
-			throw new DataNotFoundException();
+			throw new DataNotFoundException("data was not finded");
 		}
 	}
 
@@ -119,7 +119,7 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 			return professor;
 		} else {
 			log.warn("data of professor's with id {} was not updated", professor.getId());
-			throw new DataNotFoundException();
+			throw new DataNotFoundException("data was not updated");
 		}
 	}
 
@@ -142,7 +142,7 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 			log.trace("professor {} successfully deleted", professor);
 		} else {
 			log.warn("professor {} was not deleted", professor);
-			throw new DataNotFoundException();
+			throw new DataNotFoundException("data was not deleted");
 		}
 	}
 
@@ -170,7 +170,7 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 			return result;
 		} else {
 			log.warn("query not returned data");
-			throw new DataNotFoundException();
+			throw new DataNotFoundException("data was not getted");
 		}
 	}
 }
