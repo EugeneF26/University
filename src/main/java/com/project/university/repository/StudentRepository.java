@@ -44,26 +44,25 @@ public class StudentRepository implements CrudRepository<Student> {
 	public Student save(Student student) throws DataSaveException, DaoLayerException {
 		Student result = null;
 		int rows = 0;
-		String fullName = student.getName() + " " + student.getSurname();
-		log.trace("adding professor's {} to Professors", fullName);
+		log.trace("entry with: {}", student);
 		try {
-			rows = this.jdbcTemplate.update("INSERT INTO STUDENTS (name, surname, groupId) VALUES (?,?,?)", student.getName(),
-					student.getSurname(), student.getGroup().getId());
+			rows = this.jdbcTemplate.update("INSERT INTO STUDENTS (name, surname, groupId) VALUES (?,?,?)",
+					student.getName(), student.getSurname(), student.getGroup().getId());
 			result = this.jdbcTemplate.queryForObject(
 					"SELECT id FROM STUDENTS WHERE name=? AND surname=? AND groupId=?",
 					BeanPropertyRowMapper.newInstance(Student.class), student.getName(), student.getSurname(),
 					student.getGroup().getId());
 		} catch (Exception ex) {
-			log.error("Cannot add student's" + fullName + " to DB", ex);
+			log.error("Cannot add student's to DB", ex);
 			throw new DaoLayerException(StudentRepository.class.getName(), ex);
 		}
-		
-		if(rows != 0) {
-			log.trace("student {} successfully created with ID {}", fullName, result.getId());
+
+		if (rows != 0) {
+			log.trace("exit with: {}", student);
 			return result;
 		} else {
-			log.trace("failed to create a student's {} with id {} ", fullName, student.getId());
-			throw new DataSaveException();
+			log.warn("failed to create a student's {} with id {} ", student, student.getId());
+			throw new DataSaveException("data was not saved");
 		}
 	}
 
@@ -71,23 +70,22 @@ public class StudentRepository implements CrudRepository<Student> {
 	 * @see CrudRepository#find(int)
 	 */
 	@Override
-	public Student findOneById(Integer id) throws DataNotFoundException {
+	public Student findOneById(Integer id) throws DataNotFoundException, DaoLayerException {
 		Student result = null;
-		log.trace("searching student's with id {}", id);
+		log.trace("entry with: {}", id);
 		try {
 			result = this.jdbcTemplate.queryForObject("SELECT id, name, surname, groupId " + "FROM STUDENTS WHERE id=?",
 					BeanPropertyRowMapper.newInstance(Student.class), id);
 		} catch (Exception ex) {
-			log.error("Method findOneById of StudentRepository threw an error", ex);
-			throw new DataNotFoundException(ex);
+			log.error("Cannot find student's", ex);
+			throw new DaoLayerException(StudentRepository.class.getName(), ex);
 		}
-		if(result != null) {
-			log.trace("student {} {} successfully find with ID {}", result.getName(), 
-					result.getSurname(), result.getId());
+		if (result != null) {
+			log.trace("exit with: {}", result);
 			return result;
 		} else {
-			log.trace("query not returned data");
-			return null;
+			log.warn("query not returned data");
+			throw new DataNotFoundException("data was not finded");
 		}
 	}
 
@@ -95,69 +93,71 @@ public class StudentRepository implements CrudRepository<Student> {
 	 * @see CrudRepository#update(Object)
 	 */
 	@Override
-	public Student update(Student student) throws DataNotFoundException {
+	public Student update(Student student) throws DataNotFoundException, DaoLayerException {
 		int rows = 0;
-		log.trace("updating student's with id {}", student.getId());
+		log.trace("entry with: {}", student);
 		try {
 			rows = this.jdbcTemplate.update("UPDATE STUDENTS SET name=?, surname=?, groupId=? " + "WHERE id=?",
 					student.getName(), student.getSurname(), student.getGroup().getId(), student.getId());
 		} catch (Exception ex) {
-			log.error("Method update of StudentRepository threw an error",ex);
-			throw new DataNotFoundException(ex);
+			log.error("Cannot update student's", ex);
+			throw new DaoLayerException(StudentRepository.class.getName(), ex);
 		}
-		if(rows != 0) {
+		if (rows != 0) {
 			log.trace("data of student's with id {} was updated", student.getId());
 			return student;
 		} else {
-			log.trace("data of student's with id {} was not updated", student.getId());
-			return null;
+			log.warn("data of student's with id {} was not updated", student.getId());
+			throw new DataNotFoundException("data was not updated");
 		}
 	}
 
 	/**
+	 * @throws DaoLayerException
 	 * @see CrudRepository#delete(int)
 	 */
 	@Override
-	public void delete(Student student) throws DataNotFoundException {
-		String fullName = student.getName() + " " + student.getSurname();
+	public void delete(Student student) throws DataNotFoundException, DaoLayerException {
 		int rows = 0;
-		log.trace("deleting student's {} with id {}", fullName, student.getId());
+		log.trace("entry with: {}", student);
 		try {
 			rows = this.jdbcTemplate.update("DELETE FROM STUDENTS WHERE id=?", student.getId());
-		} catch(Exception ex) {
-			log.error("Method delete of StudentRepository threw an error", ex);
-			throw new DataNotFoundException(ex);
+		} catch (Exception ex) {
+			log.error("Cannot delete student's to DB", ex);
+			throw new DaoLayerException(StudentRepository.class.getName(), ex);
 		}
-		if(rows != 0) {
-			log.trace("student {} successfully deleted with ID {}", fullName, student.getId());
+		if (rows != 0) {
+			log.trace("student {} successfully deleted", student);
 		} else {
-			log.trace("student {} with id {} was not deleted", fullName, student.getId());
+			log.warn("student {} was not deleted", student);
+			throw new DataNotFoundException("data was not deleted");
 		}
 	}
 
 	/**
+	 * @throws DaoLayerException 
 	 * @see CrudRepository#getAll()
 	 */
 	@Override
-	public List<Student> getAll() throws DataNotFoundException {
+	public List<Student> getAll() throws DataNotFoundException, DaoLayerException {
 		List<Student> result = null;
-		log.trace("getting list all students");
+		log.trace("getting list all professors");
 		try {
 			result = this.jdbcTemplate.query("SELECT id, name, surname, groupId FROM STUDENTS", (rs, rowNum) -> {
 				return Student.builder().id(rs.getInt("id")).name(rs.getString("name")).surname(rs.getString("surname"))
 						.group(Group.builder().id(1).build()).build();
 			});
-		} catch(Exception ex) {
-			log.error("Method getAll of StudentRepository threw an error", ex);
-			throw new DataNotFoundException(ex);
+		} catch (Exception ex) {
+			log.error("Cannot get list professors from DB", ex);
+			throw new DaoLayerException(StudentRepository.class.getName(), ex);
 		}
-		
+
 		if (result != null) {
 			log.trace("list all students successfully created");
 			return result;
 		} else {
-			log.trace("query not returned data");
-			return null;
+			log.warn("query not returned data");
+			throw new DataNotFoundException("data was not getted");
 		}
 	}
 }

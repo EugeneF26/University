@@ -83,7 +83,7 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 					"SELECT id, name, surname, patronymic " + "FROM PROFESSORS WHERE id = ?;",
 					BeanPropertyRowMapper.newInstance(Professor.class), id);
 		} catch (Exception ex) {
-			log.error("Method findOneById of ProfessorRepository threw an error", ex);
+			log.error(ProfessorRepository.class.getName(), ex);
 			throw new DaoLayerException (ProfessorRepository.class.getName(), ex);
 		}
 		
