@@ -4,8 +4,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.dbunit.dataset.NoSuchTableException;
-
-import com.project.university.exception.DataAlreadyExistsException;
 import com.project.university.exception.DataNotFoundException;
 
 /** @author Eugene

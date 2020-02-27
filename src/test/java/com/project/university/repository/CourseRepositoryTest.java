@@ -1,6 +1,7 @@
 package com.project.university.repository;
 
 import java.io.FileNotFoundException;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,6 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import com.project.university.config.DatasourseConfigurationTest;
 import com.project.university.entity.Course;
 import com.project.university.entity.Group;
-import com.project.university.exception.DataAlreadyExistsException;
 import com.project.university.exception.DataNotFoundException;
 
 @ExtendWith(SpringExtension.class)
@@ -40,7 +40,7 @@ public class CourseRepositoryTest {
 	
 	@Test
 	public void testSave_WhenTheUserSendsTheCourseYearAndTheProgramSavesCourseYearThem_thenCorrect()
-			throws DataSetException, FileNotFoundException, DataAlreadyExistsException, SQLException {
+			throws DataSetException, FileNotFoundException, SQLException {
 		List<Group> group = new ArrayList<>();
 		group.add(Group
 				.builder()

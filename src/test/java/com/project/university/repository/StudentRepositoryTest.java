@@ -19,7 +19,6 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import com.project.university.config.DatasourseConfigurationTest;
 import com.project.university.entity.Group;
 import com.project.university.entity.Student;
-import com.project.university.exception.DataAlreadyExistsException;
 import com.project.university.exception.DataNotFoundException;
 import com.project.university.repository.CrudRepository;
 import com.project.university.repository.StudentRepository;
@@ -44,7 +43,7 @@ public class StudentRepositoryTest {
 	
 	@Test
 	public void testSave_WhenTheUserSendsTheStudentDataAndTheProgramSavesAndIncrementStudentIdThem_thenCorrect()
-			throws DataSetException, FileNotFoundException, SQLException, DataAlreadyExistsException {	
+			throws DataSetException, FileNotFoundException, SQLException {	
 		Student student = Student
 		.builder()
 		.name("Pavel")

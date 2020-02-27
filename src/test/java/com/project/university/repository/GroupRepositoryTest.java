@@ -20,7 +20,6 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import com.project.university.config.DatasourseConfigurationTest;
 import com.project.university.entity.Course;
 import com.project.university.entity.Group;
-import com.project.university.exception.DataAlreadyExistsException;
 import com.project.university.exception.DataNotFoundException;
 
 @ExtendWith(SpringExtension.class)
@@ -38,7 +37,7 @@ public class GroupRepositoryTest {
 	
 	@Test
 	public void testSave_WhenTheUserSendsTheGroupDataAndTheProgramSavesCourseIdThem_thenCorrect()
-			throws DataSetException, FileNotFoundException, DataAlreadyExistsException, SQLException {
+			throws DataSetException, FileNotFoundException, SQLException {
 		Group group = Group
 				.builder()
 				.course(Course
