@@ -1,6 +1,5 @@
 package com.project.university.repository;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -12,7 +11,9 @@ import org.springframework.stereotype.Repository;
 
 import com.project.university.entity.Group;
 import com.project.university.entity.Student;
-import com.project.university.exception.DataNotFoundException;
+import com.project.university.repository.exception.DaoLayerException;
+import com.project.university.repository.exception.DataNotFoundException;
+import com.project.university.repository.exception.DataSaveException;
 
 /**
  * @author Eugene The repository class contain methods working with data base
@@ -40,7 +41,7 @@ public class StudentRepository implements CrudRepository<Student> {
 	 * @see CrudRepository#save(Object)
 	 */
 	@Override
-	public Student save(Student student) throws SQLException {
+	public Student save(Student student) throws DataSaveException, DaoLayerException {
 		Student result = null;
 		int rows = 0;
 		String fullName = student.getName() + " " + student.getSurname();
@@ -54,7 +55,7 @@ public class StudentRepository implements CrudRepository<Student> {
 					student.getGroup().getId());
 		} catch (Exception ex) {
 			log.error("Cannot add student's" + fullName + " to DB", ex);
-			throw new SQLException(ex);
+			throw new DaoLayerException(StudentRepository.class.getName(), ex);
 		}
 		
 		if(rows != 0) {
@@ -62,7 +63,7 @@ public class StudentRepository implements CrudRepository<Student> {
 			return result;
 		} else {
 			log.trace("failed to create a student's {} with id {} ", fullName, student.getId());
-			return null;
+			throw new DataSaveException();
 		}
 	}
 

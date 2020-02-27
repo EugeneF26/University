@@ -1,6 +1,5 @@
 package com.project.university.repository;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -12,7 +11,9 @@ import org.springframework.stereotype.Repository;
 
 import com.project.university.entity.Professor;
 import com.project.university.entity.StatusProfessor;
-import com.project.university.exception.DataNotFoundException;
+import com.project.university.repository.exception.DaoLayerException;
+import com.project.university.repository.exception.DataNotFoundException;
+import com.project.university.repository.exception.DataSaveException;
 
 /**
  * @author Eugene The repository class contain methods working with data base
@@ -37,14 +38,15 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 	}
 
 	/**
+	 * @throws DataSaveException 
+	 * @throws DaoLayerException 
 	 * @see CrudRepository#save(Object)
 	 */
 	@Override
-	public Professor save(Professor professor) throws SQLException {
+	public Professor save(Professor professor) throws DataSaveException, DaoLayerException {
 		Professor result = null;
 		int rows = 0;
-		String fullName = professor.getName() + " " + professor.getSurname() + " " + professor.getPatronymic();
-		log.trace("adding professor's {} to Professors", fullName);
+		log.trace("entry with: {}", professor);
 		try {
 			rows = this.jdbcTemplate.update(
 					"INSERT INTO PROFESSORS (name, surname, patronymic, currentStatus) VALUES (?,?,?,?)",
@@ -55,98 +57,101 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 					BeanPropertyRowMapper.newInstance(Professor.class), professor.getName(), professor.getSurname(),
 					professor.getPatronymic(), professor.getCurrentStatus().getStatus());
 		} catch (Exception ex) {
-			log.error("Cannot add professor's" + fullName + " to DB", ex);
-			throw new SQLException(ex);
+			log.error("Cannot add professor's to DB", ex);
+			throw new DaoLayerException(ProfessorRepository.class.getName(), ex);
 		}
 		
 		if(rows != 0) {
-			log.trace("professor {} successfully created with ID {}", fullName, result.getId());
+			log.trace("exit with: {}", professor);
 			return result;
 		} else {
-			log.trace("failed to create a professor's {} with id {} ", fullName, professor.getId());
-			return null;
+			log.warn("failed to create a professor's {} with id {} ", professor, professor.getId());
+			throw new DataSaveException();
 		}
 	}
 
 	/**
+	 * @throws DataNotFoundException 
 	 * @see CrudRepository#find(int)
 	 */
 	@Override
-	public Professor findOneById(Integer id) throws DataNotFoundException {
+	public Professor findOneById(Integer id) throws DaoLayerException, DataNotFoundException  {
 		Professor result = null;
-		log.trace("searching professor's with id {}", id);
+		log.trace("entry with: {}", id);
 		try {
 			result = this.jdbcTemplate.queryForObject(
 					"SELECT id, name, surname, patronymic " + "FROM PROFESSORS WHERE id = ?;",
 					BeanPropertyRowMapper.newInstance(Professor.class), id);
 		} catch (Exception ex) {
 			log.error("Method findOneById of ProfessorRepository threw an error", ex);
-			throw new DataNotFoundException(ex);
+			throw new DaoLayerException (ProfessorRepository.class.getName(), ex);
 		}
 		
 		if(result != null) {
-			log.trace("professor {} {} {} successfully find with ID {}", result.getName(), result.getSurname(),
-					result.getPatronymic(), result.getId());
+			log.trace("exit with: {}", result);
 			return result;
 		} else {
-			log.trace("query not returned data");
-			return null;
+			log.warn("query not returned data");
+			throw new DataNotFoundException();
 		}
 	}
 
 	/**
+	 * @throws DaoLayerException 
 	 * @see CrudRepository#update(Object)
 	 */
 	@Override
-	public Professor update(Professor professor) throws DataNotFoundException {
+	public Professor update(Professor professor) throws DataNotFoundException, DaoLayerException {
 		int rows = 0;
-		log.trace("updating professor's with id {}", professor.getId());
+		log.trace("entry with: {}", professor);
 		try {
 			rows = jdbcTemplate.update(
 					"UPDATE PROFESSORS SET name=?, surname=?, patronymic=?, currentStatus=? " + "WHERE id=? ",
 					professor.getName(), professor.getSurname(), professor.getPatronymic(),
 					professor.getCurrentStatus().getStatus(), professor.getId());
 		} catch (Exception ex) {
-			log.error("Method update of ProfessorRepository threw an error", ex);
-			throw new DataNotFoundException(ex);
+			log.error("Cannot update professor's to DB", ex);
+			throw new DaoLayerException (ProfessorRepository.class.getName(), ex);
 		}
 		
 		if(rows != 0) {
-			log.trace("data of professor's with id {} was updated", professor.getId());
+			log.trace("exit with: {}", professor);
 			return professor;
 		} else {
-			log.trace("data of professor's with id {} was not updated", professor.getId());
-			return null;
+			log.warn("data of professor's with id {} was not updated", professor.getId());
+			throw new DataNotFoundException();
 		}
 	}
 
 	/**
+	 * @throws DaoLayerException 
 	 * @see CrudRepository#delete(int)
 	 */
 	@Override
-	public void delete(Professor professor) throws DataNotFoundException {
-		String fullName = professor.getName() + " " + professor.getSurname() + " " + professor.getPatronymic();
+	public void delete(Professor professor) throws DataNotFoundException, DaoLayerException {
 		int rows = 0;
-		log.trace("deleting professor's {} with id {}", fullName, professor.getId());
+		log.trace("entry with: {}", professor);
 		try {
 			rows = this.jdbcTemplate.update("DELETE FROM PROFESSORS WHERE id=?", professor.getId());
 		} catch (Exception ex) {
-			log.error("Method delete of ProfessorRepository threw an error", ex);
-			throw new DataNotFoundException(ex);
+			log.error("Cannot delete professor's to DB", ex);
+			throw new DaoLayerException(ProfessorRepository.class.getName(), ex);
 		}
 		
 		if(rows != 0) {
-			log.trace("professor {} successfully deleted with ID {}", fullName, professor.getId());
+			log.trace("professor {} successfully deleted", professor);
 		} else {
-			log.trace("professor {} with id {} was not deleted", fullName, professor.getId());
+			log.warn("professor {} was not deleted", professor);
+			throw new DataNotFoundException();
 		}
 	}
 
 	/**
+	 * @throws DaoLayerException 
 	 * @see CrudRepository#getAll()
 	 */
 	@Override
-	public List<Professor> getAll() throws DataNotFoundException {
+	public List<Professor> getAll() throws DataNotFoundException, DaoLayerException {
 		List<Professor> result = null;
 		log.trace("getting list all professors");
 		try {
@@ -156,16 +161,16 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 						.currentStatus((StatusProfessor.valueOf((rs.getString("currentStatus"))))).build();
 			});
 		} catch (Exception ex) {
-			log.error("Method getAll of ProfessorRepository threw an error", ex);
-			throw new DataNotFoundException(ex);
+			log.error("Cannot get list professors from DB", ex);
+			throw new DaoLayerException(ProfessorRepository.class.getName(), ex);
 		}
 		
 		if (result != null) {
 			log.trace("list all professors successfully created");
 			return result;
 		} else {
-			log.trace("query not returned data");
-			return null;
+			log.warn("query not returned data");
+			throw new DataNotFoundException();
 		}
 	}
 }

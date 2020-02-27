@@ -19,9 +19,11 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import com.project.university.config.DatasourseConfigurationTest;
 import com.project.university.entity.Group;
 import com.project.university.entity.Student;
-import com.project.university.exception.DataNotFoundException;
 import com.project.university.repository.CrudRepository;
 import com.project.university.repository.StudentRepository;
+import com.project.university.repository.exception.DaoLayerException;
+import com.project.university.repository.exception.DataNotFoundException;
+import com.project.university.repository.exception.DataSaveException;
 
 import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 
@@ -43,7 +45,7 @@ public class StudentRepositoryTest {
 	
 	@Test
 	public void testSave_WhenTheUserSendsTheStudentDataAndTheProgramSavesAndIncrementStudentIdThem_thenCorrect()
-			throws DataSetException, FileNotFoundException, SQLException {	
+			throws DataSetException, FileNotFoundException, SQLException, DataSaveException, DaoLayerException {	
 		Student student = Student
 		.builder()
 		.name("Pavel")
@@ -57,7 +59,7 @@ public class StudentRepositoryTest {
 
 	@Test
 	public void testFindStudentsById_WhenTheUserEntersTheIdOfTheStudentIsOneAndTheProgramDisplaysTheResult_thenCorrect()
-			throws DataSetException, FileNotFoundException, DataNotFoundException {
+			throws DataSetException, FileNotFoundException, DataNotFoundException, DaoLayerException {
 		Student student = crudRepository.findOneById(1);
 		Assert.assertEquals(student.getName(), "Petr");
 		Assert.assertEquals(student.getSurname(), "Manshikov");
@@ -65,7 +67,7 @@ public class StudentRepositoryTest {
 	
 	@Test
 	public void testUpdate_WhenUserSendsTheDataInTheMethodAndReturnsCountUpdatedRows_thenCorrect()
-			throws DataSetException, FileNotFoundException, DataNotFoundException {
+			throws DataSetException, FileNotFoundException, DataNotFoundException, DaoLayerException {
 		Student student = Student
 		.builder()
 		.id(1)
@@ -82,7 +84,7 @@ public class StudentRepositoryTest {
 	
 	@Test
 	public void testGetAll_WhenTheUserSendsQueryForAllDataAndTheProgramReturnThem_thenCorrect()
-			throws DataSetException, FileNotFoundException, SQLException, DataNotFoundException {
+			throws DataSetException, FileNotFoundException, SQLException, DataNotFoundException, DaoLayerException {
 		
 		List<Student> result = crudRepository.getAll();
 		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(3));

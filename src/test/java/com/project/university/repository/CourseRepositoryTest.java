@@ -22,7 +22,9 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import com.project.university.config.DatasourseConfigurationTest;
 import com.project.university.entity.Course;
 import com.project.university.entity.Group;
-import com.project.university.exception.DataNotFoundException;
+import com.project.university.repository.exception.DaoLayerException;
+import com.project.university.repository.exception.DataNotFoundException;
+import com.project.university.repository.exception.DataSaveException;
 
 @ExtendWith(SpringExtension.class)
 @SpringJUnitConfig(classes = {CourseRepository.class, DatasourseConfigurationTest.class})
@@ -40,7 +42,7 @@ public class CourseRepositoryTest {
 	
 	@Test
 	public void testSave_WhenTheUserSendsTheCourseYearAndTheProgramSavesCourseYearThem_thenCorrect()
-			throws DataSetException, FileNotFoundException, SQLException {
+			throws DataSetException, FileNotFoundException, SQLException, DataSaveException, DaoLayerException {
 		List<Group> group = new ArrayList<>();
 		group.add(Group
 				.builder()
@@ -57,14 +59,14 @@ public class CourseRepositoryTest {
 	
 	@Test
 	public void testFindCourseByYear_WhenTheUserEntersTheYearOfTheCourseIsOneAndTheProgramDisplaysTheResult_thenCorrect()
-			throws DataSetException, FileNotFoundException, DataNotFoundException {
+			throws DataSetException, FileNotFoundException, DataNotFoundException, DaoLayerException {
 		Course course = crudRepository.findOneById(1);
 		MatcherAssert.assertThat(course.getYear(), CoreMatchers.equalTo(1));
 	}
 	
 	@Test
 	public void testUpdate_WhenUserSendsTheDataInTheMethodAndReturnsTheSameObject_thenCorrect()
-			throws DataSetException, FileNotFoundException, DataNotFoundException {
+			throws DataSetException, FileNotFoundException, DataNotFoundException, DaoLayerException {
 		List<Group> group = new ArrayList<>();
 		group.add(Group
 				.builder()
@@ -82,7 +84,7 @@ public class CourseRepositoryTest {
 	
 	@Test
 	public void testGetAll_WhenTheUserSendsQueryForAllDataAndTheProgramReturnThem_thenCorrect()
-			throws DataSetException, FileNotFoundException, SQLException, DataNotFoundException {
+			throws DataSetException, FileNotFoundException, SQLException, DataNotFoundException, DaoLayerException {
 		List<Course> result = crudRepository.getAll();
 		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(3));
 	}
