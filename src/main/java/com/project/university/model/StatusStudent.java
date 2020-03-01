@@ -1,11 +1,11 @@
-package com.project.university.entity;
+package com.project.university.model;
 
-public enum StatusProfessor {
-	ACCEPTED("accepted"), FIRED("fired"), WORKS("works");
+public enum StatusStudent {
+	ACCEPTED("accepted"), EXPELLED("expelled"), STUDY("study");
 
 	private String status;
 
-	StatusProfessor(String status) {
+	StatusStudent(String status) {
 		this.status = status;
 	}
 	

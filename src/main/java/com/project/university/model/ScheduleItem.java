@@ -1,4 +1,4 @@
-package com.project.university.entity;
+package com.project.university.model;
 
 import java.time.LocalDate;
 import lombok.Data;

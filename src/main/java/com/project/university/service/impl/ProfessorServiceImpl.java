@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
-import com.project.university.entity.Professor;
-import com.project.university.entity.StatusProfessor;
+import com.project.university.model.Professor;
+import com.project.university.model.StatusProfessor;
 import com.project.university.repository.CrudRepository;
 import com.project.university.service.ProfessorService;
 

@@ -7,8 +7,8 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.project.university.entity.Course;
-import com.project.university.entity.Group;
+import com.project.university.model.Course;
+import com.project.university.model.Group;
 
 /**
  * @author Eugene The repository class contain methods working with data base

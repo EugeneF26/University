@@ -1,14 +1,11 @@
 package com.project.university;
 
-import org.springframework.context.annotation.ComponentScan;
-
-import com.project.university.entity.Professor;
-import com.project.university.entity.Student;
+import com.project.university.model.Professor;
+import com.project.university.model.Student;
 
 /**
  * @author Eugene The class contain methods for managing data of other classes
  */
-@ComponentScan
 public class UniversityApplication {
 
 	/*

@@ -1,6 +1,4 @@
-package com.project.university.entity;
-
-import java.util.List;
+package com.project.university.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,16 +6,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /** @author Eugene
- * The class contain data of Group
+ * The class contain data of student and methods working with it
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Group {
+public class Student {
 	private Integer id;
 	private String name;
-	private Course course;
-	private List<Student> students;
+	private String surname;
+	private Group group;
+	private StatusStudent currentStatus;
 }
 

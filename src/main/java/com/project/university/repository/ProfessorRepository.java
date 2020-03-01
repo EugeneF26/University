@@ -9,8 +9,8 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.project.university.entity.Professor;
-import com.project.university.entity.StatusProfessor;
+import com.project.university.model.Professor;
+import com.project.university.model.StatusProfessor;
 import com.project.university.repository.exception.DaoLayerException;
 import com.project.university.repository.exception.DataNotFoundException;
 import com.project.university.repository.exception.DataSaveException;

@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.project.university.entity.ScheduleItem;
+import com.project.university.model.ScheduleItem;
 import com.project.university.repository.CrudRepository;
 import com.project.university.service.ScheduleService;
 

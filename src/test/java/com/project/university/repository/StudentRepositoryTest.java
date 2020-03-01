@@ -17,8 +17,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.project.university.config.DatasourseConfigurationTest;
-import com.project.university.entity.Group;
-import com.project.university.entity.Student;
+import com.project.university.model.Group;
+import com.project.university.model.Student;
 import com.project.university.repository.CrudRepository;
 import com.project.university.repository.StudentRepository;
 import com.project.university.repository.exception.DaoLayerException;

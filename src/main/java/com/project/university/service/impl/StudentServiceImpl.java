@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.project.university.entity.StatusStudent;
-import com.project.university.entity.Student;
+import com.project.university.model.StatusStudent;
+import com.project.university.model.Student;
 import com.project.university.repository.CrudRepository;
 import com.project.university.service.StudentService;
 

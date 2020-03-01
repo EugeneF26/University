@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.time.Period;
 import java.util.List;
 
-import com.project.university.entity.ScheduleItem;
+import com.project.university.model.ScheduleItem;
 
 public interface ScheduleService {
 	void createSchedule(ScheduleItem item);

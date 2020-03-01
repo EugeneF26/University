@@ -1,6 +1,6 @@
 package com.project.university.service;
 
-import com.project.university.entity.Professor;
+import com.project.university.model.Professor;
 
 public interface ProfessorService {
 	void fireProfessor(Professor professor) throws Exception;

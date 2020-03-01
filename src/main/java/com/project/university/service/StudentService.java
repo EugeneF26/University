@@ -2,7 +2,7 @@ package com.project.university.service;
 
 import java.util.List;
 
-import com.project.university.entity.Student;
+import com.project.university.model.Student;
 
 public interface StudentService {
 	Student transferStudentToAnotherGroup(Student student) throws Exception ;
