@@ -3,7 +3,9 @@ package com.project.university;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import com.project.university.config.WebConfiguration;
 import com.project.university.controller.UniversityController;
 import com.project.university.model.Professor;
 import com.project.university.model.Student;
@@ -13,7 +15,7 @@ import com.project.university.model.Student;
  */
 @Configuration
 @ComponentScan
-public class UniversityApplication {
+public class UniversityApplication extends AbstractAnnotationConfigDispatcherServletInitializer{
 	
 	private UniversityController universityController;
 	
@@ -43,6 +45,21 @@ public class UniversityApplication {
 	}
 
 	private void acceptNewStudentToCourse(Student student) {
+	}
+	
+	@Override
+	protected Class<?>[] getRootConfigClasses() {
+		return null;
+	}
+
+	@Override
+	protected Class<?>[] getServletConfigClasses() {
+		return new Class[] { WebConfiguration.class };
+	}
+
+	@Override
+	protected String[] getServletMappings() {
+		return new String[] { "/" };
 	}
 }
 
