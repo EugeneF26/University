@@ -3,8 +3,6 @@ package com.project.university.repository;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.dbunit.dataset.NoSuchTableException;
-
 import com.project.university.repository.exception.DaoLayerException;
 import com.project.university.repository.exception.DataNotFoundException;
 import com.project.university.repository.exception.DataSaveException;
