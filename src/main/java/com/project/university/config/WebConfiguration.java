@@ -14,6 +14,8 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
+import com.project.university.service.impl.StudentServiceImpl;
+
 @Configuration
 @EnableWebMvc
 @ComponentScan("com.project.university.controller")
@@ -44,6 +46,11 @@ public class WebConfiguration implements WebMvcConfigurer {
 		ThymeleafViewResolver resolver = new ThymeleafViewResolver();
 		resolver.setTemplateEngine(templateEngine());
 		registry.viewResolver(resolver);
+	}
+	
+	@Bean
+	public StudentServiceImpl getStudentSerice() {
+		return new StudentServiceImpl();
 	}
 }
 

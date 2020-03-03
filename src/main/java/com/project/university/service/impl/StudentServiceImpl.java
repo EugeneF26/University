@@ -24,6 +24,8 @@ public class StudentServiceImpl implements StudentService {
 		this.crudRepository = crudRepository;
 	}
 	
+	public StudentServiceImpl() {}
+
 	@Override
 	public Student transferStudentToAnotherGroup(Student student) throws Exception {
 		return crudRepository.update(student);
