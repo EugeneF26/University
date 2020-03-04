@@ -19,13 +19,13 @@ public class UniversityController {
 		this.studentService = studentService;
 	}
 
-	@GetMapping("/")
+	@GetMapping("/index")
 	public String index(Model model) {
 		return "index";
 	}
 	
 	@GetMapping("/list")
-	public String studentsList(Model model) throws Exception {
+	public String list(Model model) throws Exception {
 //		  model.addAttribute("students", studentService.getStudents());
 		return "list";
 	}
