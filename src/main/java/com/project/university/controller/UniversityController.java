@@ -25,9 +25,18 @@ public class UniversityController {
 	}
 	
 	@GetMapping("/list")
-	public String list(Model model) throws Exception {
-//		  model.addAttribute("students", studentService.getStudents());
+	public String list(Model model, String sex) throws Exception {
+		if(sex == "м") {
+		model.addAttribute("students", "");
+		} else if (sex == "ж") {
+		model.addAttribute("students", "");
+		}
 		return "list";
+	}
+	
+	@GetMapping("/one")
+	public String one(Model model) throws Exception {
+		return "one";
 	}
 }
 
