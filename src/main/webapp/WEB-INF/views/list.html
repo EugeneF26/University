@@ -2,124 +2,111 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="utf-8">
-    <title>Universities</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="import" href="index.html">
+<meta charset="utf-8">
+<title>Universities</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<link rel="import" href="index.html">
 </head>
 <body>
 
-  <script>
+	<script>
            var link = document.querySelector('link[rel=import]');
            var content = link.import.querySelector('#bar');
            document.body.appendChild(content.cloneNode(true));
          </script>
 
-<div class="row">
-<div class="card-deck">
-  <div class="col-md-3 col-xl-3">
-  <div class="card">
-        <!-- Изображение -->
-        <img class="card-img-top" src="https://cs13.pikabu.ru/post_img/2019/11/04/11/1572890608146535296.webp" alt="...">
-        <div class="card-body">
-            <h4 class="card-title">Anna Mixeeva</h4>
-            <p class="card-text">Student id=1</p>
-        </div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">Course year=1</li>
-            <li class="list-group-item">Group id=2</li>
-            <li class="list-group-item">Status: study</li>
-        </ul>
-    </div>
-    </div>
+	<div class="w-auto my-auto m-auto">
+		<div class="row">
+			<div class="col-md-4">
+				<div class="card mb-3">
+					<div class="card-header">Marina Kravec</div>
+					<img class="card-img-top"
+						src="https://cs10.pikabu.ru/post_img/2019/11/04/11/1572890660110352407.webp"
+						alt="...">
+					<div class="card-body">
+						<h7 class="card-title">Student id <strong>1</strong></h7>
+						<p class="card-text">
+							<strong>Study</strong> in the <strong>5 year</strong> in the <strong>4
+								group</strong>
+						</p>
+					</div>
+				</div>
+			</div>
 
-<div class="col-md-3 col-xl-3">
-<div class="card">
-      <!-- Изображение -->
-      <img class="card-img-top" src="https://cs11.pikabu.ru/post_img/2019/11/04/11/1572890673177395791.webp" alt="...">
-      <div class="card-body">
-          <h4 class="card-title">Anton Pakrov</h4>
-          <p class="card-text">Student id=2</p>
-      </div>
-      <ul class="list-group list-group-flush">
-          <li class="list-group-item">Course year=2</li>
-          <li class="list-group-item">Group id=4</li>
-          <li class="list-group-item">Status: excluded</li>
-      </ul>
-  </div>
-</div>
+			<div class="col-md-4">
+				<div class="card mb-3">
+					<div class="card-header">Kirill Artor</div>
+					<img class="card-img-top"
+						src="https://cs11.pikabu.ru/post_img/2019/11/04/11/1572890673177395791.webp"
+						alt="...">
+					<div class="card-body">
+						<h7 class="card-title">Student id <strong>2</strong></h7>
+						<p class="card-text">
+							<strong>Study</strong> in the <strong>1 year</strong> in the <strong>2
+								group</strong>
+						</p>
+					</div>
+				</div>
+			</div>
 
-<div class="col-md-3 col-xl-3">
-  <div class="card">
-        <!-- Изображение -->
-        <img class="card-img-top" src="https://cs10.pikabu.ru/post_img/2019/11/04/11/1572890660110352407.webp" alt="...">
-        <div class="card-body">
-            <h4 class="card-title">Maria Marko</h4>
-            <p class="card-text">Student id=3</p>
-        </div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">Course year=4</li>
-            <li class="list-group-item">Group id=2</li>
-            <li class="list-group-item">Status: study</li>
-        </ul>
-    </div>
-</div>
+			<div class="col-md-4">
+				<div class="card mb-3">
+					<div class="card-header">Karana Navka</div>
+					<img class="card-img-top"
+						src="https://cs13.pikabu.ru/post_img/2019/11/04/11/1572890608146535296.webp"
+						alt="...">
+					<div class="card-body">
+						<h7 class="card-title">Student id <strong>3</strong></h7>
+						<p class="card-text">
+							<strong>Study</strong> in the <strong>2 year</strong> in the <strong>4
+								group</strong>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-<div class="col-md-3 col-xl-3">
-    <div class="card">
-          <!-- Изображение -->
-          <img class="card-img-top" src="https://cs11.pikabu.ru/post_img/2019/11/04/11/1572890673177395791.webp" alt="...">
-          <div class="card-body">
-              <h4 class="card-title">Artem Batrovish</h4>
-              <p class="card-text">Student id=4</p>
-          </div>
-          <ul class="list-group list-group-flush">
-              <li class="list-group-item">Course year=2</li>
-              <li class="list-group-item">Group id=3</li>
-              <li class="list-group-item">Status: study</li>
-          </ul>
-      </div>
-</div>
-</div>
-</div>
+	<div class="w-auto my-auto m-auto">
+		<div class="row">
 
-<div class="row">
-<div class="card-deck">
-<div class="col-md-3 col-xl-3">
-<div class="card">
-      <!-- Изображение -->
-      <img class="card-img-top" src="https://cs11.pikabu.ru/post_img/2019/11/04/11/1572890673177395791.webp" alt="...">
-      <div class="card-body">
-          <h4 class="card-title">Dmitriy Krav</h4>
-          <p class="card-text">Student id=5</p>
-      </div>
-      <ul class="list-group list-group-flush">
-          <li class="list-group-item">Course year=3</li>
-          <li class="list-group-item">Group id=4</li>
-          <li class="list-group-item">Status: study</li>
-      </ul>
-  </div>
-  </div>
+			<div class="col-md-4">
+				<div class="card mb-3">
+					<div class="card-header">Anton Petrov</div>
+					<img class="card-img-top"
+						src="https://cs11.pikabu.ru/post_img/2019/11/04/11/1572890673177395791.webp"
+						alt="...">
+					<div class="card-body">
+						<h7 class="card-title">Student id <strong>4</strong></h7>
+						<p class="card-text">
+							<strong>Study</strong> in the <strong>4 year</strong> in the <strong>3
+								group</strong>
+						</p>
+					</div>
+				</div>
+			</div>
 
-  <div class="col-md-3 col-xl-3">
-  <div class="card">
-        <!-- Изображение -->
-        <img class="card-img-top" src="https://cs13.pikabu.ru/post_img/2019/11/04/11/1572890608146535296.webp" alt="...">
-        <div class="card-body">
-            <h4 class="card-title">Tatiana Malkurova</h4>
-            <p class="card-text">Student id=6</p>
-        </div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">Course year=3</li>
-            <li class="list-group-item">Group id=3</li>
-            <li class="list-group-item">Status: study</li>
-        </ul>
-    </div>
-  </div>
-  </div>
-  </div>
+			<div class="col-md-4">
+				<div class="card mb-3">
+					<div class="card-header">Ksenia Ivanova</div>
+					<img class="card-img-top"
+						src="https://cs10.pikabu.ru/post_img/2019/11/04/11/1572890660110352407.webp"
+						alt="...">
+					<div class="card-body">
+						<h7 class="card-title">Student id <strong>5</strong></h7>
+						<p class="card-text">
+							<strong>Study</strong> in the <strong>2 year</strong> in the <strong>1
+								group</strong>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </html>
 
