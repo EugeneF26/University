@@ -33,7 +33,7 @@ public class StudentRepository implements CrudRepository<Student> {
 	 * @see SpringConfig#dataSource()
 	 */
 	@Autowired
-	public void setDataSource(JdbcTemplate jdbcTemplate) {
+	public StudentRepository(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 

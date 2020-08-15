@@ -1,13 +1,11 @@
 package com.project.university;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import com.project.university.config.WebConfiguration;
 import com.project.university.model.Professor;
 import com.project.university.model.Student;
-import com.project.university.service.impl.StudentServiceImpl;
 
 /**
  * @author Eugene The class contain methods for managing data of other classes
@@ -45,12 +43,12 @@ public class UniversityApplication extends AbstractAnnotationConfigDispatcherSer
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		return new Class[] { WebConfiguration.class };
+		return new Class[] {WebConfiguration.class};
 	}
 
 	@Override
 	protected String[] getServletMappings() {
-		return new String[] { "/" };
+		return new String[] {"/"};
 	}
 }
 
