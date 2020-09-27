@@ -48,7 +48,7 @@ public class GroupRepositoryTest {
 						.build())
 				.name("Y1")
 				.build();		
-		MatcherAssert.assertThat(crudRepository.save(group).getId(), CoreMatchers.equalTo(4));
+		MatcherAssert.assertThat(crudRepository.save(group).getId(), CoreMatchers.equalTo(5));
 	}
 	
 	@Test
@@ -77,7 +77,7 @@ public class GroupRepositoryTest {
 	public void testGetAll_WhenTheUserSendsQueryForAllDataAndTheProgramReturnThem_thenCorrect()
 			throws DataSetException, FileNotFoundException, SQLException, DataNotFoundException, DaoLayerException {
 		List<Group> result = crudRepository.getAll();
-		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(3));
+		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(4));
 	}
 }
 

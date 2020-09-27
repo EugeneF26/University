@@ -31,7 +31,6 @@ import com.project.university.repository.exception.DataSaveException;
 @ActiveProfiles("dev")
 public class ProfessorRepositoryTest {
 	
-	@Autowired
 	private CrudRepository<Professor> crudRepository;
 	
 	@Autowired
@@ -45,9 +44,8 @@ public class ProfessorRepositoryTest {
 		new Professor().getCurrentStatus();
 		Professor professor = Professor.builder()
 				.name("Alexander")
-				.surname("Artemenko")
 				.patronymic("Fedorovich")
-				.currentStatus(StatusProfessor.ACCEPTED)
+				.currentStatus(StatusProfessor.WORKS)
 				.build();
 		MatcherAssert.assertThat(crudRepository.save(professor).getId(), CoreMatchers.equalTo(4));
 	}
@@ -65,10 +63,9 @@ public class ProfessorRepositoryTest {
 		new Professor().getCurrentStatus();
 		Professor professor = Professor.builder()
 				.name("Alexander")
-				.surname("Artemenko")
 				.patronymic("Fedorovich")
 				.id(2)
-				.currentStatus(StatusProfessor.ACCEPTED)
+				.currentStatus(StatusProfessor.WORKS)
 				.build();	
 		Professor result = crudRepository.update(professor);
 		MatcherAssert.assertThat(result, CoreMatchers.equalToObject(professor));

@@ -1,5 +1,7 @@
 package com.project.university.repository;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.List;
@@ -18,6 +20,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.project.university.config.DatasourseConfigurationTest;
 import com.project.university.model.Group;
+import com.project.university.model.StatusStudent;
 import com.project.university.model.Student;
 import com.project.university.repository.CrudRepository;
 import com.project.university.repository.StudentRepository;
@@ -26,8 +29,6 @@ import com.project.university.repository.exception.DataNotFoundException;
 import com.project.university.repository.exception.DataSaveException;
 
 import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
-
-import junit.framework.Assert;
 
 @ExtendWith(SpringExtension.class)
 @SpringJUnitConfig(classes = {StudentRepository.class, DatasourseConfigurationTest.class})
@@ -53,6 +54,7 @@ public class StudentRepositoryTest {
 		.group(Group.builder()
 				.id(6)
 				.build())
+		.currentStatus(StatusStudent.STUDY)
 		.build();
 		MatcherAssert.assertThat(crudRepository.save(student).getId(), CoreMatchers.equalTo(4));
 	}
@@ -61,8 +63,8 @@ public class StudentRepositoryTest {
 	public void testFindStudentsById_WhenTheUserEntersTheIdOfTheStudentIsOneAndTheProgramDisplaysTheResult_thenCorrect()
 			throws DataSetException, FileNotFoundException, DataNotFoundException, DaoLayerException {
 		Student student = crudRepository.findOneById(1);
-		Assert.assertEquals(student.getName(), "Petr");
-		Assert.assertEquals(student.getSurname(), "Manshikov");
+		assertEquals(student.getName(), "Petr");
+		assertEquals(student.getSurname(), "Manshikov");
 	}
 	
 	@Test

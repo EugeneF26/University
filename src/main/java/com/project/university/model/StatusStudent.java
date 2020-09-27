@@ -1,7 +1,7 @@
 package com.project.university.model;
 
 public enum StatusStudent {
-	ACCEPTED("accepted"), EXPELLED("expelled"), STUDY("study");
+	APPLY("APPLY"), EXPELLED("EXPELLED"), STUDY("STUDY");
 
 	private String status;
 

@@ -34,10 +34,18 @@ public class ProfessorServiceTest {
 	public void testAcceptNewProfessor_WhenTheUserSendsQueryForAddANewProfessorAndTheProgramReturnIncrementIdOfStudent_thenCorrect() throws Exception {
 		Professor professor = Professor
 				.builder()
-				.currentStatus(StatusProfessor.ACCEPTED)
-				.id(1)
+				.id(4)
+				.name("Mark")
+				.patronymic("Hamatov")
+				.currentStatus(StatusProfessor.AT_INTERVIEW)
 				.build();
-		MatcherAssert.assertThat(professorService.acceptNewProfessor(professor).getId(), CoreMatchers.equalTo(1));
+		
+		professorService.acceptNewProfessor(professor);
+		
+		MatcherAssert.assertThat(professorService.getProfessor(professor)
+				.getCurrentStatus()
+				.getStatus(), 
+				CoreMatchers.equalTo("WORKS"));
 	}
 }
 

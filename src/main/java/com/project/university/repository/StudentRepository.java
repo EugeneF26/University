@@ -2,6 +2,7 @@ package com.project.university.repository;
 
 import java.util.List;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,12 +47,14 @@ public class StudentRepository implements CrudRepository<Student> {
 		int rows = 0;
 		log.trace("entry with: {}", student);
 		try {
-			rows = this.jdbcTemplate.update("INSERT INTO STUDENTS (name, surname, groupId) VALUES (?,?,?)",
-					student.getName(), student.getSurname(), student.getGroup().getId());
+			rows = this.jdbcTemplate.update("INSERT INTO STUDENTS (name, surname, groupId, currentStatus) VALUES (?,?,?,?)",
+					student.getName(), student.getSurname(), student.getGroup().getId(),
+					student.getCurrentStatus().getStatus());
+			
 			result = this.jdbcTemplate.queryForObject(
-					"SELECT id FROM STUDENTS WHERE name=? AND surname=? AND groupId=?",
+					"SELECT id FROM STUDENTS WHERE name=? AND surname=? AND groupId=? AND currentStatus=? ORDER BY id DESC LIMIT 1",
 					BeanPropertyRowMapper.newInstance(Student.class), student.getName(), student.getSurname(),
-					student.getGroup().getId());
+					student.getGroup().getId(), student.getCurrentStatus().getStatus());
 		} catch (Exception ex) {
 			log.error("Cannot add student's to DB", ex);
 			throw new DaoLayerException(StudentRepository.class.getName(), ex);

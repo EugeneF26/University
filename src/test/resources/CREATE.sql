@@ -2,7 +2,7 @@ CREATE TABLE groups
 (
 id SERIAL PRIMARY KEY CHECK (id <= 5),
 name TEXT,
-courseId NUMBER CHECK (courseId <= 5),
+courseId INTEGER CHECK (courseId <= 5),
 CONSTRAINT sc_unique UNIQUE (id, courseId)
 );
 CREATE TABLE students
@@ -10,22 +10,21 @@ CREATE TABLE students
 id SERIAL PRIMARY KEY,
 name TEXT NOT NULL,
 surname TEXT NOT NULL,
-groupId NUMBER NOT NULL,
-currentStatus TEXT
+groupId INTEGER NOT NULL,
+currentStatus VARCHAR(255) CHECK(currentStatus in ('STUDY','EXPELLED'))
 );
 CREATE TABLE courses
 (
 id SERIAL PRIMARY KEY,
-year NUMBER CHECK (year <= 5)
+year INTEGER CHECK (year <= 5)
 );
 ALTER TABLE GROUPS ADD FOREIGN KEY (courseId) REFERENCES courses(year) ON DELETE CASCADE ON UPDATE CASCADE;
 CREATE TABLE professors
 (
 id SERIAL PRIMARY KEY,
-name TEXT,
-surname TEXT,
-patronymic TEXT,
-currentStatus TEXT
+name TEXT NOT NULL,
+patronymic TEXT NOT NULL,
+currentStatus VARCHAR(255) CHECK(currentStatus in ('WORKS', 'FIRED'))
 );
 CREATE TABLE lectures
 (
@@ -35,16 +34,16 @@ title TEXT
 CREATE TABLE lecture_halls
 (
 id SERIAL PRIMARY KEY,
-floor NUMBER,
-numberRoom NUMBER
+floor INTEGER,
+numberRoom INTEGER
 );
 CREATE TABLE schedule_Item
 (
 studyDay TIMESTAMP PRIMARY KEY,
-year NUMBER,
-id NUMBER,
+year INTEGER,
+id INTEGER,
 title TEXT,
-numberRoom NUMBER,
+numberRoom INTEGER,
 FOREIGN KEY (year) REFERENCES courses(year) ON DELETE CASCADE ON UPDATE CASCADE,
 FOREIGN KEY (id) REFERENCES professors(id) ON DELETE CASCADE ON UPDATE CASCADE,
 FOREIGN KEY (title) REFERENCES lectures(title) ON DELETE CASCADE ON UPDATE CASCADE,

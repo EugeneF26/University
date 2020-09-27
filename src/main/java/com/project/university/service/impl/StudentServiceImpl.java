@@ -39,7 +39,7 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public Student acceptNewStudent(Student student) throws Exception {
-		student.setCurrentStatus(StatusStudent.ACCEPTED);
+		student.setCurrentStatus(StatusStudent.STUDY);
 		return crudRepository.save(student);
 	}
 

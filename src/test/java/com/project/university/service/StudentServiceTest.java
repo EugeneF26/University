@@ -51,7 +51,7 @@ public class StudentServiceTest {
 						.builder()
 						.id(1)
 						.build())
-				.currentStatus(StatusStudent.ACCEPTED)
+				.currentStatus(StatusStudent.STUDY)
 				.build();
 		MatcherAssert.assertThat(studentService.acceptNewStudent(student).getId(), CoreMatchers.equalTo(4));
 	}

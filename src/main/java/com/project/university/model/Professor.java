@@ -16,12 +16,13 @@ import lombok.NoArgsConstructor;
 public class Professor {
 	private Integer id;
 	private String name;
-	private String surname;
 	private String patronymic;
 	private StatusProfessor currentStatus;
 	
 	
-	public StatusProfessor getCurrentStatus(){ return currentStatus; }
+	public StatusProfessor getCurrentStatus(){ 
+		return currentStatus; 
+		}
 
 }
 

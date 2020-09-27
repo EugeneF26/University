@@ -33,7 +33,7 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 	 * @see SpringConfig#dataSource()
 	 */
 	@Autowired
-	public void setDataSource(JdbcTemplate jdbcTemplate) {
+	public ProfessorRepository(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
@@ -49,13 +49,15 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 		log.trace("entry with: {}", professor);
 		try {
 			rows = this.jdbcTemplate.update(
-					"INSERT INTO PROFESSORS (name, surname, patronymic, currentStatus) VALUES (?,?,?,?)",
-					professor.getName(), professor.getSurname(), professor.getPatronymic(),
+					"INSERT INTO PROFESSORS (name, patronymic, currentStatus) VALUES (?,?,?)",
+					professor.getName(), professor.getPatronymic(),
 					professor.getCurrentStatus().getStatus());
+			
 			result = this.jdbcTemplate.queryForObject(
-					"SELECT id FROM PROFESSORS WHERE name=? AND surname=? AND patronymic=? " + "AND currentStatus=?",
-					BeanPropertyRowMapper.newInstance(Professor.class), professor.getName(), professor.getSurname(),
+					"SELECT id FROM PROFESSORS WHERE name=? AND patronymic=? AND currentStatus=? ORDER BY id DESC LIMIT 1",
+					BeanPropertyRowMapper.newInstance(Professor.class), professor.getName(),
 					professor.getPatronymic(), professor.getCurrentStatus().getStatus());
+			
 		} catch (Exception ex) {
 			log.error("Cannot add professor's to DB", ex);
 			throw new DaoLayerException(ProfessorRepository.class.getName(), ex);
@@ -80,7 +82,7 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 		log.trace("entry with: {}", id);
 		try {
 			result = this.jdbcTemplate.queryForObject(
-					"SELECT id, name, surname, patronymic " + "FROM PROFESSORS WHERE id = ?;",
+					"SELECT id, name, patronymic, currentStatus " + "FROM PROFESSORS WHERE id = ?",
 					BeanPropertyRowMapper.newInstance(Professor.class), id);
 		} catch (Exception ex) {
 			log.error(ProfessorRepository.class.getName(), ex);
@@ -106,8 +108,8 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 		log.trace("entry with: {}", professor);
 		try {
 			rows = jdbcTemplate.update(
-					"UPDATE PROFESSORS SET name=?, surname=?, patronymic=?, currentStatus=? " + "WHERE id=? ",
-					professor.getName(), professor.getSurname(), professor.getPatronymic(),
+					"UPDATE PROFESSORS SET name=?, patronymic=?, currentStatus=? " + "WHERE id=? ",
+					professor.getName(), professor.getPatronymic(),
 					professor.getCurrentStatus().getStatus(), professor.getId());
 		} catch (Exception ex) {
 			log.error("Cannot update professor's to DB", ex);
@@ -155,10 +157,10 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 		List<Professor> result = null;
 		log.trace("getting list all professors");
 		try {
-			result = this.jdbcTemplate.query("SELECT * FROM PROFESSORS", (rs, rowNum) -> {
-				return Professor.builder().id(rs.getInt("id")).name(rs.getString("name"))
-						.surname(rs.getString("surname"))
-						.currentStatus((StatusProfessor.valueOf((rs.getString("currentStatus"))))).build();
+			result = this.jdbcTemplate.query("SELECT id, name, patronymic, currentStatus FROM PROFESSORS", (rs, rowNum) -> {
+				return Professor.builder().id(rs.getInt("id")).name(rs.getString("name")).patronymic(rs.getString("patronymic"))
+						.currentStatus((StatusProfessor.valueOf((rs.getString("currentStatus")))))
+						.build();
 			});
 		} catch (Exception ex) {
 			log.error("Cannot get list professors from DB", ex);

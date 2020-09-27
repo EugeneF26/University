@@ -42,19 +42,20 @@ public class CourseRepositoryTest {
 	
 	@Test
 	public void testSave_WhenTheUserSendsTheCourseYearAndTheProgramSavesCourseYearThem_thenCorrect()
-			throws DataSetException, FileNotFoundException, SQLException, DataSaveException, DaoLayerException {
+			throws DataSetException, FileNotFoundException, SQLException, DataSaveException, DaoLayerException, DataNotFoundException {
 		List<Group> group = new ArrayList<>();
 		group.add(Group
 				.builder()
-				.id(1)
+				.id(5)
 				.build());
 		
 		Course course = Course
 				.builder()
-				.id(2)
+				.year(5)
 				.groups(group)
 				.build();	
-		MatcherAssert.assertThat(crudRepository.save(course).getId(), CoreMatchers.equalTo(2));
+		
+		MatcherAssert.assertThat(crudRepository.save(course).getId(), CoreMatchers.equalTo(5));
 	}
 	
 	@Test
@@ -86,7 +87,7 @@ public class CourseRepositoryTest {
 	public void testGetAll_WhenTheUserSendsQueryForAllDataAndTheProgramReturnThem_thenCorrect()
 			throws DataSetException, FileNotFoundException, SQLException, DataNotFoundException, DaoLayerException {
 		List<Course> result = crudRepository.getAll();
-		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(3));
+		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(4));
 	}
 }
 

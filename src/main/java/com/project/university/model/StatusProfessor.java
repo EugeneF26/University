@@ -1,7 +1,7 @@
 package com.project.university.model;
 
 public enum StatusProfessor {
-	ACCEPTED("accepted"), FIRED("fired"), WORKS("works");
+	AT_INTERVIEW("AT_INTERVIEW"), FIRED("FIRED"), WORKS("WORKS");
 
 	private String status;
 
