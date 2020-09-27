@@ -24,7 +24,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableJpaRepositories 
 @ComponentScan("com.project.university.repository")
-@Profile({"prod","default"})
+//@Profile({"prod","default"})
 public class DatasourseConfiguration {
 	
 	private static final String DRIVER_POSTGRES = "postgres.DRIVER";
@@ -45,7 +45,7 @@ public class DatasourseConfiguration {
 	 * @return dataSourse
 	 */
 	@Bean
-	@Profile({"prod, default"})
+//	@Profile({"prod, default"})
     public DataSource dataSourcePostgres() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(env.getRequiredProperty(DRIVER_POSTGRES));

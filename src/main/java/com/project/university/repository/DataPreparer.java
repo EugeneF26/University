@@ -1,12 +1,18 @@
 package com.project.university.repository;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import java.util.Arrays;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Objects;
 import com.project.university.model.Course;
 import com.project.university.model.Group;
 import com.project.university.model.Professor;
@@ -36,6 +42,38 @@ public class DataPreparer {
 		this.courseRepository = courseRepository;
 		this.studentRepository = studentRepository;
 		this.professorRepository = professorRepository;
+	}
+	
+	/*
+	 * public void prepareData() { preparerGroupsTable();
+	 * preparerCoursesTable(); preparerStudentsTable();
+	 * preparerStudentsCoursesTable(); }
+	 */
+	
+	/*
+	 * public void cleanData() { groupRepository.truncateGroups();
+	 * courseRepository.truncateCourses();
+	 * studentRepository.truncateStudentsAndStudentsCourses(); }
+	 */
+
+	public void deleteTables() {
+		dropGroupsTable();
+		dropCoursesTable();
+		dropStudentsTable();
+		dropProfessorsTable();
+		dropSchedule_ItemTable();
+		dropLecture_hallsTable();
+		dropLecturesTable(); 
+	}
+
+	public void createTables() {
+		createGroupsTable();
+		createStudentsTable();
+		createCoursesTable();
+		createProfessorsTable();
+		createLecturesTable();
+		createLecture_hallsTable();
+		createSchedule_ItemTable();
 	}
 	
 	public void createStudents() throws DataSaveException, DaoLayerException {
@@ -139,20 +177,117 @@ public class DataPreparer {
 		}
 	}
 	
-	public void createCoursesTable() {
+	private void createGroupsTable() {
+		try {
+			File file = new File(Objects.requireNonNull(DataPreparer.class.getClassLoader().getResource("QueriesDDL/CreateGroupsTable.sql")).getFile());
+			groupRepository.createGroupsTable(Files.lines(Paths.get(file.getPath())).collect(Collectors.joining()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void createStudentsTable() {
+		try {
+			File file = new File(Objects.requireNonNull(DataPreparer.class.getClassLoader().getResource("QueriesDDL/CreateStudentsTable.sql")).getFile());
+			studentRepository.createStudentsTable(Files.lines(Paths.get(file.getPath())).collect(Collectors.joining()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void createCoursesTable() {
+		try {
+			File file = new File(Objects.requireNonNull(DataPreparer.class.getClassLoader().getResource("QueriesDDL/CreateCoursesTable.sql")).getFile());
+			courseRepository.createCourseTable(Files.lines(Paths.get(file.getPath())).collect(Collectors.joining()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void createProfessorsTable() {
+		try {
+			File file = new File(Objects.requireNonNull(DataPreparer.class.getClassLoader().getResource("QueriesDDL/CreateProfessorsTable.sql")).getFile());
+			professorRepository.createProfessorsTable(Files.lines(Paths.get(file.getPath())).collect(Collectors.joining()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void createSchedule_ItemTable() {
+	
+	}
+
+	private void createLecture_hallsTable() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void createLecturesTable() {
+		// TODO Auto-generated method stub
 		
 	}
 	
-	public void createGroupsTable() {
-		
+	private void dropLecturesTable() {
+		try {
+			File file = new File(Objects.requireNonNull(DataPreparer.class.getClassLoader().getResource("QueriesDDL/DropLecturesTable.sql")).getFile());
+			studentRepository.createStudentsTable(Files.lines(Paths.get(file.getPath())).collect(Collectors.joining()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-	
-	public void createStudentsTable() {
-		
+
+	private void dropLecture_hallsTable() {
+		try {
+			File file = new File(Objects.requireNonNull(DataPreparer.class.getClassLoader().getResource("QueriesDDL/CreateLecture_hallsTable.sql")).getFile());
+			studentRepository.createStudentsTable(Files.lines(Paths.get(file.getPath())).collect(Collectors.joining()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-	
-	public void createProfessorsTable() {
-		
+
+	private void dropSchedule_ItemTable() {
+		try {
+			File file = new File(Objects.requireNonNull(DataPreparer.class.getClassLoader().getResource("QueriesDDL/CreateSchedule_ItemTable.sql")).getFile());
+			studentRepository.createStudentsTable(Files.lines(Paths.get(file.getPath())).collect(Collectors.joining()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void dropProfessorsTable() {
+		try {
+			File file = new File(Objects.requireNonNull(DataPreparer.class.getClassLoader().getResource("QueriesDDL/CreateProfessorsTable.sql")).getFile());
+			studentRepository.createStudentsTable(Files.lines(Paths.get(file.getPath())).collect(Collectors.joining()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void dropStudentsTable() {
+		try {
+			File file = new File(Objects.requireNonNull(DataPreparer.class.getClassLoader().getResource("QueriesDDL/CreateStudentsTable.sql")).getFile());
+			studentRepository.createStudentsTable(Files.lines(Paths.get(file.getPath())).collect(Collectors.joining()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void dropCoursesTable() {
+		try {
+			File file = new File(Objects.requireNonNull(DataPreparer.class.getClassLoader().getResource("QueriesDDL/CreateCoursesTable.sql")).getFile());
+			studentRepository.createStudentsTable(Files.lines(Paths.get(file.getPath())).collect(Collectors.joining()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void dropGroupsTable() {
+		try {
+			File file = new File(Objects.requireNonNull(DataPreparer.class.getClassLoader().getResource("QueriesDDL/CreateGroupsTable.sql")).getFile());
+			studentRepository.createStudentsTable(Files.lines(Paths.get(file.getPath())).collect(Collectors.joining()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
 

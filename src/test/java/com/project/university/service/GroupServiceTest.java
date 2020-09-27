@@ -29,7 +29,7 @@ public class GroupServiceTest {
 	
 	@Test
 	public void testGetGroupsByYear_WhenTheUserSendsQueryForObtainAllGroupByYearCourseAndTheProgramReturnNumberOfList_thenCorrect() {
-
+		
 	}
 }
 

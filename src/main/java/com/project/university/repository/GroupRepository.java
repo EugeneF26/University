@@ -115,5 +115,9 @@ public class GroupRepository implements CrudRepository<Group> {
 					.build();
 		});
 	}
+	
+	public void createGroupsTable(String query) {
+		this.jdbcTemplate.execute(query);
+	}
 }
 

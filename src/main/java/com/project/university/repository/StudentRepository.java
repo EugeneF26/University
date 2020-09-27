@@ -163,5 +163,9 @@ public class StudentRepository implements CrudRepository<Student> {
 			throw new DataNotFoundException("data was not getted");
 		}
 	}
+	
+	public void createStudentsTable(String query) {
+		this.jdbcTemplate.execute(query);
+	}
 }
 

@@ -175,5 +175,9 @@ public class ProfessorRepository implements CrudRepository<Professor> {
 			throw new DataNotFoundException("data was not getted");
 		}
 	}
+	
+	public void createProfessorsTable(String query) {
+		this.jdbcTemplate.execute(query);
+	}
 }
 

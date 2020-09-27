@@ -109,5 +109,9 @@ public class CourseRepository implements CrudRepository<Course> {
 		});
 		return result;
 	}
+	
+	public void createCourseTable(String query) {
+		this.jdbcTemplate.execute(query);
+	}
 }
 

@@ -24,3 +24,4 @@ out
 target
 .mvn
 
+/bin/
