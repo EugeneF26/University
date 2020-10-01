@@ -110,7 +110,7 @@ public class CourseRepository implements CrudRepository<Course> {
 		return result;
 	}
 	
-	public void createCourseTable(String query) {
+	public void createCoursesTable(String query) {
 		this.jdbcTemplate.execute(query);
 	}
 }
