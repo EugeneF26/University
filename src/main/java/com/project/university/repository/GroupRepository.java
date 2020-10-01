@@ -122,7 +122,7 @@ public class GroupRepository implements CrudRepository<Group> {
 	}
 	
 	public void dropGroupsTable(String query) {
-		this.jdbcTemplate.update(query);
+		this.jdbcTemplate.execute(query);
 	}
 }
 

@@ -46,11 +46,11 @@ public class DataPreparer {
 		this.professorRepository = professorRepository;
 	}
 	
-	/*
-	 * public void prepareData() { preparerGroupsTable();
-	 * preparerCoursesTable(); preparerStudentsTable();
-	 * preparerStudentsCoursesTable(); }
-	 */
+	
+	 public void prepareData() {
+		 
+	 }
+	 
 	
 	/*
 	 * public void cleanData() { groupRepository.truncateGroups();
@@ -255,7 +255,7 @@ public class DataPreparer {
 
 	private void dropProfessorsTable() {
 		try {
-			File file = new File(Objects.requireNonNull(DataPreparer.class.getClassLoader().getResource("QueriesDDL/DropProfessorsTable.sql")).getFile());
+			File file = new File(Objects.requireNonNull(DataPreparer.class.getClassLoader().getResource("QueriesDML/DropProfessorsTable.sql")).getFile());
 			professorRepository.createProfessorsTable(Files.lines(Paths.get(file.getPath())).collect(Collectors.joining()));
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -264,7 +264,7 @@ public class DataPreparer {
 
 	private void dropStudentsTable() {
 		try {
-			File file = new File(Objects.requireNonNull(DataPreparer.class.getClassLoader().getResource("QueriesDDL/DropStudentsTable.sql")).getFile());
+			File file = new File(Objects.requireNonNull(DataPreparer.class.getClassLoader().getResource("QueriesDML/DropStudentsTable.sql")).getFile());
 			studentRepository.createStudentsTable(Files.lines(Paths.get(file.getPath())).collect(Collectors.joining()));
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -273,7 +273,7 @@ public class DataPreparer {
 
 	private void dropCoursesTable() {
 		try {
-			File file = new File(Objects.requireNonNull(DataPreparer.class.getClassLoader().getResource("QueriesDDL/DropCoursesTable.sql")).getFile());
+			File file = new File(Objects.requireNonNull(DataPreparer.class.getClassLoader().getResource("QueriesDML/DropCoursesTable.sql")).getFile());
 			courseRepository.createCoursesTable(Files.lines(Paths.get(file.getPath())).collect(Collectors.joining()));
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -282,7 +282,7 @@ public class DataPreparer {
 
 	private void dropGroupsTable() {
 		try {
-			File file = new File(Objects.requireNonNull(DataPreparer.class.getClassLoader().getResource("QueriesDDL/DropGroupsTable.sql")).getFile());
+			File file = new File(Objects.requireNonNull(DataPreparer.class.getClassLoader().getResource("QueriesDML/DropGroupsTable.sql")).getFile());
 			groupRepository.dropGroupsTable(Files.lines(Paths.get(file.getPath())).collect(Collectors.joining()));
 		} catch (IOException e) {
 			e.printStackTrace();
