@@ -12,14 +12,7 @@ import com.project.university.repository.CrudRepository;
 import com.project.university.service.ScheduleService;
 
 @Service
-public class ScheduleServiceImpl implements ScheduleService {
-
-	private CrudRepository<ScheduleItem> crudRepository;
-
-	@Autowired
-	public ScheduleServiceImpl(CrudRepository<ScheduleItem> crudRepository) {
-		this.crudRepository = crudRepository;
-	}
+public class ScheduleServiceImpl implements ScheduleService {	
 
 	@Override
 	public void createSchedule(ScheduleItem item) {

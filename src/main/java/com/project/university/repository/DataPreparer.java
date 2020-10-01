@@ -9,6 +9,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,6 +24,7 @@ import com.project.university.repository.exception.DaoLayerException;
 import com.project.university.repository.exception.DataNotFoundException;
 import com.project.university.repository.exception.DataSaveException;
 
+@Component
 public class DataPreparer {
 
 	private GroupRepository groupRepository;
