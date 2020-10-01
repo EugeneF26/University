@@ -31,8 +31,9 @@ public class GroupRepository implements CrudRepository<Group> {
 	 *                     from
 	 * @see SpringConfig#dataSource()
 	 */
+	
 	@Autowired
-	public void setDataSource(JdbcTemplate jdbcTemplate) {
+	public GroupRepository(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
@@ -118,6 +119,10 @@ public class GroupRepository implements CrudRepository<Group> {
 	
 	public void createGroupsTable(String query) {
 		this.jdbcTemplate.execute(query);
+	}
+	
+	public void dropGroupsTable(String query) {
+		this.jdbcTemplate.update(query);
 	}
 }
 

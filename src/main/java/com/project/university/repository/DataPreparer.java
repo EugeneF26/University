@@ -283,7 +283,7 @@ public class DataPreparer {
 	private void dropGroupsTable() {
 		try {
 			File file = new File(Objects.requireNonNull(DataPreparer.class.getClassLoader().getResource("QueriesDDL/DropGroupsTable.sql")).getFile());
-			groupRepository.createGroupsTable(Files.lines(Paths.get(file.getPath())).collect(Collectors.joining()));
+			groupRepository.dropGroupsTable(Files.lines(Paths.get(file.getPath())).collect(Collectors.joining()));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
