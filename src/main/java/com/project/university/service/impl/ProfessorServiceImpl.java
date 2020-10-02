@@ -1,11 +1,14 @@
 package com.project.university.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
 import com.project.university.model.Professor;
 import com.project.university.model.StatusProfessor;
+import com.project.university.model.Student;
 import com.project.university.repository.CrudRepository;
 import com.project.university.service.ProfessorService;
 
@@ -40,6 +43,11 @@ public class ProfessorServiceImpl implements ProfessorService {
 	@Override
 	public Professor getProfessor(Professor professor) throws Exception {
 		return crudRepository.findOneById(professor.getId());
+	}
+
+	@Override
+	public List<Professor> getProfessors() throws Exception {
+		return crudRepository.getAll();
 	}
 }
 

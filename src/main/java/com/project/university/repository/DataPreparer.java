@@ -59,18 +59,22 @@ public class DataPreparer {
 	 */
 
 	public void deleteTables() {
-		dropGroupsTable();
+		// dropGroupsTable();
+		// dropCoursesTable(); 
+		dropStudentsTable(); 
+		dropProfessorsTable();
 		/*
-		 * dropCoursesTable(); dropStudentsTable(); dropProfessorsTable();
 		 * dropSchedule_ItemTable(); dropLecture_hallsTable();
 		 * dropLecturesTable();
 		 */
 	}
 
 	public void createTables() {
-		createGroupsTable();
+		// createGroupsTable();
+		// createCoursesTable();
+		createStudentsTable(); 
+		createProfessorsTable();
 		/*
-		 * createStudentsTable(); createCoursesTable(); createProfessorsTable();
 		 * createLecturesTable(); createLecture_hallsTable();
 		 * createSchedule_ItemTable();
 		 */

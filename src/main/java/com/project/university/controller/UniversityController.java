@@ -22,7 +22,7 @@ public class UniversityController {
 	
 	@Autowired
 	public UniversityController(StudentService studentService, GroupService groupService,
-			CourseService coursetService, ProfessorService professorSevicem, 
+			CourseService coursetService, ProfessorService professorSevice, 
 			DataPreparer dataPreparer) {
 		this.studentService = studentService;
 		this.groupService = groupService;
@@ -35,19 +35,22 @@ public class UniversityController {
 	public String createUniversitet(Model model) throws Exception {
 		dataPreparer.deleteTables();
 		dataPreparer.createTables();
+		dataPreparer.createStudents();
+		dataPreparer.createProfessors(); 
 		return "welcome";
 	}
 	
 	@GetMapping("/students")
 	public String listStudents(Model model) throws Exception {
-		/* dataPreparer.createStudents(); */
+		model.addAttribute("students", studentService.getStudents());
 		return "students";
 	}
 	
-	@GetMapping("/professors")
-	public String listProfessors(Model model) throws Exception {
-		/* dataPreparer.createProfessors(); */
+	
+	 @GetMapping("/professors") 
+	 public String listProfessors(Model model) throws Exception { 
+		model.addAttribute("professors", professorSevice.getProfessors());
 		return "professors";
-	}
+	 } 
 }
 
