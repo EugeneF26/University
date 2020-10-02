@@ -64,7 +64,8 @@
 
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="professors">View full list</a>
-					</div></li>
+					</div>
+					</li>
 					
 					<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
@@ -103,18 +104,17 @@
 
 	<div class="flex-container">
 		<tbody>
-			<tr th:each="student: ${students}">
+			<tr th:each="course: ${courses}">
 				<div class="card">
 					<div class="card-body">
 						<h5 class="card-title">
-							<td th:text="${student.id}" />
-							<td th:text="${student.name}" />
-							<td th:text="${student.surname}" />
+							<td th:text="${course.id}" />
+							<td th:text="${course.year}" />
 						</h5>
-						<h6 class="card-subtitle mb-2 text-muted">student</h6>
+						<h6 class="card-subtitle mb-2 text-muted">courses</h6>
 						<p class="card-text"></p>
-						<td><a th:href="@{|/delete/${student.id}|}">Expel</a></td>
-						<td><a th:href="@{|/update/${student.id}|}">Update</a></td>
+						<td><a th:href="@{|/delete/${course.id}|}">Expel</a></td>
+						<td><a th:href="@{|/update/${course.id}|}">Update</a></td>
 					</div>
 				</div>
 			</tr>

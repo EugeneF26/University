@@ -59,8 +59,8 @@ public class DataPreparer {
 	 */
 
 	public void deleteTables() {
-		// dropGroupsTable();
-		// dropCoursesTable(); 
+		dropGroupsTable();
+		dropCoursesTable(); 
 		dropStudentsTable(); 
 		dropProfessorsTable();
 		/*
@@ -70,8 +70,8 @@ public class DataPreparer {
 	}
 
 	public void createTables() {
-		// createGroupsTable();
-		// createCoursesTable();
+		createGroupsTable();
+		createCoursesTable();
 		createStudentsTable(); 
 		createProfessorsTable();
 		/*
