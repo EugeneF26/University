@@ -47,7 +47,6 @@ public class GroupRepository implements CrudRepository<Group> {
 		int rows = 0;
 		Group result = null;
 		log.trace("entry with: {}", group);
-		System.out.println(group.getName() + "-" + group.getCourse().getId());
 		try {
 			rows = this.jdbcTemplate.update("INSERT INTO GROUPS (name, courseId) VALUES (?,?)", group.getName(), group.getCourse().getId());
 			result = this.jdbcTemplate.queryForObject("SELECT id FROM GROUPS WHERE name=? AND courseId=?", 
@@ -71,11 +70,12 @@ public class GroupRepository implements CrudRepository<Group> {
 	 */
 	@Override
 	public Group findOneById(Integer id) {
-		return this.jdbcTemplate.queryForObject("SELECT id, courseId FROM GROUPS WHERE id = ?;",
+		return this.jdbcTemplate.queryForObject("SELECT id, name, courseId FROM GROUPS WHERE id = ?;",
 				(rs, rowNum) -> {
 					return Group
 							.builder()
 							.id(rs.getInt("id"))
+							.name(rs.getString("name"))
 							.course(Course
 									.builder()
 									.id(rs.getInt("id"))
@@ -106,10 +106,11 @@ public class GroupRepository implements CrudRepository<Group> {
 	 */
 	@Override
 	public List<Group> getAll() {
-		return this.jdbcTemplate.query("SELECT * FROM GROUPS", (rs, rowNum) -> {
+		return this.jdbcTemplate.query("SELECT id, name, courseId FROM GROUPS", (rs, rowNum) -> {
 			return Group
 					.builder()
 					.id(rs.getInt("id"))
+					.name(rs.getString("name"))
 					.course(Course.builder()
 							.id(rs.getInt("courseId"))
 							.build())

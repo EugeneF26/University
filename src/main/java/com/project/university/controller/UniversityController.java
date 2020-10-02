@@ -35,8 +35,7 @@ public class UniversityController {
 	public String createUniversitet(Model model) throws Exception {
 		dataPreparer.deleteTables();
 		dataPreparer.createTables();
-		dataPreparer.createStudents();
-		dataPreparer.createProfessors(); 
+		dataPreparer.prepareData();
 		return "welcome";
 	}
 	
@@ -45,7 +44,6 @@ public class UniversityController {
 		model.addAttribute("students", studentService.getStudents());
 		return "students";
 	}
-	
 	
 	 @GetMapping("/professors") 
 	 public String listProfessors(Model model) throws Exception { 

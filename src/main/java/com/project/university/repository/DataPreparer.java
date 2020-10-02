@@ -47,8 +47,11 @@ public class DataPreparer {
 	}
 	
 	
-	 public void prepareData() {
-		 
+	 public void prepareData() throws DataSaveException, DaoLayerException, DataNotFoundException {
+		 createGroups();
+		 createCourses();
+		 createStudents();
+		 createProfessors();
 	 }
 	 
 	
@@ -145,7 +148,7 @@ public class DataPreparer {
 		ArrayList<String> groupsName = new ArrayList<String>
 		(Arrays.asList(new String[] {"Group A","Group B","Group C",
 				"Group D", "Group E", "Group F", "Group G", "Group R"}));
-	
+
 		Group group = null;
 		
 		for(int i = 1; i < 6; i++) {
@@ -162,7 +165,7 @@ public class DataPreparer {
 							.findAny()
 							.get())
 					.build();
-			
+						
 			groupRepository.save(group);
 		}
 	}

@@ -30,6 +30,7 @@ public class GroupServiceImpl implements GroupService {
 	@Override
 	public List<Group> getGroups() throws DataNotFoundException, DaoLayerException {
 		return crudRepository.getAll();
+		 
 	}
 }
 
