@@ -1,5 +1,7 @@
 CREATE TABLE courses
 (
 id SERIAL PRIMARY KEY,
-year INTEGER CHECK (year <= 5)
+year INTEGER CHECK (year <= 5),
+CONSTRAINT sc_unique_courses UNIQUE (year)
 );
+ALTER TABLE GROUPS ADD FOREIGN KEY (courseId) REFERENCES courses(year) ON DELETE CASCADE ON UPDATE CASCADE;
