@@ -62,5 +62,11 @@ public class UniversityController {
 		model.addAttribute("groups", groupService.getGroups());
 		return "groups";
 	} 
+	
+	@GetMapping("/lectures") 
+	public String listLectures(Model model) throws Exception { 
+		model.addAttribute("lectures", groupService.getGroups());
+		return "lectures";
+	} 
 }
 
