@@ -30,11 +30,11 @@ import com.project.university.repository.exception.DataSaveException;
 @ActiveProfiles("dev")
 public class GroupRepositoryTest {
 	
-	private CrudRepository<Group> crudRepository;
+	private GroupRepository groupRepository;
 	
 	@Autowired
-	public GroupRepositoryTest(CrudRepository<Group> groupRepository){
-		this.crudRepository = groupRepository;
+	public GroupRepositoryTest(GroupRepository groupRepository){
+		this.groupRepository = groupRepository;
 	}
 	
 	@Test
@@ -44,17 +44,17 @@ public class GroupRepositoryTest {
 				.builder()
 				.course(Course
 						.builder()
-						.id(2)
+						.id(Long.valueOf(2))
 						.build())
 				.name("Y1")
 				.build();		
-		MatcherAssert.assertThat(crudRepository.save(group).getId(), CoreMatchers.equalTo(5));
+		MatcherAssert.assertThat(groupRepository.save(group).getId(), CoreMatchers.equalTo(5));
 	}
 	
 	@Test
 	public void testFindGroupById_WhenTheUserEntersTheIdOfTheGroupIsOneAndTheProgramDisplaysTheResult_thenCorrect()
 			throws DataSetException, FileNotFoundException, DataNotFoundException, DaoLayerException {
-		Group group = crudRepository.findOneById(1);
+		Group group = groupRepository.getOne(Long.valueOf(1));
 		MatcherAssert.assertThat(group.getId(), CoreMatchers.equalTo(1));
 	}
 	
@@ -63,20 +63,20 @@ public class GroupRepositoryTest {
 			throws DataSetException, FileNotFoundException, DataNotFoundException, DaoLayerException {
 		Group group = Group
 				.builder()
-				.id(1)
+				.id(Long.valueOf(1))
 				.course(Course
 						.builder()
-						.id(1)
+						.id(Long.valueOf(1))
 						.build())
 				.build();	
-		Group result = crudRepository.update(group);
+		Group result = groupRepository.save(group);
 		MatcherAssert.assertThat(result, CoreMatchers.equalToObject(group));
 	}
 	
 	@Test
 	public void testGetAll_WhenTheUserSendsQueryForAllDataAndTheProgramReturnThem_thenCorrect()
 			throws DataSetException, FileNotFoundException, SQLException, DataNotFoundException, DaoLayerException {
-		List<Group> result = crudRepository.getAll();
+		List<Group> result = groupRepository.findAll();
 		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(4));
 	}
 }

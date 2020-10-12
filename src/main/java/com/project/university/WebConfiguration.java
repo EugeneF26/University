@@ -1,5 +1,5 @@
 
-package com.project.university.config;
+package com.project.university;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,8 +15,8 @@ import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
 @Configuration
-@EnableWebMvc
 @ComponentScan("com.project.university")
+@EnableWebMvc
 public class WebConfiguration implements WebMvcConfigurer {
 
 	private ApplicationContext applicationContext;
@@ -49,6 +49,5 @@ public class WebConfiguration implements WebMvcConfigurer {
 		resolver.setTemplateEngine(templateEngine());
 		registry.viewResolver(resolver);
 	}
-	
 }
 

@@ -33,11 +33,11 @@ scripts={"/DROP.sql", "/CREATE.sql", "/INSERT.sql"})
 @ActiveProfiles("dev")
 public class CourseRepositoryTest {
 	
-	private CrudRepository<Course> crudRepository;
+	private CourseRepository courseRepository;
 
 	@Autowired
-	public CourseRepositoryTest(CrudRepository<Course> crudRepository){
-		this.crudRepository = crudRepository;
+	public CourseRepositoryTest(CourseRepository courseRepository){
+		this.courseRepository = courseRepository;
 	}
 	
 	@Test
@@ -46,22 +46,22 @@ public class CourseRepositoryTest {
 		List<Group> group = new ArrayList<>();
 		group.add(Group
 				.builder()
-				.id(5)
+				.id(Long.valueOf(5))
 				.build());
 		
 		Course course = Course
 				.builder()
 				.year(5)
-				.groups(group)
+//				.groups(group)
 				.build();	
 		
-		MatcherAssert.assertThat(crudRepository.save(course).getId(), CoreMatchers.equalTo(5));
+		MatcherAssert.assertThat(courseRepository.save(course).getId(), CoreMatchers.equalTo(5));
 	}
 	
 	@Test
 	public void testFindCourseByYear_WhenTheUserEntersTheYearOfTheCourseIsOneAndTheProgramDisplaysTheResult_thenCorrect()
 			throws DataSetException, FileNotFoundException, DataNotFoundException, DaoLayerException {
-		Course course = crudRepository.findOneById(1);
+		Course course = courseRepository.getOne(Long.valueOf(1));
 		MatcherAssert.assertThat(course.getYear(), CoreMatchers.equalTo(1));
 	}
 	
@@ -71,22 +71,22 @@ public class CourseRepositoryTest {
 		List<Group> group = new ArrayList<>();
 		group.add(Group
 				.builder()
-				.id(1)
+				.id(Long.valueOf(1))
 				.build());
 		
 		Course course = Course
 				.builder()
 				.year(2)
-				.groups(group)
+//				.groups(group)
 				.build();	
-		Course result = crudRepository.update(course);
+		Course result = courseRepository.save(course);
 		MatcherAssert.assertThat(result, CoreMatchers.equalToObject(course));
 	}
 	
 	@Test
 	public void testGetAll_WhenTheUserSendsQueryForAllDataAndTheProgramReturnThem_thenCorrect()
 			throws DataSetException, FileNotFoundException, SQLException, DataNotFoundException, DaoLayerException {
-		List<Course> result = crudRepository.getAll();
+		List<Course> result = courseRepository.findAll();
 		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(4));
 	}
 }

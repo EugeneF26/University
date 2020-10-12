@@ -34,7 +34,7 @@ public class ProfessorServiceTest {
 	public void testAcceptNewProfessor_WhenTheUserSendsQueryForAddANewProfessorAndTheProgramReturnIncrementIdOfStudent_thenCorrect() throws Exception {
 		Professor professor = Professor
 				.builder()
-				.id(4)
+				.id(Long.valueOf(4))
 				.name("Mark")
 				.patronymic("Hamatov")
 				.currentStatus(StatusProfessor.AT_INTERVIEW)

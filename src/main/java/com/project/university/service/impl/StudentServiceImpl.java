@@ -5,9 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.project.university.model.StatusStudent;
 import com.project.university.model.Student;
-import com.project.university.repository.CrudRepository;
+import com.project.university.repository.StudentRepository;
 import com.project.university.service.StudentService;
 
 /**
@@ -17,35 +16,45 @@ import com.project.university.service.StudentService;
 @Service
 public class StudentServiceImpl implements StudentService {
 	
-	private CrudRepository<Student> crudRepository;		
+	private StudentRepository studentRepository;		
 	
 	@Autowired
-	public StudentServiceImpl(CrudRepository<Student> crudRepository) {
-		this.crudRepository = crudRepository;
+	public StudentServiceImpl(StudentRepository studentRepository) {
+		this.studentRepository = studentRepository;
 	}
 	
-	public StudentServiceImpl() {}
-
-	@Override
-	public Student transferStudentToAnotherGroup(Student student) throws Exception {
-		return crudRepository.update(student);
-	}
+//	@Override
+//	public Student transferStudentToAnotherGroup(Student student, Group group) throws Exception {
+//		Optional<Student> studentGet = studentRepository.findById(Long.valueOf(student.getId()));
+//		studentGet.get().setGroup(Group
+//				.builder()
+//				.id(group
+//						.getId())
+//				.build());
+//		return studentRepository.save(studentGet.get());
+//	}
 	
-	@Override
-	public void expelStrudent(Student student) throws Exception {
-		student.setCurrentStatus(StatusStudent.EXPELLED);
-		crudRepository.update(student);
-	}
+//	@Override
+//	public void expelStrudent(Student student) throws Exception {
+//		Optional<Student> studentGet = studentRepository.findById(Long.valueOf(student.getId()));
+//		studentGet.get().setCurrentStatus(StatusStudent.EXPELLED);
+//		studentRepository.save(studentGet.get());
+//	}
 
-	@Override
-	public Student acceptNewStudent(Student student) throws Exception {
-		student.setCurrentStatus(StatusStudent.STUDY);
-		return crudRepository.save(student);
-	}
+//	@Override
+//	public Student acceptNewStudent(Student student) throws Exception {
+//		student.setCurrentStatus(StatusStudent.STUDY);
+//		return studentRepository.save(student);
+//	}
 
 	@Override
 	public List<Student> getStudents() throws Exception {
-		return crudRepository.getAll();
+		return studentRepository.findAll();
+	}
+
+	@Override
+	public Student getStudent(Long id) throws Exception {
+		return studentRepository.getOne(id);
 	}
 }
 

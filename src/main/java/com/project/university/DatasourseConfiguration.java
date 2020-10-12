@@ -1,4 +1,4 @@
-package com.project.university.config;
+package com.project.university;
 
 import java.util.Properties;
 
@@ -23,7 +23,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories 
-@ComponentScan("com.project.university.repository")
+@ComponentScan
 //@Profile({"prod","default"})
 public class DatasourseConfiguration {
 	

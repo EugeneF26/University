@@ -33,9 +33,6 @@ public class UniversityController {
 	
 	@GetMapping("/")
 	public String createUniversitet(Model model) throws Exception {
-		dataPreparer.deleteTables();
-		dataPreparer.createTables();
-		dataPreparer.prepareData();
 		return "welcome";
 	}
 	

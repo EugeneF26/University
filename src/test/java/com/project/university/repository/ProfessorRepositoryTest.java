@@ -31,11 +31,11 @@ import com.project.university.repository.exception.DataSaveException;
 @ActiveProfiles("dev")
 public class ProfessorRepositoryTest {
 	
-	private CrudRepository<Professor> crudRepository;
+	private ProfessorRepository professorRepository;
 	
 	@Autowired
-	public ProfessorRepositoryTest(CrudRepository<Professor> crudRepository){
-		this.crudRepository = crudRepository;
+	public ProfessorRepositoryTest(ProfessorRepository professorRepository){
+		this.professorRepository = professorRepository;
 	}
 	
 	@Test
@@ -47,13 +47,13 @@ public class ProfessorRepositoryTest {
 				.patronymic("Fedorovich")
 				.currentStatus(StatusProfessor.WORKS)
 				.build();
-		MatcherAssert.assertThat(crudRepository.save(professor).getId(), CoreMatchers.equalTo(4));
+		MatcherAssert.assertThat(professorRepository.save(professor).getId(), CoreMatchers.equalTo(4));
 	}
 	
 	@Test
 	public void testFindProfessorById_WhenTheUserEntersTheIdOfTheProfessorIsOneAndTheProgramDisplaysTheResult_thenCorrect()
 			throws DataSetException, FileNotFoundException, DataNotFoundException, DaoLayerException {
-		Professor professor = crudRepository.findOneById(1);
+		Professor professor = professorRepository.getOne(Long.valueOf(1));
 		MatcherAssert.assertThat(professor.getId(), CoreMatchers.equalTo(1));
 	}
 	
@@ -64,17 +64,17 @@ public class ProfessorRepositoryTest {
 		Professor professor = Professor.builder()
 				.name("Alexander")
 				.patronymic("Fedorovich")
-				.id(2)
+				.id(Long.valueOf(2))
 				.currentStatus(StatusProfessor.WORKS)
 				.build();	
-		Professor result = crudRepository.update(professor);
+		Professor result = professorRepository.save(professor);
 		MatcherAssert.assertThat(result, CoreMatchers.equalToObject(professor));
 	}
 	
 	@Test
 	public void testGetAll_WhenTheUserSendsQueryForAllDataAndTheProgramReturnThem_thenCorrect()
 			throws DataSetException, FileNotFoundException, SQLException, DataNotFoundException, DaoLayerException {
-		List<Professor> result = crudRepository.getAll();
+		List<Professor> result = professorRepository.findAll();
 		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(3));
 	}
 }

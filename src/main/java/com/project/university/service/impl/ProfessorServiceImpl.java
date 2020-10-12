@@ -8,24 +8,26 @@ import org.springframework.stereotype.Service;
 
 import com.project.university.model.Professor;
 import com.project.university.model.StatusProfessor;
-import com.project.university.model.Student;
-import com.project.university.repository.CrudRepository;
+import com.project.university.repository.ProfessorRepository;
 import com.project.university.service.ProfessorService;
 
 @Service
 public class ProfessorServiceImpl implements ProfessorService {
 
-	private CrudRepository<Professor> crudRepository;
+	private ProfessorRepository professorRepository;
 
 	@Autowired
-	public ProfessorServiceImpl(CrudRepository<Professor> crudRepository) {
-		this.crudRepository = crudRepository;
+	public ProfessorServiceImpl(ProfessorRepository professorRepository) {
+		this.professorRepository = professorRepository;
 	}
 
 	@Override
 	public void fireProfessor(Professor professor) throws Exception {
-		professor.setCurrentStatus(StatusProfessor.FIRED);
-		crudRepository.update(professor);
+		professorRepository
+		.getOne(professor
+				.getId())
+		.setCurrentStatus(StatusProfessor.FIRED);
+		professorRepository.save(professor);
 	}
 
 	@Override
@@ -37,17 +39,17 @@ public class ProfessorServiceImpl implements ProfessorService {
 				.currentStatus(StatusProfessor.WORKS)
 				.build();
 		
-		return crudRepository.save(professor);
+		return professorRepository.save(professor);
 	}
 
 	@Override
 	public Professor getProfessor(Professor professor) throws Exception {
-		return crudRepository.findOneById(professor.getId());
+		return professorRepository.getOne(professor.getId());
 	}
 
 	@Override
 	public List<Professor> getProfessors() throws Exception {
-		return crudRepository.getAll();
+		return professorRepository.findAll();
 	}
 }
 
