@@ -42,10 +42,10 @@ public class GroupRepositoryTest {
 			throws DataSetException, FileNotFoundException, SQLException, DataSaveException, DaoLayerException {
 		Group group = Group
 				.builder()
-				.course(Course
-						.builder()
-						.id(Long.valueOf(2))
-						.build())
+//				.course(Course
+//						.builder()
+//						.id(Long.valueOf(2))
+//						.build())
 				.name("Y1")
 				.build();		
 		MatcherAssert.assertThat(groupRepository.save(group).getId(), CoreMatchers.equalTo(5));
@@ -64,10 +64,10 @@ public class GroupRepositoryTest {
 		Group group = Group
 				.builder()
 				.id(Long.valueOf(1))
-				.course(Course
-						.builder()
-						.id(Long.valueOf(1))
-						.build())
+//				.course(Course
+//						.builder()
+//						.id(Long.valueOf(1))
+//						.build())
 				.build();	
 		Group result = groupRepository.save(group);
 		MatcherAssert.assertThat(result, CoreMatchers.equalToObject(group));

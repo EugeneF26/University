@@ -42,8 +42,8 @@ public class Group implements Serializable {
 	@Column(name = "name")
 	private String name;
 	
-	@Column(name = "surname")
-	private Course course;
+//	@Column(name = "surname")
+//	private Course course;
 	
 	/*
 	 * @OneToMany(mappedBy = "group", cascade = CascadeType.ALL) private

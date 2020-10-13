@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.project.university.repository.DataPreparer;
 import com.project.university.service.CourseService;
 import com.project.university.service.GroupService;
+import com.project.university.service.LectureService;
 import com.project.university.service.ProfessorService;
 import com.project.university.service.StudentService;
 
@@ -18,6 +19,7 @@ public class UniversityController {
 	private GroupService groupService;
 	private CourseService coursetService;
 	private ProfessorService professorSevice;
+	private LectureService lectureService;
 	private DataPreparer dataPreparer;
 	
 	@Autowired
@@ -33,6 +35,11 @@ public class UniversityController {
 	
 	@GetMapping("/")
 	public String createUniversitet(Model model) throws Exception {
+		dataPreparer.createGroups();
+		dataPreparer.createCourses();		
+		dataPreparer.createStudents();
+		dataPreparer.createProfessors();
+		dataPreparer.createLecture();
 		return "welcome";
 	}
 	
@@ -62,7 +69,7 @@ public class UniversityController {
 	
 	@GetMapping("/lectures") 
 	public String listLectures(Model model) throws Exception { 
-		model.addAttribute("lectures", groupService.getGroups());
+		model.addAttribute("lectures", lectureService.getLectures());
 		return "lectures";
 	} 
 }

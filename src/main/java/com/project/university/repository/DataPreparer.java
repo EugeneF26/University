@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.project.university.model.Course;
 import com.project.university.model.Group;
+import com.project.university.model.Lecture;
 import com.project.university.model.Professor;
 import com.project.university.model.StatusProfessor;
 import com.project.university.model.StatusStudent;
@@ -25,6 +26,7 @@ public class DataPreparer {
 	private CourseRepository courseRepository;
 	private StudentRepository studentRepository;
 	private ProfessorRepository professorRepository;
+	private LectureRepository lectureRepository;
 	
 	private ArrayList<String> first_name = new ArrayList<String>(Arrays.asList(new String[] { "Alexander", "Modest", 
 			"Konstantin", "Michail", "Anton", "Vladimir", "Sergey", "Fedor", "Inokentiy", 
@@ -33,24 +35,14 @@ public class DataPreparer {
 	
 	@Autowired
 	public DataPreparer(GroupRepository groupRepository, CourseRepository courseRepository, 
-			StudentRepository studentRepository, ProfessorRepository professorRepository) {
+			StudentRepository studentRepository, ProfessorRepository professorRepository, 
+			LectureRepository lectureRepository) {
 		this.groupRepository = groupRepository;
 		this.courseRepository = courseRepository;
 		this.studentRepository = studentRepository;
 		this.professorRepository = professorRepository;
+		this.lectureRepository = lectureRepository;
 	}
-	
-	
-	 public void prepareData() throws DataSaveException, DaoLayerException, DataNotFoundException {
-		 
-	 }
-	 
-	
-	/*
-	 * public void cleanData() { groupRepository.truncateGroups();
-	 * courseRepository.truncateCourses();
-	 * studentRepository.truncateStudentsAndStudentsCourses(); }
-	 */
 
 	public void createStudents() throws DataSaveException, DaoLayerException {
 		
@@ -123,10 +115,10 @@ public class DataPreparer {
 		for(int i = 1; i < 6; i++) {
 			group = Group
 					.builder()
-					.course(Course
-							.builder()
-							.id(Long.valueOf(i))
-						.build())  //	(int)(Math.random() * ((5 - 1) + 1)
+//					.course(Course
+//							.builder()
+//							.id(Long.valueOf(i))
+//						.build())  //	(int)(Math.random() * ((5 - 1) + 1)
 					.name(groupsName
 							.stream()
 							.skip(new Random()
@@ -150,6 +142,16 @@ public class DataPreparer {
 					.build();
 			
 			courseRepository.save(course);
+		}
+	}
+	
+	public void createLecture() {
+		Lecture lecture = null;
+		ArrayList<String> lectures = new ArrayList<String>(Arrays.asList(new String[]{"Math", 
+				"English","Philosopher","Biology","Economics","Computer science","French"}));
+		
+		for(int i = 0; i < lectures.size(); i++) {
+		lectureRepository.save(lecture);
 		}
 	}
 }
