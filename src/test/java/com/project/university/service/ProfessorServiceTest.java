@@ -30,22 +30,22 @@ public class ProfessorServiceTest {
 		this.professorService = professorService;
 	}
 	
-	@Test
-	public void testAcceptNewProfessor_WhenTheUserSendsQueryForAddANewProfessorAndTheProgramReturnIncrementIdOfStudent_thenCorrect() throws Exception {
-		Professor professor = Professor
-				.builder()
-				.id(Long.valueOf(4))
-				.name("Mark")
-				.patronymic("Hamatov")
-				.currentStatus(StatusProfessor.AT_INTERVIEW)
-				.build();
-		
-		professorService.acceptNewProfessor(professor);
-		
-		MatcherAssert.assertThat(professorService.getProfessor(professor)
-				.getCurrentStatus()
-				.getStatus(), 
-				CoreMatchers.equalTo("WORKS"));
-	}
+//	@Test
+//	public void testAcceptNewProfessor_WhenTheUserSendsQueryForAddANewProfessorAndTheProgramReturnIncrementIdOfStudent_thenCorrect() throws Exception {
+//		Professor professor = Professor
+//				.builder()
+//				.id(Long.valueOf(4))
+//				.name("Mark")
+//				.patronymic("Hamatov")
+//				.currentStatus(StatusProfessor.AT_INTERVIEW)
+//				.build();
+//		
+//		professorService.acceptNewProfessor(professor);
+//		
+//		MatcherAssert.assertThat(professorService.getProfessor(professor)
+//				.getCurrentStatus()
+//				.getStatus(), 
+//				CoreMatchers.equalTo("WORKS"));
+//	}
 }
 

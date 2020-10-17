@@ -15,31 +15,28 @@ import com.project.university.service.StudentService;
 @Controller
 public class UniversityController {
 	
-	private StudentService studentService;
-	private GroupService groupService;
-	private CourseService coursetService;
-	private ProfessorService professorSevice;
-	private LectureService lectureService;
-	private DataPreparer dataPreparer;
+	private final StudentService studentService;
+	private final GroupService groupService;
+	private final CourseService courseService;
+	private final ProfessorService professorService;
+	private final LectureService lectureService;
+	private final DataPreparer dataPreparer;
 	
 	@Autowired
 	public UniversityController(StudentService studentService, GroupService groupService,
-			CourseService coursetService, ProfessorService professorSevice, 
-			DataPreparer dataPreparer) {
+								CourseService courseService, ProfessorService professorService,
+								LectureService lectureService, DataPreparer dataPreparer) {
 		this.studentService = studentService;
 		this.groupService = groupService;
-		this.coursetService = coursetService;
-		this.professorSevice = professorSevice;
+		this.courseService = courseService;
+		this.professorService = professorService;
+		this.lectureService = lectureService;
 		this.dataPreparer = dataPreparer;
 	}
 	
 	@GetMapping("/")
-	public String createUniversitet(Model model) throws Exception {
-		dataPreparer.createGroups();
-		dataPreparer.createCourses();		
+	public String createUniversity() throws Exception {
 		dataPreparer.createStudents();
-		dataPreparer.createProfessors();
-		dataPreparer.createLecture();
 		return "welcome";
 	}
 	
@@ -51,13 +48,13 @@ public class UniversityController {
 	
 	 @GetMapping("/professors") 
 	 public String listProfessors(Model model) throws Exception { 
-		model.addAttribute("professors", professorSevice.getProfessors());
+		model.addAttribute("professors", professorService.getProfessors());
 		return "professors";
 	 } 
 	 
 	@GetMapping("/courses")
 	public String listCourses(Model model) throws Exception {
-		model.addAttribute("courses", coursetService.getCourses());
+		model.addAttribute("courses", courseService.getCourses());
 		return "courses";
 	}
 		
@@ -68,7 +65,7 @@ public class UniversityController {
 	} 
 	
 	@GetMapping("/lectures") 
-	public String listLectures(Model model) throws Exception { 
+	public String listLectures(Model model) {
 		model.addAttribute("lectures", lectureService.getLectures());
 		return "lectures";
 	} 

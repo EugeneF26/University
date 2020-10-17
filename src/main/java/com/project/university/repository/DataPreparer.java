@@ -98,7 +98,7 @@ public class DataPreparer {
 							.skip(new Random().nextInt(patronymic.size() - 1))
 							.findAny()
 							.get())
-					.currentStatus(StatusProfessor.WORKS)
+//					.currentStatus(StatusProfessor.WORKS)
 					.build();
 			
 			professorRepository.save(professor);

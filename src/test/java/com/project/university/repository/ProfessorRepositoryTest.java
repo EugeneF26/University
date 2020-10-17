@@ -38,17 +38,17 @@ public class ProfessorRepositoryTest {
 		this.professorRepository = professorRepository;
 	}
 	
-	@Test
-	public void testSave_WhenTheUserSendsTheProfessorDataAndTheProgramSavesProfessorDataThem_thenCorrect()
-			throws DataSetException, FileNotFoundException, SQLException, DataSaveException, DaoLayerException {
-		new Professor().getCurrentStatus();
-		Professor professor = Professor.builder()
-				.name("Alexander")
-				.patronymic("Fedorovich")
-				.currentStatus(StatusProfessor.WORKS)
-				.build();
-		MatcherAssert.assertThat(professorRepository.save(professor).getId(), CoreMatchers.equalTo(4));
-	}
+//	@Test
+//	public void testSave_WhenTheUserSendsTheProfessorDataAndTheProgramSavesProfessorDataThem_thenCorrect()
+//			throws DataSetException, FileNotFoundException, SQLException, DataSaveException, DaoLayerException {
+//		new Professor().getCurrentStatus();
+//		Professor professor = Professor.builder()
+//				.name("Alexander")
+//				.patronymic("Fedorovich")
+//				.currentStatus(StatusProfessor.WORKS)
+//				.build();
+//		MatcherAssert.assertThat(professorRepository.save(professor).getId(), CoreMatchers.equalTo(4));
+//	}
 	
 	@Test
 	public void testFindProfessorById_WhenTheUserEntersTheIdOfTheProfessorIsOneAndTheProgramDisplaysTheResult_thenCorrect()
@@ -57,19 +57,19 @@ public class ProfessorRepositoryTest {
 		MatcherAssert.assertThat(professor.getId(), CoreMatchers.equalTo(1));
 	}
 	
-	@Test
-	public void testUpdate_WhenUserSendsTheDataInTheMethodAndReturnsCountUpdatedRows_thenCorrect()
-			throws DataSetException, FileNotFoundException, DataNotFoundException, DaoLayerException {
-		new Professor().getCurrentStatus();
-		Professor professor = Professor.builder()
-				.name("Alexander")
-				.patronymic("Fedorovich")
-				.id(Long.valueOf(2))
-				.currentStatus(StatusProfessor.WORKS)
-				.build();	
-		Professor result = professorRepository.save(professor);
-		MatcherAssert.assertThat(result, CoreMatchers.equalToObject(professor));
-	}
+//	@Test
+//	public void testUpdate_WhenUserSendsTheDataInTheMethodAndReturnsCountUpdatedRows_thenCorrect()
+//			throws DataSetException, FileNotFoundException, DataNotFoundException, DaoLayerException {
+//		new Professor().getCurrentStatus();
+//		Professor professor = Professor.builder()
+//				.name("Alexander")
+//				.patronymic("Fedorovich")
+//				.id(Long.valueOf(2))
+//				.currentStatus(StatusProfessor.WORKS)
+//				.build();	
+//		Professor result = professorRepository.save(professor);
+//		MatcherAssert.assertThat(result, CoreMatchers.equalToObject(professor));
+//	}
 	
 	@Test
 	public void testGetAll_WhenTheUserSendsQueryForAllDataAndTheProgramReturnThem_thenCorrect()

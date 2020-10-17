@@ -25,8 +25,8 @@ public class ProfessorServiceImpl implements ProfessorService {
 	public void fireProfessor(Professor professor) throws Exception {
 		professorRepository
 		.getOne(professor
-				.getId())
-		.setCurrentStatus(StatusProfessor.FIRED);
+				.getId());
+//		.setCurrentStatus(StatusProfessor.FIRED);
 		professorRepository.save(professor);
 	}
 
@@ -36,7 +36,7 @@ public class ProfessorServiceImpl implements ProfessorService {
 				.builder()
 				.name(newProfessor.getName())
 				.patronymic(newProfessor.getPatronymic())
-				.currentStatus(StatusProfessor.WORKS)
+//				.currentStatus(StatusProfessor.WORKS)
 				.build();
 		
 		return professorRepository.save(professor);
