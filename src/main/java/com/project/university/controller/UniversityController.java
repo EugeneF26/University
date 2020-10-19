@@ -1,5 +1,8 @@
 package com.project.university.controller;
 
+import com.project.university.SessionManager;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,22 +24,30 @@ public class UniversityController {
 	private final ProfessorService professorService;
 	private final LectureService lectureService;
 	private final DataPreparer dataPreparer;
+	private SessionManager sessionManager;
 	
 	@Autowired
 	public UniversityController(StudentService studentService, GroupService groupService,
 								CourseService courseService, ProfessorService professorService,
-								LectureService lectureService, DataPreparer dataPreparer) {
+								LectureService lectureService, DataPreparer dataPreparer,
+								SessionManager sessionManager) {
 		this.studentService = studentService;
 		this.groupService = groupService;
 		this.courseService = courseService;
 		this.professorService = professorService;
 		this.lectureService = lectureService;
 		this.dataPreparer = dataPreparer;
+		this.sessionManager = sessionManager;
 	}
 	
 	@GetMapping("/")
 	public String createUniversity() throws Exception {
+		Session session = sessionManager.getConfiguration().openSession();
+		dataPreparer.createCourses();
+		dataPreparer.createGroups();
 		dataPreparer.createStudents();
+		dataPreparer.createProfessors();
+		session.close();
 		return "welcome";
 	}
 	
