@@ -2,6 +2,7 @@ CREATE TABLE Groups
 (
 id SERIAL PRIMARY KEY CHECK (id <= 5),
 name TEXT,
+courseYear INTEGER NOT NULL,
 CONSTRAINT sc_unique_groups UNIQUE (id, name)
 );
 CREATE TABLE Courses
@@ -16,7 +17,7 @@ CREATE TABLE Professors
 id SERIAL PRIMARY KEY,
 name TEXT NOT NULL,
 patronymic TEXT NOT NULL
---currentStatus VARCHAR(255) CHECK(currentStatus in ('WORKS', 'FIRED'))
+currentStatus VARCHAR(255) CHECK(currentStatus in ('WORKS', 'FIRED'))
 );
 CREATE TABLE Students
 (
@@ -26,7 +27,7 @@ surname TEXT NOT NULL,
 groupId INTEGER NOT NULL,
 currentStatus VARCHAR(255) CHECK(currentStatus in ('STUDY','EXPELLED'))
 );
-CREATE TABLE Courses_Groups
+CREATE TABLE CoursesGroups
 (
 id SERIAL PRIMARY KEY,
 courseId INTEGER,
@@ -35,6 +36,16 @@ FOREIGN KEY (courseId) REFERENCES courses(id) ON DELETE CASCADE ON UPDATE CASCAD
 FOREIGN KEY (groupId) REFERENCES groups(id) ON DELETE CASCADE ON UPDATE CASCADE,
 CONSTRAINT sc_unique_courses_groups UNIQUE (courseId),
 CONSTRAINT sc_unique_courses_groups2 UNIQUE (courseId, groupId)
+);
+CREATE TABLE GroupsStudents
+(
+id SERIAL PRIMARY KEY,
+groupId INTEGER,
+studentId INTEGER,
+FOREIGN KEY (groupId) REFERENCES groups(id) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (studentId) REFERENCES students(id) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT sc_unique_courses_groups UNIQUE (groupId),
+CONSTRAINT sc_unique_courses_groups2 UNIQUE (groupId, studentId)
 );
 CREATE TABLE Lectures
 (
@@ -53,27 +64,27 @@ CONSTRAINT sc_unique_lectureHall2 UNIQUE (floor, classroom),
 CONSTRAINT sc_unique_lectureHall3 UNIQUE (floor),
 CONSTRAINT sc_unique_lectureHall4 UNIQUE (classroom)
 );
---CREATE TABLE ScheduleItem
---(
---id SERIAL PRIMARY KEY,
---professorId INTEGER NOT NULL,
---courseId INTEGER NOT NULL,
---studyDay VARCHAR(255) CHECK(studyDay in ('Monday', 'Tuesday', 'Wednesday', 'Thursday',
---'Friday')),
---lectureId INTEGER NOT NULL,
---floor INTEGER NOT NULL,
---classroom INTEGER NOT NULL,
---FOREIGN KEY (professorId) REFERENCES Professors(id) ON DELETE CASCADE ON UPDATE CASCADE,
---FOREIGN KEY (courseId) REFERENCES Courses(id) ON DELETE CASCADE ON UPDATE CASCADE,
---FOREIGN KEY (lectureId) REFERENCES Lectures(id) ON DELETE CASCADE ON UPDATE CASCADE,
---FOREIGN KEY (floor) REFERENCES LectureHalls(floor) ON DELETE CASCADE ON UPDATE CASCADE,
---FOREIGN KEY (classRoom) REFERENCES LectureHalls(classRoom) ON DELETE CASCADE ON UPDATE CASCADE,
---CONSTRAINT sc_unique_schedule UNIQUE (id, professorId, courseId, studyDay, lectureId, floor),
---CONSTRAINT sc_unique_schedule2 UNIQUE (professorId, courseId, studyDay, lectureId, floor),
---CONSTRAINT sc_unique_schedule3 UNIQUE (professorId, courseId, studyDay, lectureId, floor),
---CONSTRAINT sc_unique_schedule4 UNIQUE (courseId, studyDay, lectureId, floor),
---CONSTRAINT sc_unique_schedule5 UNIQUE (studyDay, lectureId, floor)
---);
+CREATE TABLE ScheduleItem
+(
+id SERIAL PRIMARY KEY,
+professorId INTEGER NOT NULL,
+courseId INTEGER NOT NULL,
+studyDay VARCHAR(255) CHECK(studyDay in ('Monday', 'Tuesday', 'Wednesday', 'Thursday',
+'Friday')),
+lectureId INTEGER NOT NULL,
+floor INTEGER NOT NULL,
+classroom INTEGER NOT NULL,
+FOREIGN KEY (professorId) REFERENCES Professors(id) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (courseId) REFERENCES Courses(id) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (lectureId) REFERENCES Lectures(id) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (floor) REFERENCES LectureHalls(floor) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (classRoom) REFERENCES LectureHalls(classRoom) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT sc_unique_schedule UNIQUE (id, professorId, courseId, studyDay, lectureId, floor),
+CONSTRAINT sc_unique_schedule2 UNIQUE (professorId, courseId, studyDay, lectureId, floor),
+CONSTRAINT sc_unique_schedule3 UNIQUE (professorId, courseId, studyDay, lectureId, floor),
+CONSTRAINT sc_unique_schedule4 UNIQUE (courseId, studyDay, lectureId, floor),
+CONSTRAINT sc_unique_schedule5 UNIQUE (studyDay, lectureId, floor)
+);
 
 --Обновление: ограничение на значение больше нуля. CHECK (classroom > 0) а так же при floor=1 
 --classroom < 101; CONSTRAINT LectureHalls CHECK (floor=1 AND classroom >= 1 AND classroom <= 101 )

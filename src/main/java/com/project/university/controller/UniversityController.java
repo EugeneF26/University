@@ -42,13 +42,15 @@ public class UniversityController {
 	
 	@GetMapping("/")
 	public String createUniversity() throws Exception {
-		Session session = sessionManager.getConfiguration().openSession();
+		sessionManager.openSession();
+
 		dataPreparer.createCourses();
 		dataPreparer.createGroups();
 		dataPreparer.createStudents();
 		dataPreparer.createProfessors();
 		dataPreparer.createLecture();
-		session.close();
+
+		sessionManager.closeSession();
 		return "welcome";
 	}
 	

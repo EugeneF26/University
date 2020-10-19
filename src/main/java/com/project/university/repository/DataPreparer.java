@@ -28,10 +28,10 @@ public class DataPreparer {
 	private ProfessorRepository professorRepository;
 	private LectureRepository lectureRepository;
 	
-	private ArrayList<String> first_name = new ArrayList<String>(Arrays.asList(new String[] { "Alexander", "Modest", 
-			"Konstantin", "Michail", "Anton", "Vladimir", "Sergey", "Fedor", "Inokentiy", 
-			"Vladislav", "Dmitriy", "Igor", "Oleg", "Petr", "Pavel", "Semion", "Arkadiy", 
-			"Nicolay", "Silveriy", "Ivan" }));
+	private ArrayList<String> first_name = new ArrayList<String>(Arrays.asList("Alexander", "Modest",
+			"Konstantin", "Michail", "Anton", "Vladimir", "Sergey", "Fedor", "Inokentiy",
+			"Vladislav", "Dmitriy", "Igor", "Oleg", "Petr", "Pavel", "Semion", "Arkadiy",
+			"Nicolay", "Silveriy", "Ivan"));
 	
 	@Autowired
 	public DataPreparer(GroupRepository groupRepository, CourseRepository courseRepository, 
@@ -46,9 +46,9 @@ public class DataPreparer {
 
 	public void createStudents() throws DataSaveException, DaoLayerException {
 		
-		ArrayList<String> last_name = new ArrayList<String>(Arrays.asList(new String[] { "Bakunin", "Kornilov", "Kuchelbecker", "Lomonosov", "Puskin",
+		ArrayList<String> last_name = new ArrayList<String>(Arrays.asList("Bakunin", "Kornilov", "Kuchelbecker", "Lomonosov", "Puskin",
 				"Korsakov", "Martinov", "Korf", "Esakov", "Delvig", "Volhovskiy", "Dansas", "Pushin", "Maslov",
-				"Matushkin", "Tirkov", "Savrasov", "Yakovlev", "Rjevskiy", "Miasoedov" }));
+				"Matushkin", "Tirkov", "Savrasov", "Yakovlev", "Rjevskiy", "Miasoedov"));
 		
 		Student student = null;
 		
@@ -65,12 +65,12 @@ public class DataPreparer {
 							.skip(new Random().nextInt(last_name.size() - 1))
 							.findAny()
 							.get())
-//					.group(Group
-//							.builder()
-//							.id(Long.valueOf(new Random()
-//									.nextInt(3) + 1))
-//							.build())
-//					.currentStatus(StatusStudent.STUDY)
+					.group(Group
+							.builder()
+							.id((long) (new Random()
+									.nextInt(3) + 1))
+							.build())
+					.currentStatus(StatusStudent.STUDY)
 					.build();
 			
 			studentRepository.save(student);
@@ -80,9 +80,9 @@ public class DataPreparer {
 		
 	public void createProfessors() throws DataSaveException, DaoLayerException {
 		
-		ArrayList<String> patronymic = new ArrayList<String>(Arrays.asList(new String[] { "Bakunin", "Kornilov", "Kuchelbecker", "Lomonosov", "Puskin",
+		ArrayList<String> patronymic = new ArrayList<String>(Arrays.asList("Bakunin", "Kornilov", "Kuchelbecker", "Lomonosov", "Puskin",
 				"Korsakov", "Martinov", "Korf", "Esakov", "Delvig", "Volhovskiy", "Dansas", "Pushin", "Maslov",
-				"Matushkin", "Tirkov", "Savrasov", "Yakovlev", "Rjevskiy", "Miasoedov" }));
+				"Matushkin", "Tirkov", "Savrasov", "Yakovlev", "Rjevskiy", "Miasoedov"));
 		
 		Professor professor = null;
 		
@@ -107,18 +107,18 @@ public class DataPreparer {
 	
 	public void createGroups() throws DataSaveException, DaoLayerException, DataNotFoundException {
 		ArrayList<String> groupsName = new ArrayList<String>
-		(Arrays.asList(new String[] {"Group A","Group B","Group C",
-				"Group D", "Group E", "Group F", "Group G", "Group R"}));
+		(Arrays.asList("Group A","Group B","Group C",
+				"Group D", "Group E", "Group F", "Group G", "Group R"));
 
 		Group group = null;
 		
 		for(int i = 1; i < 6; i++) {
 			group = Group
 					.builder()
-//					.course(Course
-//							.builder()
-//							.id(Long.valueOf(i))
-//						.build())  //	(int)(Math.random() * ((5 - 1) + 1)
+					.course(Course
+							.builder()
+							.year((long) i )
+						.build())  //	(int)(Math.random() * ((5 - 1) + 1)
 					.name(groupsName
 							.stream()
 							.skip(new Random()
@@ -138,7 +138,7 @@ public class DataPreparer {
 		for(int i = 1; i < 6; i++) {
 			course = Course
 					.builder()
-					.year(i)
+					.year((long) i)
 					.build();
 			
 			courseRepository.save(course);
@@ -147,8 +147,8 @@ public class DataPreparer {
 	
 	public void createLecture() {
 		Lecture lecture = null;
-		ArrayList<String> lectures = new ArrayList<String>(Arrays.asList(new String[]{"Math", 
-				"English","Philosopher","Biology","Economics","Computer science","French"}));
+		ArrayList<String> lectures = new ArrayList<String>(Arrays.asList("Math",
+				"English","Philosopher","Biology","Economics","Computer science","French"));
 		
 		for(int i = 0; i < lectures.size(); i++) {
 			lecture = Lecture

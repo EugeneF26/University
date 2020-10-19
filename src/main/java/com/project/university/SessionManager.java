@@ -1,6 +1,7 @@
 package com.project.university;
 
 import com.project.university.model.*;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.springframework.context.annotation.Bean;
@@ -26,8 +27,9 @@ import javax.annotation.Resource;
         private Environment env;
 
         private SessionFactory sessionFactory;
+        private Session session;
 
-        public SessionFactory getConfiguration() {
+        public Session openSession() {
             Configuration configuration = new Configuration();
             configuration.setProperty("hibernate.connection.driver_class", env.getRequiredProperty(HIBERNATE_DRIVER_CLASS));
             configuration.setProperty("hibernate.connection.url", env.getRequiredProperty(HIBERNATE_URL));
@@ -44,8 +46,13 @@ import javax.annotation.Resource;
             configuration.addAnnotatedClass(Lecture.class);
 
             sessionFactory = configuration.buildSessionFactory();
+            session = sessionFactory.openSession();
 
-            return sessionFactory;
+            return session;
+        }
+
+        public void closeSession(){
+            session.close();
         }
     }
 

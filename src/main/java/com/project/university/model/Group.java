@@ -4,14 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -42,12 +35,11 @@ public class Group implements Serializable {
 	@Column(name = "name")
 	private String name;
 	
-//	@Column(name = "surname")
-//	private Course course;
-	
-	/*
-	 * @OneToMany(mappedBy = "group", cascade = CascadeType.ALL) private
-	 * List<Student> students = new ArrayList<>();
-	 */
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name ="courseYear")
+	private Course course;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "group")
+	private List<Student> students = new ArrayList<>();
 }
 
