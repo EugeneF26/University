@@ -14,29 +14,28 @@ import javax.annotation.Resource;
     @Component
     public class SessionManager {
 
-//        @Resource
-//        private Environment env;
+        private static final String HIBERNATE_DRIVER_CLASS = "spring.datasource.driver-class-name";
+        private static final String HIBERNATE_URL = "spring.datasource.url";
+        private static final String HIBERNATE_USERNAME = "spring.datasource.name";
+        private static final String HIBERNATE_PASSWORD = "spring.datasource.password";
+        private static final String HIBERNATE_DIALECT = "spring.jooq.sql-dialect";
+        private static final String HIBERNATE_SHOW_SQL = "spring.jpa.show-sql";
+        private static final String HIBERNATE_DDL = "spring.jpa.hibernate.ddl-auto";
+
+        @Resource
+        private Environment env;
 
         private SessionFactory sessionFactory;
 
         public SessionFactory getConfiguration() {
             Configuration configuration = new Configuration();
-            configuration.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver");
-            configuration.setProperty("hibernate.connection.url", "jdbc:postgresql://localhost:5432/postgres");
-            configuration.setProperty("hibernate.connection.username", "postgres");
-            configuration.setProperty("hibernate.connection.password", "2610");
-            configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
-            configuration.setProperty("hibernate.hbm2ddl.auto", "create-drop");
-            configuration.setProperty("hibernate.show_sql", "true");
-
-//            Configuration configuration = new Configuration();
-//            configuration.setProperty("hibernate.connection.driver_class", env.getRequiredProperty("spring.datasource.driver-class-name"));
-//            configuration.setProperty("hibernate.connection.url", env.getRequiredProperty("spring.datasource.url"));
-//            configuration.setProperty("hibernate.connection.username", env.getRequiredProperty("spring.datasource.username"));
-//            configuration.setProperty("hibernate.connection.password", env.getRequiredProperty("spring.datasource.password"));
-//            configuration.setProperty("hibernate.dialect", env.getRequiredProperty("org.hibernate.dialect.PostgreSQLDialect"));
-//            configuration.setProperty("hibernate.hbm2ddl.auto", env.getRequiredProperty("spring.jpa.hibernate.ddl-auto"));
-//            configuration.setProperty("hibernate.show_sql", env.getRequiredProperty("spring.jpa.show-sql"));
+            configuration.setProperty("hibernate.connection.driver_class", env.getRequiredProperty(HIBERNATE_DRIVER_CLASS));
+            configuration.setProperty("hibernate.connection.url", env.getRequiredProperty(HIBERNATE_URL));
+            configuration.setProperty("hibernate.connection.username", env.getRequiredProperty(HIBERNATE_USERNAME));
+            configuration.setProperty("hibernate.connection.password", env.getRequiredProperty(HIBERNATE_PASSWORD));
+            configuration.setProperty("hibernate.dialect", env.getRequiredProperty(HIBERNATE_DIALECT));
+            configuration.setProperty("hibernate.hbm2ddl.auto", env.getRequiredProperty(HIBERNATE_DDL));
+            configuration.setProperty("hibernate.show_sql", env.getRequiredProperty(HIBERNATE_SHOW_SQL));
 
             configuration.addAnnotatedClass(Student.class);
             configuration.addAnnotatedClass(Professor.class);

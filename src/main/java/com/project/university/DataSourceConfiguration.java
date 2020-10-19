@@ -24,16 +24,16 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableJpaRepositories 
 @ComponentScan
 //@Profile({"prod","default"})
-class DatasourceConfiguration {
+class DataSourceConfiguration {
 	
-	private static final String DRIVER_POSTGRES = "postgres.DRIVER";
-    private static final String PASSWORD_H2_POSTGRES = "postgres.PASSWORD";
-    private static final String HOST_POSTGRES = "postgres.HOST";
-    private static final String USER_NAME_POSTGRES = "postgres.USERNAME";
+	private static final String DRIVER_POSTGRES = "spring.datasource.driver-class-name";
+    private static final String PASSWORD_H2_POSTGRES = "spring.datasource.password";
+    private static final String HOST_POSTGRES = "spring.datasource.url";
+    private static final String USER_NAME_POSTGRES = "spring.datasource.name";
     
     private static final String PROP_HIBERNATE_DIALECT = "spring.jooq.sql-dialect";
     private static final String PROP_HIBERNATE_SHOW_SQL = "spring.jpa.show-sql";
-    private static final String PROP_ENTITYMANAGER_PACKAGES_TO_SCAN = "entity.scan";
+    private static final String PROP_ENTITYMANAGER_PACKAGES_TO_SCAN = "spring.jpa.mapping-resources";
     private static final String PROP_HIBERNATE_HBM2DDL_AUTO = "spring.jpa.hibernate.ddl-auto";
 	
 	@Resource
@@ -79,8 +79,6 @@ class DatasourceConfiguration {
 	        return transactionManager;
 	    }
 
-
-
 	private Properties getHibernateProperties() {
 	        Properties properties = new Properties();
 	        properties.put("spring.jooq.sql-dialect","org.hibernate.dialect.PostgreSQLDialect");
@@ -89,5 +87,5 @@ class DatasourceConfiguration {
 
 	        return properties;
 	    }
-	  
 }
+
