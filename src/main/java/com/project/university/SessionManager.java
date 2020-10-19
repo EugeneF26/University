@@ -41,6 +41,7 @@ import javax.annotation.Resource;
             configuration.addAnnotatedClass(Professor.class);
             configuration.addAnnotatedClass(Course.class);
             configuration.addAnnotatedClass(Group.class);
+            configuration.addAnnotatedClass(Lecture.class);
 
             sessionFactory = configuration.buildSessionFactory();
 

@@ -151,7 +151,12 @@ public class DataPreparer {
 				"English","Philosopher","Biology","Economics","Computer science","French"}));
 		
 		for(int i = 0; i < lectures.size(); i++) {
-		lectureRepository.save(lecture);
+			lecture = Lecture
+					.builder()
+					.title(lectures.get(i)).
+							build();
+
+			lectureRepository.save(lecture);
 		}
 	}
 }

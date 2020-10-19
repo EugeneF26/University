@@ -47,6 +47,7 @@ public class UniversityController {
 		dataPreparer.createGroups();
 		dataPreparer.createStudents();
 		dataPreparer.createProfessors();
+		dataPreparer.createLecture();
 		session.close();
 		return "welcome";
 	}
@@ -76,7 +77,7 @@ public class UniversityController {
 	} 
 	
 	@GetMapping("/lectures") 
-	public String listLectures(Model model) {
+	public String listLectures(Model model) throws Exception {
 		model.addAttribute("lectures", lectureService.getLectures());
 		return "lectures";
 	} 
