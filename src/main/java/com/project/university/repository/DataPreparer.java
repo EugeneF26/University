@@ -98,7 +98,7 @@ public class DataPreparer {
 							.skip(new Random().nextInt(patronymic.size() - 1))
 							.findAny()
 							.get())
-//					.currentStatus(StatusProfessor.WORKS)
+					.currentStatus(StatusProfessor.WORKS)
 					.build();
 			
 			professorRepository.save(professor);
@@ -117,7 +117,7 @@ public class DataPreparer {
 					.builder()
 					.course(Course
 							.builder()
-							.year((long) i )
+							.id((long) i )
 						.build())  //	(int)(Math.random() * ((5 - 1) + 1)
 					.name(groupsName
 							.stream()
