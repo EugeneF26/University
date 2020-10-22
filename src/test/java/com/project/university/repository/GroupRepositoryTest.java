@@ -37,26 +37,26 @@ public class GroupRepositoryTest {
 		this.groupRepository = groupRepository;
 	}
 	
-	@Test
-	public void testSave_WhenTheUserSendsTheGroupDataAndTheProgramSavesCourseIdThem_thenCorrect()
-			throws DataSetException, FileNotFoundException, SQLException, DataSaveException, DaoLayerException {
-		Group group = Group
-				.builder()
-//				.course(Course
-//						.builder()
-//						.id(Long.valueOf(2))
-//						.build())
-				.name("Y1")
-				.build();		
-		MatcherAssert.assertThat(groupRepository.save(group).getId(), CoreMatchers.equalTo(5));
-	}
+//	@Test
+//	public void testSave_WhenTheUserSendsTheGroupDataAndTheProgramSavesCourseIdThem_thenCorrect()
+//			throws DataSetException, FileNotFoundException, SQLException, DataSaveException, DaoLayerException {
+//		Group group = Group
+//				.builder()
+////				.course(Course
+////						.builder()
+////						.id(Long.valueOf(2))
+////						.build())
+//				.name("Y1")
+//				.build();
+//		MatcherAssert.assertThat(groupRepository.save(group).getId(), CoreMatchers.equalTo(5));
+//	}
 	
-	@Test
-	public void testFindGroupById_WhenTheUserEntersTheIdOfTheGroupIsOneAndTheProgramDisplaysTheResult_thenCorrect()
-			throws DataSetException, FileNotFoundException, DataNotFoundException, DaoLayerException {
-		Group group = groupRepository.getOne(Long.valueOf(1));
-		MatcherAssert.assertThat(group.getId(), CoreMatchers.equalTo(1));
-	}
+//	@Test
+//	public void testFindGroupById_WhenTheUserEntersTheIdOfTheGroupIsOneAndTheProgramDisplaysTheResult_thenCorrect()
+//			throws DataSetException, FileNotFoundException, DataNotFoundException, DaoLayerException {
+//		Group group = groupRepository.getOne(Long.valueOf(1));
+//		MatcherAssert.assertThat(group.getId(), CoreMatchers.equalTo(1));
+//	}
 	
 	@Test
 	public void testUpdate_WhenUserSendsTheDataInTheMethodAndReturnsTheSameObject_thenCorrect()

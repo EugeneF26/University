@@ -40,6 +40,6 @@ public class Group implements Serializable {
 	private Course course;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "group")
-	private List<Student> students = new ArrayList<>();
+	private List<Student> students;
 }
 

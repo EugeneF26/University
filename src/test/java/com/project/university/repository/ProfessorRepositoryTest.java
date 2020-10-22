@@ -50,12 +50,12 @@ public class ProfessorRepositoryTest {
 //		MatcherAssert.assertThat(professorRepository.save(professor).getId(), CoreMatchers.equalTo(4));
 //	}
 	
-	@Test
-	public void testFindProfessorById_WhenTheUserEntersTheIdOfTheProfessorIsOneAndTheProgramDisplaysTheResult_thenCorrect()
-			throws DataSetException, FileNotFoundException, DataNotFoundException, DaoLayerException {
-		Professor professor = professorRepository.getOne(Long.valueOf(1));
-		MatcherAssert.assertThat(professor.getId(), CoreMatchers.equalTo(1));
-	}
+//	@Test
+//	public void testFindProfessorById_WhenTheUserEntersTheIdOfTheProfessorIsOneAndTheProgramDisplaysTheResult_thenCorrect()
+//			throws DataSetException, FileNotFoundException, DataNotFoundException, DaoLayerException {
+//		Professor professor = professorRepository.getOne(Long.valueOf(1));
+//		MatcherAssert.assertThat(professor.getId(), CoreMatchers.equalTo(1));
+//	}
 	
 //	@Test
 //	public void testUpdate_WhenUserSendsTheDataInTheMethodAndReturnsCountUpdatedRows_thenCorrect()
