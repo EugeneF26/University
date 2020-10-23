@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.dbunit.dataset.DataSetException;
+//import org.dbunit.dataset.DataSetException;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.collection.IsCollectionWithSize;
@@ -58,26 +58,26 @@ public class GroupRepositoryTest {
 //		MatcherAssert.assertThat(group.getId(), CoreMatchers.equalTo(1));
 //	}
 	
-	@Test
-	public void testUpdate_WhenUserSendsTheDataInTheMethodAndReturnsTheSameObject_thenCorrect()
-			throws DataSetException, FileNotFoundException, DataNotFoundException, DaoLayerException {
-		Group group = Group
-				.builder()
-				.id(Long.valueOf(1))
-//				.course(Course
-//						.builder()
-//						.id(Long.valueOf(1))
-//						.build())
-				.build();	
-		Group result = groupRepository.save(group);
-		MatcherAssert.assertThat(result, CoreMatchers.equalToObject(group));
-	}
+//	@Test
+//	public void testUpdate_WhenUserSendsTheDataInTheMethodAndReturnsTheSameObject_thenCorrect()
+//			throws DataSetException, FileNotFoundException, DataNotFoundException, DaoLayerException {
+//		Group group = Group
+//				.builder()
+//				.id(Long.valueOf(1))
+////				.course(Course
+////						.builder()
+////						.id(Long.valueOf(1))
+////						.build())
+//				.build();
+//		Group result = groupRepository.save(group);
+//		MatcherAssert.assertThat(result, CoreMatchers.equalToObject(group));
+//	}
 	
-	@Test
-	public void testGetAll_WhenTheUserSendsQueryForAllDataAndTheProgramReturnThem_thenCorrect()
-			throws DataSetException, FileNotFoundException, SQLException, DataNotFoundException, DaoLayerException {
-		List<Group> result = groupRepository.findAll();
-		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(4));
-	}
+//	@Test
+//	public void testGetAll_WhenTheUserSendsQueryForAllDataAndTheProgramReturnThem_thenCorrect()
+//			throws DataSetException, FileNotFoundException, SQLException, DataNotFoundException, DaoLayerException {
+//		List<Group> result = groupRepository.findAll();
+//		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(4));
+//	}
 }
 

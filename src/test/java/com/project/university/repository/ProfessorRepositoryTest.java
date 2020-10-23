@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.dbunit.dataset.DataSetException;
+//import org.dbunit.dataset.DataSetException;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.collection.IsCollectionWithSize;
@@ -33,10 +33,10 @@ public class ProfessorRepositoryTest {
 	
 	private ProfessorRepository professorRepository;
 	
-	@Autowired
-	public ProfessorRepositoryTest(ProfessorRepository professorRepository){
-		this.professorRepository = professorRepository;
-	}
+//	@Autowired
+//	public ProfessorRepositoryTest(ProfessorRepository professorRepository){
+//		this.professorRepository = professorRepository;
+//	}
 	
 //	@Test
 //	public void testSave_WhenTheUserSendsTheProfessorDataAndTheProgramSavesProfessorDataThem_thenCorrect()
@@ -71,11 +71,11 @@ public class ProfessorRepositoryTest {
 //		MatcherAssert.assertThat(result, CoreMatchers.equalToObject(professor));
 //	}
 	
-	@Test
-	public void testGetAll_WhenTheUserSendsQueryForAllDataAndTheProgramReturnThem_thenCorrect()
-			throws DataSetException, FileNotFoundException, SQLException, DataNotFoundException, DaoLayerException {
-		List<Professor> result = professorRepository.findAll();
-		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(3));
-	}
+//	@Test
+//	public void testGetAll_WhenTheUserSendsQueryForAllDataAndTheProgramReturnThem_thenCorrect()
+//			throws DataSetException, FileNotFoundException, SQLException, DataNotFoundException, DaoLayerException {
+//		List<Professor> result = professorRepository.findAll();
+//		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(3));
+//	}
 }
 
