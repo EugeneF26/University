@@ -24,18 +24,18 @@ import com.project.university.repository.exception.DaoLayerException;
 import com.project.university.repository.exception.DataNotFoundException;
 import com.project.university.repository.exception.DataSaveException;
 
-@ExtendWith(SpringExtension.class)
-@SpringJUnitConfig(classes = {GroupRepository.class, DatasourseConfigurationTest.class})
-@Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, scripts={"/DROP.sql", "/CREATE.sql", "/INSERT.sql"})
-@ActiveProfiles("dev")
-public class GroupRepositoryTest {
-	
-	private GroupRepository groupRepository;
-	
-	@Autowired
-	public GroupRepositoryTest(GroupRepository groupRepository){
-		this.groupRepository = groupRepository;
-	}
+//@ExtendWith(SpringExtension.class)
+//@SpringJUnitConfig(classes = {GroupRepository.class, DatasourseConfigurationTest.class})
+//@Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, scripts={"/DROP.sql", "/CREATE.sql", "/INSERT.sql"})
+//@ActiveProfiles("dev")
+//public class GroupRepositoryTest {
+//
+//	private GroupRepository groupRepository;
+//
+//	@Autowired
+//	public GroupRepositoryTest(GroupRepository groupRepository){
+//		this.groupRepository = groupRepository;
+//	}
 	
 //	@Test
 //	public void testSave_WhenTheUserSendsTheGroupDataAndTheProgramSavesCourseIdThem_thenCorrect()
@@ -79,5 +79,5 @@ public class GroupRepositoryTest {
 //		List<Group> result = groupRepository.findAll();
 //		MatcherAssert.assertThat(result, IsCollectionWithSize.hasSize(4));
 //	}
-}
+//}
 

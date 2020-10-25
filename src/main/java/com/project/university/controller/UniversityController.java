@@ -16,18 +16,18 @@ import com.project.university.service.StudentService;
 public class UniversityController {
 	
 	private final StudentService studentService;
-	private final GroupService groupService;
+//	private final GroupService groupService;
 	private final CourseService courseService;
 	private final ProfessorService professorService;
 	private final LectureService lectureService;
 	private final DataPreparer dataPreparer;
 
 	@Autowired
-	public UniversityController(StudentService studentService, GroupService groupService,
+	public UniversityController(StudentService studentService, /* GroupService groupService, */
 								CourseService courseService, ProfessorService professorService,
 								LectureService lectureService, DataPreparer dataPreparer) {
 		this.studentService = studentService;
-		this.groupService = groupService;
+//		this.groupService = groupService;
 		this.courseService = courseService;
 		this.professorService = professorService;
 		this.lectureService = lectureService;
@@ -37,11 +37,11 @@ public class UniversityController {
 	@GetMapping("/")
 	public String createUniversity() throws Exception {
 
-		dataPreparer.createCourses();
-		dataPreparer.createGroups();
-		dataPreparer.createStudents();
-		dataPreparer.createProfessors();
-		dataPreparer.createLecture();
+//		dataPreparer.createCourses();
+//		dataPreparer.createGroups();
+//		dataPreparer.createStudents();
+//		dataPreparer.createProfessors();
+//		dataPreparer.createLecture();
 
 		return "welcome";
 	}
@@ -66,7 +66,7 @@ public class UniversityController {
 		
 	@GetMapping("/groups") 
 	public String listGroups(Model model) throws Exception { 
-		model.addAttribute("groups", groupService.getGroups());
+//		model.addAttribute("groups", groupService.getGroups());
 		return "groups";
 	} 
 	

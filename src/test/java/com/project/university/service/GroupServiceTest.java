@@ -16,22 +16,22 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.project.university.config.DatasourseConfigurationTest;
 import com.project.university.model.Group;
-import com.project.university.repository.GroupRepository;
+//import com.project.university.repository.GroupRepository;
 import com.project.university.repository.exception.DaoLayerException;
 import com.project.university.repository.exception.DataNotFoundException;
 
 @ExtendWith(SpringExtension.class)
-@SpringJUnitConfig(classes = {GroupService.class, GroupRepository.class, DatasourseConfigurationTest.class})
+//@SpringJUnitConfig(classes = {GroupService.class, GroupRepository.class, DatasourseConfigurationTest.class})
 @Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, scripts={"/DROP.sql", "/CREATE.sql", "/INSERT.sql"})
 @ActiveProfiles("dev")
 public class GroupServiceTest {
 	
 	private GroupService groupService;
 	
-	@Autowired
-	public GroupServiceTest(GroupService groupService){
-		this.groupService = groupService;
-	}
+//	@Autowired
+//	public GroupServiceTest(GroupService groupService){
+//		this.groupService = groupService;
+//	}
 	
 	/*
 	 * @Test public void

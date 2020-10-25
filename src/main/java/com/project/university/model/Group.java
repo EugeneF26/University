@@ -18,8 +18,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "groups")
+//@Entity
+//@Table(name = "groups")
 public class Group implements Serializable {
 	
 	/**
@@ -27,19 +27,19 @@ public class Group implements Serializable {
 	 */
 	private static final long serialVersionUID = 238402213888528052L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@Column(name = "id")
 	private Long id;
 	
-	@Column(name = "name")
+//	@Column(name = "name")
 	private String name;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name ="courseYear")
-	private Course course;
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name ="courseYear")
+//	private Course course;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "group")
-	private List<Student> students;
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "group")
+//	private List<Student> students;
 }
 

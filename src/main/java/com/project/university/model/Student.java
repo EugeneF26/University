@@ -36,9 +36,9 @@ public class Student implements Serializable {
 	@Column(name = "surname", nullable = false)
 	private String surname;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name ="group_id")
-	private Group group;
+//	@ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name ="group_id")
+//	private Group group;
 
 	@Column(name = "currentStatus")
     @Enumerated(EnumType.STRING)

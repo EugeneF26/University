@@ -1,0 +1,9 @@
+CREATE TABLE UNIVERSITY_LECTURES
+(
+id INT PRIMARY KEY AUTO_INCREMENT,
+title VARCHAR(255),
+CONSTRAINT sc_unique_lecture UNIQUE (id, title),
+CONSTRAINT sc_unique_lecture2 UNIQUE (title)
+);
+
+GO

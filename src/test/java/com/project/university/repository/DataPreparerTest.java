@@ -29,19 +29,19 @@ import com.project.university.repository.exception.DataSaveException;
 public class DataPreparerTest {
 	
 	private DataPreparer dataPreparer;
-	private GroupRepository groupRepository;
+//	private GroupRepository groupRepository;
 	private CourseRepository courseRepository;
 	private ProfessorRepository professorRepository;
 	private StudentRepository studentRepository;
 	
-	@Autowired
-	public DataPreparerTest(DataPreparer dataPreparer, GroupRepository groupRepository,
-			CourseRepository courseRepository, ProfessorRepository professorRepository) {
-		this.dataPreparer = dataPreparer;
-		this.groupRepository = groupRepository;
-		this.courseRepository = courseRepository;
-		this.professorRepository = professorRepository;
-	}
+//	@Autowired
+//	public DataPreparerTest(DataPreparer dataPreparer, GroupRepository groupRepository,
+//			CourseRepository courseRepository, ProfessorRepository professorRepository) {
+//		this.dataPreparer = dataPreparer;
+//		this.groupRepository = groupRepository;
+//		this.courseRepository = courseRepository;
+//		this.professorRepository = professorRepository;
+//	}
 	
 	@Test
 	public void testCreateStudents() throws DataSaveException, DaoLayerException, DataNotFoundException {
@@ -52,22 +52,22 @@ public class DataPreparerTest {
 	
 	@Test
 	public void testCreateProfessors() throws DataSaveException, DaoLayerException, DataNotFoundException {
-		dataPreparer.createProfessors();
+//		dataPreparer.createProfessors();
 		List<Professor> professors = professorRepository.findAll();
 		MatcherAssert.assertThat(professors, IsCollectionWithSize.hasSize(15));
 	}
 	
-	@Test
-	public void createGroups() throws DataSaveException, DaoLayerException, DataNotFoundException {
-		dataPreparer.createCourses();
-		dataPreparer.createGroups();
-		List<Group> groups = groupRepository.findAll();
-		MatcherAssert.assertThat(groups, IsCollectionWithSize.hasSize(5));
-	}
+//	@Test
+////	public void createGroups() throws DataSaveException, DaoLayerException, DataNotFoundException {
+////		dataPreparer.createCourses();
+////		dataPreparer.createGroups();
+//		List<Group> groups = groupRepository.findAll();
+//		MatcherAssert.assertThat(groups, IsCollectionWithSize.hasSize(5));
+//	}
 	
 	@Test
 	public void createCourses() throws DataSaveException, DaoLayerException, DataNotFoundException {
-		dataPreparer.createCourses();
+//		dataPreparer.createCourses();
 		List<Course> course = courseRepository.findAll();
 		MatcherAssert.assertThat(course, IsCollectionWithSize.hasSize(5));
 	}
