@@ -1,4 +1,4 @@
-CREATE TABLE ScheduleItem
+CREATE TABLE SCHEDULE
 (
 id INT PRIMARY KEY AUTO_INCREMENT,
 professorId INT NOT NULL,
@@ -19,3 +19,5 @@ CONSTRAINT sc_unique_schedule3 UNIQUE (professorId, courseId, studyDay, lectureI
 CONSTRAINT sc_unique_schedule4 UNIQUE (courseId, studyDay, lectureId, floor),
 CONSTRAINT sc_unique_schedule5 UNIQUE (studyDay, lectureId, floor)
 );
+
+GO
