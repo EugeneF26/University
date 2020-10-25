@@ -11,6 +11,7 @@
     <include file="/professors/30-changeset-professors-table.xml" relativeToChangelogFile="true"/>
     <include file="/lectures/40-changeset-lectures-table.xml" relativeToChangelogFile="true"/>
     <include file="/lectureHalls/60-changeset-lectureHalls-table.xml" relativeToChangelogFile="true"/>
+    <include file="/schedule/50-changeset-schedule-table.xml" relativeToChangelogFile="true"/>
 
     <!--    <include file="10-changeset-lecture-table.xml" relativeToChangelogFile="true"/>-->
 

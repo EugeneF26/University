@@ -13,6 +13,14 @@
                  splitStatements="true"
                  stripComments="true"
                  path="30-create-professors-table.sql"/>
+
+        <sqlFile dbms="mysql"
+                 encoding="utf8"
+                 endDelimiter="\nGO"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"
+                 path="30-insert-professors-table.sql"/>
         <rollback>
             <sqlFile dbms="mysql"
                      encoding="utf8"

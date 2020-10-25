@@ -13,6 +13,14 @@
                  splitStatements="true"
                  stripComments="true"
                  path="40-create-lectures-table.sql"/>
+
+        <sqlFile dbms="mysql"
+                 encoding="utf8"
+                 endDelimiter="\nGO"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"
+                 path="40-insert-lectures-table.sql"/>
         <rollback>
             <sqlFile dbms="mysql"
                      encoding="utf8"

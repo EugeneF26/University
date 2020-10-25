@@ -13,6 +13,15 @@
                  splitStatements="true"
                  stripComments="true"
                  path="10-create-courses-table.sql"/>
+
+        <sqlFile dbms="mysql"
+                 encoding="utf8"
+                 endDelimiter="\nGO"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"
+                 path="10-insert-courses-table.sql"/>
+
         <rollback>
             <sqlFile dbms="mysql"
                      encoding="utf8"
