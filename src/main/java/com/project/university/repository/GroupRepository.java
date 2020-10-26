@@ -9,8 +9,7 @@ import com.project.university.model.Group;
 /**
  * @author Eugene The repository class contain methods working with data base
  */
-//@Repository
-//public interface GroupRepository extends JpaRepository<Group, Long>,
-//JpaSpecificationExecutor<Group> {
-//}
+ @Repository
+ public interface GroupRepository extends JpaRepository<Group, Long>, JpaSpecificationExecutor<Group> {
+}
 

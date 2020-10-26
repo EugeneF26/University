@@ -1,48 +1,33 @@
 package com.project.university.controller;
 
+import com.project.university.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.project.university.repository.DataPreparer;
-import com.project.university.service.CourseService;
-import com.project.university.service.GroupService;
-import com.project.university.service.LectureService;
-import com.project.university.service.ProfessorService;
-import com.project.university.service.StudentService;
-
 @Controller
 public class UniversityController {
 	
 	private final StudentService studentService;
-//	private final GroupService groupService;
+	private final GroupService groupService;
 	private final CourseService courseService;
 	private final ProfessorService professorService;
 	private final LectureService lectureService;
-	private final DataPreparer dataPreparer;
 
 	@Autowired
-	public UniversityController(StudentService studentService, /* GroupService groupService, */
+	public UniversityController(StudentService studentService, GroupService groupService,
 								CourseService courseService, ProfessorService professorService,
-								LectureService lectureService, DataPreparer dataPreparer) {
+								LectureService lectureService) {
 		this.studentService = studentService;
-//		this.groupService = groupService;
+		this.groupService = groupService;
 		this.courseService = courseService;
 		this.professorService = professorService;
 		this.lectureService = lectureService;
-		this.dataPreparer = dataPreparer;
 	}
 	
 	@GetMapping("/")
 	public String createUniversity() throws Exception {
-
-//		dataPreparer.createCourses();
-//		dataPreparer.createGroups();
-//		dataPreparer.createStudents();
-//		dataPreparer.createProfessors();
-//		dataPreparer.createLecture();
-
 		return "welcome";
 	}
 	
@@ -66,7 +51,7 @@ public class UniversityController {
 		
 	@GetMapping("/groups") 
 	public String listGroups(Model model) throws Exception { 
-//		model.addAttribute("groups", groupService.getGroups());
+		model.addAttribute("groups", groupService.getGroups());
 		return "groups";
 	} 
 	
