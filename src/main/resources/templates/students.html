@@ -119,7 +119,9 @@
 							<td th:text="${student.id}"></td>
 							<td th:text="${student.name}"></td>
 							<td th:text="${student.surname}"></td>
-						</h5>
+<!--                            <td th:text="${student.groupId}"></td>-->
+<!--                            <td th:text="${student.currentStatus}"></td>-->
+                        </h5>
 						<h6 class="card-subtitle mb-2 text-muted">student</h6>
 						<p class="card-text"></p>
 						<td><a th:href="@{|/delete/${student.id}|}">Expel</a></td>

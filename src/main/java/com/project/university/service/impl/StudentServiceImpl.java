@@ -1,7 +1,10 @@
 package com.project.university.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
+import com.project.university.model.Group;
+import com.project.university.model.StatusStudent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,14 +36,14 @@ public class StudentServiceImpl implements StudentService {
 //				.build());
 //		return studentRepository.save(studentGet.get());
 //	}
-	
+//
 //	@Override
-//	public void expelStrudent(Student student) throws Exception {
+//	public void expelStudent(Student student) throws Exception {
 //		Optional<Student> studentGet = studentRepository.findById(Long.valueOf(student.getId()));
 //		studentGet.get().setCurrentStatus(StatusStudent.EXPELLED);
 //		studentRepository.save(studentGet.get());
 //	}
-
+//
 //	@Override
 //	public Student acceptNewStudent(Student student) throws Exception {
 //		student.setCurrentStatus(StatusStudent.STUDY);

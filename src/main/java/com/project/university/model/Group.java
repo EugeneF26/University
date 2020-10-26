@@ -39,7 +39,7 @@ public class Group implements Serializable {
 	@JoinColumn(name ="year")
 	private Course course;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "group")
-	private List<Student> students;
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "group")
+//	private List<Student> students;
 }
 
