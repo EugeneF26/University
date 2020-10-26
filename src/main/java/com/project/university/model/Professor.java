@@ -47,11 +47,5 @@ public class Professor implements Serializable {
 	@Column(name = "currentStatus", nullable = false)
     @Enumerated(EnumType.STRING)
 	private StatusProfessor currentStatus;
-	
-	
-//	public StatusProfessor getCurrentStatus(){ 
-//		return currentStatus; 
-//		}
-
 }
 

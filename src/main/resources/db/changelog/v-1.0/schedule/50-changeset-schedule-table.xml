@@ -14,13 +14,13 @@
                  stripComments="true"
                  path="50-create-schedule-table.sql"/>
 
-<!--        <sqlFile dbms="mysql"-->
-<!--                 encoding="utf8"-->
-<!--                 endDelimiter="\nGO"-->
-<!--                 relativeToChangelogFile="true"-->
-<!--                 splitStatements="true"-->
-<!--                 stripComments="true"-->
-<!--                 path="50-insert-schedule-table.sql"/>-->
+        <sqlFile dbms="mysql"
+                 encoding="utf8"
+                 endDelimiter="\nGO"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"
+                 path="50-insert-schedule-table.sql"/>
         <rollback>
             <sqlFile dbms="mysql"
                      encoding="utf8"

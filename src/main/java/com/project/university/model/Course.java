@@ -35,7 +35,7 @@ public class Course implements Serializable {
 	@Column(name = "year")
 	private Long year;
 	
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "course")
-//	private List<Group> groups;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "course")
+	private List<Group> groups;
 }
 

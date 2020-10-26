@@ -37,7 +37,7 @@ public class LectureHall implements Serializable {
 	@Column(name = "floor")
 	private Long floor;
 	
-	@Column(name = "number")
-	private Long number;
+	@Column(name = "classroom")
+	private Long classroom;
 }
 
