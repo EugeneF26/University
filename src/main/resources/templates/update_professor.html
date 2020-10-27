@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form name="professor" action="update_professor" method="post">
+
+    <p>Id</p>
+    <input title="Name" type="text" name="id" th:value="${professor.id}" readonly></td>
+
+    <p>Name</p>
+    <input title="Name" type="text" name="name" th:value="${professor.name}"></td>
+
+    <p>Patronymic</p>
+    <input title="Patronymic" type="text" name="patronymic" th:value="${professor.patronymic}">
+    <input type="submit" value="OK">
+</form>
+</body>
+</html>

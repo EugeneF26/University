@@ -116,15 +116,16 @@
 				<div class="card">
 					<div class="card-body">
 						<h5 class="card-title">
-							<td th:text="${professor.id}" />
-							<td th:text="${professor.name}" />
-							<td th:text="${professor.patronymic}" />
-							<td th:text="${professor.currentStatus}" />
+							<td th:text="${professor.id}"></td>
+							<td th:text="${professor.name}"></td>
+							<td th:text="${professor.patronymic}"></td>
+							<td th:text="${professor.currentStatus.status}"></td>
 						</h5>
 						<h6 class="card-subtitle mb-2 text-muted">professor</h6>
 						<p class="card-text"></p>
-						<td><a th:href="@{|/delete/${professor.id}|}">Expel</a></td>
-						<td><a th:href="@{|/update/${professor.id}|}">Update</a></td>
+						<td><a th:href="@{|professor/delete/${professor.id}|}">Delete card</a></td>
+						<td><a th:href="@{|professor/layOf/${professor.id}|}">lay Of</a></td>
+						<td><a th:href="@{|professor/update/${professor.id}|}">Update</a></td>
 					</div>
 				</div>
 			</tr>
