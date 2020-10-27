@@ -39,7 +39,7 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public void expelStudent(Student student) throws Exception {
-		Optional<Student> studentGet = studentRepository.findById((long) student.getId());
+		Optional<Student> studentGet = studentRepository.findById(student.getId());
 		studentGet.get().setCurrentStatus(StatusStudent.EXPELLED);
 		studentRepository.save(studentGet.get());
 	}
@@ -62,18 +62,14 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public void updateStudent(Student student) {
-		studentRepository.getOne(student.getId());
-
 		Optional<Student> studentGet = studentRepository.findById(student.getId());
-		studentGet.get().setId(student.getId());
 		studentGet.get().setName(student.getName());
 		studentGet.get().setSurname(student.getSurname());
-
 		studentRepository.save(studentGet.get());
 	}
 
 	@Override
-	public Student getStudent(Long id) throws Exception {
+	public Student getStudent(Long id) {
 		return studentRepository.getOne(id);
 	}
 }

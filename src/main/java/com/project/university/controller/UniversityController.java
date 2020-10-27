@@ -1,14 +1,11 @@
 package com.project.university.controller;
 
-import com.project.university.model.StatusStudent;
 import com.project.university.model.Student;
 import com.project.university.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @Controller
 public class UniversityController {
@@ -55,13 +52,19 @@ public class UniversityController {
 		return "redirect:/students";
 	}
 
+	@PostMapping("student/update/update_student")
+	public String createUpdateStudentPage(@ModelAttribute("student") Student selected) {
+		studentService.updateStudent(selected);
+		return "redirect:/students";
+	}
+
 	@GetMapping("student/update/{id}")
-	public String createUpdatePage(@ModelAttribute("student") Student student) {
-		studentService.updateStudent(student);
-		return "editStudent";
-	} // доделать
-	
-	 @GetMapping("/professors") 
+	public String updateStudent(@PathVariable("id") long id, Model model) throws Exception {
+		model.addAttribute("student", studentService.getStudent(id));
+		return "update_student";
+	}
+
+	@GetMapping("/professors")
 	 public String listProfessors(Model model) throws Exception { 
 		model.addAttribute("professors", professorService.getProfessors());
 		return "professors";
