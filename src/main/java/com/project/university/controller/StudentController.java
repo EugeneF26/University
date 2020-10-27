@@ -25,7 +25,7 @@ public class StudentController {
 	@GetMapping("/students")
 	public String listAllStudents(Model model) throws Exception {
 		model.addAttribute("students", studentService.getStudents());
-		return "students";
+		return "list_all_students";
 	}
 
 	@GetMapping("student/delete/{id}")

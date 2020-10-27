@@ -17,6 +17,6 @@ public class GroupController {
     @GetMapping("/groups")
     public String listGroups(Model model) throws Exception {
         model.addAttribute("groups", groupService.getGroups());
-        return "groups";
+        return "list_all_groups";
     }
 }

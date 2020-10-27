@@ -17,6 +17,6 @@ public class ProfessorController {
     @GetMapping("/professors")
     public String listProfessors(Model model) throws Exception {
         model.addAttribute("professors", professorService.getProfessors());
-        return "professors";
+        return "list_all_professors";
     }
 }
