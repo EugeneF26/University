@@ -124,8 +124,9 @@
                         </h5>
 						<h6 class="card-subtitle mb-2 text-muted">student</h6>
 						<p class="card-text"></p>
-						<td><a th:href="@{|/delete/${student.id}|}">Expel</a></td>
-						<td><a th:href="@{|/update/${student.id}|}">Update</a></td>
+						<td><a th:href="@{|student/delete/${student.id}|}">Delete card</a></td>
+						<td><a th:href="@{|student/expel/${student.id}|}">Expel</a></td>
+						<td><a th:href="@{|student/update/${student.id}|}">Update</a></td>
 					</div>
 				</div>
 			</tr>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<table class="table table-responsive">
+
+    <th >
+    <td>ID</td>
+    <td>Name</td>
+    <td>Address</td>
+    <td>Delete</td>
+    </th>
+
+    <tr th:each="student : ${students}">
+        <td>
+            <form th:action="@{delete}" method="post">
+                <input type="hidden" name="id" th:value="${student.id}" />
+                <input type="submit" value="Delete" class="btn btn-danger" />
+            </form>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

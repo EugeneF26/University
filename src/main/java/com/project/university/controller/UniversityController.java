@@ -1,10 +1,14 @@
 package com.project.university.controller;
 
+import com.project.university.model.StatusStudent;
+import com.project.university.model.Student;
 import com.project.university.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @Controller
 public class UniversityController {
@@ -36,6 +40,26 @@ public class UniversityController {
 		model.addAttribute("students", studentService.getStudents());
 		return "students";
 	}
+
+	@GetMapping("student/delete/{id}")
+	public String deleteStudent(@PathVariable("id") long id) throws Exception {
+		studentService.deleteStudent(id);
+		return "redirect:/students";
+	}
+
+	@GetMapping("student/expel/{id}")
+	public String expelStudent(@PathVariable("id") long id) throws Exception {
+		Student student = new Student();
+		student.setId(id);
+		studentService.expelStudent(student);
+		return "redirect:/students";
+	}
+
+	@GetMapping("student/update/{id}")
+	public String createUpdatePage(@ModelAttribute("student") Student student) {
+		studentService.updateStudent(student);
+		return "editStudent";
+	} // доделать
 	
 	 @GetMapping("/professors") 
 	 public String listProfessors(Model model) throws Exception { 
