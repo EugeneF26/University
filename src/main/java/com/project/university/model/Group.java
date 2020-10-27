@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "groups")
+@Table(name = "university_groups")
 public class Group implements Serializable {
 	
 	/**
@@ -36,10 +36,14 @@ public class Group implements Serializable {
 	private String name;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name ="year")
+	@JoinColumn(name ="courseId")
 	private Course course;
 
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "group")
-//	private List<Student> students;
+	@OneToMany(
+			mappedBy = "group",
+			cascade = CascadeType.ALL,
+			orphanRemoval = true
+	)
+	private List<Student> students;
 }
 

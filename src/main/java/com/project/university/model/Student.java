@@ -36,12 +36,12 @@ public class Student implements Serializable {
 	@Column(name = "surname", nullable = false)
 	private String surname;
 	
-//	@ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name ="groupId")
-//	private Group group;
+	@ManyToOne
+    @JoinColumn(name ="groupId")
+	private Group group;
 
-//	@Column(name = "currentStatus")
-//    @Enumerated(EnumType.STRING)
-//	private StatusStudent currentStatus;
+	@Column(name = "currentStatus")
+    @Enumerated(EnumType.STRING)
+	private StatusStudent currentStatus;
 }
 
