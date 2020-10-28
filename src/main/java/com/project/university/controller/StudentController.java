@@ -25,7 +25,7 @@ public class StudentController {
 	@GetMapping("/students")
 	public String listAllStudents(Model model) throws Exception {
 		model.addAttribute("students", studentService.getStudents());
-		return "list_all_students";
+		return "students_table/list_all_students";
 	}
 
 	@GetMapping("student/delete/{id}")
@@ -43,15 +43,15 @@ public class StudentController {
 	}
 
 	@PostMapping("student/update/update_student")
-	public String createUpdateStudentPage(@ModelAttribute("student") Student selected) {
-		studentService.updateStudent(selected);
+	public String createUpdateStudentPage(@ModelAttribute("student") Student student) {
+		studentService.updateStudent(student);
 		return "redirect:/students";
 	}
 
 	@GetMapping("student/update/{id}")
 	public String updateStudent(@PathVariable("id") long id, Model model) throws Exception {
 		model.addAttribute("student", studentService.getStudent(id));
-		return "update_student";
+		return "students_table/update_student";
 	}
 }
 

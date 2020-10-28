@@ -40,5 +40,10 @@ public class LectureServiceImpl implements LectureService {
 	public List<Lecture> getLectures() throws Exception {
 		return lectureRepository.findAll();
 	}
+
+	@Override
+	public void deleteLecture(long id) {
+		lectureRepository.deleteById(id);
+	}
 }
 

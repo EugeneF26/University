@@ -1,7 +1,6 @@
 package com.project.university.controller;
 
 import com.project.university.model.Professor;
-import com.project.university.model.Student;
 import com.project.university.service.ProfessorService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +21,7 @@ public class ProfessorController {
     @GetMapping("/professors")
     public String listProfessors(Model model) throws Exception {
         model.addAttribute("professors", professorService.getProfessors());
-        return "list_all_professors";
+        return "professors_table/list_all_professors";
     }
 
     @GetMapping("professor/delete/{id}")
@@ -48,6 +47,6 @@ public class ProfessorController {
     @GetMapping("professor/update/{id}")
     public String updateProfessor(@PathVariable("id") long id, Model model) throws Exception {
         model.addAttribute("professor", professorService.getProfessor(id));
-        return "update_professor";
+        return "professors_table/update_professor";
     }
 }

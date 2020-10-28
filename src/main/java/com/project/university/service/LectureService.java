@@ -9,4 +9,5 @@ public interface LectureService {
 	void addNewLecture(Lecture lecture);
 	void updateLecture(Lecture lecture);
 	List<Lecture> getLectures() throws Exception;
+    void deleteLecture(long id);
 }

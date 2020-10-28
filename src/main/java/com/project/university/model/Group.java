@@ -45,5 +45,9 @@ public class Group implements Serializable {
 			orphanRemoval = true
 	)
 	private List<Student> students;
+
+	public void setCourseId(Course course){
+
+	}
 }
 
