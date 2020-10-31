@@ -3,19 +3,64 @@
 <head>
 <meta charset="UTF-8">
 <title>Update</title>
+
+	<link rel="stylesheet"
+		  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+		  crossorigin="anonymous">
+
+	<style type="text/css">
+
+.row {
+	margin-top: 10px;
+	margin-left: 10px;
+	padding-right: 85%;
+}
+
+
+	</style>
+
 </head>
 <body>
 	<form name="student" action="update_student" method="post">
-	
-		<p>Id</p>
-		<input title="Name" type="text" name="id" th:value="${student.id}" readonly></td>
 
-		<p>Name</p>
-		<input title="Name" type="text" name="name" th:value="${student.name}"></td>
+		<div class="row">
+			<div class="col">
+				<input type="text" name="id" class="form-control" th:value="${student.id}" value="Id" readonly>
+			</div>
+		</div>
 
-		<p>Surname</p>
-		<input title="Surname" type="text" name="surname" th:value="${student.surname}"> 
-		<input type="submit" value="OK">
+		<div class="row">
+			<div class="col">
+				<input type="text" name="name" placeholder="Name" class="form-control" th:value="${student.name}">
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+				<input type="text" name="surname" placeholder="Surname" class="form-control" th:value="${student.surname}">
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+				<button type="submit" class="btn btn-dark">Save</button>
+			</div>
+		</div>
 	</form>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+			integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+			crossorigin="anonymous"></script>
+
+	<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+			crossorigin="anonymous"></script>
+
+	<script
+			src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+			integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+			crossorigin="anonymous"></script>
 </body>
 </html>
