@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml" lang="ru">
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
 <head>
 	<meta charset="UTF-8">
 
@@ -19,12 +19,22 @@
 		}
 
 		.card {
-			width: 20%;
-			height: 20%;
+			width: 18%;
+			height: 18%;
 		}
+
+		.card-text-id, .card-text-title {
+			text-align: left;
+			font-weight: 900;
+		}
+
+		.span-id, .span-title {
+			font-weight: normal;
+		}
+
 	</style>
 
-	<title>students</title>
+	<title>lectures</title>
 </head>
 <body>
 
@@ -113,13 +123,19 @@
 	<tr th:each="lecture: ${lectures}">
 		<div class="card">
 			<div class="card-body">
-				<h5 class="card-title">
-					<td th:text="${lecture.id}"></td>
-					<td th:text="${lecture.title}"></td>
-				</h5>
+
+				<p class="card-text-id">Id:
+					<span class="span-id" th:text="${lecture.id}"></span>
+				</p>
+
+				<p class="card-text-title">Title:
+					<span class="span-title" th:text="${lecture.title}"></span>
+				</p>
+
 				<h6 class="card-subtitle mb-2 text-muted">lecture</h6>
 				<p class="card-text"></p>
-				<td><a th:href="@{|lecture/delete/${lecture.id}|}">Delete subject</a></td>
+
+				<a type="button" class="btn btn-danger" th:href="@{|lecture/delete/${lecture.id}|}" role="button">Delete subject</a>
 			</div>
 		</div>
 	</tr>

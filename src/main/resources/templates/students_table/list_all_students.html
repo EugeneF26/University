@@ -14,7 +14,6 @@
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: row;
-	-ms-flex-direction: column;
 	justify-content: start;
 }
 
@@ -28,7 +27,7 @@
 	font-weight: 900;
 }
 
-.span-id, .span-name1, .span-name2, .span-groupId, .span-status {
+.span-id, .span-name, .span-surname, .span-groupId, .span-status {
 	font-weight: normal;
 }
 
@@ -129,8 +128,8 @@
 						</p>
 
                         <p class="card-text-name">Name:
-							<span class="span-name1" th:text="${student.name}"></span>
-							<span class="span-name2" th:text="${student.surname}"></span>
+							<span class="span-name" th:text="${student.name}"></span>
+							<span class="span-surname" th:text="${student.surname}"></span>
 						</p>
 
 						<p class="card-text-groupId">Group id:
@@ -146,7 +145,7 @@
 
 						<a type="button" class="btn btn-danger" th:href="@{|student/delete/${student.id}|}" role="button">Delete card</a>
 						<a type="button" class="btn btn-warning" th:href="@{|student/expel/${student.id}|}" role="button">Expel</a>
-						<a type="button" class="btn btn-dark" th:href="@{|student/update/${student.id}|}" role="button">Update data</a>
+						<a type="button" class="btn btn-dark" th:href="@{|student/update/${student.id}|}" role="button">Update</a>
 					</div>
 				</div>
 			</tr>
