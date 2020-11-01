@@ -3,6 +3,10 @@ VALUES ('MATH'),
        ('ENGLISH'),
        ('RUSSIAN'),
        ('HISTORY'),
-       ('HISTORY ART');
+       ('HISTORY ART'),
+       ('Computer science'),
+       ('Economic theory'),
+       ('Psychology'),
+       ('Ethics');
 
 GO
