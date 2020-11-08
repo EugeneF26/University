@@ -3,16 +3,12 @@ package com.project.university.service.impl;
 import java.util.List;
 import java.util.Optional;
 
-import com.project.university.model.StatusStudent;
-import com.project.university.model.Student;
 import com.project.university.repository.GroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.university.model.Course;
 import com.project.university.model.Group;
-import com.project.university.repository.exception.DaoLayerException;
-import com.project.university.repository.exception.DataNotFoundException;
 import com.project.university.service.GroupService;
 
 @Service
@@ -56,7 +52,7 @@ public class GroupServiceImpl implements GroupService {
 
 	@Override
 	public void addNewGroup(Group group) {
-
+		groupRepository.save(group);
 	}
 }
 

@@ -46,8 +46,5 @@ public class Group implements Serializable {
 	)
 	private List<Student> students;
 
-	public void setCourseId(Course course){
-
-	}
 }
 

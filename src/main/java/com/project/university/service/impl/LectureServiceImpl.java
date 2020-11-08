@@ -37,7 +37,7 @@ public class LectureServiceImpl implements LectureService {
 	}
 
 	@Override
-	public List<Lecture> getLectures() throws Exception {
+	public List<Lecture> getLectures() {
 		return lectureRepository.findAll();
 	}
 

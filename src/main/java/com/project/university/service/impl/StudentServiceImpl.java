@@ -28,7 +28,7 @@ public class StudentServiceImpl implements StudentService {
 	
 	@Override
 	public Student transferStudentToAnotherGroup(Student student, Group group) throws Exception {
-		Optional<Student> studentGet = studentRepository.findById(Long.valueOf(student.getId()));
+		Optional<Student> studentGet = studentRepository.findById(student.getId());
 		studentGet.get().setGroup(Group
 				.builder()
 				.id(group
@@ -38,7 +38,7 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public void expelStudent(Student student) throws Exception {
+	public void expelStudent(Student student) {
 		Optional<Student> studentGet = studentRepository.findById(student.getId());
 		studentGet.get().setCurrentStatus(StatusStudent.EXPELLED);
 		studentRepository.save(studentGet.get());
