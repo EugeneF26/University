@@ -1,16 +1,16 @@
 package com.project.university.service.impl;
 
+import com.project.university.model.Course;
 import com.project.university.model.Group;
 import com.project.university.repository.GroupRepository;
-import com.project.university.repository.exception.DaoLayerException;
-import com.project.university.repository.exception.DataNotFoundException;
-import com.project.university.service.impl.GroupServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -49,4 +49,43 @@ class GroupServiceImplTest {
         groupServiceImpl.addNewGroup(group);
         verify(groupRepository, times(1)).save(any(Group.class));
     }
+
+    @Test
+    void changeCourseIdGroup() {
+        Course course = spy(Course.class);
+        course.setId(anyLong());
+
+        Group group = spy(Group.class);
+        group.setId(anyLong());
+        group.setCourse(course);
+
+        when(groupRepository.findById(anyLong())).thenReturn(Optional.of(group));
+
+        groupServiceImpl.changeCourseIdGroup(group);
+
+        verify(group).setCourse(course);
+        verify(groupRepository).save(group);
+    }
+
+    @Test
+    void changeNameGroup() {
+        Group group = spy(Group.class);
+        group.setId(anyLong());
+        group.setName(anyString());
+
+        when(groupRepository.findById(anyLong())).thenReturn(Optional.of(group));
+
+        groupServiceImpl.changeNameGroup(group);
+
+        verify(group, times(2)).setName(anyString());
+        verify(groupRepository).save(group);
+     }
+
+     @Test
+     void addNewGroup(){
+        Group group = mock(Group.class);
+        groupServiceImpl.addNewGroup(group);
+        verify(groupRepository).save(group);
+    }
 }
+
