@@ -29,7 +29,7 @@ class LectureServiceImplTest {
     @Test
     void removeLecture() {
         lectureServiceImpl.removeLecture(anyLong());
-        verify(lectureRepository, times(1)).deleteById(anyLong());
+        verify(lectureRepository).deleteById(anyLong());
     }
 
     @Test
@@ -37,7 +37,7 @@ class LectureServiceImplTest {
         Lecture lecture = mock(Lecture.class);
 
         lectureServiceImpl.addNewLecture(lecture);
-        verify(lectureRepository, times(1)).save(lecture);
+        verify(lectureRepository).save(lecture);
     }
 
     @Test
@@ -51,19 +51,19 @@ class LectureServiceImplTest {
         lectureServiceImpl.updateLecture(lecture);
 
         verify(lecture, times(2)).setTitle(anyString());
-        verify(lectureRepository, times(1)).save(any(Lecture.class));
+        verify(lectureRepository).save(any(Lecture.class));
     }
 
     @Test
     void getLectures() {
         lectureServiceImpl.getLectures();
-        verify(lectureRepository, times(1)).findAll();
+        verify(lectureRepository).findAll();
     }
 
     @Test
     void deleteLecture() {
         lectureServiceImpl.deleteLecture(anyLong());
-        verify(lectureRepository, times(1)).deleteById(anyLong());
+        verify(lectureRepository).deleteById(anyLong());
     }
 }
 

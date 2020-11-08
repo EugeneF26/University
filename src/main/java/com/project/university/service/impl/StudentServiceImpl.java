@@ -27,7 +27,7 @@ public class StudentServiceImpl implements StudentService {
 	}
 	
 	@Override
-	public Student transferStudentToAnotherGroup(Student student, Group group) throws Exception {
+	public Student transferStudentToAnotherGroup(Student student, Group group) {
 		Optional<Student> studentGet = studentRepository.findById(student.getId());
 		studentGet.get().setGroup(Group
 				.builder()

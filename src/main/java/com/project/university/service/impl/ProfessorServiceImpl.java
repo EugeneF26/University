@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import com.project.university.model.StatusProfessor;
-import com.project.university.model.StatusStudent;
-import com.project.university.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
@@ -26,28 +24,22 @@ public class ProfessorServiceImpl implements ProfessorService {
 
 	@Override
 	public Professor acceptNewProfessor(Professor newProfessor) throws Exception {
-		Professor professor = Professor
-				.builder()
-				.name(newProfessor.getName())
-				.patronymic(newProfessor.getPatronymic())
-//				.currentStatus(StatusProfessor.WORKS)
-				.build();
-		
-		return professorRepository.save(professor);
+		newProfessor.setCurrentStatus(StatusProfessor.WORKS);
+		return professorRepository.save(newProfessor);
 	}
 
 	@Override
-	public Professor getProfessor(long id) throws Exception {
+	public Professor getProfessor(long id) {
 		return professorRepository.getOne(id);
 	}
 
 	@Override
-	public List<Professor> getProfessors() throws Exception {
+	public List<Professor> getProfessors() {
 		return professorRepository.findAll();
 	}
 
 	@Override
-	public void deleteProfessor(long id) throws Exception {
+	public void deleteProfessor(long id) {
 		professorRepository.deleteById(id);
 	}
 

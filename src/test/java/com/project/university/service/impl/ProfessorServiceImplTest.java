@@ -14,6 +14,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -28,21 +30,60 @@ class ProfessorServiceImplTest {
     private ProfessorRepository professorRepository;
 
     @Test
-    void getProfessor() throws Exception {
+    void acceptNewProfessor() throws Exception {
+        Professor professor = mock(Professor.class);
+
+        professorServiceImpl.acceptNewProfessor(professor);
+
+        verify(professor).setCurrentStatus(StatusProfessor.WORKS);
+        verify(professorRepository).save(professor);
+    }
+
+    @Test
+    void getProfessor() {
         professorServiceImpl.getProfessor(anyLong());
-        verify(professorRepository, times(1)).getOne(anyLong());
+        verify(professorRepository).getOne(anyLong());
     }
 
     @Test
-    void getProfessors() throws Exception {
+    void getProfessors() {
         professorServiceImpl.getProfessors();
-        verify(professorRepository, times(1)).findAll();
+        verify(professorRepository).findAll();
     }
 
     @Test
-    void deleteProfessor() throws Exception {
+    void deleteProfessor() {
         professorServiceImpl.deleteProfessor(anyLong());
-        verify(professorRepository, times(1)).deleteById(anyLong());
+        verify(professorRepository).deleteById(anyLong());
+    }
+
+    @Test
+    void layOfProfessor(){
+        Professor professor = spy(Professor.class);
+        professor.setId(anyLong());
+
+        when(professorRepository.findById(anyLong())).thenReturn(Optional.of(professor));
+
+        professorServiceImpl.layOfProfessor(professor);
+
+        verify(professor).setCurrentStatus(StatusProfessor.FIRED);
+        verify(professorRepository).save(professor);
+    }
+
+    @Test
+    void updateProfessor(){
+        Professor professor = spy(Professor.class);
+        professor.setId(anyLong());
+        professor.setName(anyString());
+        professor.setPatronymic(anyString());
+
+        when(professorRepository.findById(anyLong())).thenReturn(Optional.of(professor));
+
+        professorServiceImpl.updateProfessor(professor);
+
+        verify(professor, times(2)).setName(anyString());
+        verify(professor, times(2)).setPatronymic(anyString());
+        verify(professorRepository).save(professor);
     }
 }
 
