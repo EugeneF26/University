@@ -51,7 +51,7 @@ class GroupServiceImplTest {
     }
 
     @Test
-    void changeCourseIdGroup() {
+    void test_WhenServiceWillInvokeItsMethodThenRepoWillChangeCourseForGroupAndInvokeSaveForGroup() {
         Course course = spy(Course.class);
         course.setId(anyLong());
 
@@ -68,7 +68,7 @@ class GroupServiceImplTest {
     }
 
     @Test
-    void changeNameGroup() {
+    void test_WhenServiceWillInvokeItsMethodThenRepoWillChangeNameForGroupAndInvokeSaveForGroup() {
         Group group = spy(Group.class);
         group.setId(anyLong());
         group.setName(anyString());
@@ -82,7 +82,7 @@ class GroupServiceImplTest {
      }
 
      @Test
-     void addNewGroup(){
+     void test_WhenServiceWillInvokeItsMethodThenRepoWillInvokeSaveForGroup(){
         Group group = mock(Group.class);
         groupServiceImpl.addNewGroup(group);
         verify(groupRepository).save(group);

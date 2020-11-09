@@ -24,13 +24,13 @@ class LectureServiceImplTest {
     private LectureRepository lectureRepository;
 
     @Test
-    void removeLecture() {
+    void test_WhenServiceWillInvokeItsMethodThenRepoInvokeDeleteByIdForLecture() {
         lectureServiceImpl.removeLecture(anyLong());
         verify(lectureRepository).deleteById(anyLong());
     }
 
     @Test
-    void addNewLecture() {
+    void test_WhenServiceWillInvokeItsMethodThenRepoWillInvokeSaveForLecture() {
         Lecture lecture = mock(Lecture.class);
 
         lectureServiceImpl.addNewLecture(lecture);
@@ -38,7 +38,7 @@ class LectureServiceImplTest {
     }
 
     @Test
-    void updateLecture() {
+    void test_WhenServiceWillInvokeItsMethodThenRepoWillChangeTitleForLectureAndInvokeSaveForLecture() {
         Lecture lecture = spy(Lecture.class);
         lecture.setId(anyLong());
         lecture.setTitle(anyString());
@@ -52,13 +52,13 @@ class LectureServiceImplTest {
     }
 
     @Test
-    void getLectures() {
+    void test_WhenServiceWillInvokeItsMethodThenRepoWillInvokeFindAllForLectures() {
         lectureServiceImpl.getLectures();
         verify(lectureRepository).findAll();
     }
 
     @Test
-    void deleteLecture() {
+    void test_WhenServiceWillInvokeItsMethodThenRepoWillInvokeDeleteByIdForLecture() {
         lectureServiceImpl.deleteLecture(anyLong());
         verify(lectureRepository).deleteById(anyLong());
     }

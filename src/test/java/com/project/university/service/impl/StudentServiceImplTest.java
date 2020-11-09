@@ -26,7 +26,7 @@ class StudentServiceImplTest {
     private StudentRepository studentRepository;
 
     @Test
-    void acceptNewStudent() throws Exception {
+    void test_WhenServiceWillInvokeItsMethodThenRepoWillChangeStatusForStudentToSTUDYAndInvokeSaveForStudent() throws Exception {
         Student student = spy(Student.class);
         studentServiceImpl.acceptNewStudent(student);
 
@@ -35,25 +35,25 @@ class StudentServiceImplTest {
     }
 
     @Test
-    void getStudents() throws Exception {
+    void test_WhenServiceWillInvokeItsMethodThenRepoWillInvokeFindAllForStudents() throws Exception {
         studentServiceImpl.getStudents();
         verify(studentRepository).findAll();
     }
 
     @Test
-    void deleteStudent() {
+    void test_WhenServiceWillInvokeItsMethodThenRepoWillInvokeDeleteByIdForStudent() {
         studentServiceImpl.deleteStudent(anyLong());
         verify(studentRepository).deleteById(anyLong());
     }
 
     @Test
-    void getStudent() {
+    void test_WhenServiceWillInvokeItsMethodThenRepoWillInvokeGetOneForStudent() {
         studentServiceImpl.getStudent(anyLong());
         verify(studentRepository).getOne(anyLong());
     }
 
     @Test
-    void transferStudentToAnotherGroup() {
+    void test_WhenServiceWillInvokeItsMethodThenRepoWillChangeGroupForStudentAndInvokeSaveForProfessor() {
         Group group = spy(Group.class);
         group.setId(anyLong());
 
@@ -70,7 +70,7 @@ class StudentServiceImplTest {
     }
 
     @Test
-    void expelStudent() {
+    void test_WhenServiceWillInvokeItsMethodThenRepoWillChangeStatusForStudentToEXPELLEDInvokeSaveForStudent() {
         Student student = spy(Student.class);
         student.setId(anyLong());
 
@@ -83,7 +83,7 @@ class StudentServiceImplTest {
     }
 
     @Test
-    void updateStudent() {
+    void test_WhenServiceWillInvokeItsMethodThenRepoWillChangeNameForStudentAndInvokeSaveForStatus() {
         Student student = spy(Student.class);
         student.setId(anyLong());
         student.setName(anyString());

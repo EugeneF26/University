@@ -24,7 +24,7 @@ class ProfessorServiceImplTest {
     private ProfessorRepository professorRepository;
 
     @Test
-    void acceptNewProfessor() throws Exception {
+    void test_WhenServiceWillInvokeItsMethodThenRepoWillChangeStatusForProfessorToWORKSAndInvokeSaveForProfessor() throws Exception {
         Professor professor = mock(Professor.class);
 
         professorServiceImpl.acceptNewProfessor(professor);
@@ -34,25 +34,25 @@ class ProfessorServiceImplTest {
     }
 
     @Test
-    void getProfessor() {
+    void test_WhenServiceWillInvokeItsMethodThenRepoWillInvokeGetOneForProfessor() {
         professorServiceImpl.getProfessor(anyLong());
         verify(professorRepository).getOne(anyLong());
     }
 
     @Test
-    void getProfessors() {
+    void test_WhenServiceWillInvokeItsMethodThenRepoWillInvokeFindAllForProfessors() {
         professorServiceImpl.getProfessors();
         verify(professorRepository).findAll();
     }
 
     @Test
-    void deleteProfessor() {
+    void test_WhenServiceWillInvokeItsMethodThenRepoWillInvokeDeleteByIdForProfessor() {
         professorServiceImpl.deleteProfessor(anyLong());
         verify(professorRepository).deleteById(anyLong());
     }
 
     @Test
-    void layOfProfessor(){
+    void test_WhenServiceWillInvokeItsMethodThenRepoWillChangeStatusForProfessorToFIREDAndInvokeSaveForProfessor(){
         Professor professor = spy(Professor.class);
         professor.setId(anyLong());
 
@@ -65,7 +65,7 @@ class ProfessorServiceImplTest {
     }
 
     @Test
-    void updateProfessor(){
+    void test_WhenServiceWillInvokeItsMethodThenRepoWillChangeNameAndPatronymicForProfessorAndInvokeSaveForProfessor(){
         Professor professor = spy(Professor.class);
         professor.setId(anyLong());
         professor.setName(anyString());
