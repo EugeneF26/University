@@ -22,11 +22,11 @@
 
 </head>
 <body>
-	<form name="student" action="update_student" method="POST">
+	<form  action="update_student" th:object="${student}"  method="POST">
 
 		<div class="row">
 			<div class="col">
-				<input type="text" name="id" class="form-control" th:value="${student.id}" value="Id" readonly>
+				<input type="text" name="id" class="form-control" th:value="*{id}" value="id" readonly>
 			</div>
 		</div>
 

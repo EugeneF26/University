@@ -21,7 +21,7 @@ public class StudentController {
 	public String createUniversity() throws Exception {
 		return "welcome";
 	}
-	
+
 	@GetMapping("/students")
 	public String listAllStudents(Model model) throws Exception {
 		model.addAttribute("students", studentService.getStudents());
@@ -51,7 +51,7 @@ public class StudentController {
 	@GetMapping("student/update/{id}")
 	public String updateStudent(@PathVariable("id") long id, Model model) throws Exception {
 		model.addAttribute("student", studentService.getStudent(id));
-		return "students_table/update_student";
+		return "/students_table/update_student";
 	}
 }
 
