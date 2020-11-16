@@ -35,7 +35,7 @@ public class Student implements Serializable {
 	
 	@Column(name = "surname", nullable = false)
 	private String surname;
-	
+
 	@ManyToOne
     @JoinColumn(name ="groupId")
 	private Group group;

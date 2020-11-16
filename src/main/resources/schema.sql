@@ -1,3 +1,8 @@
+CREATE TABLE Students
+(
+id NUMBER,
+name TEXT NOT NULL
+);
 -- CREATE TABLE Groups
 -- (
 -- id SERIAL PRIMARY KEY CHECK (id <= 5),
@@ -18,14 +23,6 @@
 -- name TEXT NOT NULL,
 -- patronymic TEXT NOT NULL
 -- currentStatus VARCHAR(255) CHECK(currentStatus in ('WORKS', 'FIRED'))
--- );
--- CREATE TABLE Students
--- (
--- id SERIAL PRIMARY KEY,
--- name TEXT NOT NULL,
--- surname TEXT NOT NULL,
--- groupId INTEGER NOT NULL,
--- currentStatus VARCHAR(255) CHECK(currentStatus in ('STUDY','EXPELLED'))
 -- );
 -- CREATE TABLE CoursesGroups
 -- (
@@ -86,38 +83,38 @@
 -- CONSTRAINT sc_unique_schedule5 UNIQUE (studyDay, lectureId, floor)
 -- );
 
---Обновление: ограничение на значение больше нуля. CHECK (classroom > 0) а так же при floor=1 
---classroom < 101; CONSTRAINT LectureHalls CHECK (floor=1 AND classroom >= 1 AND classroom <= 101 )
---NOT NULL поставить на id primary key
---CHECK (Ball > 50 OR Form_ob = ‘Дневная’));
+ --Обновление: ограничение на значение больше нуля. CHECK (classroom > 0) а так же при floor=1
+ --classroom < 101; CONSTRAINT LectureHalls CHECK (floor=1 AND classroom >= 1 AND classroom <= 101 )
+ --NOT NULL поставить на id primary key
+ --CHECK (Ball > 50 OR Form_ob = ‘Дневная’));
 
---How to combine constraint CHECK in SQL?
---CREATE TABLE LectureHalls
---(
---id SERIAL PRIMARY KEY,
---floor INTEGER NOT NULL CHECK (floor BETWEEN 1 AND 4),
---classroom INTEGER NOT NULL,
---UNIQUE KEY (floor, classroom),
---CHECK (floor = 1 AND classroom BETWEEN 1 AND 30 OR
---       floor = 2 AND classroom BETWEEN 1 AND 15 OR
---       floor = 3 AND classroom BETWEEN 1 and 24) 
---);
---
---create table lecturehalls (
---    id serial primary key,
---    floor integer check (floor <= 4),
+ --How to combine constraint CHECK in SQL?
+ --CREATE TABLE LectureHalls
+ --(
+ --id SERIAL PRIMARY KEY,
+ --floor INTEGER NOT NULL CHECK (floor BETWEEN 1 AND 4),
+ --classroom INTEGER NOT NULL,
+ --UNIQUE KEY (floor, classroom),
+ --CHECK (floor = 1 AND classroom BETWEEN 1 AND 30 OR
+ --       floor = 2 AND classroom BETWEEN 1 AND 15 OR
+ --       floor = 3 AND classroom BETWEEN 1 and 24)
+ --);
+ --
+ --create table lecturehalls (
+ --    id serial primary key,
+ --    floor integer check (floor <= 4),
 --    classroom integer not null,
---    unique (floor, classroom),
---    check(floor is distinct from 1 or (classroom > 0 and classroom <= 30)),
---    check(floor is distinct from 2 or (classroom > 30 and classroom <= 60)),
---    check(floor is distinct from 3 or (classroom > 60 and classroom <= 90)),
---    check(floor is distinct from 4 or (classroom > 90 and classroom <= 120))
---);
---
---CREATE TABLE LectureHalls (
---    id SERIAL PRIMARY KEY,
---    floor INTEGER CHECK (floor <= 4),
---    classroom INTEGER NOT NULL,
+ --    unique (floor, classroom),
+ --    check(floor is distinct from 1 or (classroom > 0 and classroom <= 30)),
+ --    check(floor is distinct from 2 or (classroom > 30 and classroom <= 60)),
+ --    check(floor is distinct from 3 or (classroom > 60 and classroom <= 90)),
+ --    check(floor is distinct from 4 or (classroom > 90 and classroom <= 120))
+ --);
+ --
+ --CREATE TABLE LectureHalls (
+ --    id SERIAL PRIMARY KEY,
+ --    floor INTEGER CHECK (floor <= 4),
+ --    classroom INTEGER NOT NULL,
 --    CHECK (floor is null or floor != 1 or (floor = 1 and classroom > 0 and classroom <= 30))
---);
+ --);
 
