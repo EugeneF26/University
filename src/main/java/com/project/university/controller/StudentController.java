@@ -7,7 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
+@RequestMapping("university")
 public class StudentController {
 	
 	private final StudentService studentService;
@@ -17,21 +18,20 @@ public class StudentController {
 		this.studentService = studentService;
 	}
 	
-	@GetMapping("/")
 	public String createUniversity() throws Exception {
-		return "welcome";
+		return "university";
 	}
 
-	@GetMapping("/students")
+	@GetMapping("student/list")
 	public String listAllStudents(Model model) throws Exception {
 		model.addAttribute("students", studentService.getStudents());
-		return "students_table/list_all_students";
+		return "students_table/list";
 	}
 
 	@GetMapping("student/delete/{id}")
 	public String deleteStudent(@PathVariable("id") long id) throws Exception {
 		studentService.deleteStudent(id);
-		return "redirect:/students";
+		return "redirect:/list";
 	}
 
 	@GetMapping("student/expel/{id}")
@@ -39,13 +39,13 @@ public class StudentController {
 		Student student = new Student();
 		student.setId(id);
 		studentService.expelStudent(student);
-		return "redirect:/students";
+		return "redirect:/list";
 	}
 
 	@PostMapping("student/update/update_student")
 	public String createUpdateStudentPage(@ModelAttribute("student") Student student) {
 		studentService.updateStudent(student);
-		return "redirect:/students";
+		return "redirect:/list";
 	}
 
 	@GetMapping("student/update/{id}")
