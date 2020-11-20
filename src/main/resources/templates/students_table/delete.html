@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Delete of Student</title>
 </head>
 <body>
 
@@ -15,7 +15,7 @@
     <td>Delete</td>
     </th>
 
-    <tr th:each="student : ${students}">
+    <tr th:each="student : ${list}">
         <td>
             <form th:action="@{delete}" method="post">
                 <input type="hidden" name="id" th:value="${student.id}" />
