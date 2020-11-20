@@ -23,19 +23,19 @@ public class StudentController {
 	}
 
 	@GetMapping("student/list")
-	public String listAllStudents(Model model) throws Exception {
+	public String list(Model model) throws Exception {
 		model.addAttribute("students", studentService.getStudents());
 		return "students_table/list";
 	}
 
 	@GetMapping("student/delete/{id}")
-	public String deleteStudent(@PathVariable("id") long id) throws Exception {
+	public String delete(@PathVariable("id") long id) throws Exception {
 		studentService.deleteStudent(id);
 		return "redirect:/list";
 	}
 
 	@GetMapping("student/expel/{id}")
-	public String expelStudent(@PathVariable("id") long id) throws Exception {
+	public String expel(@PathVariable("id") long id) throws Exception {
 		Student student = new Student();
 		student.setId(id);
 		studentService.expelStudent(student);
@@ -43,15 +43,15 @@ public class StudentController {
 	}
 
 	@PostMapping("student/update/update_student")
-	public String createUpdateStudentPage(@ModelAttribute("student") Student student) {
+	public String createUpdatePage(@ModelAttribute("student") Student student) {
 		studentService.updateStudent(student);
 		return "redirect:/list";
 	}
 
 	@GetMapping("student/update/{id}")
-	public String updateStudent(@PathVariable("id") long id, Model model) throws Exception {
+	public String update(@PathVariable("id") long id, Model model) throws Exception {
 		model.addAttribute("student", studentService.getStudent(id));
-		return "/students_table/update_student";
+		return "students_table/update";
 	}
 }
 
