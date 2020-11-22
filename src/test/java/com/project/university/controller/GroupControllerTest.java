@@ -33,10 +33,10 @@ class GroupControllerTest {
 
     @Test
     void test_WhenQueryListGroups_thenInvokeGetGroupOfGroupServiceAndReturn200() throws Exception {
-        this.mockMvc.perform(get("/groups")
+        this.mockMvc.perform(get("/groups/list")
                 .contentType(MediaType.TEXT_HTML))
                 .andExpect(status().isOk())
-                .andExpect(view().name("groups_table/list_all_groups"));
+                .andExpect(view().name("groups_table/list"));
 
         verify(groupService).getGroups();
         assertThat(groupService.getGroups(), hasItems());
@@ -44,20 +44,20 @@ class GroupControllerTest {
 
     @Test
     void test_WhenQueryDeleteGroup_thenInvokeDeleteGroupOfGroupServiceAndReturn302() throws Exception {
-        this.mockMvc.perform(get("/group/delete/{id}", 1L)
+        this.mockMvc.perform(get("/groups/delete/{id}", 1L)
                 .contentType(MediaType.TEXT_HTML))
                 .andExpect(status().is(302))
-                .andExpect(view().name("redirect:/groups"));
+                .andExpect(view().name("redirect:/groups/list"));
 
         verify(groupService).deleteGroup(anyLong());
     }
 
     @Test
     void test_WhenQueryUpdateGroupPage_thenInvokeGetGroupOfGroupServiceAndReturn302() throws Exception {
-        this.mockMvc.perform(post("/group/updateName/update_group_name")
+        this.mockMvc.perform(post("/groups/update/form")
                 .contentType(MediaType.TEXT_HTML))
                 .andExpect(status().is(302))
-                .andExpect(view().name("redirect:/groups"));
+                .andExpect(view().name("redirect:/groups/list"));
 
         verify(groupService).changeNameGroup(ArgumentMatchers.any(Group.class));
     }

@@ -30,10 +30,10 @@ class LectureControllerTest {
 
     @Test
     void test_WhenQueryListLectures_thenInvokeGetLecturesOfLectureServiceAndReturn200() throws Exception {
-        this.mockMvc.perform(get("/lectures")
+        this.mockMvc.perform(get("/lectures/list")
                 .contentType(MediaType.TEXT_HTML))
                 .andExpect(status().isOk())
-                .andExpect(view().name("lectures_table/list_all_lectures"));
+                .andExpect(view().name("lectures_table/list"));
 
         verify(lectureService).getLectures();
         assertThat(lectureService.getLectures(), hasItems());
@@ -41,10 +41,10 @@ class LectureControllerTest {
 
     @Test
     void test_WhenQueryDeleteLecture_thenInvokeDeleteLectureOfLectureServiceAndReturn302() throws Exception {
-        this.mockMvc.perform(get("/lecture/delete/{id}", 1L)
+        this.mockMvc.perform(get("/lectures/delete/{id}", 1L)
                 .contentType(MediaType.TEXT_HTML))
                 .andExpect(status().is(302))
-                .andExpect(view().name("redirect:/lectures"));
+                .andExpect(view().name("redirect:/lectures/list"));
 
         verify(lectureService).deleteLecture(anyLong());
     }

@@ -29,10 +29,10 @@ class CourseControllerTest {
 
     @Test
     void test_WhenQueryListCourses_thenInvokeGetCoursesOfCourseServiceAndReturn200() throws Exception {
-        this.mockMvc.perform(get("/courses")
+        this.mockMvc.perform(get("/courses/list")
                 .contentType(MediaType.TEXT_HTML))
                 .andExpect(status().isOk())
-                .andExpect(view().name("courses_table/list_all_courses"));
+                .andExpect(view().name("courses_table/list"));
 
         verify(courseService).getCourses();
         assertThat(courseService.getCourses(), hasItems());

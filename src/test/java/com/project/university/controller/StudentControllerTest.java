@@ -39,15 +39,15 @@ class StudentControllerTest {
         this.mockMvc.perform(get("/")
                 .contentType(MediaType.TEXT_HTML))
                 .andExpect(status().isOk())
-                .andExpect(view().name("welcome"));
+                .andExpect(view().name("university"));
     }
 
     @Test
     void test_WhenQueryListStudents_thenInvokeGetStudentsOfStudentServiceAndReturn200() throws Exception {
-        this.mockMvc.perform(get("/students")
+        this.mockMvc.perform(get("/students/list")
                 .contentType(MediaType.TEXT_HTML))
                 .andExpect(status().isOk())
-                .andExpect(view().name("students_table/list_all_students"));
+                .andExpect(view().name("students_table/list"));
 
         verify(studentService).getStudents();
         assertThat(studentService.getStudents(), hasItems());
@@ -55,30 +55,30 @@ class StudentControllerTest {
 
     @Test
     void test_WhenQueryDeleteStudent_thenInvokeDeleteStudentOfStudentServiceAndReturn302() throws Exception {
-        this.mockMvc.perform(get("/student/delete/{id}", 1L)
+        this.mockMvc.perform(get("/students/delete/{id}", 1L)
         .contentType(MediaType.TEXT_HTML))
                 .andExpect(status().is(302))
-                .andExpect(view().name("redirect:/students"));
+                .andExpect(view().name("redirect:/students/list"));
 
         verify(studentService).deleteStudent(anyLong());
     }
 
     @Test
     void test_WhenQueryExpelStudent_thenInvokeExpelStudentOfStudentServiceAndReturn302() throws Exception {
-        this.mockMvc.perform(get("/student/expel/{id}", 1L)
+        this.mockMvc.perform(get("/students/expel/{id}", 1L)
                 .contentType(MediaType.TEXT_HTML))
                 .andExpect(status().is(302))
-                .andExpect(view().name("redirect:/students"));
+                .andExpect(view().name("redirect:/students/list"));
 
         verify(studentService).expelStudent(ArgumentMatchers.any(Student.class));
     }
 
     @Test
     void test_WhenQueryUpdateStudentPage_thenInvokeUpdateStudentOfStudentServiceAndReturn302() throws Exception {
-        this.mockMvc.perform(post("/student/update/update_student")
+        this.mockMvc.perform(post("/students/update/form")
                 .contentType(MediaType.TEXT_HTML))
                 .andExpect(status().is(302))
-                .andExpect(view().name("redirect:/students"));
+                .andExpect(view().name("redirect:/students/list"));
 
         verify(studentService).updateStudent(ArgumentMatchers.any(Student.class));
     }

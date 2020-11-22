@@ -33,10 +33,10 @@ class ProfessorControllerTest {
 
     @Test
     void test_WhenQueryListProfessors_thenInvokeGetProfessorsOfProfessorServiceAndReturn200() throws Exception {
-        this.mockMvc.perform(get("/professors")
+        this.mockMvc.perform(get("/professors/list")
                 .contentType(MediaType.TEXT_HTML))
                 .andExpect(status().isOk())
-                .andExpect(view().name("professors_table/list_all_professors"));
+                .andExpect(view().name("professors_table/list"));
 
         verify(professorService).getProfessors();
         assertThat(professorService.getProfessors(), hasItems());
@@ -44,30 +44,30 @@ class ProfessorControllerTest {
 
     @Test
     void test_WhenQueryDeleteProfessor_thenInvokeDeleteProfessorOfProfessorServiceAndReturn302() throws Exception {
-        this.mockMvc.perform(get("/professor/delete/{id}", 1L)
+        this.mockMvc.perform(get("/professors/delete/{id}", 1L)
                 .contentType(MediaType.TEXT_HTML))
                 .andExpect(status().is(302))
-                .andExpect(view().name("redirect:/professors"));
+                .andExpect(view().name("redirect:/professors/list"));
 
         verify(professorService).deleteProfessor(anyLong());
     }
 
     @Test
     void test_WhenQueryLayOfProfessor_thenInvokeLayOfProfessorOfProfessorServiceAndReturn302() throws Exception {
-        this.mockMvc.perform(get("/professor/layOf/{id}", 1L)
+        this.mockMvc.perform(get("/professors/layOf/{id}", 1L)
                 .contentType(MediaType.TEXT_HTML))
                 .andExpect(status().is(302))
-                .andExpect(view().name("redirect:/professors"));
+                .andExpect(view().name("redirect:/professors/list"));
 
         verify(professorService).layOfProfessor(ArgumentMatchers.any(Professor.class));
     }
 
     @Test
     void test_WhenQueryUpdateProfessorPage_thenInvokeUpdateProfessorOfProfessorServiceAndReturn302() throws Exception {
-        this.mockMvc.perform(post("/professor/update/update_professor")
+        this.mockMvc.perform(post("/professors/update/form")
                 .contentType(MediaType.TEXT_HTML))
                 .andExpect(status().is(302))
-                .andExpect(view().name("redirect:/professors"));
+                .andExpect(view().name("redirect:/professors/list"));
 
         verify(professorService).updateProfessor(ArgumentMatchers.any(Professor.class));
     }
