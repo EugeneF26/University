@@ -18,28 +18,28 @@ public class GroupController {
         this.groupService = groupService;
     }
 
-    @GetMapping("/groups")
-    public String listGroups(Model model) throws Exception {
+    @GetMapping("/groups/list")
+    public String list(Model model) throws Exception {
         model.addAttribute("groups", groupService.getGroups());
-        return "groups_table/list_all_groups";
+        return "groups_table/list";
     }
 
-    @GetMapping("group/delete/{id}")
-    public String deleteGroup(@PathVariable("id") long id) throws Exception {
+    @GetMapping("/groups/delete/{id}")
+    public String delete(@PathVariable("id") long id) throws Exception {
         groupService.deleteGroup(id);
-        return "redirect:/groups";
+        return "redirect:/groups/list";
     }
 
-    @PostMapping("group/updateName/update_group_name")
-    public String createUpdateGroupPage(@ModelAttribute("group") Group selected) {
+    @PostMapping("/groups/update/form")
+    public String createUpdateForm(@ModelAttribute("group") Group selected) {
         groupService.changeNameGroup(selected);
-        return "redirect:/groups";
+        return "redirect:/groups/list";
     }
 
-    @GetMapping("group/updateName/{id}")
+    @GetMapping("/groups/update/{id}")
     public String changeNameGroup(@PathVariable("id") long id, Model model) throws Exception {
        model.addAttribute("group", groupService.getGroup(id));
-       return "groups_table/update_group_name";
+       return "groups_table/form";
     }
 }
 

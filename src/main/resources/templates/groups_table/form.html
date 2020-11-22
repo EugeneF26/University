@@ -18,22 +18,21 @@
         padding-right: 85%;
     }
 
-
 </style>
 
 <body>
-<form name="group" action="update_group_name" method="POST">
+<form action="form" th:object="${group}" method="POST">
 
 
     <div class="row">
         <div class="col">
-            <input type="text" name="id" class="form-control" th:value="${group.id}" readonly>
+            <input type="text" name="id" class="form-control" th:value="*{id}" readonly>
         </div>
     </div>
 
     <div class="row">
         <div class="col">
-            <input type="text" name="name" class="form-control" placeholder="Name group" th:value="${group.name}">
+            <input type="text" name="name" class="form-control" placeholder="Name group" th:value="*{name}">
         </div>
     </div>
 

@@ -31,7 +31,6 @@
 	font-weight: normal;
 }
 
-
 </style>
 
 <title>List of students</title>
@@ -60,7 +59,7 @@
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown1">
 					<a class="dropdown-item" href="../../../resources/templates/save.html">Accept</a>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="students">View full list</a>
+					<a class="dropdown-item" href="/university/students/list">View full list</a>
 				</div></li>
 
 			<li class="nav-item dropdown"><a
@@ -72,7 +71,7 @@
 					<a class="dropdown-item" href="#">Accept</a>
 
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="professors">View full list</a>
+					<a class="dropdown-item" href="/university/professors/list">View full list</a>
 				</div></li>
 
 			<li class="nav-item dropdown"><a
@@ -81,7 +80,7 @@
 					aria-expanded="false"> Courses </a>
 
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown3">
-					<a class="dropdown-item" href="courses">View full list</a>
+					<a class="dropdown-item" href="/university/courses/list">View full list</a>
 				</div>
 			</li>
 
@@ -91,7 +90,7 @@
 					aria-expanded="false"> Groups </a>
 
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="groups">View full list</a>
+					<a class="dropdown-item" href="/university/groups/list">View full list</a>
 				</div>
 			</li>
 
@@ -101,7 +100,7 @@
 					aria-expanded="false"> Lectures </a>
 
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown4">
-					<a class="dropdown-item" href="lectures">View full list</a>
+					<a class="dropdown-item" href="/university/lectures/list">View full list</a>
 				</div>
 			</li>
 		</ul>
@@ -120,7 +119,7 @@
 
 	<div class="flex-container">
 		<tbody>
-			<tr th:each="student: ${list}">
+			<tr th:each="student: ${students}">
 				<div class="card">
 					<div class="card-body">
 						<p class="card-text-id">Id:
@@ -143,9 +142,9 @@
 						<h6 class="card-subtitle mb-2 text-muted">student</h6>
 						<p class="card-link"></p>
 
-						<a type="button" class="btn btn-danger" th:href="@{|student/delete/${student.id}|}" role="button">Delete card</a>
-						<a type="button" class="btn btn-warning" th:href="@{|student/expel/${student.id}|}" role="button">Expel</a>
-						<a type="button" class="btn btn-dark" th:href="@{|student/update/${student.id}|}" role="button">Update</a>
+						<a type="button" class="btn btn-danger" th:href="@{|delete/${student.id}|}" role="button">Delete card</a>
+						<a type="button" class="btn btn-warning" th:href="@{|expel/${student.id}|}" role="button">Expel</a>
+						<a type="button" class="btn btn-dark" th:href="@{|update/${student.id}|}" role="button">Update</a>
 					</div>
 				</div>
 			</tr>

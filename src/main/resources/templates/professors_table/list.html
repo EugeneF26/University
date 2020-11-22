@@ -18,27 +18,22 @@
 }
 
 .card {
-	width: 20%;
-	height: 20%;
-}
-
-.card {
 	width: 18%;
 	height: 18%;
 }
 
-.card-text-id, .card-text-name, .card-text-courseId {
+.card-text-id, .card-text-name, .card-text-status {
 	text-align: left;
 	font-weight: 900;
 }
 
-.span-id, .span-name, .span-courseId {
+.span-id, .span-name, .span-patronymic, .span-status {
 	font-weight: normal;
 }
 
 </style>
 
-<title>groups</title>
+<title>students</title>
 </head>
 <body>
 
@@ -64,7 +59,7 @@
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown1">
 					<a class="dropdown-item" href="../../../resources/templates/save.html">Accept</a>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="students">View full list</a>
+					<a class="dropdown-item" href="/university/students/list">View full list</a>
 				</div></li>
 
 			<li class="nav-item dropdown"><a
@@ -76,7 +71,7 @@
 					<a class="dropdown-item" href="#">Accept</a>
 
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="professors">View full list</a>
+					<a class="dropdown-item" href="/university/professors/list">View full list</a>
 				</div></li>
 
 			<li class="nav-item dropdown"><a
@@ -85,7 +80,7 @@
 					aria-expanded="false"> Courses </a>
 
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown3">
-					<a class="dropdown-item" href="courses">View full list</a>
+					<a class="dropdown-item" href="/university/courses/list">View full list</a>
 				</div>
 			</li>
 
@@ -95,7 +90,7 @@
 					aria-expanded="false"> Groups </a>
 
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="groups">View full list</a>
+					<a class="dropdown-item" href="/university/groups/list">View full list</a>
 				</div>
 			</li>
 
@@ -105,7 +100,7 @@
 					aria-expanded="false"> Lectures </a>
 
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown4">
-					<a class="dropdown-item" href="lectures">View full list</a>
+					<a class="dropdown-item" href="/university/lectures/list">View full list</a>
 				</div>
 			</li>
 		</ul>
@@ -114,8 +109,8 @@
 
 	<div class="alert alert-warning alert-dismissible fade show alert-dark"
 		role="alert">
-		<strong>You are in the list of groups.</strong> You can see all the
-		groups of the university.
+		<strong>You are in the list of professors.</strong> You can see all the
+		professors of the university.
 		<button type="button" class="close" data-dismiss="alert"
 			aria-label="Close">
 			<span aria-hidden="true">&times;</span>
@@ -124,27 +119,29 @@
 
 	<div class="flex-container">
 		<tbody>
-			<tr th:each="group: ${groups}">
+			<tr th:each="professor: ${professors}">
 				<div class="card">
 					<div class="card-body">
 
-						<p class="card-text-id">Id:
-							<span class="span-id" th:text="${group.id}"></span>
-						</p>
+							<p class="card-text-id">Id:
+								<span class="span-id" th:text="${professor.id}"></span>
+							</p>
 
-						<p class="card-text-name">Name:
-							<span class="span-name" th:text="${group.name}"></span>
-						</p>
+							<p class="card-text-name">Name:
+								<span class="span-name" th:text="${professor.name}"></span>
+								<span class="span-patronymic" th:text="${professor.patronymic}"></span>
+							</p>
 
-						<p class="card-text-courseId">Course id:
-							<span class="span-courseId" th:text="${group.course.id}"></span>
-						</p>
+							<p class="card-text-status">Status:
+								<span class="span-status" th:text="${professor.currentStatus.status}"></span>
+							</p>
 
-						<h6 class="card-subtitle mb-2 text-muted">group</h6>
+						<h6 class="card-subtitle mb-2 text-muted">professor</h6>
 						<p class="card-text"></p>
 
-						<a type="button" class="btn btn-danger" th:href="@{|group/delete/${group.id}|}" role="button">Delete group</a>
-						<a type="button" class="btn btn-warning" th:href="@{|group/updateName/${group.id}|}" role="button">Change name</a>
+						<a type="button" class="btn btn-danger" th:href="@{|delete/${professor.id}|}" role="button">Delete card</a>
+						<a type="button" class="btn btn-warning" th:href="@{|layOf/${professor.id}|}" role="button">lay Of</a>
+						<a type="button" class="btn btn-dark" th:href="@{|update/${professor.id}|}" role="button">Update</a>
 					</div>
 				</div>
 			</tr>

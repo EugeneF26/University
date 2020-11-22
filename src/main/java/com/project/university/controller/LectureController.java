@@ -15,20 +15,16 @@ public class LectureController {
         this.lectureService = lectureService;
     }
 
-    @GetMapping("/lectures")
-    public String listLectures(Model model) throws Exception {
+    @GetMapping("/lectures/list")
+    public String list(Model model) throws Exception {
         model.addAttribute("lectures", lectureService.getLectures());
-        return "lectures_table/list_all_lectures";
+        return "lectures_table/list";
     }
 
-//    @GetMapping
-//    public String addNewLecture(Model model) throws Exception {
-//        return "list_all_lectures";
-//    }
-
-    @GetMapping("lecture/delete/{id}")
-    public String deleteLecture(@PathVariable("id") long id) throws Exception {
+    @GetMapping("/lectures/delete/{id}")
+    public String delete(@PathVariable("id") long id) throws Exception {
         lectureService.deleteLecture(id);
-        return "redirect:/lectures";
+        return "redirect:/lectures/list";
     }
 }
+

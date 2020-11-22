@@ -22,7 +22,7 @@
 
 </head>
 <body>
-	<form  action="update_student" th:object="${student}"  method="POST">
+	<form action="form" th:object="${student}"  method="POST">
 
 		<div class="row">
 			<div class="col">
@@ -32,13 +32,13 @@
 
 		<div class="row">
 			<div class="col">
-				<input type="text" name="name" placeholder="Name" class="form-control" th:value="${student.name}">
+				<input type="text" name="name" placeholder="Name" class="form-control" th:value="*{name}">
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col">
-				<input type="text" name="surname" placeholder="Surname" class="form-control" th:value="${student.surname}">
+				<input type="text" name="surname" placeholder="Surname" class="form-control" th:value="*{surname}">
 			</div>
 		</div>
 

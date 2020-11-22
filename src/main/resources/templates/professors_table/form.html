@@ -21,25 +21,25 @@
 
 </head>
 <body>
-<form name="professor" action="update_professor" method="POST">
+<form action="form" th:object="${professor}" method="POST">
 
     <div class="row">
         <div class="col">
-            <input type="text" name="id" class="form-control" th:value="${professor.id}" readonly>
+            <input type="text" name="id" class="form-control" th:value="*{id}" value="id" readonly>
         </div>
     </div>
 
 
     <div class="row">
         <div class="col">
-            <input type="text" name="name" placeholder="Name" class="form-control" th:value="${professor.name}">
+            <input type="text" name="name" placeholder="Name" class="form-control" th:value="*{name}">
         </div>
     </div>
 
 
     <div class="row">
         <div class="col">
-            <input type="text" name="patronymic" placeholder="Patronymic" class="form-control" th:value="${professor.patronymic}">
+            <input type="text" name="patronymic" placeholder="Patronymic" class="form-control" th:value="*{patronymic}">
         </div>
     </div>
 

@@ -14,9 +14,9 @@ public class CourseController {
         this.courseService = courseService;
     }
 
-    @GetMapping("/courses")
-    public String listCourses(Model model) throws Exception {
+    @GetMapping("/courses/list")
+    public String list(Model model) throws Exception {
         model.addAttribute("courses", courseService.getCourses());
-        return "courses_table/list_all_courses";
+        return "courses_table/list";
     }
 }

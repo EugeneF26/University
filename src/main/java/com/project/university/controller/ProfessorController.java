@@ -18,35 +18,36 @@ public class ProfessorController {
         this.professorService = professorService;
     }
 
-    @GetMapping("/professors")
-    public String listProfessors(Model model) throws Exception {
+    @GetMapping("/professors/list")
+    public String list(Model model) throws Exception {
         model.addAttribute("professors", professorService.getProfessors());
-        return "professors_table/list_all_professors";
+        return "professors_table/list";
     }
 
-    @GetMapping("professor/delete/{id}")
-    public String deleteProfessor(@PathVariable("id") long id) throws Exception {
+    @GetMapping("/professors/delete/{id}")
+    public String delete(@PathVariable("id") long id) throws Exception {
         professorService.deleteProfessor(id);
-        return "redirect:/professors";
+        return "redirect:/professors/list";
     }
 
-    @GetMapping("professor/layOf/{id}")
-    public String layOfProfessor(@PathVariable("id") long id) throws Exception {
+    @GetMapping("/professors/layOf/{id}")
+    public String layOf(@PathVariable("id") long id) throws Exception {
         Professor professor = new Professor();
         professor.setId(id);
         professorService.layOfProfessor(professor);
-        return "redirect:/professors";
+        return "redirect:/professors/list";
     }
 
-    @PostMapping("professor/update/update_professor")
-    public String createUpdateProfessorPage(@ModelAttribute("professor") Professor selected) {
+    @PostMapping("/professors/update/form")
+    public String createUpdateForm(@ModelAttribute("professor") Professor selected) {
         professorService.updateProfessor(selected);
-        return "redirect:/professors";
+        return "redirect:/professors/list";
     }
 
-    @GetMapping("professor/update/{id}")
-    public String updateProfessor(@PathVariable("id") long id, Model model) throws Exception {
+    @GetMapping("/professors/update/{id}")
+    public String update(@PathVariable("id") long id, Model model) throws Exception {
         model.addAttribute("professor", professorService.getProfessor(id));
-        return "professors_table/update_professor";
+        return "professors_table/form";
     }
 }
+
