@@ -1,5 +1,6 @@
 package com.project.university.controller;
 
+import com.project.university.model.StatusStudent;
 import com.project.university.model.Student;
 import com.project.university.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,20 @@ public class StudentController {
 	public String update(@PathVariable("id") long id, Model model) throws Exception {
 		model.addAttribute("student", studentService.getStudent(id));
 		return "students_table/form";
+	}
+
+	@PostMapping("/students/save/form")
+	public String createSaveForm(@ModelAttribute("student") Student student) {
+		student.setCurrentStatus(StatusStudent.STUDY);
+		studentService.addStudent(student);
+		return "redirect:/students/list";
+	}
+
+	@GetMapping("/students/save")
+	public String save(Model model) throws Exception {
+		Student student = new Student();
+		model.addAttribute("student", student);
+		return "students_table/save";
 	}
 }
 

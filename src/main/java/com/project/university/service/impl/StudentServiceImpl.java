@@ -72,5 +72,10 @@ public class StudentServiceImpl implements StudentService {
 	public Student getStudent(Long id) {
 		return studentRepository.getOne(id);
 	}
+
+	@Override
+	public void addStudent(Student student) {
+		studentRepository.save(student);
+	}
 }
 
