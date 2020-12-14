@@ -1,6 +1,7 @@
 package com.project.university.controller;
 
 import com.project.university.model.Professor;
+import com.project.university.model.StatusProfessor;
 import com.project.university.service.ProfessorService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,6 +49,20 @@ public class ProfessorController {
     public String update(@PathVariable("id") long id, Model model) throws Exception {
         model.addAttribute("professor", professorService.getProfessor(id));
         return "professors_table/form";
+    }
+
+    @PostMapping("/professors/save/form")
+    public String createSaveForm(@ModelAttribute("professor") Professor professor) {
+        professor.setCurrentStatus(StatusProfessor.WORKS);
+        professorService.addProfessor(professor);
+        return "redirect:/professors/list";
+    }
+
+    @GetMapping("/professors/save")
+    public String save(Model model) throws Exception {
+        Professor professor = new Professor();
+        model.addAttribute("professor", professor);
+        return "professors_table/save";
     }
 }
 

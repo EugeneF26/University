@@ -57,5 +57,10 @@ public class ProfessorServiceImpl implements ProfessorService {
 		professorGet.get().setPatronymic(professor.getPatronymic());
 		professorRepository.save(professorGet.get());
 	}
+
+	@Override
+	public void addProfessor(Professor professor) {
+		professorRepository.save(professor);
+	}
 }
 

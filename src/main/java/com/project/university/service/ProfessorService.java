@@ -12,5 +12,6 @@ public interface ProfessorService {
     void deleteProfessor(long id) throws Exception;
 	void layOfProfessor(Professor professor);
 	void updateProfessor(Professor selected);
+	void addProfessor(Professor professor);
 }
 
