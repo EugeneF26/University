@@ -24,6 +24,19 @@ public class GroupController {
         return "groups_table/list";
     }
 
+    @GetMapping("/groups/create")
+    public String create(Model model) throws Exception {
+        Group group = new Group();
+        model.addAttribute("group", group);
+        return "groups_table/create";
+    }
+
+    @PostMapping("/groups/create/form")
+    public String createSaveForm(@ModelAttribute("group") Group group) {
+        groupService.addNewGroup(group);
+        return "redirect:/groups/list";
+    }
+
     @GetMapping("/groups/delete/{id}")
     public String delete(@PathVariable("id") long id) throws Exception {
         groupService.deleteGroup(id);
