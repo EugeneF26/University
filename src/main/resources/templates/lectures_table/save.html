@@ -21,23 +21,11 @@
 
 </head>
 <body>
-<form th:object="${student}" th:action="@{save/form}" method="POST">
+<form th:object="${lecture}" th:action="@{save/form}" method="POST">
 
     <div class="row">
         <div class="col">
-            <input type="text" th:field="*{name}" name="name" placeholder="name" class="form-control">
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col">
-            <input type="text" th:field="*{surname}" placeholder="surname" class="form-control">
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col">
-            <input type="text" th:field="*{group.id}" placeholder="enter id of existing group" class="form-control">
+            <input type="text" th:field="*{title}" name="title" placeholder="title" class="form-control">
         </div>
     </div>
 
