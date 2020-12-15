@@ -11,16 +11,24 @@ import org.springframework.stereotype.Service;
 import com.project.university.model.Student;
 import com.project.university.repository.StudentRepository;
 import com.project.university.service.StudentService;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  * @author Eugene
  * The class is component of the service layer for Student.
  */
 @Service
-public class StudentServiceImpl implements StudentService {
+public class StudentServiceImpl implements StudentService  {
 	
-	private StudentRepository studentRepository;		
-	
+	private StudentRepository studentRepository;
+
+	@PersistenceContext
+	private EntityManager entityManager;
+
 	@Autowired
 	public StudentServiceImpl(StudentRepository studentRepository) {
 		this.studentRepository = studentRepository;
@@ -76,6 +84,15 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	public void addStudent(Student student) {
 		studentRepository.save(student);
+	}
+
+	@Override
+	@Transactional
+	public void changeGroupForStudent(Long groupId, Long studentId) {
+		Query query = entityManager.createQuery("UPDATE Student s SET s.group.id = :groupId WHERE s.id= :studentId");
+		query.setParameter("groupId", groupId);
+		query.setParameter("studentId", studentId);
+		query.executeUpdate();
 	}
 }
 

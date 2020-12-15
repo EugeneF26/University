@@ -45,6 +45,7 @@ public class StudentController {
 
 	@PostMapping("/students/update/form")
 	public String createUpdateForm(@ModelAttribute("student") Student student) {
+		studentService.changeGroupForStudent(student.getGroup().getId(),student.getId());
 		studentService.updateStudent(student);
 		return "redirect:/students/list";
 	}
