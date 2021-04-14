@@ -97,19 +97,15 @@
     </button>
 </div>
 
-<div class="flex-container">
-    <tbody>
-    <tr th:each="student: ${students}">
-        <div class="card">
-            <div class="card-body">
-                <p class="card-text-id">Id:
-                    <span class="span-id" th:text="${student.id}"></span>
-                </p>
+<div class="container">
+    <div class="card" th:each="student: ${students}">
+        <div class="face face1">
+            <div class="content">
 
-                <p class="card-text-name">Name:
+                <h2 class="card-text-name">
                     <span class="span-name" th:text="${student.name}"></span>
                     <span class="span-surname" th:text="${student.surname}"></span>
-                </p>
+                </h2>
 
                 <p class="card-text-groupId">Group id:
                     <span class="span-groupId" th:text="${student.group.id}"></span>
@@ -119,16 +115,18 @@
                     <span class="span-status" th:text="${student.currentStatus.status}"></span>
                 </p>
 
-                <h6 class="card-subtitle mb-2 text-muted">student</h6>
-                <p class="card-link"></p>
+                <a class="shine-button" th:href="@{|delete/${student.id}|}">Delete card</a>
+                <a class="shine-button" th:href="@{|update/${student.id}|}">Change</a>
+                <a class="shine-button" th:href="@{|expel/${student.id}|}">Expel</a>
 
-                <a type="button" class="btn btn-danger" th:href="@{|delete/${student.id}|}" role="button">Delete card</a>
-                <a type="button" class="btn btn-warning" th:href="@{|expel/${student.id}|}" role="button">Expel</a>
-                <a type="button" class="btn btn-dark" th:href="@{|update/${student.id}|}" role="button">Update</a>
             </div>
         </div>
-    </tr>
-    </tbody>
+        <div class="face face2">
+            <h2 class="card-text-studentId">ID
+            <span class="span-id" th:text="${student.id}"></span>
+            </h2>
+        </div>
+    </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
