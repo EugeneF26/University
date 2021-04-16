@@ -43,8 +43,5 @@ public class Student implements Serializable {
 	@Column(name = "currentStatus")
     @Enumerated(EnumType.STRING)
 	private StatusStudent currentStatus;
-
-	@Column(name = "sex", nullable = false)
-	private String sex;
 }
 

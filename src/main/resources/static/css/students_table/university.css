@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900');
+
+body {
+    /* margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center; */
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    /*background: linear-gradient(45deg, #24006b, #f42f8c);*/
+    background-image: url('../resources/static/picture/university_picture.jpg');
+}
