@@ -60,7 +60,7 @@ body {
 }
 
 .container .card:last-child .face.face2 {
-    /*background-image: url(images/1_Img_100.jpg);*/
+    background-image: url('../../picture/man_01.jpg');
     background-size: cover;
 }
 
