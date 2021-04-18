@@ -98,11 +98,10 @@
 		</button>
 	</div>
 
-	<div class="flex-container">
-		<tbody>
-			<tr th:each="course: ${courses}">
-				<div class="card">
-					<div class="card-body">
+	<div class="container">
+		<div class="card" th:each="course: ${courses}">
+				<div class="face face1">
+					<div class="content">
 
 						<p class="card-text-id">Id:
 							<span class="span-id" th:text="${course.id}"></span>
@@ -112,12 +111,10 @@
 							<span class="span-year" th:text="${course.year}"></span>
 						</p>
 
-						<h6 class="card-subtitle mb-2 text-muted">courses</h6>
-						<p class="card-text"></p>
+						<h6 class="card-subtitle mb-2 text-muted">course</h6>
 					</div>
 				</div>
-			</tr>
-		</tbody>
+			</div>
 	</div>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

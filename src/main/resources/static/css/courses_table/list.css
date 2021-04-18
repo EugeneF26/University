@@ -8,21 +8,21 @@ body {
     align-items: center; */
     min-height: 100vh;
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(45deg, #24006b, #f42f8c);
+    background: linear-gradient(45deg, #ddff48, #d3d3d3);
 }
 
 .container {
     max-width: 1200px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    grid-gap: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px 5px;
     margin: 0 auto;
 }
 
 .container .card {
     position: relative;
-    width: 300px;
-    height: 400px;
+    width: 150px;
+    height: 150px;
     margin: 0 auto;
     background: #fff;
     text-shadow: 0 15px 60px rgba(0, 0, 0, .5);
@@ -128,4 +128,16 @@ body {
 .shine-button:hover:before {
     left: 150px;
     transition: .5s ease-in-out;
+}
+
+.container .card .face.face1 .content .card-text-id {
+    margin: -15px -15px;
+}
+
+.container .card .face.face1 .content .card-text-year {
+    margin: 45px 20px;
+}
+
+.container .card .face.face1 .content .card-subtitle {
+    margin: -45px 20px;
 }

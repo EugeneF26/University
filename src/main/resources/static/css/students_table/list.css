@@ -8,7 +8,7 @@ body {
     align-items: center; */
     min-height: 100vh;
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(45deg, #24006b, #f42f8c);
+    background: linear-gradient(#39069e, #ada0a6);
 }
 
 .container {

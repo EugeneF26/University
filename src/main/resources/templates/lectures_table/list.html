@@ -98,11 +98,10 @@
 	</button>
 </div>
 
-<div class="flex-container">
-	<tbody>
-	<tr th:each="lecture: ${lectures}">
-		<div class="card">
-			<div class="card-body">
+<div class="container">
+	<div class="card" th:each="lecture: ${lectures}">
+		<div class="face face1">
+			<div class="content">
 
 				<p class="card-text-id">Id:
 					<span class="span-id" th:text="${lecture.id}"></span>
@@ -112,14 +111,10 @@
 					<span class="span-title" th:text="${lecture.title}"></span>
 				</p>
 
-				<h6 class="card-subtitle mb-2 text-muted">lecture</h6>
-				<p class="card-text"></p>
-
-				<a type="button" class="btn btn-danger" th:href="@{|delete/${lecture.id}|}" role="button">Delete subject</a>
+				<a class="shine-button" th:href="@{|delete/${lecture.id}|}">Delete</a>
 			</div>
 		</div>
-	</tr>
-	</tbody>
+	</div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
