@@ -100,19 +100,15 @@
 
 <div class="container">
 	<div class="card" th:each="lecture: ${lectures}">
-		<div class="face face1">
-			<div class="content">
+		<div class="card-body">
+			<h5 class="card-title"> Franch
+				<span class="span-title" th:text="${lecture.title}"></span>
+			</h5>
+			<h6 class="card-subtitle mb-2 text-muted">Id:
+				<span class="span-id" th:text="${lecture.id}"></span>
+			</h6>
 
-				<p class="card-text-id">Id:
-					<span class="span-id" th:text="${lecture.id}"></span>
-				</p>
-
-				<p class="card-text-title">Title:
-					<span class="span-title" th:text="${lecture.title}"></span>
-				</p>
-
-				<a class="shine-button" th:href="@{|delete/${lecture.id}|}">Delete</a>
-			</div>
+			<a class="shine-button" th:href="@{|delete/${lecture.id}|}">Delete</a>
 		</div>
 	</div>
 </div>

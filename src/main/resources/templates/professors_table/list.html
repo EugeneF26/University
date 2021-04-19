@@ -98,33 +98,35 @@
 		</button>
 	</div>
 
-	<div class="container">
-			<div class="card" th:each="professor: ${professors}">
-				<div class="face face1">
-					<div class="content">
+<div class="container">
+	<div class="card" th:each="professor: ${professors}">
+		<div class="face face1">
+			<div class="content">
 
-							<p class="card-text-id">Id:
-								<span class="span-id" th:text="${professor.id}"></span>
-							</p>
+				<p class="card-text-name">Name:
+					<span class="span-name" th:text="${professor.name}"></span>
+					<span class="span-patronymic" th:text="${professor.patronymic}"></span>
+				</p>
 
-							<p class="card-text-name">Name:
-								<span class="span-name" th:text="${professor.name}"></span>
-								<span class="span-patronymic" th:text="${professor.patronymic}"></span>
-							</p>
+				<p class="card-text-status">Status:
+					<span class="span-status" th:text="${professor.currentStatus.status}"></span>
+				</p>
 
-							<p class="card-text-status">Status:
-								<span class="span-status" th:text="${professor.currentStatus.status}"></span>
-							</p>
-
-						<h6 class="card-subtitle mb-2 text-muted">professor</h6>
-
-						<a class="shine-button" th:href="@{|delete/${professor.id}|}">Delete</a>
-						<a class="shine-button" th:href="@{|layOf/${professor.id}|}">lay Of</a>
-						<a class="shine-button" th:href="@{|update/${professor.id}|}">Update</a>
-					</div>
+				<div shine-buttons>
+					<a class="shine-button" th:href="@{|delete/${professor.id}|}">Delete</a>
+					<a class="shine-button" th:href="@{|layOf/${professor.id}|}">lay Of</a>
+					<a class="shine-button" th:href="@{|update/${professor.id}|}">Update</a>
 				</div>
+
 			</div>
+		</div>
+		<div class="face face2">
+			<h2 class="card-text-studentId">ID
+				<span class="span-id" th:text="${professor.id}"></span>
+			</h2>
+		</div>
 	</div>
+</div>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

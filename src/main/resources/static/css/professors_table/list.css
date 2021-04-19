@@ -93,13 +93,13 @@ body {
 }
 
 .shine-button {
-    display: flex;
+    display:inline-block;
     padding: 1% 0% 0% 0%;
-    margin: 4% 0% 0% 0%;
+    margin: 5% 0% 0% 0%;
     position: relative;
     right: 1px;
     height: 7%;
-    width: 40%;
+    width: 50%;
     overflow: hidden;
     /* border: 2px solid #fe6637;
     border-radius: 8px;  */
