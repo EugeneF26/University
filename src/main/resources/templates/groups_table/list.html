@@ -100,28 +100,26 @@
 
 	<div class="container">
 		<div class="card" th:each="group: ${groups}">
-				<div class="face face1">
-					<div class="content">
+			<div class="face face1">
+				<div class="content">
 
-						<p class="card-text-id">Id:
-							<span class="span-id" th:text="${group.id}"></span>
-						</p>
+					<p class="card-text-id">Id:
+						<span class="span-id" th:text="${group.id}"></span>
+					</p>
 
-						<p class="card-text-name">Name:
-							<span class="span-name" th:text="${group.name}"></span>
-						</p>
+					<p class="card-text-name">Name:
+						<span class="span-name" th:text="${group.name}"></span>
+					</p>
 
-						<p class="card-text-courseId">Course id:
-							<span class="span-courseId" th:text="${group.course.id}"></span>
-						</p>
+					<p class="card-text-courseId">Course id:
+						<span class="span-courseId" th:text="${group.course.id}"></span>
+					</p>
 
-						<h6 class="card-subtitle mb-2 text-muted">group</h6>
-						<p class="card-text"></p>
-
-						<a class="shine-button one" th:href="@{|delete/${group.id}|}">Delete</a>
-						<a class="shine-button two" th:href="@{|update/${group.id}|}">Change</a>
-					</div>
+					<a class="shine-button one" th:href="@{|delete/${group.id}|}">Delete</a>
+					<a class="shine-button two" th:href="@{|update/${group.id}|}">Change</a>
 				</div>
+			</div>
+		</div>
 			</div>
 
 	</div>
