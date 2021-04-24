@@ -1,110 +1,54 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900');
 
 body {
-    /* margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center; */
     min-height: 100vh;
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(45deg, #030303, #018bfc);
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     grid-gap: 15px;
-    margin: 0 auto;
 }
 
-.container .card {
+.card {
+    width: 170px;
+    height: 220px;
     position: relative;
-    width: 280px;
-    height: 240px;
     margin: 0 auto;
-    background: #fff;
     text-shadow: 0 15px 60px rgba(0, 0, 0, .5);
+    /* border: 2px solid rgb(0, 110, 255); */
+    border: 2px solid orange;
 }
 
-.container .card .face {
+.face {
+    background-color:rgb(190, 255, 255);
+    box-sizing: border-box;
+    padding: 20px;
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    display: flex;
-    /* justify-content: center;
-    align-items: center; */
 }
 
-.container .card .face.face1 {
-    box-sizing: border-box;
-    padding: 20px;
-}
-
-.container .card .face.face1 p {
-    margin: 1px;
-    padding: 1px;
-}
-
-.container .card .face.face1 h2 {
-    margin: 1px;
-    padding: 0;
-}
-
-.container .card .face.face2 {
-    background: #111;
-    transition: .5s;
-}
-
-.container .card:last-child .face.face2 {
-    /*background-image: url('../../picture/man_01.jpg');*/
-    background-size: cover;
-}
-
-.container .card:hover .face.face2 {
-    height: 60px;
-}
-
-.container .card .face.face2::before {
-    content: '';
+.shine-content {
     position: absolute;
-    top: 0;
     left: 0;
-    width: 50%;
-    height: 100%;
-    background: rgba(255, 255, 255, .1);
-}
-
-.container .card .face.face2 h2 {
-    margin: 2px 2px;
-    padding: 0;
-    font-size: 2em;
-    color: #ffffff;
-    transition: .5s;
-    text-shadow: 0 2px 5px rgba(0, 0, 0, .2);
-}
-
-.container .card:hover .face.face2 h2 {
-    margin: 2px 2px;
-    font-size: 2em;
+    bottom: 0;
+    color: black;
 }
 
 .shine-button {
     display: flex;
-    padding: 1% 0% 0% 0%;
-    margin: 90% 0% 0% 0%;
     position: relative;
-    right: 5px;
-    height: 10%;
-    width: 70%;
     overflow: hidden;
-    /* border: 1px solid #fe6637;
-    border-radius: 10px;  */
+    border: 2px solid #ebf4f7;
+    border-radius: 5px;
     font-family: 'Montserrat', sans-serif;
-    color: #fe6637;
+    font-weight: 800;
     transition: .2s ease-in-out;
 }
 
@@ -121,7 +65,7 @@ body {
 
 .shine-button:hover {
     text-decoration: none;
-    background: #fe6637;
+    background: #ff0000;
     color: #fff;
 }
 
