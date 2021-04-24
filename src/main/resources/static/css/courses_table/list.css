@@ -1,143 +1,34 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900');
 
 body {
-    /* margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center; */
     min-height: 100vh;
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(45deg, #ddff48, #d3d3d3);
+    background: linear-gradient(45deg, #eeea0f, #115185);
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px 5px;
-    margin: 0 auto;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-gap: 15px;
 }
 
-.container .card {
+.card {
+    width: 190px;
+    height: 220px;
     position: relative;
-    width: 150px;
-    height: 150px;
     margin: 0 auto;
-    background: #fff;
     text-shadow: 0 15px 60px rgba(0, 0, 0, .5);
+    border: 2px solid orange;
 }
 
-.container .card .face {
+.face {
+    background-color:rgb(190, 255, 255);
+    box-sizing: border-box;
+    padding: 20px;
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    display: flex;
-    /* justify-content: center;
-    align-items: center; */
-}
-
-.container .card .face.face1 {
-    box-sizing: border-box;
-    padding: 20px;
-}
-
-.container .card .face.face1 p {
-    margin: 1px;
-    padding: 1px;
-}
-
-.container .card .face.face1 h2 {
-    margin: 1px;
-    padding: 0;
-}
-
-.container .card .face.face2 {
-    background: #111;
-    transition: .5s;
-}
-
-.container .card:last-child .face.face2 {
-    /*background-image: url('../../picture/man_01.jpg');*/
-    background-size: cover;
-}
-
-.container .card:hover .face.face2 {
-    height: 60px;
-}
-
-.container .card .face.face2::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 50%;
-    height: 100%;
-    background: rgba(255, 255, 255, .1);
-}
-
-.container .card .face.face2 h2 {
-    margin: 2px 2px;
-    padding: 0;
-    font-size: 2em;
-    color: #ffffff;
-    transition: .5s;
-    text-shadow: 0 2px 5px rgba(0, 0, 0, .2);
-}
-
-.container .card:hover .face.face2 h2 {
-    margin: 2px 2px;
-    font-size: 2em;
-}
-
-.shine-button {
-    display: flex;
-    padding: 1% 0% 0% 0%;
-    margin: 4% 0% 0% 0%;
-    position: relative;
-    right: 1px;
-    height: 7%;
-    width: 40%;
-    overflow: hidden;
-    /* border: 2px solid #fe6637;
-    border-radius: 8px;  */
-    font-family: 'Montserrat', sans-serif;
-    color: #fe6637;
-    transition: .2s ease-in-out;
-}
-
-.shine-button:before {
-    content: "";
-    background: linear-gradient(90deg, rgba(255, 255, 255, .1), rgba(255, 255, 255, .5));
-    height: 50px;
-    width: 50px;
-    position: absolute;
-    top: -8px;
-    left: -75px;
-    transform: skewX(-45deg);
-}
-
-.shine-button:hover {
-    text-decoration: none;
-    background: #fe6637;
-    color: #fff;
-}
-
-.shine-button:hover:before {
-    left: 150px;
-    transition: .5s ease-in-out;
-}
-
-.container .card .face.face1 .content .card-text-id {
-    margin: -15px -15px;
-}
-
-.container .card .face.face1 .content .card-text-year {
-    margin: 45px 20px;
-}
-
-.container .card .face.face1 .content .card-subtitle {
-    margin: -45px 20px;
 }

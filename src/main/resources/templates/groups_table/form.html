@@ -13,28 +13,29 @@
 <link th:href="@{/css/groups_table/form.css}" rel="stylesheet" />
 
 <body>
-<form action="form" th:object="${group}" method="POST">
 
+<div class="content">
+    <form action="form" th:object="${group}" method="POST">
 
-    <div class="row">
-        <div class="col">
-            <input type="text" name="id" class="form-control" th:value="*{id}" readonly>
+        <div class="row">
+            <div class="col">
+                <input type="text" name="id" class="form-control" th:value="*{id}" readonly>
+            </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col">
-            <input type="text" name="name" class="form-control" placeholder="name" th:value="*{name}">
+        <div class="row">
+            <div class="col">
+                <input type="text" name="name" class="form-control" placeholder="name" th:value="*{name}">
+            </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col">
-            <button type="submit" class="btn btn-dark">Save</button>
+        <div class="row">
+            <div class="col">
+                <button type="submit" class="btn btn-dark">Save</button>
+            </div>
         </div>
-    </div>
-
-</form>
+    </form>
+</div>
 
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
