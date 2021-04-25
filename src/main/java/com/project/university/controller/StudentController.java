@@ -49,7 +49,7 @@ public class StudentController {
 			studentService.changeGroupForStudent(student.getGroup().getId(), student.getId());
 			studentService.updateStudent(student);
 		} catch (Exception ex) {
-			return "redirect:/";
+			return "warning";
 		}
 		return "redirect:/students/list";
 	}
@@ -66,7 +66,7 @@ public class StudentController {
 			student.setCurrentStatus(StatusStudent.STUDY);
 			studentService.addStudent(student);
 		} catch (Exception ex) {
-			return "redirect:/";
+			return "warning";
 		}
 		return "redirect:/students/list";
 	}
