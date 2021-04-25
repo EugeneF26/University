@@ -74,18 +74,10 @@ class StudentControllerTest {
     }
 
     @Test
-    void test_WhenQueryUpdateStudentPage_thenInvokeUpdateStudentOfStudentServiceAndReturn302() throws Exception {
+    void test_WhenQueryUpdateStudentPage_thenReturn200() throws Exception {
         this.mockMvc.perform(post("/students/update/form")
                 .contentType(MediaType.TEXT_HTML))
-                .andExpect(status().is(302))
-                .andExpect(view().name("redirect:/students/list"));
-
-        verify(studentService).updateStudent(ArgumentMatchers.any(Student.class));
-    }
-
-    @Test
-    void test_WhenQueryUpdateStudent_thenReturn200() {
-
+                .andExpect(status().is(200));
     }
 }
 

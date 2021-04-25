@@ -1,11 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900');
 
 body {
-    /* margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center; */
     min-height: 100vh;
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(#39069e, #ada0a6);
@@ -35,8 +30,6 @@ body {
     width: 100%;
     height: 100%;
     display: flex;
-    /* justify-content: center;
-    align-items: center; */
 }
 
 .container .card .face.face1 {
@@ -60,7 +53,6 @@ body {
 }
 
 .container .card:last-child .face.face2 {
-    /*background-image: url('../../picture/man_01.jpg');*/
     background-size: cover;
 }
 
@@ -101,8 +93,6 @@ body {
     height: 7%;
     width: 40%;
     overflow: hidden;
-    /* border: 2px solid #fe6637;
-    border-radius: 8px;  */
     font-family: 'Montserrat', sans-serif;
     color: #fe6637;
     transition: .2s ease-in-out;
