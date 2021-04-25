@@ -45,8 +45,12 @@ public class StudentController {
 
 	@PostMapping("/students/update/form")
 	public String createUpdateForm(@ModelAttribute("student") Student student) {
-		studentService.changeGroupForStudent(student.getGroup().getId(),student.getId());
-		studentService.updateStudent(student);
+		try {
+			studentService.changeGroupForStudent(student.getGroup().getId(), student.getId());
+			studentService.updateStudent(student);
+		} catch (Exception ex) {
+			return "redirect:/";
+		}
 		return "redirect:/students/list";
 	}
 
@@ -58,8 +62,12 @@ public class StudentController {
 
 	@PostMapping("/students/save/form")
 	public String createSaveForm(@ModelAttribute("student") Student student) {
-		student.setCurrentStatus(StatusStudent.STUDY);
-		studentService.addStudent(student);
+		try {
+			student.setCurrentStatus(StatusStudent.STUDY);
+			studentService.addStudent(student);
+		} catch (Exception ex) {
+			return "redirect:/";
+		}
 		return "redirect:/students/list";
 	}
 
