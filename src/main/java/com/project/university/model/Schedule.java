@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Schedule")
+@Table(name = "schedule")
 public class Schedule implements Serializable {
 	
 	/**
@@ -34,7 +34,5 @@ public class Schedule implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
-	
-//	private List<ScheduleItem> items;
 }
 

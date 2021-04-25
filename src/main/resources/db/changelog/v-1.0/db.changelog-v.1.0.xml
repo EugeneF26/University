@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <include file="/courses/10-changeset-courses-table.xml" relativeToChangelogFile="true"/>
+    <include file="/groups/20-changeset-groups-table.xml" relativeToChangelogFile="true"/>
+    <include file="/students/01-changeset-students-table.xml" relativeToChangelogFile="true"/>
+    <include file="/professors/30-changeset-professors-table.xml" relativeToChangelogFile="true"/>
+    <include file="/lectures/40-changeset-lectures-table.xml" relativeToChangelogFile="true"/>
+    <include file="/lectureHalls/60-changeset-lectureHalls-table.xml" relativeToChangelogFile="true"/>
+    <include file="/schedule/50-changeset-schedule-table.xml" relativeToChangelogFile="true"/>
+
+</databaseChangeLog>

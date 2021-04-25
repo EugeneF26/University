@@ -7,14 +7,22 @@ import com.project.university.model.Student;
 
 public interface StudentService {
 	
-//	Student transferStudentToAnotherGroup(Student student, Group group) throws Exception ;
-	
-//	Student acceptNewStudent(Student student) throws Exception;
-	
-//	void expelStrudent(Student student) throws Exception;
+	Student transferStudentToAnotherGroup(Student student, Group group) throws Exception ;
+
+	Student acceptNewStudent(Student student) throws Exception;
+
+	void expelStudent(Student student) throws Exception;
 	
 	Student getStudent(Long id) throws Exception;
 	
 	List<Student> getStudents() throws Exception;
+
+	void deleteStudent(Long id);
+
+	void updateStudent(Student student);
+
+	void addStudent(Student student);
+
+	void changeGroupForStudent(Long groupId, Long studentId);
 }
 

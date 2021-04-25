@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+	<meta charset="UTF-8">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet"
+		  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+		  crossorigin="anonymous">
+
+	<link th:href="@{/css/lectures_table/list.css}" rel="stylesheet" />
+
+	<title>lectures</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+	<a href="/university/" class="navbar-brand">University</a>
+
+	<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav">
+
+			<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdown1"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"> Students </a>
+
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+					<a class="dropdown-item" href="/university/students/save">Accept</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="/university/students/list">View full list</a>
+				</div></li>
+
+			<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdown2"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"> Professors </a>
+
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+					<a class="dropdown-item" href="/university/professors/save">Accept</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="/university/professors/list">View full list</a>
+				</div></li>
+
+			<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdown3"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"> Courses </a>
+
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+					<a class="dropdown-item" href="/university/courses/list">View full list</a>
+				</div>
+			</li>
+
+			<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"> Groups </a>
+
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<a class="dropdown-item" href="/university/groups/create">Accept</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="/university/groups/list">View full list</a>
+				</div>
+			</li>
+
+			<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdown4"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"> Lectures </a>
+
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown4">
+					<a class="dropdown-item" href="/university/lectures/save">Accept</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="/university/lectures/list">View full list</a>
+				</div>
+			</li>
+		</ul>
+	</div>
+</nav>
+
+<div class="alert alert-warning alert-dismissible fade show alert-dark"
+	 role="alert">
+	<strong>You are in the list of lectures.</strong> You can see all the
+	lectures of the university.
+	<button type="button" class="close" data-dismiss="alert"
+			aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</div>
+
+<div class="container">
+	<div class="card" th:each="lecture: ${lectures}">
+		<div class="face">
+			<div class="content">
+
+				<h5 class="card-title">
+					<span class="span-title" th:text="${lecture.title}"></span>
+				</h5>
+
+				<h6 class="card-subtitle mb-2 text-muted">Id:
+					<span class="span-id" th:text="${lecture.id}"></span>
+				</h6>
+
+				<div class="shine-content">
+					<a class="shine-button" th:href="@{|delete/${lecture.id}|}">Delete</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+
+<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+
+<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+
+</body>
+</html>
